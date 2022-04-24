@@ -2,6 +2,7 @@ import 'package:coin_wise/database/profiledata.dart';
 import 'package:coin_wise/screens/intro_screens/onboarding_screen.dart';
 import 'package:coin_wise/screens/intro_screens/profile_screen.dart';
 import 'package:coin_wise/screens/intro_screens/splash_screen.dart';
+import 'package:coin_wise/screens/main_screens/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -55,14 +56,17 @@ class MyApp extends StatelessWidget {
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       title: 'Coin Wise',
-      theme: ThemeData(
+      theme:
+      //  MyThemes.darkTheme,
+       ThemeData(
         fontFamily: 'Antic',
         scaffoldBackgroundColor: primaryLight,
         primarySwatch: Colors.blueGrey,
+        dialogBackgroundColor: defaultPrimaryColor,
         
-       // canvasColor: 
+      //  canvasColor: 
       ),
-      home:const IntroScreen(),
+      home: SplashScreen(),
     );
   }
 }

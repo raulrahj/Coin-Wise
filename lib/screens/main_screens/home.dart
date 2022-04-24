@@ -1,4 +1,7 @@
 import 'dart:io';
+import 'package:coin_wise/constants/data.dart';
+import 'package:coin_wise/constants/functions.dart';
+import 'package:coin_wise/database/category_db.dart';
 import 'package:flutter/foundation.dart';
 import 'package:coin_wise/constants/sizes.dart';
 import 'package:coin_wise/database/profiledata.dart';
@@ -16,7 +19,7 @@ import 'package:flutter/material.dart';
 
 final String? profilepic = loginData?.profilePhoto;
 
-//  HOME PAGE
+// _______________________________ HOME PAGE _____________________________________ //
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -27,12 +30,12 @@ class Home extends StatelessWidget {
     final String message =
         DateTime.now().hour < 12 ? "Good morning..." : "Good Afternoon...";
 
-    appbar = false;
+    // appbar = false;
     return SafeArea(
       child: SingleChildScrollView(
         child: ValueListenableBuilder(
             valueListenable: TransactionDbFunctions.instance.walletDataListener,
-            builder: (context, Wallet newWalletDataListner, child) {
+            builder: (context, double newWalletDataListner, child) {
               return Column(
                 children: [
                   ValueListenableBuilder(
@@ -69,7 +72,7 @@ class Home extends StatelessWidget {
                       }),
                   defaultContainer(
                     color: defaultColor,
-                    height: 200,
+                    height: 180,
                     item: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -84,8 +87,8 @@ class Home extends StatelessWidget {
                                 style: boxTitle,
                               ),
                               Text(
-                                '₹ ${newWalletDataListner.totalBalance.toString()}',
-                                style: (newWalletDataListner.totalBalance < 0)
+                                '₹ ${newWalletDataListner.toString()}',
+                                style: (newWalletDataListner < 0)
                                     ? fortotalNegBal
                                     : fortotalBal,
                               ),
@@ -118,9 +121,14 @@ class Home extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    Text(
-                                      '₹ ${newWalletDataListner.income.toString()}',
-                                      style: boxSubBoldTitle,
+                                    ValueListenableBuilder(
+                                        valueListenable: TransactionDbFunctions.instance.walletIncomeListener,
+                                      builder: (context,double newIncome,child) {
+                                        return Text(
+                                          '₹ ${newIncome.toString()}',
+                                          style: boxSubBoldTitle,
+                                        );
+                                      }
                                     )
                                   ],
                                 ),
@@ -146,9 +154,14 @@ class Home extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    Text(
-                                      '₹ ${newWalletDataListner.expense}',
-                                      style: boxSubBoldTitle,
+                                    ValueListenableBuilder(
+                                      valueListenable: TransactionDbFunctions.instance.walletExpenseListener,
+                                      builder: (context,double newExpense,childe) {
+                                        return Text(
+                                          '₹ ${newExpense.toString()}',
+                                          style: boxSubBoldTitle,
+                                        );
+                                      }
                                     ),
                                   ],
                                 ),
@@ -190,116 +203,124 @@ class Home extends StatelessWidget {
 //_______________________________ MAIN NAVIGATION SECTION ___________________________________
 var page = 0;
 
-bool appbar = true;
-ValueListenable<bool> appBar = ValueNotifier(false);
+// bool appbar = true;
+// ValueListenable<bool> appBar = ValueNotifier(false);
 
-class Navigate extends StatefulWidget {
-  const Navigate({
-    Key? key,
-  }) : super(key: key);
+// class Navigate extends StatefulWidget {
+//   const Navigate({
+//     Key? key,
+//   }) : super(key: key);
 
-  @override
-  State<Navigate> createState() => _NavigateState();
-}
+//   @override
+//   State<Navigate> createState() => _NavigateState();
+// }
 
-class _NavigateState extends State<Navigate> {
-  static const List<Widget> pages = <Widget>[
-    Home(),
-    AllTransactions(),
-    Analysis(),
-    Settings()
-  ];
+// class _NavigateState extends State<Navigate> {
+//   static const List<Widget> pages = <Widget>[
+//     Home(),
+//     AllTransactions(),
+//     Analysis(),
+//     Settings()
+//   ];
 
-  Widget? currentpage;
-  // = pages[0];
-  @override
-  void initState() {
-    // TransactionDbFunctions.instance.getWallet();
-    TransactionDbFunctions.instance.refreshData();
+//   Widget? currentpage;
+//   // = pages[0];
+//   @override
+//   void initState() {
+//     print('init printing');
+//     //WARNING
+//     // TransactionDbFunctions.instance.walletData();
+//     // TransactionDbFunctions.instance.refreshData();
+//     CategoryFunctions.instance.refreshUI();
+//     // defaultCategoryAdding();
+//     // incomeList();
 
-    super.initState();
-  }
-  @override
-  void dispose() {
+//     super.initState();
+//   }
+//   @override
+//   void dispose() {
 
-    super.dispose();
-  }
+//     super.dispose();
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    int field;
-    // setState(() {
-    currentpage = pages[page];
-    // });
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          pages[page].toString(),
-          style: boxTitle,
-        ),
-        elevation: 0,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(gradient: defaultBoxGradient),
-        ),
-      ),
-      backgroundColor: defaultLightColor,
-      bottomNavigationBar: PandaBar(
-        fabColors: const [
-          defaultColor,
-          defaultColor,
-        ],
-        backgroundColor: defaultPrimaryColor,
-        buttonColor: primaryBlack,
-        buttonSelectedColor: primaryDark,
-        buttonData: [
-          PandaBarButtonData(id: 0, icon: Icons.home),
-          PandaBarButtonData(id: 1, icon: Icons.account_balance_wallet),
-          PandaBarButtonData(id: 2, icon: Icons.query_stats_rounded),
-          PandaBarButtonData(id: 3, icon: Icons.settings),
-        ],
-        onChange: (id) {
-          setState(() {
-            page = id;
-          });
-        },
-        onFabButtonPressed: () async {
-          showDialog(
-              context: context,
-              builder: (ctx) {
-                return addTransactionPopup();
-              });
-        },
-      ),
-      body: DoubleBackToCloseApp(
-        snackBar: const SnackBar(
-          content: Text(
-            'Double tap to close the app !',
-          ),
-          shape: StadiumBorder(),
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.symmetric(horizontal: 70),
-        ),
-        child: Builder(
-          builder: (context) {
-            switch (page) {
-              case 0:
-                return const Home();
-              case 1:
-                return const AllTransactions();
-              case 2:
-                return const Analysis();
-              case 3:
-                return const Settings();
-              default:
-                return Container(
-                  color: primaryDark,
-                  child: const Text('None'),
-                );
-            }
-          },
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     // TransactionDbFunctions.instance.refreshData();
+
+//     int field;
+//     // setState(() {
+//     currentpage = pages[page];
+//     // });
+//     return Scaffold(
+//       appBar: AppBar(
+//         centerTitle: true,
+//         title: Text(
+//           appbarTitle[page],
+//           style: boxTitle,
+//         ),
+//         elevation: 0,
+//         flexibleSpace: Container(
+//           decoration: const BoxDecoration(gradient: defaultBoxGradient),
+//         ),
+//       ),
+//       backgroundColor: defaultLightColor,
+//       bottomNavigationBar: PandaBar(
+//         fabColors: const [
+//           defaultColor,
+//           defaultColor,
+//         ],
+//         backgroundColor: defaultPrimaryColor,
+//         buttonColor: primaryBlack,
+//         buttonSelectedColor: primaryDark,
+//         buttonData: [
+//           PandaBarButtonData(id: 0, icon: Icons.home),
+//           PandaBarButtonData(id: 1, icon: Icons.account_balance_wallet),
+//           PandaBarButtonData(id: 2, icon: Icons.query_stats_rounded),
+//           PandaBarButtonData(id: 3, icon: Icons.settings),
+//         ],
+//         onChange: (id) {
+//           setState(() {
+//             page = id;
+//           });
+//         },
+//         onFabButtonPressed: () async {
+//           showDialog(
+//               context: context,
+//               builder: (ctx) {
+//                 return addTransactionPopup();
+//               });
+//         },
+//       ),
+//       body: DoubleBackToCloseApp(
+//         snackBar: const SnackBar(
+//           content: Text(
+//             'Double tap to close the app !',
+//           ),
+//           shape: StadiumBorder(),
+//           behavior: SnackBarBehavior.floating,
+//           margin: EdgeInsets.symmetric(horizontal: 70),
+//         ),
+//         child: Builder(
+//           builder: (context) {
+//             isFilter=false;
+//             switch (page) {
+//               case 0:
+//                 return const Home();
+//               case 1:
+//                 return const AllTransactions();
+//               case 2:
+//                 return const Analysis();
+//               case 3:
+//                 return const Settings();
+//               default:
+//                 return Container(
+//                   color: primaryDark,
+//                   child: const Text('None'),
+//                 );
+//             }
+//           },
+//         ),
+//       ),
+//     );
+//   }
+// }

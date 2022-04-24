@@ -2,7 +2,6 @@ import 'package:coin_wise/constants/colors.dart';
 import 'package:coin_wise/constants/data.dart';
 import 'package:coin_wise/constants/functions.dart';
 import 'package:coin_wise/constants/sizes.dart';
-import 'package:coin_wise/constants/text_styles.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/main.dart';
 // import 'package:coin_wise/main.dart';
@@ -51,64 +50,64 @@ class _AllTransactionsState extends State<AllTransactions> {
         children: [
           defaultContainer(
             color: defaultColor,
-            height: displayHeight(context) * .32,
+            height: displayHeight(context) * .20,
             item: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 decentHieght,
 
-                showBox(
-                  color: defaultPrimaryColor,
-                  x: displayWidth(context) * .88,
-                  y: displayHeight(context) * .10,
-                  item: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      showBox(
-                        x: displayWidth(context) * .36,
-                        y: displayHeight(context) * .09,
-                        color: defaultPrimaryColor,
-                        item: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: const [
-                            SizedBox(
-                                child: Text(
-                              'Total Income',
-                              style: onboardBody,
-                            )),
-                            Text(
-                              '₹ 4534535',
-                              style: boxSubBoldTitle,
-                            ),
-                          ],
-                        ),
-                      ),
-                      verticalDivider,
-                      showBox(
-                        color: defaultPrimaryColor,
-                        x: displayWidth(context) * .36,
-                        y: displayHeight(context) * .09,
-                        item: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: const [
-                            SizedBox(
-                              child: Text(
-                                'Total Expense',
-                                style: onboardBody,
-                              ),
-                            ),
-                            Text(
-                              '₹ 34535',
-                              style: boxSubBoldTitle,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                // showBox(
+                //   color: defaultPrimaryColor,
+                //   x: displayWidth(context) * .88,
+                //   y: displayHeight(context) * .10,
+                //   item: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //     children: [
+                //       showBox(
+                //         x: displayWidth(context) * .36,
+                //         y: displayHeight(context) * .09,
+                //         color: defaultPrimaryColor,
+                //         item: Column(
+                //           mainAxisSize: MainAxisSize.min,
+                //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //           children: const [
+                //             SizedBox(
+                //                 child: Text(
+                //               'Total Income',
+                //               style: onboardBody,
+                //             )),
+                //             Text(
+                //               '₹ 4534535',
+                //               style: boxSubBoldTitle,
+                //             ),
+                //           ],
+                //         ),
+                //       ),
+                //       verticalDivider,
+                //       showBox(
+                //         color: defaultPrimaryColor,
+                //         x: displayWidth(context) * .36,
+                //         y: displayHeight(context) * .09,
+                //         item: Column(
+                //           mainAxisSize: MainAxisSize.min,
+                //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //           children: const [
+                //             SizedBox(
+                //               child: Text(
+                //                 'Total Expense',
+                //                 style: onboardBody,
+                //               ),
+                //             ),
+                //             Text(
+                //               '₹ 34535',
+                //               style: boxSubBoldTitle,
+                //             ),
+                //           ],
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -251,7 +250,7 @@ class _AllTransactionsState extends State<AllTransactions> {
                         showBox(
                             color: _dropdownValue == allFields[0]
                                 ? defaultPrimaryColor
-                                : primaryRed,
+                                : primaryGreen,
                             y: displayHeight(context) * .045,
                             x: displayWidth(context) * .35,
                             item: Row(
@@ -279,9 +278,13 @@ class _AllTransactionsState extends State<AllTransactions> {
                                       _dropdownValue = value.toString();
                                       switch (value) {
                                         case 'All':
-                                          dropDownListener = TransactionDbFunctions
+                                          dropDownListener = (isFilter)?
+                                          TransactionDbFunctions
                                               .instance
-                                              .selectedRangeTransactionsListener;
+                                              .selectedRangeTransactionsListener
+                                              : TransactionDbFunctions
+                                              .instance
+                                              .transactionListener;
                                           break;
                                         case 'Income':
                                           dropDownListener =

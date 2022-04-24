@@ -4,6 +4,7 @@ import 'package:coin_wise/constants/text_styles.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/main.dart';
 import 'package:coin_wise/models/transaction_model.dart';
+import 'package:coin_wise/widgets/list_views.dart';
 import 'package:flutter/material.dart';
 import 'package:coin_wise/constants/colors.dart';
 import 'package:coin_wise/constants/sizes.dart';
@@ -368,7 +369,7 @@ class SwitchScreen extends StatefulWidget {
 }
 
 class SwitchClass extends State {
-  bool isSwitched = false;
+  bool isSwitched = true;
   var textValue = 'Switch is OFF';
 
   void toggleSwitch(bool value) {
@@ -388,6 +389,7 @@ class SwitchClass extends State {
       setState(
         () {
           isSwitched = false;
+          
         },
       );
     }
@@ -422,6 +424,9 @@ class Date extends StatefulWidget {
   @override
   State<Date> createState() => _DateState();
 }
+String onTime = formatedDate(DateTime.now());
+
+
 
 class _DateState extends State<Date> {
   @override
@@ -447,7 +452,7 @@ class _DateState extends State<Date> {
                 const Icon(Icons.calendar_month),
                 Text(
                   (date == null)
-                      ? 'Select date'
+                      ? onTime
                       : '${date!.year}/${date!.month}/${date!.day}',
                   style: const TextStyle(fontSize: 13),
                 ),
@@ -470,6 +475,8 @@ class CustomTile extends StatelessWidget {
   // }
   void popupEdit(BuildContext context) {
     isAdd = false;
+    mainData?.field==CategoryField.income? categoryMod=0:categoryMod=1;
+    dropDownValue==null;
     Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
       return AddScreen(selectedTransactionData: mainData);
     }));
@@ -510,7 +517,7 @@ class CustomTile extends StatelessWidget {
             SlidableAction(
               flex: 1,
               onPressed: popupEdit,
-              backgroundColor: defaultColor,
+              backgroundColor: defaultPrimaryColor,
               foregroundColor: primaryDark,
               icon: Icons.edit,
               label: 'Edit',
@@ -526,7 +533,7 @@ class CustomTile extends StatelessWidget {
               onPressed: (context) {
                 transactionDeletePopup(context, deletionKey);
               },
-              backgroundColor: defaultColor,
+              backgroundColor: defaultPrimaryColor,
               foregroundColor: primaryDark,
               icon: Icons.delete,
               label: 'Delete',
@@ -544,7 +551,7 @@ class CustomTile extends StatelessWidget {
                   color: defaultColor,
                   width: 60,
                   height: 60,
-                  child: const Icon(Icons.shopping_bag, color: Colors.white),
+                  child: const Icon(Icons.currency_rupee, color: Colors.white),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
@@ -727,6 +734,7 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
 //________________________________________________ADD CATEGROY POPUP SCREEN END_____________________________________________//
 
 // final _categoryUpdateNameController = TextEditingController();
+///_______________________________________________ UPDATE CATEGORY POPUP ______________________________________
 
 class UpdateCategoryPopup extends StatefulWidget {
   final String oldId;
@@ -740,8 +748,8 @@ class UpdateCategoryPopup extends StatefulWidget {
     required this.oldField,
     required this.currentVal,
   }) : super(key: key);
-  final _categoryUpdateNameController = TextEditingController();
 
+  final _categoryUpdateNameController = TextEditingController();
   @override
   _UpdateCategoryPopupState createState() => _UpdateCategoryPopupState();
 }
@@ -749,6 +757,7 @@ class UpdateCategoryPopup extends StatefulWidget {
 class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
   @override
   Widget build(BuildContext context) {
+    widget._categoryUpdateNameController.text=widget.oldName;
     return AlertDialog(
       backgroundColor: defaultPrimaryColor,
       title: Row(
@@ -970,11 +979,11 @@ Widget snackAlert(BuildContext context, String text) {
   return SnackBar(
     behavior: SnackBarBehavior
         .floating, //behavior used to change decoration or change default config
-    margin: EdgeInsets.all(10),
+    margin:const EdgeInsets.all(10),
     backgroundColor: defaultColor,
     content: Text(
       text,
-      style: TextStyle(color: Colors.white),
+      style:const TextStyle(color: Colors.white),
     ),
   );
 }
@@ -1045,4 +1054,37 @@ class addTransactionPopup extends StatelessWidget {
 
   }
 }
- 
+ Widget aboutApp(context){
+   return  
+      SimpleDialog(
+       backgroundColor: defaultPrimaryColor,
+       children: [
+    //      defaultContainer(
+    //  color: defaultColor,
+    //  height: displayHeight(context)*.5,
+
+          //  item:
+            Column(
+             mainAxisSize: MainAxisSize.max,
+             children: [
+            //  Container(
+            //    child:  Text(aboutAppText,style:TextStyle(color: defaultPrimaryColor,)),
+            //  )
+           ],),
+        //  ) 
+       ],
+     );
+   
+ }
+ Widget themePopup(){
+   return SimpleDialog(
+     children: [
+       Row(
+         children: [
+           Radio(value: 1, groupValue: 2, onChanged: (value)=>null), Text('Light')
+         ],
+       ),
+       Row(children: [Radio(value: 2, groupValue: 2, onChanged: (value)=>null),Text('Dark')],),
+     ],
+   );
+ }

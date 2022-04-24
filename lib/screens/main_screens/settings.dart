@@ -3,10 +3,11 @@ import 'dart:io';
 import 'package:coin_wise/constants/colors.dart';
 import 'package:coin_wise/constants/sizes.dart';
 import 'package:coin_wise/constants/text_styles.dart';
-import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/database/profiledata.dart';
 import 'package:coin_wise/database/transactions_db.dart';
-import 'package:coin_wise/models/transaction_model.dart';
+import 'package:coin_wise/screens/intro_screens/onboarding_screen.dart';
+import 'package:coin_wise/screens/intro_screens/splash_screen.dart';
+import 'package:coin_wise/widgets/bottom_nav.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,7 +19,7 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    appbar = true;
+    // appbar = true;
     return SafeArea(
       child: Padding(
         padding: decent0,
@@ -27,53 +28,65 @@ class Settings extends StatelessWidget {
             decentSpace20,
             Card(
               color: defaultPrimaryColor,
-              child:
-              ValueListenableBuilder(valueListenable: profileListner, builder: (context, ProfileModel newProfileListener, child){
-                final ProfileModel _data =newProfileListener;
-                return  Container(
-                height: displayHeight(context) * .1,
-                child: ListTile(
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: const [
-                            Text(
-                              "Profile",
-                              style: defaultTitle,
-                            )
-                          ],
-                        ),
-                        Text(
-                          _data.profileName ?? 'Username',
-                          style: boxTitle,
-                        ),
-                        Text(
-                          _data.profileEmail ?? 'email@gmail.com',
-                        )
-                      ],
-                    ),
-                    trailing: _data.profilePhoto == null
-                        ? const CircleAvatar(
-                            backgroundColor: primaryGrey,
-                            radius: 30,
-                            child: Icon(
-                              Icons.person,
-                              color: primaryBlack,
-                              size: 40,
+              child: ValueListenableBuilder(
+                  valueListenable: profileListner,
+                  builder: (context, ProfileModel newProfileListener, child) {
+                    final ProfileModel _data = newProfileListener;
+                    return Container(
+                      height: displayHeight(context) * .14,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical:18.0),
+                        child: ListTile(
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                // addHorizontalSpace(20.0),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children:  [
+                                    Wrap(
+                                      children:const [
+                                       Icon(Icons.person_outlined,size: 16,), 
+                                       Text(
+                                      "Profile",
+                                      style: defaultTitle,
+                                    ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                addHorizontalSpace(10.0),
+                                Text(
+                                  _data.profileName ?? 'Username',
+                                  style: boxSubBoldTitle,
+                                ),
+                              
+                              ],
                             ),
-                          )
-                        : CircleAvatar(
-                            radius: 30,
-                            backgroundImage: FileImage(File(_data.profilePhoto!)),
-                          )),
-              );
-              }),
+                            trailing: _data.profilePhoto == null
+                                ? const CircleAvatar(
+                                    backgroundColor: primaryGrey,
+                                    radius: 30,
+                                    child: Icon(
+                                      Icons.person,
+                                      color: primaryBlack,
+                                      size: 40,
+                                    ),
+                                  )
+                                : CircleAvatar(
+                                    radius: 30,
+                                    backgroundImage:
+                                        FileImage(File(_data.profilePhoto!)),
+                                  )),
+                      ),
+                    );
+                  }),
             ),
             settingsTile(
+                settingsFunction: () async => showDialog(
+                    context: context, builder: (ctx) => themePopup()),
                 head: "Theme",
                 icn: const Icon(Icons.brightness_medium_rounded)),
             settingsTile(
@@ -87,21 +100,21 @@ class Settings extends StatelessWidget {
                     builder: (ctx) {
                       return SimpleDialog(
                         children: [
-                      const Text(
-                             ' Do you really want to clear all the transactions'),
+                          const Text(
+                              ' Do you really want to clear all the transactions'),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               TextButton(
                                   onPressed: (() =>
                                       Navigator.of(context).pop()),
-                                  child:const Text("Cancel")),
+                                  child: const Text("Cancel")),
                               TextButton(
                                   onPressed: () {
                                     TransactionDbFunctions.instance
                                         .clearTransaction();
                                   },
-                                  child:const Text('Ok'))
+                                  child: const Text('Ok'))
                             ],
                           )
                         ],
@@ -112,6 +125,13 @@ class Settings extends StatelessWidget {
               icn: const Icon(Icons.restart_alt_rounded),
             ),
             settingsTile(
+                settingsFunction: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const IntroScreen()));
+                  isSplash = false;
+                },
                 head: "App Intro",
                 icn: const Icon(Icons.phone_android_rounded)),
             settingsTile(
@@ -121,8 +141,9 @@ class Settings extends StatelessWidget {
                   _launchURLBrowser();
                 }),
             settingsTile(
-                settingsFunction: () =>
-                    CategoryFunctions.instance.categoryAmountAdding(),
+                // settingsFunction: () => Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => MyHomePage(),)),
+                //  showDialog(
+                //     context: context, builder: (ctx) => aboutApp(context)),
                 head: "About app",
                 icn: const Icon(Icons.info_outline)),
           ],
@@ -159,4 +180,17 @@ _launchURLBrowser() async {
   } else {
     throw 'Could not launch $url';
   }
+}
+
+class MyThemes{
+  static final darkTheme = ThemeData(
+    scaffoldBackgroundColor: Colors.grey.shade900,
+    primaryColor: primaryBlack,
+    colorScheme:const ColorScheme.dark(),
+    bottomNavigationBarTheme:const BottomNavigationBarThemeData(backgroundColor: primaryGrey,selectedIconTheme: IconThemeData(color: defaultPrimaryColor)),
+  navigationBarTheme:const NavigationBarThemeData(backgroundColor: primaryGrey,indicatorColor: primaryLight,)
+  );
+  static final lightTheme = ThemeData(
+
+  );
 }

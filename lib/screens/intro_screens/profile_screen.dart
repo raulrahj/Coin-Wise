@@ -3,6 +3,7 @@ import 'package:coin_wise/constants/colors.dart';
 import 'package:coin_wise/constants/sizes.dart';
 import 'package:coin_wise/constants/text_styles.dart';
 import 'package:coin_wise/database/profiledata.dart';
+import 'package:coin_wise/widgets/bottom_nav.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -118,8 +119,8 @@ class SetupProfile extends StatelessWidget {
                                 },
                                 child: _data.profilePhoto == null
                                     ? const CircleAvatar(
-                                        maxRadius: 48,
-                                        minRadius: 39,
+                                        maxRadius: 70,
+                                        minRadius: 50,
                                         backgroundColor: primaryGrey,
                                         child: Icon(
                                           Icons.person,
@@ -128,8 +129,8 @@ class SetupProfile extends StatelessWidget {
                                         ),
                                       )
                                     : CircleAvatar(
-                                        maxRadius: 48,
-                                        minRadius: 39,
+                                        maxRadius: 70,
+                                        minRadius: 50,
                                         backgroundImage: FileImage(
                                             File(_data.profilePhoto.toString()),
                                             scale: 1),
@@ -152,15 +153,15 @@ class SetupProfile extends StatelessWidget {
                                 return null;
                               },
                             ),
-                            TextFormBox(
-                              hint: 'Email',
-                              profileformController: _profileEmail,
-                              validation: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Enter the email !';
-                                }
-                              },
-                            ),
+                            // TextFormBox(
+                            //   hint: 'Email',
+                            //   profileformController: _profileEmail,
+                            //   validation: (value) {
+                            //     if (value == null || value.isEmpty) {
+                            //       return 'Enter the email !';
+                            //     }
+                            //   },
+                            // ),
                           ],
                         );
                       }),
@@ -174,11 +175,10 @@ class SetupProfile extends StatelessWidget {
                     if (_formKey.currentState!.validate()) {
                       bool isLogged = true;
                       final name = _profileName.text;
-                      final email = _profileEmail.text;
-                      final profilePhoto = image.path??null;
+                      final profilePhoto = image.path ?? null;
                       ProfileModel _profileData = ProfileModel(
                           profileName: name,
-                          profileEmail: email,
+                          notify: true,
                           profilePhoto: profilePhoto,
                           isLogged: isLogged);
                       ProflieDb().addprofileData(_profileData);
@@ -186,7 +186,7 @@ class SetupProfile extends StatelessWidget {
                       if (isLogged) {
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(builder: (BuildContext ctx) {
-                          return const Navigate();
+                          return const HomePage();
                         }), (route) => false);
                       }
                     }
@@ -207,9 +207,7 @@ class SetupProfile extends StatelessWidget {
     if (_profileName == null) {
       return;
     }
-    if (_profileEmail == null) {
-      return;
-    }
+  
     // if(image==null){
     //   return;
     // }

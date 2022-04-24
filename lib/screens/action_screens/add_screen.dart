@@ -1,3 +1,4 @@
+import 'package:coin_wise/main.dart';
 import 'package:flutter/material.dart';
 import 'package:pandabar/fab-button.view.dart';
 import 'package:coin_wise/constants/sizes.dart';
@@ -36,15 +37,17 @@ class AddScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    dropDownValue==null;
+
     print("checking the isAdd is working or not");
     print(isAdd);
     isAdd ?? false;
     print('after the null aware ${isAdd}');
     ////////////// TO DO - null check operator used in a null value ////////////////////////
-    // if (!isAdd!) {
-    //  // _updateNoteController.text = selectedTransactionData!.note;
-    //  // _updateAmoutnController.text = selectedTransactionData!.amount.toString();
-    // }
+    if (!isAdd!) {
+     _updateNoteController.text = selectedTransactionData!.note;
+     _updateAmoutnController.text = selectedTransactionData!.amount.toString();
+    }
     print('selected Transaction Data printing>>>>>>>>>>>>>>>>>>>>>>>');
     print(selectedTransactionData?.amount);
     return GestureDetector(
@@ -55,7 +58,10 @@ class AddScreen extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.transparent,
           leading: IconButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                 Navigator.pop(context);
+                 dropDownValue=null;
+              },
               icon: const Icon(
                 Icons.close,
                 color: primaryDark,
@@ -93,7 +99,8 @@ class AddScreen extends StatelessWidget {
                   double? parsed = double.tryParse(_amountController.text);
                   field ?? 1;
                   final transactionData = TransactionModel(
-                      date: date!,
+                    id: DateTime.now().millisecondsSinceEpoch.toString(),
+                      date: date ?? DateTime.now(),
                       amount: parsed ?? 0000.0,
                       note: _noteController.text,
                       field: field == 0
@@ -103,7 +110,8 @@ class AddScreen extends StatelessWidget {
                   TransactionDbFunctions.instance
                       .addTransaction(transactionData);
                   int count = 0;
-                  Navigator.of(context).popUntil((_) => count++ >= 2);
+                  navigatorKey?.currentState?.pop();
+                  // Navigator.of(context).popUntil((_) => count++ >= 2);
                   _amountController.clear();
                   await TransactionDbFunctions.instance.getTransaction();
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -122,14 +130,15 @@ class AddScreen extends StatelessWidget {
                   double? parsedUpdate =
                       double.tryParse(_updateAmoutnController.text);
                   final updateTransactionData = TransactionModel(
-                      date: selectedTransactionData!.date,
+                    id: selectedTransactionData!.id,
+                      date: date??selectedTransactionData!.date,
                       amount: parsedUpdate!,
                       note: _updateNoteController.text,
                       field: selectedTransactionData!.field,
-                      category: selectedTransactionData!.category);
+                      category: globalCategory ?? selectedTransactionData!.category);
                   TransactionDbFunctions.instance.updateTransaction(
                       selectedTransactionData!.id, updateTransactionData);
-
+                          dropDownValue=null;
                   Navigator.of(context).pop();
                   await TransactionDbFunctions.instance.getTransaction();
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(

@@ -25,7 +25,6 @@ class _MyFormFieldState extends State<MyFormField> {
 
   @override
   Widget build(BuildContext context) {
-    print('Date range picker is working !!');
     return DateRangeField(
         firstDate: DateTime(2021),
         lastDate: DateTime.now().add(Duration(days: 1)),
@@ -46,14 +45,11 @@ class _MyFormFieldState extends State<MyFormField> {
           return null;
         },
         onChanged: (value) async{
-          print('save is called ');
           setState(() {
             myDateRange = value!;
             final startDate =myDateRange?.start;
             final endDate = myDateRange?.end; 
            selectedRangeTransactions(start: startDate,end: endDate);
-           print('Now in the Setstate Function>>>>>>>>>>>>>>>>>>>>>>>>>>');
-          print(myDateRange!.start.toString());
           });
         });
   

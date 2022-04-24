@@ -1,7 +1,10 @@
+import 'package:coin_wise/constants/data.dart';
+import 'package:coin_wise/constants/functions.dart';
 import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/main.dart';
 import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/models/transaction_model.dart';
+import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -22,7 +25,9 @@ class TransactionDbFunctions {
       ValueNotifier([]);
   ValueNotifier<List<TransactionModel>> selectedRangeTransactionsListener =
       ValueNotifier([]);
-  ValueNotifier<Wallet> walletDataListener = ValueNotifier(Wallet());
+  ValueNotifier<double> walletDataListener = ValueNotifier(totalBalanceValue);
+  ValueNotifier<double> walletIncomeListener = ValueNotifier(incomeValue);
+  ValueNotifier<double> walletExpenseListener = ValueNotifier(expenseValue);
 
   //<<<<<<<<<<<<< TRANSACTION ADDING >>>>>>>>>>>>>>>
   Future<void> addTransaction(TransactionModel value) async {
@@ -30,20 +35,23 @@ class TransactionDbFunctions {
         await Hive.openBox<TransactionModel>('transaction_Db');
     // transactionDB.clear();
     await transactionDB.put(value.id, value);
-    CategoryFunctions.instance.categoryAmountAdding();
+    // CategoryFunctions.instance.categoryAmountAdding();
     refreshData();
   }
 
-  //<<<<<<<<<<<<< UPDATING UI WITH LISTENERS >>>>>>>>>>>.
+  //<<<<<<<<<<<<< UPDATING UI WITH LISTENERS >>>>>>>>>>>
+
   Future<void> refreshData() async {
     final _list = await getTransaction();
+    _list.sort((first, second) => second.date.compareTo(first.date));
+
     transactionListener.value.clear();
     transactionIncomeListener.value.clear();
     transactionExpenseListener.value.clear();
     transactionListener.value.addAll(_list);
     transactionListener.notifyListeners();
     final _allTransaction = await getTransaction();
-    // walletDataListener.notifyListeners(); // @@@@@@@@@@@@@@@@
+    walletDataListener.notifyListeners(); //
     await Future.forEach(_allTransaction,
         (TransactionModel transactions) async {
       if (transactions.field == CategoryField.income) {
@@ -51,15 +59,13 @@ class TransactionDbFunctions {
       } else {
         transactionExpenseListener.value.add(transactions);
       }
-      getWallet(_list);
-      /////////////// TO DO REFRESH DATA FUNCTION RECURSIVLY CALLLING /////////
 
-      //  print(transactions.amount);
-      // print('function checkig');
-
+      walletRefresh();
+      walletData();
       transactionExpenseListener.notifyListeners();
       transactionIncomeListener.notifyListeners();
     });
+    refreshCategoryAmountListners();
   }
 
   //<<<<<<<<<<< GETTING DATA FROM DATABASE >>>>>>>>>>>>>>>>
@@ -69,14 +75,13 @@ class TransactionDbFunctions {
     return _transactionDatabase.values.toList();
   }
 
-  //<<<<<<<<<<<< DELETE TRANSACTION >>>>>>>>>>>>>>> 
+  //<<<<<<<<<<<< DELETE TRANSACTION >>>>>>>>>>>>>>>
   Future<void> deleteTransaction(context, key) async {
     final _transactionDb =
         await Hive.openBox<TransactionModel>('transaction_Db');
     _transactionDb.delete(key);
-    CategoryFunctions.instance.categoryAmountAdding();
     refreshData();
-    // TransactionDbFunctions.instance.getWallet();
+    walletData();
   }
 
   //<<<<<<<<<<<<<<<< UPDATING TRANSACTION >>>>>>>>>>>
@@ -84,7 +89,7 @@ class TransactionDbFunctions {
     final _transactionDb =
         await Hive.openBox<TransactionModel>('transaction_Db');
     _transactionDb.put(key, value);
-    CategoryFunctions.instance.categoryAmountAdding();
+    dropDownValue = null;
 
     refreshData();
     // _transactionDb.clear();
@@ -96,39 +101,78 @@ class TransactionDbFunctions {
     transactionDB.clear();
     navigatorKey?.currentState?.pop();
     refreshData();
+    TransactionDbFunctions.instance.walletDataListener.value = 0;
+    TransactionDbFunctions.instance.walletIncomeListener.value = 0;
+    TransactionDbFunctions.instance.walletExpenseListener.value = 0;
+    walletRefresh();
+    walletData();
   }
 
   // <<<<<<<<<< GETTING WALLET AMOUNT >>>>>>>>>>>>>
 
-  Future<void> getWallet(List<TransactionModel> _listener) async {
-    print('get all called ');
-    walletDataListener.value = Wallet();
+//   Future<void> getWallet(List<TransactionModel> _listener) async {
+//     print('get all called ');
+//     // walletDataListener.value = Wallet();
+// incomeValue=0;
+// expenseValue=0;
+// totalBalanceValue=0;
+//     await Future.forEach(_listener, (TransactionModel wallet) async {
+//       print('foreach all called ');
+//       if (wallet.field == CategoryField.income) {
+//         // walletDataListener.value.income =
+//         //     walletDataListener.value.income + wallet.amount;
+//         walletIncomeListener.value+=wallet.amount;
+//         walletDataListener.value +=wallet.amount;
 
-    await Future.forEach(_listener, (TransactionModel wallet) async {
-      print('foreach all called ');
+//       } else {
+//         // walletDataListener.value.expense += wallet.amount;
+//         walletExpenseListener.value+=wallet.amount;
+//         walletDataListener.value-=wallet.amount;
+
+//       }
+//       walletRefresh();
+//     });
+//     print('coming out of foreach ');
+//     // print(walletDataListener.value.totalBalance);
+//     // walletDataListener.value.totalBalance =
+//         // walletDataListener.value.income - walletDataListener.value.expense;
+//     walletDataListener.notifyListeners();
+//   }
+// }
+
+  Future<void> walletData() async {
+    incomeValue = 0;
+    expenseValue = 0;
+    totalBalanceValue = 0;
+    walletExpenseListener.value = 0;
+    walletIncomeListener.value = 0;
+    walletDataListener.value = 0;
+    List<TransactionModel> _data = await getTransaction();
+    Future.forEach(_data, (TransactionModel wallet) {
       if (wallet.field == CategoryField.income) {
-        walletDataListener.value.income =
-            walletDataListener.value.income + wallet.amount;
+        walletIncomeListener.value += wallet.amount;
+        walletDataListener.value += wallet.amount;
       } else {
-        walletDataListener.value.expense += wallet.amount;
+        walletExpenseListener.value += wallet.amount;
+        walletDataListener.value -= wallet.amount;
       }
+      walletRefresh();
     });
-    print('coming out of foreach ');
-    // print(walletDataListener.value.totalBalance);
-    walletDataListener.value.totalBalance =
-        walletDataListener.value.income - walletDataListener.value.expense;
-    walletDataListener.notifyListeners();
   }
 }
 
-class Wallet {
-  // Wallet._internal();
-  // static Wallet instance = Wallet._internal();
-  // factory Wallet() {
-  //   return instance;
-  // }
-  double income;
-  double expense;
-  double totalBalance;
-  Wallet({this.income = 0, this.expense = 0, this.totalBalance = 0});
+// class Wallet {
+// Wallet._internal();
+// static Wallet instance = Wallet._internal();
+// factory Wallet() {
+//   return instance;
+// }
+double incomeValue = 0;
+double expenseValue = 0;
+double totalBalanceValue = 0;
+
+walletRefresh() {
+  TransactionDbFunctions.instance.walletDataListener.notifyListeners();
+  TransactionDbFunctions.instance.walletIncomeListener.notifyListeners();
+  TransactionDbFunctions.instance.walletExpenseListener.notifyListeners();
 }

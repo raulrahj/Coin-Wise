@@ -27,44 +27,41 @@ class TransactionList extends StatelessWidget {
       valueListenable: dropDownList,
       builder: (context, List<TransactionModel> newTransactionListener, child) {
         int? homeCount = newTransactionListener.length >= 4 ? count : 0;
-        return Align(
-          alignment: Alignment.topCenter,
-          child: newTransactionListener.length >=1?
-           ListView.builder(
-            reverse: true,
-            shrinkWrap: true,
-            physics: const ClampingScrollPhysics(),
-            itemCount:
-                // (homeCount!=0)?homeCount :
-                newTransactionListener.length,
-            itemBuilder: (BuildContext context, index) {
-              final data = newTransactionListener[index];
-              return CustomTile(
-                mainData: data,
-                context: context,
-                title: data.note,
-                trailing: '₹ ${data.amount}',
-                style: amountColor(data.field),
-                subTitle1: formatedDate(data.date),
-                subTitle2: data.category.name,
-                deletionKey: data.id,
-              );
-            },
-          ):
-          Column(
+        return newTransactionListener.length >=1?
+         ListView.builder(
+          // reverse: true,
+          shrinkWrap: true,
+          physics: const ClampingScrollPhysics(),
+          itemCount:
+              // (homeCount!=0)?homeCount :
+              newTransactionListener.length,
+          itemBuilder: (BuildContext context, index) {
+            final data = newTransactionListener[index];
+            return CustomTile(
+              mainData: data,
+              context: context,
+              title: data.note,
+              trailing: '₹ ${data.amount}',
+              style: amountColor(data.field),
+              subTitle1: formatedDate(data.date),
+              subTitle2: data.category.name,
+              deletionKey: data.id,
+            );
+          },
+        ):
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: displayHeight(context)*.2,),
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: displayHeight(context)*.2,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.find_in_page,size: 40,),Text('No transactions found !',style: boxTitle,)
-              ],
-            ),
-            Text('add new transactions for monitering...')
-          ])
-        );
+            children:const [
+              Icon(Icons.find_in_page,size: 40,),Text('No transactions found !',style: boxTitle,)
+            ],
+          ),
+         const Text('add new transactions for monitering...')
+        ]);
       },
     );
   }

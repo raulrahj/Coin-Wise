@@ -38,3 +38,14 @@ double displayWidth(BuildContext context) {
 double displayHeight(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
+
+Widget addVerticalSpace(size){
+  return SizedBox(
+    width: size,
+  );
+}
+Widget addHorizontalSpace(size){
+  return SizedBox(
+    height: size,
+  );
+}

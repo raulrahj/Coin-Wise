@@ -18,7 +18,7 @@ class ProfileModelAdapter extends TypeAdapter<ProfileModel> {
     };
     return ProfileModel(
       profileName: fields[0] as String?,
-      profileEmail: fields[1] as String?,
+      notify: fields[1] as bool?,
       profilePhoto: fields[2] as String?,
       isLogged: fields[3] as bool?,
     );
@@ -31,7 +31,7 @@ class ProfileModelAdapter extends TypeAdapter<ProfileModel> {
       ..writeByte(0)
       ..write(obj.profileName)
       ..writeByte(1)
-      ..write(obj.profileEmail)
+      ..write(obj.notify)
       ..writeByte(2)
       ..write(obj.profilePhoto)
       ..writeByte(3)

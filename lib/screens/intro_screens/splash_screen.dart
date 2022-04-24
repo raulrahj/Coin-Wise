@@ -1,5 +1,3 @@
-// copied data
-
 import 'dart:async';
 import 'package:coin_wise/constants/colors.dart';
 import 'package:coin_wise/database/category_db.dart';
@@ -7,8 +5,9 @@ import 'package:coin_wise/database/profiledata.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/screens/intro_screens/onboarding_screen.dart';
 import 'package:coin_wise/screens/main_screens/home.dart';
+import 'package:coin_wise/widgets/bottom_nav.dart';
 import 'package:flutter/material.dart';
-
+bool isSplash=true;
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -35,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
 
     _controller =
-        AnimationController(vsync: this, duration:const Duration(seconds: 3));
+        AnimationController(vsync: this, duration: const Duration(seconds: 3));
 
     animation1 = Tween<double>(begin: 40, end: 20).animate(CurvedAnimation(
         parent: _controller, curve: Curves.fastLinearToSlowEaseIn))
@@ -62,11 +61,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     Timer(const Duration(seconds: 4), () {
       setState(() {
-      checkLogin(context);
-        // Navigator.pushReplacement(
-        //     context, MaterialPageRoute(builder: (context) => IntroScreen()));
-
-        //  Navigator.pushReplacement(context, PageTransition(IntroScreen()));
+        checkLogin(context);
       });
     });
   }
@@ -91,7 +86,7 @@ class _SplashScreenState extends State<SplashScreen>
               AnimatedContainer(
                   duration: const Duration(milliseconds: 2000),
                   curve: Curves.fastLinearToSlowEaseIn,
-                  height: _height*.7 / _fontSize),
+                  height: _height * .7 / _fontSize),
               AnimatedOpacity(
                 duration: const Duration(milliseconds: 1000),
                 opacity: _textOpacity,
@@ -102,7 +97,6 @@ class _SplashScreenState extends State<SplashScreen>
                     fontWeight: FontWeight.w900,
                     fontSize: 22,
                     fontFamily: 'Antic',
-                    
                   ),
                 ),
               ),
@@ -123,11 +117,15 @@ class _SplashScreenState extends State<SplashScreen>
                     color: Colors.white.withOpacity(0.0),
                     borderRadius: BorderRadius.circular(30),
                   ),
-                   child: Image.asset('./assets/images/log.jpg',width: 100,height: 100,)
+                  child: Image.asset(
+                    './assets/images/log.jpg',
+                    width: 100,
+                    height: 100,
+                  )
                   // child: const Icon(
                   //   Icons.account_balance_wallet,
                   //   size: 122,
-                  // ),  
+                  // ),
                   ),
             ),
           ),
@@ -143,7 +141,7 @@ class PageTransition extends PageRouteBuilder {
   PageTransition(this.page)
       : super(
             pageBuilder: (context, animation, anotherAnimation) => page,
-            transitionDuration:const Duration(milliseconds: 2000),
+            transitionDuration: const Duration(milliseconds: 2000),
             transitionsBuilder: (context, animation, anotherAnimation, child) {
               animation = CurvedAnimation(
                 curve: Curves.fastLinearToSlowEaseIn,
@@ -157,16 +155,16 @@ class PageTransition extends PageRouteBuilder {
 
 Future<void> checkLogin(context) async {
   final ProfileModel? logData = await ProflieDb().getProfileData();
-  bool? isLogged =  logData?.isLogged;
+  bool? isLogged = logData?.isLogged;
   FocusManager.instance.primaryFocus?.unfocus();
- // return isLogged;
-  if (isLogged!=null||isLogged==true) {
+  // return isLogged;
+  if (isLogged != null || isLogged == true) {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (BuildContext ctx) {
-      return const Navigate();
+      return const HomePage();
     }), (route) => false);
-  }else{
-     Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) =>const IntroScreen()));
+  } else {
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const IntroScreen()));
   }
 }

@@ -6,7 +6,7 @@ ProfileModel? loginData;
 ProfileModel _value = ProfileModel(
     profilePhoto: null,
     isLogged: false,
-    profileEmail: null,
+    notify: true,
     profileName: 'Guest User');
 ValueNotifier<ProfileModel> profileListner = ValueNotifier(_value);
 
@@ -34,7 +34,7 @@ class ProflieDb {
     profileListner.value = _data;
     profileListner.notifyListeners();
     print(
-        'THE PROFILE LISTENER VALUES PRINTING ${profileListner.value.profileName} ${profileListner.value.profileEmail}');
+        'THE PROFILE LISTENER VALUES PRINTING ${profileListner.value.profileName} ');
   }
 }
 
@@ -44,7 +44,7 @@ class ProfileModel {
   final String? profileName;
 
   @HiveField(1)
-  final String? profileEmail;
+  final bool? notify;
 
   @HiveField(2)
   late String? profilePhoto;
@@ -53,5 +53,5 @@ class ProfileModel {
   final bool? isLogged;
 
   ProfileModel(
-      {this.profileName, this.profileEmail, this.profilePhoto, this.isLogged});
+      {this.profileName, this.notify, this.profilePhoto, this.isLogged});
 }
