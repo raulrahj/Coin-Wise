@@ -28,7 +28,7 @@ class _AnalysisState extends State<Analysis> {
   @override
   Widget build(BuildContext context) {
     print('THE DROPDOWN VALUE IS ON THE WAY $dropDownValue');
-      CategoryFunctions.instance.categoryAmounts();
+      // CategoryFunctions.instance.categoryAmounts();
       refreshCategoryAmountListners();
       CategoryFunctions.instance.incomeAmountCategoryListner.value.clear();
     // appbar = false;
@@ -52,20 +52,23 @@ class _AnalysisState extends State<Analysis> {
                       SizedBox(
                         width: displayWidth(context) * .6,
                       ),
-                      const Icon(Icons.arrow_drop_down),
+                      const Icon(Icons.arrow_drop_down,color: defaultLightColor,),
                     ],
                   ),
                   items: fields.map((String items) {
                     return DropdownMenuItem(
                       value: items,
-                      child: Text(items),
+                      child: Text(items,),
                     );
                   }).toList(),
                   onChanged: (value) {
-                      value == fields[0] ? incomeList() : expenseList();
+      // CategoryFunctions.instance.categoryAmounts();
+
+      // CategoryFunctions.instance.categoryAmounts();
                     setState(() {
                       dropDownValue = value.toString();
-                      print('Listening here income categoriers');
+
+                      value == fields[0] ? incomeList() : expenseList();
                       
                       refreshCategoryAmountListners();
                     });
@@ -138,22 +141,31 @@ class _AnalysisState extends State<Analysis> {
                     itemCount: newAmountCategories.length,
                     itemBuilder: (BuildContext context, index) {
                       CategoryModel _data = newAmountCategories[index];
-                      return Card(
-                          child: dropDownValue == fields[0]
-                              ? ListTile(
-                                  tileColor: defaultPrimaryColor,
-                                  title: Text(_data.name),
-                                  trailing: Text(_data.categoryAmount != null
-                                      ? '₹ ${_data.categoryAmount.toString()}'
-                                      : '₹ 0.0'),
-                                )
-                              : ListTile(
-                                  tileColor: primaryRed,
-                                  title: Text(_data.name),
-                                  trailing: Text(_data.categoryAmount != null
-                                      ? '₹ ${_data.categoryAmount.toString()}'
-                                      : '0.0'),
-                                ));
+                      return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
+                        child: ClipRRect(
+          borderRadius: BorderRadius.circular(30),
+
+                          child: Container(
+                              child: dropDownValue == fields[0]
+                                  ? ListTile(
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                                      tileColor: defaultPrimaryColor,
+                                      title: Text(_data.name),
+                                      trailing: Text(_data.categoryAmount != null
+                                          ? '₹ ${_data.categoryAmount.toString()}'
+                                          : '₹ 0.0'),
+                                    )
+                                  : ListTile(
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                                      tileColor: primaryRed,
+                                      title: Text(_data.name),
+                                      trailing: Text(_data.categoryAmount != null
+                                          ? '₹ ${_data.categoryAmount.toString()}'
+                                          : '0.0'),
+                                    )),
+                        ),
+                      );
                     });
               })
         ],

@@ -1,20 +1,12 @@
 import 'dart:io';
-import 'package:coin_wise/constants/data.dart';
-import 'package:coin_wise/constants/functions.dart';
-import 'package:coin_wise/database/category_db.dart';
-import 'package:flutter/foundation.dart';
 import 'package:coin_wise/constants/sizes.dart';
+import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/database/profiledata.dart';
 import 'package:coin_wise/constants/text_styles.dart';
-import 'package:coin_wise/screens/main_screens/analysis.dart';
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
-import 'package:coin_wise/screens/main_screens/all_transactions.dart';
-import 'package:coin_wise/screens/main_screens/settings.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/widgets/list_views.dart';
 import 'package:coin_wise/constants/colors.dart';
 import 'package:coin_wise/widgets/widgets.dart';
-import 'package:pandabar/pandabar.dart';
 import 'package:flutter/material.dart';
 
 final String? profilepic = loginData?.profilePhoto;
@@ -25,6 +17,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CategoryFunctions.instance.refreshUI();
     ProflieDb().refreshProfile();
     TransactionDbFunctions.instance.refreshData();
     final String message =

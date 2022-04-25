@@ -66,6 +66,7 @@ class TransactionDbFunctions {
       transactionIncomeListener.notifyListeners();
     });
     refreshCategoryAmountListners();
+    CategoryFunctions.instance.categoryAmounts();
   }
 
   //<<<<<<<<<<< GETTING DATA FROM DATABASE >>>>>>>>>>>>>>>>
@@ -107,38 +108,6 @@ class TransactionDbFunctions {
     walletRefresh();
     walletData();
   }
-
-  // <<<<<<<<<< GETTING WALLET AMOUNT >>>>>>>>>>>>>
-
-//   Future<void> getWallet(List<TransactionModel> _listener) async {
-//     print('get all called ');
-//     // walletDataListener.value = Wallet();
-// incomeValue=0;
-// expenseValue=0;
-// totalBalanceValue=0;
-//     await Future.forEach(_listener, (TransactionModel wallet) async {
-//       print('foreach all called ');
-//       if (wallet.field == CategoryField.income) {
-//         // walletDataListener.value.income =
-//         //     walletDataListener.value.income + wallet.amount;
-//         walletIncomeListener.value+=wallet.amount;
-//         walletDataListener.value +=wallet.amount;
-
-//       } else {
-//         // walletDataListener.value.expense += wallet.amount;
-//         walletExpenseListener.value+=wallet.amount;
-//         walletDataListener.value-=wallet.amount;
-
-//       }
-//       walletRefresh();
-//     });
-//     print('coming out of foreach ');
-//     // print(walletDataListener.value.totalBalance);
-//     // walletDataListener.value.totalBalance =
-//         // walletDataListener.value.income - walletDataListener.value.expense;
-//     walletDataListener.notifyListeners();
-//   }
-// }
 
   Future<void> walletData() async {
     incomeValue = 0;

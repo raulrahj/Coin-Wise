@@ -16,11 +16,12 @@ List<String> defaultExpenseCategories = [
   "Shopping",
   "Charity",
   "Health",
-  "Food & Drinks",
+  "Food&Drinks",
   "Education",
   "Electronics",
   "Entertainment",
-  "Friends & Family",
+  "Friends",
+  "Family",
 ];
 List<String> fields = ['Income', 'Expense'];
 List<String> allFields = ['All', 'Income', 'Expense'];

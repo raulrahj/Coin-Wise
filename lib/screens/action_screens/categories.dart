@@ -90,40 +90,45 @@ class CategoryBuilder extends StatelessWidget {
             itemBuilder: (BuildContext context, index) {
               final data = newListener[index];
               return Padding(
-                padding: decent0,
-                child: Card(
-                  color: color,
-                  child: ListTile(
-                    title: Text(data.name),
-                    trailing: PopupMenuButton(onSelected: (value) {
-                      (value == 1)
-                          ? showDialog(
-                              context: context,
-                              builder: (ctx) {
-                                return deletionPopup(context, data.id);
-                              })
-                          : showDialog(
-                              context: context,
-                              builder: (ctx) {
-                                return UpdateCategoryPopup(
-                                  currentVal: newListener,
-                                  oldName: data.name,
-                                  oldField: data.field,
-                                  oldId: data.id,
-                                );
-                              });
-                    }, itemBuilder: (context) {
-                      return [
-                        const PopupMenuItem(
-                          child: Text('Delete'),
-                          value: 1,
-                        ),
-                        const PopupMenuItem(
-                          child: Text('Edit'),
-                          value: 2,
-                        )
-                      ];
-                    }),
+                  padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
+                child: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+                  child: Container(
+                    color: color,
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      title: Text(data.name),
+                      trailing: PopupMenuButton(onSelected: (value) {
+                        (value == 1)
+                            ? showDialog(
+                                context: context,
+                                builder: (ctx) {
+                                  return deletionPopup(context, data.id);
+                                })
+                            : showDialog(
+                                context: context,
+                                builder: (ctx) {
+                                  return UpdateCategoryPopup(
+                                    currentVal: newListener,
+                                    oldName: data.name,
+                                    oldField: data.field,
+                                    oldId: data.id,
+                                  );
+                                });
+                      }, itemBuilder: (context) {
+                        return [
+                          const PopupMenuItem(
+                            child: Text('Delete'),
+                            value: 1,
+                          ),
+                          const PopupMenuItem(
+                            child: Text('Edit'),
+                            value: 2,
+                          )
+                        ];
+                      }),
+                    ),
                   ),
                 ),
               );

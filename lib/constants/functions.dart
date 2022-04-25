@@ -194,20 +194,29 @@ Future<void> defaultCategoryAdding() async {
 }
 // sort((first,csecond)=> first.date.comparedTo(second.date));
 
-void incomeList() async{
-  
+void incomeList()  {
+  print('fuck its not working');
+      CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
+
   final _list0 =
       CategoryFunctions.instance.incomeAmountCategoryListner.value.toList();
-      if(_list0.isEmpty){return;}
-      print(_list0);
-  _list0.sort((first, second) =>
-      second.categoryAmount!.compareTo(first.categoryAmount!));
-  CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
-  CategoryFunctions.instance.multiAmountCategoryListener.value = _list0;
-  refreshCategoryAmountListners();
+      print(_list0.length);
+  if (_list0.isEmpty) {
+    return;
+  } else {
+    _list0.sort((first, second) =>
+        second.categoryAmount!.compareTo(first.categoryAmount!));
+    // Future.forEach(_list0, (CategoryModel element) async {
+      CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
+      CategoryFunctions.instance.multiAmountCategoryListener.value = _list0;
+      refreshCategoryAmountListners();
+    // });
+  }
 }
 
-void expenseList()async {
+void expenseList() {
+  CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
+
   final _list1 =
       CategoryFunctions.instance.expenseAmountCategoryListner.value.toList();
   _list1.sort((first, second) =>
