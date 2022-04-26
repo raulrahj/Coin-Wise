@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 
 final String? profilepic = loginData?.profilePhoto;
 final  brightness = MediaQueryData.fromWindow(WidgetsBinding.instance!.window).platformBrightness;
+bool isHome =true;
 // _______________________________ HOME PAGE _____________________________________ //
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);

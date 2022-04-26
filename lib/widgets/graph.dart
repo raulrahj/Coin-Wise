@@ -30,6 +30,7 @@ class PieChartSample3 extends StatelessWidget {
         CategoryFunctions.instance.multiAmountCategoryListener.value.toList();
     if (list.isEmpty) {
       // throw 'list value is empty';
+
     }
     final map1 = <String, double>{
       for (CategoryModel e in list) e.name.toString(): e.categoryAmount ?? 0
@@ -79,7 +80,6 @@ class PieChartSample3 extends StatelessWidget {
                             showChartValuesOutside: true,
                               showChartValuesInPercentage: true,
                               decimalPlaces: 1),
-                          //totalValue: 20,
                         ),
                       ),
                     ),

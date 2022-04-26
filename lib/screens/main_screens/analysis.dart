@@ -23,8 +23,13 @@ class _AnalysisState extends State<Analysis> {
 
   @override
   Widget build(BuildContext context) {
-    // CategoryFunctions.instance.availableCategories();
-    print('THE DROPDOWN VALUE IS ON THE WAY $dropDownValue');
+    // isHome=true;
+    // if(isHome){
+    //   setState(() {
+    //               CategoryFunctions.instance.multiAmountCategoryListener=CategoryFunctions.instance.incomeAmountCategoryListner;
+        
+    //   });
+    // }
     // CategoryFunctions.instance.categoryAmounts();
     refreshCategoryAmountListners();
     CategoryFunctions.instance.incomeAmountCategoryListner.value.clear();
@@ -33,7 +38,7 @@ class _AnalysisState extends State<Analysis> {
       child: ListView(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
+            padding:const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
             child: showBox(
                 color: brightness != Brightness.light
                     ? defaultColor

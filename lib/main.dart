@@ -59,18 +59,18 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Coin Wise',
       theme:
-      //  MyThemes.darkTheme,
-       ThemeData(
-        fontFamily: 'Antic',
-        scaffoldBackgroundColor: primaryLight,
-        primarySwatch: Colors.blueGrey,
-        dialogBackgroundColor: defaultPrimaryColor,
-        brightness: Brightness.light,
-      colorScheme: const ColorScheme.light(),
+        MyThemes.darkTheme,
+      //  ThemeData(
+      //   fontFamily: 'Antic',
+      //   scaffoldBackgroundColor: primaryLight,
+      //   primarySwatch: Colors.blueGrey,
+      //   dialogBackgroundColor: defaultPrimaryColor,
+      //   brightness: Brightness.light,
+      // colorScheme: const ColorScheme.light(),
 
         
-      //  canvasColor: 
-      ),
+      // //  canvasColor: 
+      // ),
       home:const SplashScreen(),
     );
   }

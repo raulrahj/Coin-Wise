@@ -31,7 +31,7 @@ class AllTransactions extends StatefulWidget {
 
 ValueListenable<List<TransactionModel>> dropDownListener = ValueNotifier([]);
 
-var _dropdownValue = fields[0];
+var _dropdownValue = allFields[0];
 
 class _AllTransactionsState extends State<AllTransactions> {
   @override
@@ -45,14 +45,18 @@ class _AllTransactionsState extends State<AllTransactions> {
   Widget build(BuildContext context) {
     // TransactionDbFunctions.instance.getWallet;
     TransactionDbFunctions.instance.getTransaction();
-// setState(() {
-//   TransactionDbFunctions.instance.transactionListener.value;
-// });
+    if (isHome) {
+      setState(() {
+        dropDownListener = TransactionDbFunctions.instance.transactionListener;
+      });
+    }
     return SafeArea(
       child: ListView(
         children: [
           defaultContainer(
-            color:brightness!=Brightness.light? defaultColor:defaultColorDark,
+            color: brightness != Brightness.light
+                ? defaultColor
+                : defaultColorDark,
             height: displayHeight(context) * .20,
             item: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -204,7 +208,6 @@ class _AllTransactionsState extends State<AllTransactions> {
                                                   null) {
                                                 navigatorKey?.currentState
                                                     ?.pop();
-                                                    
                                               }
                                               selectedWeekTransactions(
                                                   _controller.selectedRange);
@@ -277,17 +280,17 @@ class _AllTransactionsState extends State<AllTransactions> {
                                     );
                                   }).toList(),
                                   onChanged: (value) {
+                                    isHome = false;
+
                                     setState(() {
                                       _dropdownValue = value.toString();
                                       switch (value) {
                                         case 'All':
-                                          dropDownListener = (isFilter)?
-                                          TransactionDbFunctions
-                                              .instance
-                                              .selectedRangeTransactionsListener
+                                          dropDownListener = (isFilter)
+                                              ? TransactionDbFunctions.instance
+                                                  .selectedRangeTransactionsListener
                                               : TransactionDbFunctions
-                                              .instance
-                                              .transactionListener;
+                                                  .instance.transactionListener;
                                           break;
                                         case 'Income':
                                           dropDownListener =

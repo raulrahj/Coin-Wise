@@ -119,9 +119,14 @@ class AddScreen extends StatelessWidget {
                       behavior: SnackBarBehavior.floating,
                       margin: const EdgeInsets.all(10),
                       backgroundColor: Colors.transparent,
-                      content: Text(
-                        'Added ${_noteController.text}...',
-                        style: const TextStyle(color: Colors.white),
+                      content: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Added ${_noteController.text}...',
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ],
                       ),
                     ),
                   );

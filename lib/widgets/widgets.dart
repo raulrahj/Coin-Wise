@@ -57,7 +57,7 @@ Widget defaultContainer({required Widget item, double? height, Color? color}) {
 Widget verticalDivider = Container(
   height: 40,
   width: 3,
-  color: defaultColor,
+  color : brightness!=Brightness.light? defaultColor : defaultGreyDark,
 );
 
 //__________ TEXTFORM FIELD IN SETUP PROFILE__________________
