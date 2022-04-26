@@ -43,6 +43,7 @@ class _AllTransactionsState extends State<AllTransactions> {
 
   @override
   Widget build(BuildContext context) {
+    Color bg = Theme.of(context).primaryColorDark;
     // TransactionDbFunctions.instance.getWallet;
     TransactionDbFunctions.instance.getTransaction();
     if (isHome) {
@@ -54,9 +55,10 @@ class _AllTransactionsState extends State<AllTransactions> {
       child: ListView(
         children: [
           defaultContainer(
-            color: brightness != Brightness.light
-                ? defaultColor
-                : defaultColorDark,
+            color: bg,
+            // color: brightness != Brightness.light
+            //     ? defaultColor
+            //     : defaultColorDark,
             height: displayHeight(context) * .20,
             item: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

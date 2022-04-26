@@ -19,6 +19,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color bg = Theme.of(context).primaryColorDark;
+    Color bgSub = Theme.of(context).primaryColorLight;
     CategoryFunctions.instance.refreshUI();
     ProflieDb().refreshProfile();
     TransactionDbFunctions.instance.refreshData();
@@ -66,13 +68,14 @@ class Home extends StatelessWidget {
                         );
                       }),
                   defaultContainer(
-                    color: brightness != Brightness.light ?  defaultColor : defaultColorDark,
+                    color: bg,
+                    // color: brightness != Brightness.light ?  defaultColor : defaultColorDark,
                     height: 180,
                     item: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         showBox(
-                          color: brightness != Brightness.light ? defaultColor :defaultColorDark,
+                          color: bg,
                           x: displayWidth(context) * 0.88,
                           item: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -93,13 +96,15 @@ class Home extends StatelessWidget {
                         ),
                         showBox(
                           x: displayWidth(context) * .85,
-                          color:brightness!=Brightness.light? defaultPrimaryColor: defaultPrimaryColorDark,
+                          color: bgSub,
+                          // color:brightness!=Brightness.light? defaultPrimaryColor: defaultPrimaryColorDark,
                           item: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               showBox(
                                 x: displayWidth(context) * 0.42,
-                                color:brightness!=Brightness.light? defaultPrimaryColor:defaultPrimaryColorDark,
+                                color: bgSub,
+                                // color:brightness!=Brightness.light? defaultPrimaryColor:defaultPrimaryColorDark,
                                 item: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment:
@@ -132,7 +137,8 @@ class Home extends StatelessWidget {
                               verticalDivider,
                               showBox(
                                 x: displayWidth(context) * 0.42,
-                                color:brightness!=Brightness.light? defaultPrimaryColor:defaultPrimaryColorDark,
+                                color: bgSub,
+                                // color:brightness!=Brightness.light? defaultPrimaryColor:defaultPrimaryColorDark,
                                 item: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment:

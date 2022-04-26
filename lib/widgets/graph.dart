@@ -24,6 +24,7 @@ class PieChartSample3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color bg =Theme.of(context).primaryColor;
     TransactionDbFunctions.instance.refreshData();
 
     final list =
@@ -64,7 +65,8 @@ class PieChartSample3 extends StatelessWidget {
           child: AspectRatio(
               aspectRatio: 1.2,
               child: Card(
-                color:brightness!=Brightness.light? primaryLight : defaultColorDark,
+                color: bg,
+                // color:brightness!=Brightness.light? primaryLight : defaultColorDark,
                 child: Row(
                   children: [
                     AspectRatio(

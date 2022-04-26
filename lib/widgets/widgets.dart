@@ -14,6 +14,7 @@ import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/screens/action_screens/add_screen.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
 
 import '../main.dart';
 import '../main.dart';
@@ -330,7 +331,7 @@ class SwitchScreen extends StatefulWidget {
   const SwitchScreen({Key? key}) : super(key: key);
 
   @override
-  SwitchClass createState() =>  SwitchClass();
+  SwitchClass createState() => SwitchClass();
 }
 
 class SwitchClass extends State {
@@ -473,6 +474,8 @@ class CustomTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color bg = Theme.of(context).primaryColor;
+    Color bgSub = Theme.of(context).primaryColorLight;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
       //_____________ SLIDABLE DELETION AND EDIT > UX <_______________________________
@@ -519,15 +522,17 @@ class CustomTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           child: Container(
             height: 60,
-            color: brightness != Brightness.light
-                ? defaultPrimaryColor
-                : defaultColorDark,
+            color: bg,
+            // color: brightness != Brightness.light
+            //     ? defaultPrimaryColor
+            //     : defaultColorDark,
             child: Row(
               children: <Widget>[
                 Container(
-                  color: brightness != Brightness.light
-                      ? defaultColor
-                      : defaultPrimaryColorDark,
+                  color: defaultColor,
+                  // color: brightness != Brightness.light
+                  //     ? defaultColor
+                  //     : defaultPrimaryColorDark,
                   width: 60,
                   height: 60,
                   child: const Icon(Icons.currency_rupee, color: Colors.white),
@@ -703,10 +708,10 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
                   _categoryNameController.clear();
                   Navigator.of(context).pop();
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    width: displayWidth(context)*03,
+                      width: displayWidth(context) * 03,
                       behavior: SnackBarBehavior
                           .floating, //behavior used to change decoration or change default config
-                      margin:const EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(10),
                       backgroundColor: defaultColor,
                       content: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -1081,43 +1086,59 @@ Widget aboutApp(context) {
 }
 
 class ThemePopup extends StatelessWidget {
-  const ThemePopup({ Key? key }) : super(key: key);
+  const ThemePopup({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-    shape:const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(15.0))),
-    children: [
-     RadioButton(text: 'Light',selection: currentTheme.lightTheme),
-     RadioButton(text: 'Dark',selection: currentTheme.darkTheme),
-    ],
-  );
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0))),
+      children: [
+        RadioButton(text: 'Light', selection: currentTheme.lightTheme),
+        RadioButton(text: 'Dark', selection: currentTheme.darkTheme),
+      ],
+    );
   }
 }
 
 class RadioButton extends StatelessWidget {
+  final String text;
+  final currentTheme selection;
 
-   final String text;
-   final currentTheme selection;
-
-   RadioButton({ Key? key,required this.text ,required this.selection}) : super(key: key);
+  RadioButton({Key? key, required this.text, required this.selection})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(valueListenable: themeListenable, builder: (context,currentTheme newValue,child){
-      return  Row(
-        children: [
-          Radio<currentTheme>(value: selection, groupValue: newValue , onChanged: (value) {
-            if(value==null){
-              return;
-            }
-              themeListenable.value=value;
-              themeListenable.notifyListeners();
-          }),
-          Text(text),
-          
-        ],
-      );
-    });
+    return ValueListenableBuilder(
+        valueListenable: themeListenable,
+        builder: (context, currentTheme newValue, child) {
+          return Row(
+            children: [
+              Consumer<ThemeModel>(
+                  builder: (context, ThemeModel themeNotifier, child) {
+                return Radio<currentTheme>(
+                    value: selection,
+                    groupValue: newValue,
+                    onChanged: (value) {
+                      print(value);
+                      if (value == null) {
+                        return;
+                      }
+                      themeListenable.value = value;
+                      themeListenable.notifyListeners();
+                    if(value==currentTheme.lightTheme){
+                      // themeNotifier.isDark
+                          // ? 
+                          themeNotifier.isDark = false;
+                    }else{
+                          // :
+                           themeNotifier.isDark = true;
+                    }
+                    });
+              }),
+              Text(text),
+            ],
+          );
+        });
   }
 }

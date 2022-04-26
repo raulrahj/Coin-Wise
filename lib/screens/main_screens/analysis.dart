@@ -23,6 +23,7 @@ class _AnalysisState extends State<Analysis> {
 
   @override
   Widget build(BuildContext context) {
+    Color bg = Theme.of(context).primaryColorDark;
     // isHome=true;
     // if(isHome){
     //   setState(() {
@@ -40,9 +41,10 @@ class _AnalysisState extends State<Analysis> {
           Padding(
             padding:const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
             child: showBox(
-                color: brightness != Brightness.light
-                    ? defaultColor
-                    : defaultColorDark,
+              color: bg,
+                // color: brightness != Brightness.light
+                //     ? defaultColor
+                //     : defaultColorDark,
                 y: displayHeight(context) * 0.05,
                 x: displayWidth(context) * 0.05,
                 alignment: Alignment.center,

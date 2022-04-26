@@ -7,13 +7,11 @@ import 'package:coin_wise/database/profiledata.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/screens/intro_screens/onboarding_screen.dart';
 import 'package:coin_wise/screens/intro_screens/splash_screen.dart';
-import 'package:coin_wise/widgets/bottom_nav.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'home.dart';
-
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
 
@@ -27,7 +25,11 @@ class Settings extends StatelessWidget {
           children: [
             decentSpace20,
             defaultContainer(
-              color: brightness != Brightness.light ? defaultPrimaryColor : defaultColorDark,
+              color: Theme.of(context).primaryColor,
+
+              // color: brightness != Brightness.light
+              //     ? defaultPrimaryColor
+              //     : defaultColorDark,
               item: ValueListenableBuilder(
                   valueListenable: profileListner,
                   builder: (context, ProfileModel newProfileListener, child) {
@@ -65,7 +67,10 @@ class Settings extends StatelessWidget {
                                 addHorizontalSpace(10.0),
                                 Text(
                                   _data.profileName ?? 'Username',
-                                  style:brightness!=Brightness.light? boxSubBoldTitle:const TextStyle(color: defaultGreyDark),
+                                  style: boxSubBoldTitle,
+                                  // style: brightness != Brightness.light
+                                  //     ? boxSubBoldTitle
+                                  //     : const TextStyle(color: defaultGreyDark),
                                 ),
                               ],
                             ),
@@ -89,22 +94,29 @@ class Settings extends StatelessWidget {
                   }),
             ),
             settingsTile(
+              bg: Theme.of(context).primaryColor,
+
                 settingsFunction: () async => showDialog(
                     context: context, builder: (ctx) => ThemePopup()),
                 head: "Theme",
                 icn: const Icon(Icons.brightness_medium_rounded)),
             settingsTile(
+              bg: Theme.of(context).primaryColor,
+
                 head: "Notification",
                 icn: const Icon(Icons.notifications_active),
-                trail: SwitchScreen()),
+                trail:const SwitchScreen()),
             settingsTile(
+              bg: Theme.of(context).primaryColor,
+
               settingsFunction: () async {
                 showDialog(
                     context: context,
                     builder: (ctx) {
                       return SimpleDialog(
-                         shape:const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15.0))),
                         children: [
                           const Text(
                               ' Do you really want to clear all the transactions'),
@@ -131,6 +143,8 @@ class Settings extends StatelessWidget {
               icn: const Icon(Icons.restart_alt_rounded),
             ),
             settingsTile(
+              bg: Theme.of(context).primaryColor,
+
                 settingsFunction: () {
                   Navigator.push(
                       context,
@@ -141,6 +155,8 @@ class Settings extends StatelessWidget {
                 head: "App Intro",
                 icn: const Icon(Icons.phone_android_rounded)),
             settingsTile(
+              bg: Theme.of(context).primaryColor,
+
                 head: "Feedback",
                 icn: const Icon(Icons.chat),
                 settingsFunction: () async {
@@ -150,7 +166,7 @@ class Settings extends StatelessWidget {
                 // settingsFunction: () => Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => MyHomePage(),)),
                 //  showDialog(
                 //     context: context, builder: (ctx) => aboutApp(context)),
-              
+              bg: Theme.of(context).primaryColor,
                 head: "About app",
                 icn: const Icon(Icons.info_outline)),
           ],
@@ -158,14 +174,16 @@ class Settings extends StatelessWidget {
       ),
     );
   }
-
   Widget settingsTile(
           {required String head,
           Widget? icn,
           Widget? trail,
-          Function()? settingsFunction}) =>
+          Function()? settingsFunction, bg,fg}) =>
       defaultContainer(
-        color:brightness != Brightness.light? defaultPrimaryColor : defaultColorDark,
+        color: bg,
+        // ( !dark!) 
+        //     ? defaultPrimaryColor
+        //     : defaultColorDark,
         item: ListTile(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -175,7 +193,8 @@ class Settings extends StatelessWidget {
             style: boxTitle,
           ),
           leading: icn,
-          iconColor: brightness != Brightness.light ? Colors.black : defaultGreyDark,
+          iconColor: fg,
+              // brightness != Brightness.light ? Colors.black : defaultGreyDark,
           trailing: trail,
         ),
       );
@@ -190,4 +209,3 @@ _launchURLBrowser() async {
     throw 'Could not launch $url';
   }
 }
-

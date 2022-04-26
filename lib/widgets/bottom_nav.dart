@@ -164,7 +164,8 @@ int? field;
     
   
       bottomNavigationBar: BottomNavyBar(
-        backgroundColor: brightness !=Brightness.light ? primaryLight: defaultPrimaryColorDark,
+        backgroundColor: Theme.of(context).primaryColorLight,
+        // brightness ==Brightness.light ? primaryLight: defaultPrimaryColorDark,
         selectedIndex: _currentIndex,
         showElevation: true,
         itemCornerRadius: 24,
