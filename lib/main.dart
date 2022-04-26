@@ -51,7 +51,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
-  statusBarColor: brightness!=Brightness.light? defaultColor : defaultColorDark
+  statusBarColor: brightness!=Brightness.light? defaultColor : Colors.transparent,
+  // systemNavigationBarColor: Colors.transparent
   
 ));
     return MaterialApp(
@@ -59,6 +60,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Coin Wise',
       theme:
+      // ValueListenableBuilder(valueListenable: currentTheme, builder: (context, newtheme,child){
+      //   return ThemeData();
+      // }),
         MyThemes.darkTheme,
       //  ThemeData(
       //   fontFamily: 'Antic',

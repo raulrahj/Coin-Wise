@@ -1,3 +1,4 @@
+import 'package:coin_wise/app_themes.dart';
 import 'package:coin_wise/constants/data.dart';
 import 'package:coin_wise/constants/functions.dart';
 import 'package:coin_wise/constants/text_styles.dart';
@@ -57,13 +58,14 @@ Widget defaultContainer({required Widget item, double? height, Color? color}) {
 Widget verticalDivider = Container(
   height: 40,
   width: 3,
-  color : brightness!=Brightness.light? defaultColor : defaultGreyDark,
+  color: brightness != Brightness.light ? defaultColor : defaultGreyDark,
 );
 
 //__________ TEXTFORM FIELD IN SETUP PROFILE__________________
 
 class TextFormBox extends StatelessWidget {
-   TextFormBox({Key? key, this.hint, this.profileformController,this.validation})
+  TextFormBox(
+      {Key? key, this.hint, this.profileformController, this.validation})
       : super(key: key);
   final String? hint;
   final TextEditingController? profileformController;
@@ -79,7 +81,7 @@ class TextFormBox extends StatelessWidget {
         color: Colors.transparent,
         child: TextFormField(
           controller: profileformController,
-           validator: validation ,
+          validator: validation,
           decoration: InputDecoration(
             labelText: hint,
             labelStyle: const TextStyle(color: Color(0xFF8D8DAA)),
@@ -137,7 +139,12 @@ Widget defaultButton({
 
 //________________________ COMMON CONTAINER BOX________________________________
 
-Widget showBox({Widget? item, double? x, double? y, Color? color,AlignmentGeometry? alignment}) {
+Widget showBox(
+    {Widget? item,
+    double? x,
+    double? y,
+    Color? color,
+    AlignmentGeometry? alignment}) {
   return Container(
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15), color: color ?? defaultColor),
@@ -174,7 +181,7 @@ class ActionBox extends StatelessWidget {
   Widget build(BuildContext context) {
     print(data);
     return TextFormField(
-      validator: validator ,
+      validator: validator,
       style: TextStyle(color: itemColor),
       controller: controller,
       keyboardType: keyboardtype,
@@ -197,51 +204,6 @@ class ActionBox extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.0),
         ),
         labelStyle: TextStyle(color: itemColor),
-      ),
-    );
-  }
-}
-
-//_________________CARD FOR FIELD SELECTION_____________________
-
-class SelectField extends StatelessWidget {
-  const SelectField({
-    required this.field,
-    Key? key,
-    this.tl,
-    this.bl,
-    this.tr,
-    this.br,
-    this.color,
-    this.borderWidth,
-    this.categoryField,
-  }) : super(key: key);
-  final String field;
-  final double? tl;
-  final double? bl;
-  final double? tr;
-  final double? br;
-  final Color? color;
-  final double? borderWidth;
-  final int? categoryField;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: defaultColor,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(tl ?? 0),
-          bottomLeft: Radius.circular(bl ?? 0),
-          topRight: Radius.circular(tr ?? 0),
-          bottomRight: Radius.circular(br ?? 0),
-        ),
-        border:
-            Border.all(width: borderWidth ?? 1, color: color ?? primaryDark),
-      ),
-      width: displayWidth(context) * .35,
-      height: 49,
-      child: Row(
-        children: [const Icon(Icons.arrow_right_sharp), Text(field)],
       ),
     );
   }
@@ -365,8 +327,10 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
 //_______________________________________SWITH BUTTON___________________________
 
 class SwitchScreen extends StatefulWidget {
+  const SwitchScreen({Key? key}) : super(key: key);
+
   @override
-  SwitchClass createState() => new SwitchClass();
+  SwitchClass createState() =>  SwitchClass();
 }
 
 class SwitchClass extends State {
@@ -379,18 +343,17 @@ class SwitchClass extends State {
         () {
           isSwitched = true;
           notifications();
-          // AwesomeNotifications().actionStream.listen((event) { 
+          // AwesomeNotifications().actionStream.listen((event) {
           //   Navigator.of(context).push(MaterialPageRoute(builder: (ctx){
           //     return const addTransactionPopup();
-           // }));
-          //});
+          // }));
+          // });
         },
       );
     } else {
       setState(
         () {
           isSwitched = false;
-          
         },
       );
     }
@@ -406,10 +369,14 @@ class SwitchClass extends State {
           child: Switch(
             onChanged: toggleSwitch,
             value: isSwitched,
-            activeColor: const Color.fromARGB(255, 1, 1, 1),
-            activeTrackColor: primaryGrey,
+            activeColor: brightness != Brightness.light
+                ? primaryDark
+                : defaultPrimaryColorDark,
+            activeTrackColor:
+                brightness != Brightness.light ? primaryGrey : defaultGreyDark,
             inactiveThumbColor: primaryRed,
-            inactiveTrackColor: primaryGrey,
+            inactiveTrackColor:
+                brightness != Brightness.light ? primaryGrey : defaultGreyDark,
           ),
         ),
       ],
@@ -425,9 +392,8 @@ class Date extends StatefulWidget {
   @override
   State<Date> createState() => _DateState();
 }
+
 String onTime = formatedDate(DateTime.now());
-
-
 
 class _DateState extends State<Date> {
   @override
@@ -476,8 +442,8 @@ class CustomTile extends StatelessWidget {
   // }
   void popupEdit(BuildContext context) {
     isAdd = false;
-    mainData?.field==CategoryField.income? categoryMod=0:categoryMod=1;
-    dropDownValue==null;
+    mainData?.field == CategoryField.income ? categoryMod = 0 : categoryMod = 1;
+    dropDownValue == null;
     Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
       return AddScreen(selectedTransactionData: mainData);
     }));
@@ -518,8 +484,12 @@ class CustomTile extends StatelessWidget {
             SlidableAction(
               flex: 1,
               onPressed: popupEdit,
-              backgroundColor:brightness!=Brightness.light? defaultPrimaryColor:defaultColorDark,
-              foregroundColor:brightness!=Brightness.light? primaryDark: defaultGreyDark,
+              backgroundColor: brightness != Brightness.light
+                  ? defaultPrimaryColor
+                  : defaultColorDark,
+              foregroundColor: brightness != Brightness.light
+                  ? primaryDark
+                  : defaultGreyDark,
               icon: Icons.edit,
               label: 'Edit',
             )
@@ -534,8 +504,12 @@ class CustomTile extends StatelessWidget {
               onPressed: (context) {
                 transactionDeletePopup(context, deletionKey);
               },
-              backgroundColor:brightness!=Brightness.light? defaultPrimaryColor:defaultColorDark,
-              foregroundColor:brightness!=Brightness.light? primaryDark:defaultGreyDark,
+              backgroundColor: brightness != Brightness.light
+                  ? defaultPrimaryColor
+                  : defaultColorDark,
+              foregroundColor: brightness != Brightness.light
+                  ? primaryDark
+                  : defaultGreyDark,
               icon: Icons.delete,
               label: 'Delete',
             )
@@ -545,11 +519,15 @@ class CustomTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           child: Container(
             height: 60,
-            color:brightness!=Brightness.light? defaultPrimaryColor : defaultColorDark,
+            color: brightness != Brightness.light
+                ? defaultPrimaryColor
+                : defaultColorDark,
             child: Row(
               children: <Widget>[
                 Container(
-                  color:brightness!=Brightness.light? defaultColor:defaultPrimaryColorDark,
+                  color: brightness != Brightness.light
+                      ? defaultColor
+                      : defaultPrimaryColorDark,
                   width: 60,
                   height: 60,
                   child: const Icon(Icons.currency_rupee, color: Colors.white),
@@ -568,14 +546,20 @@ class CustomTile extends StatelessWidget {
                         children: [
                           Text(
                             subTitle1,
-                            style:  TextStyle(color:brightness!=Brightness.light? primaryBlack: defaultLightColorDark),
+                            style: TextStyle(
+                                color: brightness != Brightness.light
+                                    ? primaryBlack
+                                    : defaultLightColorDark),
                           ),
                           const Text(
                             ' | ',
                             style: defaultTitle,
                           ),
                           Text(subTitle2,
-                              style:  TextStyle(color:brightness!=Brightness.light? primaryBlack:defaultLightColorDark)),
+                              style: TextStyle(
+                                  color: brightness != Brightness.light
+                                      ? primaryBlack
+                                      : defaultLightColorDark)),
                         ],
                       )
                     ],
@@ -603,13 +587,14 @@ class AddCategoryPopup extends StatefulWidget {
 }
 
 class _AddCategoryPopupState extends State<AddCategoryPopup> {
-
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-       shape:const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-      backgroundColor:brightness!=Brightness.light? defaultPrimaryColor :defaultColorDark,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0))),
+      backgroundColor: brightness != Brightness.light
+          ? defaultPrimaryColor
+          : defaultColorDark,
       title: Row(
         children: const [
           decentWidth,
@@ -634,11 +619,10 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
             Form(
               key: widget._formKey,
               child: TextFormField(
-                validator: (value){
-                  if(value==null || value.isEmpty){
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
                     return 'please enter category name !';
-                  }
-                  else{
+                  } else {
                     return null;
                   }
                 },
@@ -648,8 +632,10 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
                   focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: primaryBlack)),
                   enabledBorder: OutlineInputBorder(
-                    borderSide:  BorderSide(
-                      color:brightness!=Brightness.light? primaryBlack:defaultGreyDark,
+                    borderSide: BorderSide(
+                      color: brightness != Brightness.light
+                          ? primaryBlack
+                          : defaultGreyDark,
                     ),
                     borderRadius: BorderRadius.circular(5.0),
                   ),
@@ -705,27 +691,34 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
             defaultButton(
               text: 'Done',
               onPressed: () {
-                 if (widget._formKey.currentState!.validate()) {
-                @override
-                final _categories = CategoryModel(
-                    id: DateTime.now().millisecondsSinceEpoch.toString(),
-                    name: _categoryNameController.text,
-                    field: categoryType == 0
-                        ? CategoryField.income
-                        : CategoryField.expense);
-                CategoryFunctions().insertCategory(_categories);
-                _categoryNameController.clear();
-                Navigator.of(context).pop();
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    behavior: SnackBarBehavior
-                        .floating, //behavior used to change decoration or change default config
-                    margin: EdgeInsets.all(10),
-                    backgroundColor: defaultColor,
-                    content: Text(
-                      'Added ${_categoryNameController.text}...',
-                      style: TextStyle(color: Colors.white),
-                    )));
-               } },
+                if (widget._formKey.currentState!.validate()) {
+                  @override
+                  final _categories = CategoryModel(
+                      id: DateTime.now().millisecondsSinceEpoch.toString(),
+                      name: _categoryNameController.text,
+                      field: categoryType == 0
+                          ? CategoryField.income
+                          : CategoryField.expense);
+                  CategoryFunctions().insertCategory(_categories);
+                  _categoryNameController.clear();
+                  Navigator.of(context).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    width: displayWidth(context)*03,
+                      behavior: SnackBarBehavior
+                          .floating, //behavior used to change decoration or change default config
+                      margin:const EdgeInsets.all(10),
+                      backgroundColor: defaultColor,
+                      content: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Added ${_categoryNameController.text}...',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      )));
+                }
+              },
             )
           ],
         ),
@@ -760,11 +753,13 @@ class UpdateCategoryPopup extends StatefulWidget {
 class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
   @override
   Widget build(BuildContext context) {
-    widget._categoryUpdateNameController.text=widget.oldName;
+    widget._categoryUpdateNameController.text = widget.oldName;
     return AlertDialog(
-       shape:const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-      backgroundColor:brightness!= Brightness.light? defaultPrimaryColor : defaultColorDark,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0))),
+      backgroundColor: brightness != Brightness.light
+          ? defaultPrimaryColor
+          : defaultColorDark,
       title: Row(
         children: const [
           decentWidth,
@@ -790,17 +785,24 @@ class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
               controller: widget._categoryUpdateNameController,
               decoration: InputDecoration(
                 labelText: 'Category name',
-                focusedBorder:  OutlineInputBorder(
-                  borderSide: BorderSide(color:brightness!=Brightness.light? primaryBlack: defaultGreyDark),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: brightness != Brightness.light
+                          ? primaryBlack
+                          : defaultGreyDark),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide:  BorderSide(
-                    color:brightness!=Brightness.light? primaryBlack :defaultGreyDark,
+                  borderSide: BorderSide(
+                    color: brightness != Brightness.light
+                        ? primaryBlack
+                        : defaultGreyDark,
                   ),
                   borderRadius: BorderRadius.circular(5.0),
                 ),
-                labelStyle:  TextStyle(color:brightness!=Brightness.light? primaryBlack: defaultGreyDark),
-                
+                labelStyle: TextStyle(
+                    color: brightness != Brightness.light
+                        ? primaryBlack
+                        : defaultGreyDark),
               ),
             ),
             Container(
@@ -897,9 +899,10 @@ class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
 
 Widget deletionPopup(context, value) {
   return SimpleDialog(
-     shape:const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-    backgroundColor: brightness!=Brightness.light? defaultPrimaryColor:defaultColorDark,
+    shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+    backgroundColor:
+        brightness != Brightness.light ? defaultPrimaryColor : defaultColorDark,
     title: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -939,9 +942,11 @@ transactionDeletePopup(BuildContext context, String? key) {
     context: context,
     builder: (ctx) {
       return SimpleDialog(
-         shape:const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-        backgroundColor: brightness != Brightness.light? defaultPrimaryColor: defaultColorDark,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15.0))),
+        backgroundColor: brightness != Brightness.light
+            ? defaultPrimaryColor
+            : defaultColorDark,
         children: [
           Column(
             mainAxisSize: MainAxisSize.min,
@@ -962,15 +967,6 @@ transactionDeletePopup(BuildContext context, String? key) {
                           .deleteTransaction(context, key);
                       //  Navigator.of(context).pop();
                       navigatorKey?.currentState?.pop();
-                      // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      //     behavior: SnackBarBehavior
-                      //         .floating, //behavior used to change decoration or change default config
-                      //     margin: EdgeInsets.all(10),
-                      //     backgroundColor: defaultColor,
-                      //     content: Text(
-                      //       'Deleted !',
-                      //       style: TextStyle(color: Colors.white),
-                      //     )));
                     },
                     child: const Text('Ok'),
                   ),
@@ -986,119 +982,142 @@ transactionDeletePopup(BuildContext context, String? key) {
 
 Widget snackAlert(BuildContext context, String text) {
   return SnackBar(
-    width: displayWidth(context)*.4,
+    width: displayWidth(context) * .4,
     behavior: SnackBarBehavior
         .floating, //behavior used to change decoration or change default config
-    margin:const EdgeInsets.all(10),
+    margin: const EdgeInsets.all(10),
     backgroundColor: Colors.transparent,
     content: Text(
       text,
-      style:const TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.white),
     ),
   );
 }
 //________________________TRANSACTION ADDING SELECTION POPUP___________
 
 class addTransactionPopup extends StatelessWidget {
-   addTransactionPopup({ Key? key }) : super(key: key);
+  addTransactionPopup({Key? key}) : super(key: key);
   int? field;
 
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-                  alignment: AlignmentGeometry.lerp(
-                      Alignment.bottomCenter, Alignment.bottomCenter, 100),
-                  backgroundColor: Colors.transparent,
-                  children: [
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'ADD TRANSACTION',
-                        style: TextStyle(color: defaultPrimaryColor),
-                      ),
-                    ),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0,
-                          primary: defaultColor,
-                          shadowColor: Colors.transparent,
-                          shape:const StadiumBorder(),
-                        ),
-                        onPressed: () {
-                          isAdd = true;
-                          categoryMod = 0;
-                           field = 0;
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (ctx) => AddScreen(field: field)));
-                          dropDownValue =
-                              null; //TransactionDbFunctions.instance.transactionIncomeListener.value[0].category;
-                        },
-                        child: const Text('Income ')),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        primary: defaultColor,
-                        shadowColor: Colors.transparent,
-                        shape: const StadiumBorder(),
-                      ),
-                      onPressed: () async {
-                        isAdd =true;
-                        categoryMod = 1;
-                         field = 1;
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (ctx) => AddScreen(field: field)));
-                        dropDownValue =
-                            null; //TransactionDbFunctions.instance.transactionIncomeListener.value[0].category;
-                      },
-                      child: const Text('Expense'),
-                    ),
-                    const SizedBox(
-                      height: 90,
-                    )
-                  ],
-                );
-
+      alignment: AlignmentGeometry.lerp(
+          Alignment.bottomCenter, Alignment.bottomCenter, 100),
+      backgroundColor: Colors.transparent,
+      children: [
+        TextButton(
+          onPressed: () {},
+          child: const Text(
+            'ADD TRANSACTION',
+            style: TextStyle(color: defaultPrimaryColor),
+          ),
+        ),
+        ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              elevation: 0,
+              primary: defaultColor,
+              shadowColor: Colors.transparent,
+              shape: const StadiumBorder(),
+            ),
+            onPressed: () {
+              isAdd = true;
+              categoryMod = 0;
+              field = 0;
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (ctx) => AddScreen(field: field)));
+              dropDownValue =
+                  null; //TransactionDbFunctions.instance.transactionIncomeListener.value[0].category;
+            },
+            child: const Text('Income ')),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            primary: defaultColor,
+            shadowColor: Colors.transparent,
+            shape: const StadiumBorder(),
+          ),
+          onPressed: () async {
+            isAdd = true;
+            categoryMod = 1;
+            field = 1;
+            Navigator.push(context,
+                MaterialPageRoute(builder: (ctx) => AddScreen(field: field)));
+            dropDownValue =
+                null; //TransactionDbFunctions.instance.transactionIncomeListener.value[0].category;
+          },
+          child: const Text('Expense'),
+        ),
+        const SizedBox(
+          height: 90,
+        )
+      ],
+    );
   }
 }
- Widget aboutApp(context){
-   return  
-      SimpleDialog(
-         shape:const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-       backgroundColor: defaultPrimaryColor,
-       children: [
-    //      defaultContainer(
-    //  color: defaultColor,
-    //  height: displayHeight(context)*.5,
 
-          //  item:
-            Column(
-             mainAxisSize: MainAxisSize.max,
-             children: [
-            //  Container(
-            //    child:  Text(aboutAppText,style:TextStyle(color: defaultPrimaryColor,)),
-            //  )
-           ],),
-        //  ) 
-       ],
-     );
-   
- }
- Widget themePopup(){
-   return SimpleDialog(
-      shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-     children: [
-       Row(
-         children: [
-           Radio(value: 1, groupValue: 2, onChanged: (value)=>null), Text('Light')
-         ],
-       ),
-       Row(children: [Radio(value: 2, groupValue: 2, onChanged: (value)=>null),Text('Dark')],),
-     ],
-   );
- }
+Widget aboutApp(context) {
+  return SimpleDialog(
+    shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+    backgroundColor: defaultPrimaryColor,
+    children: [
+      //      defaultContainer(
+      //  color: defaultColor,
+      //  height: displayHeight(context)*.5,
+
+      //  item:
+      Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          //  Container(
+          //    child:  Text(aboutAppText,style:TextStyle(color: defaultPrimaryColor,)),
+          //  )
+        ],
+      ),
+      //  )
+    ],
+  );
+}
+
+class ThemePopup extends StatelessWidget {
+  const ThemePopup({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SimpleDialog(
+    shape:const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+    children: [
+     RadioButton(text: 'Light',selection: currentTheme.lightTheme),
+     RadioButton(text: 'Dark',selection: currentTheme.darkTheme),
+    ],
+  );
+  }
+}
+
+class RadioButton extends StatelessWidget {
+
+   final String text;
+   final currentTheme selection;
+
+   RadioButton({ Key? key,required this.text ,required this.selection}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(valueListenable: themeListenable, builder: (context,currentTheme newValue,child){
+      return  Row(
+        children: [
+          Radio<currentTheme>(value: selection, groupValue: newValue , onChanged: (value) {
+            if(value==null){
+              return;
+            }
+              themeListenable.value=value;
+              themeListenable.notifyListeners();
+          }),
+          Text(text),
+          
+        ],
+      );
+    });
+  }
+}

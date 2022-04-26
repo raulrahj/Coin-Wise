@@ -23,7 +23,7 @@ defaultPrimaryColor], begin: Alignment.topLeft, end: Alignment.topRight);
 
 const Gradient defaultBoxGradientDark = LinearGradient(colors: <Color>[
   defaultPrimaryColorDark,
-primaryDark], begin: Alignment.topLeft, end: Alignment.topRight);
+defaultColorDark], begin: Alignment.topLeft, end: Alignment.topRight);
 const Gradient defaultGradient = LinearGradient(colors: <Color>[
   Color.fromARGB(236, 204, 253, 192),
   Color.fromARGB(202, 255, 255, 255)

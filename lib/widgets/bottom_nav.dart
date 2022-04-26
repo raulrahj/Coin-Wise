@@ -68,7 +68,7 @@ int? field;
               ),
             ],
           ),
-          shape: StadiumBorder(),
+          shape:const StadiumBorder(),
           behavior: SnackBarBehavior.floating,
           margin: EdgeInsets.symmetric(horizontal: 70,),
         ),
@@ -103,7 +103,7 @@ int? field;
             iconColor :Colors.white,
             bubbleColor : defaultColor,
             icon:Icons.category,
-            titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
+            titleStyle:const TextStyle(fontSize: 16 , color: Colors.white),
             onPress: () {
               Navigator.push(context,  MaterialPageRoute(builder: (BuildContext context) =>const Categories()));
               _animationController.reverse();
@@ -179,6 +179,7 @@ int? field;
             title:const Text('Home'),
             activeColor: primaryDark,
             textAlign: TextAlign.center,
+            // inactiveColor: brightness!=Brightness.light? primaryDark :defaultGreyDark
           ),
           BottomNavyBarItem(
             icon:const Icon(Icons.account_balance_wallet),

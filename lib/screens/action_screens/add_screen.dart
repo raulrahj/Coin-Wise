@@ -116,6 +116,7 @@ class AddScreen extends StatelessWidget {
                   await TransactionDbFunctions.instance.getTransaction();
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
+                      width: displayWidth(context)*03,
                       behavior: SnackBarBehavior.floating,
                       margin: const EdgeInsets.all(10),
                       backgroundColor: Colors.transparent,

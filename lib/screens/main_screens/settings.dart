@@ -90,7 +90,7 @@ class Settings extends StatelessWidget {
             ),
             settingsTile(
                 settingsFunction: () async => showDialog(
-                    context: context, builder: (ctx) => themePopup()),
+                    context: context, builder: (ctx) => ThemePopup()),
                 head: "Theme",
                 icn: const Icon(Icons.brightness_medium_rounded)),
             settingsTile(
