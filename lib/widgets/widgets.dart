@@ -4,6 +4,7 @@ import 'package:coin_wise/constants/text_styles.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/main.dart';
 import 'package:coin_wise/models/transaction_model.dart';
+import 'package:coin_wise/screens/main_screens/home.dart';
 import 'package:coin_wise/widgets/list_views.dart';
 import 'package:flutter/material.dart';
 import 'package:coin_wise/constants/colors.dart';
@@ -517,8 +518,8 @@ class CustomTile extends StatelessWidget {
             SlidableAction(
               flex: 1,
               onPressed: popupEdit,
-              backgroundColor: defaultPrimaryColor,
-              foregroundColor: primaryDark,
+              backgroundColor:brightness!=Brightness.light? defaultPrimaryColor:defaultColorDark,
+              foregroundColor:brightness!=Brightness.light? primaryDark: defaultGreyDark,
               icon: Icons.edit,
               label: 'Edit',
             )
@@ -533,8 +534,8 @@ class CustomTile extends StatelessWidget {
               onPressed: (context) {
                 transactionDeletePopup(context, deletionKey);
               },
-              backgroundColor: defaultPrimaryColor,
-              foregroundColor: primaryDark,
+              backgroundColor:brightness!=Brightness.light? defaultPrimaryColor:defaultColorDark,
+              foregroundColor:brightness!=Brightness.light? primaryDark:defaultGreyDark,
               icon: Icons.delete,
               label: 'Delete',
             )
@@ -544,11 +545,11 @@ class CustomTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           child: Container(
             height: 60,
-            color: defaultPrimaryColor,
+            color:brightness!=Brightness.light? defaultPrimaryColor : defaultColorDark,
             child: Row(
               children: <Widget>[
                 Container(
-                  color: defaultColor,
+                  color:brightness!=Brightness.light? defaultColor:defaultPrimaryColorDark,
                   width: 60,
                   height: 60,
                   child: const Icon(Icons.currency_rupee, color: Colors.white),
@@ -567,14 +568,14 @@ class CustomTile extends StatelessWidget {
                         children: [
                           Text(
                             subTitle1,
-                            style: const TextStyle(color: primaryBlack),
+                            style:  TextStyle(color:brightness!=Brightness.light? primaryBlack: defaultLightColorDark),
                           ),
                           const Text(
                             ' | ',
                             style: defaultTitle,
                           ),
                           Text(subTitle2,
-                              style: const TextStyle(color: primaryBlack)),
+                              style:  TextStyle(color:brightness!=Brightness.light? primaryBlack:defaultLightColorDark)),
                         ],
                       )
                     ],
@@ -606,7 +607,9 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: defaultPrimaryColor,
+       shape:const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+      backgroundColor:brightness!=Brightness.light? defaultPrimaryColor :defaultColorDark,
       title: Row(
         children: const [
           decentWidth,
@@ -645,8 +648,8 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
                   focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: primaryBlack)),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: primaryBlack,
+                    borderSide:  BorderSide(
+                      color:brightness!=Brightness.light? primaryBlack:defaultGreyDark,
                     ),
                     borderRadius: BorderRadius.circular(5.0),
                   ),
@@ -759,7 +762,9 @@ class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
   Widget build(BuildContext context) {
     widget._categoryUpdateNameController.text=widget.oldName;
     return AlertDialog(
-      backgroundColor: defaultPrimaryColor,
+       shape:const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+      backgroundColor:brightness!= Brightness.light? defaultPrimaryColor : defaultColorDark,
       title: Row(
         children: const [
           decentWidth,
@@ -785,16 +790,16 @@ class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
               controller: widget._categoryUpdateNameController,
               decoration: InputDecoration(
                 labelText: 'Category name',
-                focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: primaryBlack),
+                focusedBorder:  OutlineInputBorder(
+                  borderSide: BorderSide(color:brightness!=Brightness.light? primaryBlack: defaultGreyDark),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: primaryBlack,
+                  borderSide:  BorderSide(
+                    color:brightness!=Brightness.light? primaryBlack :defaultGreyDark,
                   ),
                   borderRadius: BorderRadius.circular(5.0),
                 ),
-                labelStyle: const TextStyle(color: primaryBlack),
+                labelStyle:  TextStyle(color:brightness!=Brightness.light? primaryBlack: defaultGreyDark),
                 
               ),
             ),
@@ -892,7 +897,9 @@ class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
 
 Widget deletionPopup(context, value) {
   return SimpleDialog(
-    backgroundColor: defaultPrimaryColor,
+     shape:const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+    backgroundColor: brightness!=Brightness.light? defaultPrimaryColor:defaultColorDark,
     title: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -932,7 +939,9 @@ transactionDeletePopup(BuildContext context, String? key) {
     context: context,
     builder: (ctx) {
       return SimpleDialog(
-        backgroundColor: defaultPrimaryColor,
+         shape:const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+        backgroundColor: brightness != Brightness.light? defaultPrimaryColor: defaultColorDark,
         children: [
           Column(
             mainAxisSize: MainAxisSize.min,
@@ -977,10 +986,11 @@ transactionDeletePopup(BuildContext context, String? key) {
 
 Widget snackAlert(BuildContext context, String text) {
   return SnackBar(
+    width: displayWidth(context)*.4,
     behavior: SnackBarBehavior
         .floating, //behavior used to change decoration or change default config
     margin:const EdgeInsets.all(10),
-    backgroundColor: defaultColor,
+    backgroundColor: Colors.transparent,
     content: Text(
       text,
       style:const TextStyle(color: Colors.white),
@@ -1057,6 +1067,8 @@ class addTransactionPopup extends StatelessWidget {
  Widget aboutApp(context){
    return  
       SimpleDialog(
+         shape:const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
        backgroundColor: defaultPrimaryColor,
        children: [
     //      defaultContainer(
@@ -1078,6 +1090,8 @@ class addTransactionPopup extends StatelessWidget {
  }
  Widget themePopup(){
    return SimpleDialog(
+      shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
      children: [
        Row(
          children: [

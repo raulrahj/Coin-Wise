@@ -6,14 +6,12 @@ import 'package:coin_wise/constants/text_styles.dart';
 import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/models/category_model.dart';
+import 'package:coin_wise/screens/main_screens/home.dart';
 import 'package:coin_wise/widgets/graph.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-
 class Analysis extends StatefulWidget {
-  
-
   const Analysis({Key? key}) : super(key: key);
 
   @override
@@ -21,24 +19,25 @@ class Analysis extends StatefulWidget {
 }
 
 class _AnalysisState extends State<Analysis> {
-  
-
   String dropDownValue = fields[0];
-  
+
   @override
   Widget build(BuildContext context) {
+    // CategoryFunctions.instance.availableCategories();
     print('THE DROPDOWN VALUE IS ON THE WAY $dropDownValue');
-      // CategoryFunctions.instance.categoryAmounts();
-      refreshCategoryAmountListners();
-      CategoryFunctions.instance.incomeAmountCategoryListner.value.clear();
+    // CategoryFunctions.instance.categoryAmounts();
+    refreshCategoryAmountListners();
+    CategoryFunctions.instance.incomeAmountCategoryListner.value.clear();
     // appbar = false;
     return SafeArea(
       child: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
             child: showBox(
-                color: defaultColor,
+                color: brightness != Brightness.light
+                    ? defaultColor
+                    : defaultColorDark,
                 y: displayHeight(context) * 0.05,
                 x: displayWidth(context) * 0.05,
                 alignment: Alignment.center,
@@ -52,24 +51,29 @@ class _AnalysisState extends State<Analysis> {
                       SizedBox(
                         width: displayWidth(context) * .6,
                       ),
-                      const Icon(Icons.arrow_drop_down,color: defaultLightColor,),
+                      const Icon(
+                        Icons.arrow_drop_down,
+                        color: defaultLightColor,
+                      ),
                     ],
                   ),
                   items: fields.map((String items) {
                     return DropdownMenuItem(
                       value: items,
-                      child: Text(items,),
+                      child: Text(
+                        items,
+                      ),
                     );
                   }).toList(),
                   onChanged: (value) {
-      // CategoryFunctions.instance.categoryAmounts();
+                    // CategoryFunctions.instance.categoryAmounts();
 
-      // CategoryFunctions.instance.categoryAmounts();
+                    // CategoryFunctions.instance.categoryAmounts();
                     setState(() {
                       dropDownValue = value.toString();
 
                       value == fields[0] ? incomeList() : expenseList();
-                      
+
                       refreshCategoryAmountListners();
                     });
                   },
@@ -142,25 +146,31 @@ class _AnalysisState extends State<Analysis> {
                     itemBuilder: (BuildContext context, index) {
                       CategoryModel _data = newAmountCategories[index];
                       return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4.0, horizontal: 12.0),
                         child: ClipRRect(
-          borderRadius: BorderRadius.circular(30),
-
+                          borderRadius: BorderRadius.circular(30),
                           child: Container(
                               child: dropDownValue == fields[0]
                                   ? ListTile(
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                                      tileColor: defaultPrimaryColor,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      tileColor:brightness!=Brightness.light? defaultPrimaryColor:defaultColorDark,
                                       title: Text(_data.name),
-                                      trailing: Text(_data.categoryAmount != null
+                                      trailing: Text(_data.categoryAmount !=
+                                              null
                                           ? '₹ ${_data.categoryAmount.toString()}'
                                           : '₹ 0.0'),
                                     )
                                   : ListTile(
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                                      tileColor: primaryRed,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      tileColor:brightness!=Brightness.light? primaryRed:primaryRedDark,
                                       title: Text(_data.name),
-                                      trailing: Text(_data.categoryAmount != null
+                                      trailing: Text(_data.categoryAmount !=
+                                              null
                                           ? '₹ ${_data.categoryAmount.toString()}'
                                           : '0.0'),
                                     )),

@@ -12,6 +12,7 @@ const TextStyle boxTitle =  TextStyle(fontFamily: 'Antic',fontSize: 18,fontWeigh
 const TextStyle boxLightTitle =  TextStyle(fontFamily: 'Antic',fontSize: 16,fontWeight: FontWeight.w500);
 const TextStyle boxSubTitle =  TextStyle(fontFamily: 'Sans',fontSize: 18,fontWeight: FontWeight.w600);
 const TextStyle boxSubBoldTitle =  TextStyle(fontFamily: 'Sans',fontSize: 18,fontWeight: FontWeight.w600,color: defaultColor);
+const TextStyle boxSubBoldTitleDark =  TextStyle(fontFamily: 'Sans',fontSize: 18,fontWeight: FontWeight.w600,color: defaultGreyDark);
 
 const TextStyle defaultTitle =  TextStyle(fontFamily: 'Antic',fontSize: 15,fontWeight: FontWeight.w500);
 

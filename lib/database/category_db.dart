@@ -66,6 +66,7 @@ class CategoryFunctions {
     incomeCategoryListner.notifyListeners();
     expenseCategoryListner.notifyListeners();
     refreshCategoryAmountListners();
+    // availableCategories();
   }
 
   List<String> availableIncomeCategories = [];
@@ -89,7 +90,7 @@ class CategoryFunctions {
 
   void incomeListing() {
     print('THREEE ');
-    CategoryModel? inc;
+    late CategoryModel inc;
     final incomeCategories = incomeCategoryListner.value.toList();
 
     for (int i = 0; i < availableIncomeCategories.length; i++) {
@@ -98,16 +99,18 @@ class CategoryFunctions {
           inc = incomeCategories[i];
         }
       }
-      incomeAmountCategoryListner.value.add(inc!);
+      incomeAmountCategoryListner.value.add(inc);
     }
   }
 
   void expenseListing() {
+   
     print('FOUR');
     CategoryModel? exp;
     final expenseCategories = expenseCategoryListner.value.toList();
 
     for (int i = 0; i < availableExpenseCategories.length; i++) {
+      print('length of available expense cat ${availableExpenseCategories.length}');
       for (int j = 0; j < expenseCategories.length; j++) {
         if (availableExpenseCategories[i] == expenseCategories[j].name) {
           exp = expenseCategories[i];
@@ -116,7 +119,6 @@ class CategoryFunctions {
       
       expenseAmountCategoryListner.value.add(exp!);
       print(' >>>>>>>>>>>>>>>>>>${exp.name}<<<<<<<<<<<<<<<<<<<<<<');
-     
     }
   }
 
@@ -131,7 +133,7 @@ class CategoryFunctions {
      
       double amount = 0;
 
-      Future.forEach(allTransactions, (TransactionModel _transaction) {
+      Future.forEach(allTransactions, (TransactionModel _transaction)async{
         if (_transaction.category.name ==
             incomeAmountCategoryListner.value[i].name) {
           amount += _transaction.amount;
@@ -146,6 +148,8 @@ class CategoryFunctions {
         }
       });
     }
+
+
     for (int i = 0; i < expenseAmountCategoryListner.value.length; i++) {
        print(
           'length of expense Category Listener ${expenseAmountCategoryListner.value.length}');
@@ -154,7 +158,7 @@ class CategoryFunctions {
       double amount = 0;
       // expenseAmountCategoryListner.value[i].categoryAmount = 0;
 
-      Future.forEach(allTransactions, (TransactionModel _transaction) {
+      Future.forEach(allTransactions, (TransactionModel _transaction) async {
         if (_transaction.category == expenseAmountCategoryListner.value[i]) {
           amount += _transaction.amount;
           // print(expenseAmountCategoryListner.value[i].categoryAmount);
@@ -162,7 +166,7 @@ class CategoryFunctions {
 
         if (expenseAmountCategoryListner.value[i].name ==
             _transaction.category.name) {
-          // expenseAmountCategoryListner.value[i].categoryAmount = 0;
+          expenseAmountCategoryListner.value[i].categoryAmount = 0;
           expenseAmountCategoryListner.value[i].categoryAmount =
               expenseAmountCategoryListner.value[i].categoryAmount! + amount;
         }

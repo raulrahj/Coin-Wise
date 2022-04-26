@@ -26,17 +26,19 @@ class Settings extends StatelessWidget {
         child: Column(
           children: [
             decentSpace20,
-            Card(
-              color: defaultPrimaryColor,
-              child: ValueListenableBuilder(
+            defaultContainer(
+              color: brightness != Brightness.light ? defaultPrimaryColor : defaultColorDark,
+              item: ValueListenableBuilder(
                   valueListenable: profileListner,
                   builder: (context, ProfileModel newProfileListener, child) {
                     final ProfileModel _data = newProfileListener;
                     return Container(
                       height: displayHeight(context) * .14,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical:18.0),
+                        padding: const EdgeInsets.symmetric(vertical: 18.0),
                         child: ListTile(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
                             title: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
@@ -45,14 +47,17 @@ class Settings extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
-                                  children:  [
+                                  children: [
                                     Wrap(
-                                      children:const [
-                                       Icon(Icons.person_outlined,size: 16,), 
-                                       Text(
-                                      "Profile",
-                                      style: defaultTitle,
-                                    ),
+                                      children: const [
+                                        Icon(
+                                          Icons.person_outlined,
+                                          size: 16,
+                                        ),
+                                        Text(
+                                          "Profile",
+                                          style: defaultTitle,
+                                        ),
                                       ],
                                     )
                                   ],
@@ -60,9 +65,8 @@ class Settings extends StatelessWidget {
                                 addHorizontalSpace(10.0),
                                 Text(
                                   _data.profileName ?? 'Username',
-                                  style: boxSubBoldTitle,
+                                  style:brightness!=Brightness.light? boxSubBoldTitle:const TextStyle(color: defaultGreyDark),
                                 ),
-                              
                               ],
                             ),
                             trailing: _data.profilePhoto == null
@@ -99,6 +103,8 @@ class Settings extends StatelessWidget {
                     context: context,
                     builder: (ctx) {
                       return SimpleDialog(
+                         shape:const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
                         children: [
                           const Text(
                               ' Do you really want to clear all the transactions'),
@@ -144,6 +150,7 @@ class Settings extends StatelessWidget {
                 // settingsFunction: () => Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => MyHomePage(),)),
                 //  showDialog(
                 //     context: context, builder: (ctx) => aboutApp(context)),
+              
                 head: "About app",
                 icn: const Icon(Icons.info_outline)),
           ],
@@ -157,16 +164,18 @@ class Settings extends StatelessWidget {
           Widget? icn,
           Widget? trail,
           Function()? settingsFunction}) =>
-      Card(
-        color: defaultPrimaryColor,
-        child: ListTile(
+      defaultContainer(
+        color:brightness != Brightness.light? defaultPrimaryColor : defaultColorDark,
+        item: ListTile(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           onTap: settingsFunction,
           title: Text(
             head,
             style: boxTitle,
           ),
           leading: icn,
-          iconColor: Colors.black,
+          iconColor: brightness != Brightness.light ? Colors.black : defaultGreyDark,
           trailing: trail,
         ),
       );
@@ -182,15 +191,3 @@ _launchURLBrowser() async {
   }
 }
 
-class MyThemes{
-  static final darkTheme = ThemeData(
-    scaffoldBackgroundColor: Colors.grey.shade900,
-    primaryColor: primaryBlack,
-    colorScheme:const ColorScheme.dark(),
-    bottomNavigationBarTheme:const BottomNavigationBarThemeData(backgroundColor: primaryGrey,selectedIconTheme: IconThemeData(color: defaultPrimaryColor)),
-  navigationBarTheme:const NavigationBarThemeData(backgroundColor: primaryGrey,indicatorColor: primaryLight,)
-  );
-  static final lightTheme = ThemeData(
-
-  );
-}

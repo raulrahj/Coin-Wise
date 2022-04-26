@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:coin_wise/app_themes.dart';
 import 'package:coin_wise/constants/sizes.dart';
 import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/database/profiledata.dart';
@@ -10,7 +11,7 @@ import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 final String? profilepic = loginData?.profilePhoto;
-
+final  brightness = MediaQueryData.fromWindow(WidgetsBinding.instance!.window).platformBrightness;
 // _______________________________ HOME PAGE _____________________________________ //
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -64,12 +65,13 @@ class Home extends StatelessWidget {
                         );
                       }),
                   defaultContainer(
-                    color: defaultColor,
+                    color: brightness != Brightness.light ?  defaultColor : defaultColorDark,
                     height: 180,
                     item: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         showBox(
+                          color: brightness != Brightness.light ? defaultColor :defaultColorDark,
                           x: displayWidth(context) * 0.88,
                           item: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -90,13 +92,13 @@ class Home extends StatelessWidget {
                         ),
                         showBox(
                           x: displayWidth(context) * .85,
-                          color: defaultPrimaryColor,
+                          color:brightness!=Brightness.light? defaultPrimaryColor: defaultPrimaryColorDark,
                           item: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               showBox(
                                 x: displayWidth(context) * 0.42,
-                                color: defaultPrimaryColor,
+                                color:brightness!=Brightness.light? defaultPrimaryColor:defaultPrimaryColorDark,
                                 item: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment:
@@ -119,7 +121,7 @@ class Home extends StatelessWidget {
                                       builder: (context,double newIncome,child) {
                                         return Text(
                                           '₹ ${newIncome.toString()}',
-                                          style: boxSubBoldTitle,
+                                          style:brightness!=Brightness.light? boxSubBoldTitle: boxSubBoldTitleDark,
                                         );
                                       }
                                     )
@@ -129,7 +131,7 @@ class Home extends StatelessWidget {
                               verticalDivider,
                               showBox(
                                 x: displayWidth(context) * 0.42,
-                                color: defaultPrimaryColor,
+                                color:brightness!=Brightness.light? defaultPrimaryColor:defaultPrimaryColorDark,
                                 item: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment:
@@ -152,7 +154,7 @@ class Home extends StatelessWidget {
                                       builder: (context,double newExpense,childe) {
                                         return Text(
                                           '₹ ${newExpense.toString()}',
-                                          style: boxSubBoldTitle,
+                                          style:brightness!=Brightness.light? boxSubBoldTitle:boxSubBoldTitleDark,
                                         );
                                       }
                                     ),

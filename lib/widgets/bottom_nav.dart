@@ -53,15 +53,20 @@ int? field;
           ),
           elevation: 0,
           flexibleSpace: Container(
-            decoration: const BoxDecoration(gradient: defaultBoxGradient),
+            decoration:  BoxDecoration(gradient: brightness!=Brightness.light? defaultBoxGradient: defaultBoxGradientDark),
           ),
         ),
       ),
       body: DoubleBackToCloseApp(
-        snackBar: const SnackBar(
+        snackBar:  SnackBar(
           
-          content: Text(
-            'Double tap to close the app !',
+          content: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:const [
+              Text(
+                'Double tap to close the app !',
+              ),
+            ],
           ),
           shape: StadiumBorder(),
           behavior: SnackBarBehavior.floating,
@@ -159,6 +164,7 @@ int? field;
     
   
       bottomNavigationBar: BottomNavyBar(
+        backgroundColor: brightness !=Brightness.light ? primaryLight: defaultPrimaryColorDark,
         selectedIndex: _currentIndex,
         showElevation: true,
         itemCornerRadius: 24,

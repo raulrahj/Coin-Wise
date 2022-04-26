@@ -6,6 +6,7 @@ import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/main.dart';
 // import 'package:coin_wise/main.dart';
 import 'package:coin_wise/models/transaction_model.dart';
+import 'package:coin_wise/screens/main_screens/home.dart';
 import 'package:coin_wise/trial.dart';
 import 'package:coin_wise/widgets/list_views.dart';
 import 'package:coin_wise/widgets/widgets.dart';
@@ -44,12 +45,14 @@ class _AllTransactionsState extends State<AllTransactions> {
   Widget build(BuildContext context) {
     // TransactionDbFunctions.instance.getWallet;
     TransactionDbFunctions.instance.getTransaction();
-
+// setState(() {
+//   TransactionDbFunctions.instance.transactionListener.value;
+// });
     return SafeArea(
       child: ListView(
         children: [
           defaultContainer(
-            color: defaultColor,
+            color:brightness!=Brightness.light? defaultColor:defaultColorDark,
             height: displayHeight(context) * .20,
             item: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -250,7 +253,7 @@ class _AllTransactionsState extends State<AllTransactions> {
                         showBox(
                             color: _dropdownValue == allFields[0]
                                 ? defaultPrimaryColor
-                                : primaryGreen,
+                                : primaryGrey,
                             y: displayHeight(context) * .045,
                             x: displayWidth(context) * .35,
                             item: Row(

@@ -4,6 +4,7 @@ import 'package:coin_wise/constants/text_styles.dart';
 import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/models/category_model.dart';
+import 'package:coin_wise/screens/main_screens/home.dart';
 // import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
@@ -57,31 +58,35 @@ class PieChartSample3 extends StatelessWidget {
                 ),
                 const Text('add new transactions for monitering...'),
               ])
-        : AspectRatio(
-            aspectRatio: 1.2,
-            child: Card(
-              color: primaryLight,
-              child: Row(
-                children: [
-                  AspectRatio(
-                    aspectRatio: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: PieChart(
-                        dataMap: map1,
-                        chartType: ChartType.ring,
-                        // //baseChartColor: Colors.grey[50]!.withOpacity(0.15),
-                        // colorList: colorList,
-                        chartValuesOptions: const ChartValuesOptions(
-                            showChartValuesInPercentage: true,
-                            decimalPlaces: 1),
-                        //totalValue: 20,
+        : Padding(
+          padding: const EdgeInsets.symmetric(horizontal:8.0),
+          child: AspectRatio(
+              aspectRatio: 1.2,
+              child: Card(
+                color:brightness!=Brightness.light? primaryLight : defaultColorDark,
+                child: Row(
+                  children: [
+                    AspectRatio(
+                      aspectRatio: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16,),
+                        child: PieChart(
+                          dataMap: map1,
+                          chartType: ChartType.ring,
+                          // //baseChartColor: Colors.grey[50]!.withOpacity(0.15),
+                          // colorList: colorList,
+                          chartValuesOptions: const ChartValuesOptions(
+                            showChartValuesOutside: true,
+                              showChartValuesInPercentage: true,
+                              decimalPlaces: 1),
+                          //totalValue: 20,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          );
+        );
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 import 'package:coin_wise/constants/colors.dart';
 import 'package:coin_wise/constants/sizes.dart';
 import 'package:coin_wise/constants/text_styles.dart';
@@ -51,120 +52,126 @@ class SetupProfile extends StatelessWidget {
                 ),
               ),
               decentSpace,
-              defaultContainer(
-                height: displayHeight(context) * .38,
-                item: Form(
-                  key: _formKey,
-                  child: ValueListenableBuilder(
-                      valueListenable: profileListner,
-                      builder:
-                          (context, ProfileModel newProfileListner, child) {
-                        final ProfileModel _data = newProfileListner;
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 10.0, bottom: 1),
-                              child: GestureDetector(
-                                onTap: () async {
-                                  // _data.profilePhoto=await image.toString();
-                                  profileListner.value.profilePhoto = null;
-                                  await showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          title: const Text('Open'),
-                                          content: SingleChildScrollView(
-                                            child: ListBody(children: [
-                                              GestureDetector(
-                                                child: Row(
-                                                  children: const [
-                                                    Icon(Icons.camera),
-                                                    Text('Camera'),
-                                                  ],
-                                                ),
-                                                onTap: () async {
-                                                  
-                                                  XFile? img = await imagePicker
-                                                      .pickImage(
-                                                          source: ImageSource
-                                                              .camera);
-                                                  image = File(img!.path);
-                                                  Navigator.of(context).pop();
-                                                },
+              ClipRRect(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 15,sigmaY: 15,),
+                  child: defaultContainer(
+                    color: defaultPrimaryColor,
+                    height: displayHeight(context) * .38,
+                    item: Form(
+                      key: _formKey,
+                      child: ValueListenableBuilder(
+                          valueListenable: profileListner,
+                          builder:
+                              (context, ProfileModel newProfileListner, child) {
+                            final ProfileModel _data = newProfileListner;
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 10.0, bottom: 1),
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      // _data.profilePhoto=await image.toString();
+                                      profileListner.value.profilePhoto = null;
+                                      await showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              title: const Text('Open'),
+                                              content: SingleChildScrollView(
+                                                child: ListBody(children: [
+                                                  GestureDetector(
+                                                    child: Row(
+                                                      children: const [
+                                                        Icon(Icons.camera),
+                                                        Text('Camera'),
+                                                      ],
+                                                    ),
+                                                    onTap: () async {
+                                                      
+                                                      XFile? img = await imagePicker
+                                                          .pickImage(
+                                                              source: ImageSource
+                                                                  .camera);
+                                                      image = File(img!.path);
+                                                      Navigator.of(context).pop();
+                                                    },
+                                                  ),
+                                                  const Padding(
+                                                      padding: EdgeInsets.all(10)),
+                                                  GestureDetector(
+                                                    child: Row(
+                                                      children: const [
+                                                        Icon(Icons.image),
+                                                        Text('Gallery'),
+                                                      ],
+                                                    ),
+                                                    onTap: () async {
+                                                      XFile? img = await imagePicker
+                                                          .pickImage(
+                                                              source: ImageSource
+                                                                  .gallery);
+                                                      image = File(img!.path);
+                                                      Navigator.of(context).pop();
+                                                    },
+                                                  )
+                                                ]),
                                               ),
-                                              const Padding(
-                                                  padding: EdgeInsets.all(10)),
-                                              GestureDetector(
-                                                child: Row(
-                                                  children: const [
-                                                    Icon(Icons.image),
-                                                    Text('Gallery'),
-                                                  ],
-                                                ),
-                                                onTap: () async {
-                                                  XFile? img = await imagePicker
-                                                      .pickImage(
-                                                          source: ImageSource
-                                                              .gallery);
-                                                  image = File(img!.path);
-                                                  Navigator.of(context).pop();
-                                                },
-                                              )
-                                            ]),
+                                            );
+                                          });
+                                    },
+                                    child: _data.profilePhoto == null
+                                        ? const CircleAvatar(
+                                            maxRadius: 70,
+                                            minRadius: 50,
+                                            backgroundColor: primaryGrey,
+                                            child: Icon(
+                                              Icons.person,
+                                              size: 60,
+                                              color: primaryBlack,
+                                            ),
+                                          )
+                                        : CircleAvatar(
+                                            maxRadius: 70,
+                                            minRadius: 50,
+                                            backgroundImage: FileImage(
+                                                File(_data.profilePhoto.toString()),
+                                                scale: 1),
                                           ),
-                                        );
-                                      });
-                                },
-                                child: _data.profilePhoto == null
-                                    ? const CircleAvatar(
-                                        maxRadius: 70,
-                                        minRadius: 50,
-                                        backgroundColor: primaryGrey,
-                                        child: Icon(
-                                          Icons.person,
-                                          size: 60,
-                                          color: primaryBlack,
-                                        ),
-                                      )
-                                    : CircleAvatar(
-                                        maxRadius: 70,
-                                        minRadius: 50,
-                                        backgroundImage: FileImage(
-                                            File(_data.profilePhoto.toString()),
-                                            scale: 1),
-                                      ),
-                              ),
-                            ),
-                            TextFormBox(
-                              hint: 'Name',
-                              profileformController: _profileName,
-                              validation: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'please enter the name !';
-                                }
-                                if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                                  return 'try to use alphabets !';
-                                }
-                                if (value.length < 4) {
-                                  return 'enter a valid name !';
-                                }
-                                return null;
-                              },
-                            ),
-                            // TextFormBox(
-                            //   hint: 'Email',
-                            //   profileformController: _profileEmail,
-                            //   validation: (value) {
-                            //     if (value == null || value.isEmpty) {
-                            //       return 'Enter the email !';
-                            //     }
-                            //   },
-                            // ),
-                          ],
-                        );
-                      }),
+                                  ),
+                                ),
+                                TextFormBox(
+                                  hint: 'Name',
+                                  profileformController: _profileName,
+                                  validation: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'please enter the name !';
+                                    }
+                                    if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                                      return 'try to use alphabets !';
+                                    }
+                                    if (value.length < 4) {
+                                      return 'enter a valid name !';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                // TextFormBox(
+                                //   hint: 'Email',
+                                //   profileformController: _profileEmail,
+                                //   validation: (value) {
+                                //     if (value == null || value.isEmpty) {
+                                //       return 'Enter the email !';
+                                //     }
+                                //   },
+                                // ),
+                              ],
+                            );
+                          }),
+                    ),
+                  ),
                 ),
               ),
               blockSpace,

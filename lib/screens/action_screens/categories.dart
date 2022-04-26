@@ -1,3 +1,4 @@
+import 'package:coin_wise/screens/main_screens/home.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -20,6 +21,7 @@ class _CategoriesState extends State<Categories> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        
         floatingActionButton: PandaBarFabButton(
             colors: const [defaultColor, defaultColor],
             size: 50,
@@ -33,7 +35,7 @@ class _CategoriesState extends State<Categories> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: defaultColor,
+          backgroundColor:brightness!=Brightness.light? defaultColor:defaultPrimaryColorDark,
           title: const Text('Categories'),
           centerTitle: true,
           leading: IconButton(
@@ -61,11 +63,11 @@ class _CategoriesState extends State<Categories> {
           children: [
             CategoryBuilder(
               category: CategoryFunctions().incomeCategoryListner,
-              color: defaultPrimaryColor,
+              color:brightness!=Brightness.light? defaultPrimaryColor:defaultColorDark,
             ),
             CategoryBuilder(
               category: CategoryFunctions().expenseCategoryListner,
-              color: primaryRed,
+              color:brightness!=Brightness.light? primaryRed:primaryRedDark,
             ),
           ],
         ),
@@ -94,7 +96,7 @@ class CategoryBuilder extends StatelessWidget {
                 child: ClipRRect(
           borderRadius: BorderRadius.circular(15),
                   child: Container(
-                    color: color,
+                    color:color,
                     child: ListTile(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15)),
