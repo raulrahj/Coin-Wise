@@ -42,6 +42,8 @@ int? field;
 
   @override
   Widget build(BuildContext context) {
+    Color bg = Theme.of(context).primaryColorDark;
+    Color bgSub = Theme.of(context).primaryColorLight;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize:const Size.fromHeight(50.0),
@@ -82,11 +84,11 @@ int? field;
             _pageController.jumpToPage(index);
               });
             },
-            children:const <Widget>[
-              Home(),
-              AllTransactions(),
+            children: <Widget>[
+            const  Home(),
+            const  AllTransactions(),
               Analysis(),
-             Settings(),
+           const  Settings(),
             ],
           ),
         ),
@@ -101,7 +103,7 @@ int? field;
           Bubble(
             title:"Categories",
             iconColor :Colors.white,
-            bubbleColor : defaultColor,
+            bubbleColor : bg,
             icon:Icons.category,
             titleStyle:const TextStyle(fontSize: 16 , color: Colors.white),
             onPress: () {
@@ -113,7 +115,7 @@ int? field;
           Bubble(
             title:"Expense",
             iconColor :Colors.white,
-            bubbleColor : defaultColor,
+            bubbleColor : bg,
             icon:Icons.arrow_circle_up_sharp,
             titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
             onPress: () {
@@ -133,7 +135,7 @@ int? field;
           Bubble(
             title:"Income",
             iconColor :Colors.white,
-            bubbleColor : defaultColor,
+            bubbleColor : bg,
             icon:Icons.arrow_circle_down_rounded,
             titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
             onPress: () {
@@ -159,7 +161,7 @@ int? field;
         
         iconColor: defaultPrimaryColor,
         iconData: Icons.add, 
-        backGroundColor: defaultColor,
+        backGroundColor: bgSub,
       ),
     
   

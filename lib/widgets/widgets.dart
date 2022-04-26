@@ -594,12 +594,14 @@ class AddCategoryPopup extends StatefulWidget {
 class _AddCategoryPopupState extends State<AddCategoryPopup> {
   @override
   Widget build(BuildContext context) {
+    Color bg= Theme.of(context).primaryColor;
     return AlertDialog(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0))),
-      backgroundColor: brightness != Brightness.light
-          ? defaultPrimaryColor
-          : defaultColorDark,
+      // backgroundColor: brightness != Brightness.light
+      //     ? defaultPrimaryColor
+      //     : defaultColorDark,
+      backgroundColor: bg,
       title: Row(
         children: const [
           decentWidth,
@@ -711,7 +713,7 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
                       width: displayWidth(context) * 03,
                       behavior: SnackBarBehavior
                           .floating, //behavior used to change decoration or change default config
-                      margin: const EdgeInsets.all(10),
+                      // margin: const EdgeInsets.all(10),
                       backgroundColor: defaultColor,
                       content: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -758,13 +760,15 @@ class UpdateCategoryPopup extends StatefulWidget {
 class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
   @override
   Widget build(BuildContext context) {
+    Color bg = Theme.of(context).primaryColor;
     widget._categoryUpdateNameController.text = widget.oldName;
     return AlertDialog(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0))),
-      backgroundColor: brightness != Brightness.light
-          ? defaultPrimaryColor
-          : defaultColorDark,
+      // backgroundColor: brightness != Brightness.light
+      //     ? defaultPrimaryColor
+      //     : defaultColorDark,
+      backgroundColor: bg,
       title: Row(
         children: const [
           decentWidth,

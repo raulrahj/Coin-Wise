@@ -104,21 +104,19 @@ class CategoryFunctions {
   }
 
   void expenseListing() {
-   
     print('FOUR');
     CategoryModel? exp;
     final expenseCategories = expenseCategoryListner.value.toList();
 
     for (int i = 0; i < availableExpenseCategories.length; i++) {
-      print('length of available expense cat ${availableExpenseCategories.length}');
+
       for (int j = 0; j < expenseCategories.length; j++) {
         if (availableExpenseCategories[i] == expenseCategories[j].name) {
           exp = expenseCategories[i];
         }
       }
-      
+
       expenseAmountCategoryListner.value.add(exp!);
-      print(' >>>>>>>>>>>>>>>>>>${exp.name}<<<<<<<<<<<<<<<<<<<<<<');
     }
   }
 
@@ -130,10 +128,10 @@ class CategoryFunctions {
 
     for (int i = 0; i < incomeAmountCategoryListner.value.length; i++) {
       print('FIVE');
-     
+
       double amount = 0;
 
-      Future.forEach(allTransactions, (TransactionModel _transaction)async{
+      Future.forEach(allTransactions, (TransactionModel _transaction) async {
         if (_transaction.category.name ==
             incomeAmountCategoryListner.value[i].name) {
           amount += _transaction.amount;
@@ -149,12 +147,7 @@ class CategoryFunctions {
       });
     }
 
-
     for (int i = 0; i < expenseAmountCategoryListner.value.length; i++) {
-       print(
-          'length of expense Category Listener ${expenseAmountCategoryListner.value.length}');
-
-     
       double amount = 0;
       // expenseAmountCategoryListner.value[i].categoryAmount = 0;
 

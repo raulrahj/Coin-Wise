@@ -16,7 +16,7 @@ class SetupProfile extends StatelessWidget {
   final _profileEmail = TextEditingController();
   ImagePicker imagePicker = ImagePicker();
 
-  var image;
+  dynamic image;
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,10 @@ class SetupProfile extends StatelessWidget {
               decentSpace,
               ClipRRect(
                 child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 15,sigmaY: 15,),
+                  filter: ImageFilter.blur(
+                    sigmaX: 15,
+                    sigmaY: 15,
+                  ),
                   child: defaultContainer(
                     color: defaultPrimaryColor,
                     height: displayHeight(context) * .38,
@@ -69,8 +72,8 @@ class SetupProfile extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 10.0, bottom: 1),
+                                  padding: const EdgeInsets.only(
+                                      top: 10.0, bottom: 1),
                                   child: GestureDetector(
                                     onTap: () async {
                                       // _data.profilePhoto=await image.toString();
@@ -90,17 +93,19 @@ class SetupProfile extends StatelessWidget {
                                                       ],
                                                     ),
                                                     onTap: () async {
-                                                      
                                                       XFile? img = await imagePicker
                                                           .pickImage(
-                                                              source: ImageSource
-                                                                  .camera);
+                                                              source:
+                                                                  ImageSource
+                                                                      .camera);
                                                       image = File(img!.path);
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
                                                   ),
                                                   const Padding(
-                                                      padding: EdgeInsets.all(10)),
+                                                      padding:
+                                                          EdgeInsets.all(10)),
                                                   GestureDetector(
                                                     child: Row(
                                                       children: const [
@@ -111,10 +116,12 @@ class SetupProfile extends StatelessWidget {
                                                     onTap: () async {
                                                       XFile? img = await imagePicker
                                                           .pickImage(
-                                                              source: ImageSource
-                                                                  .gallery);
+                                                              source:
+                                                                  ImageSource
+                                                                      .gallery);
                                                       image = File(img!.path);
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
                                                   )
                                                 ]),
@@ -137,7 +144,8 @@ class SetupProfile extends StatelessWidget {
                                             maxRadius: 70,
                                             minRadius: 50,
                                             backgroundImage: FileImage(
-                                                File(_data.profilePhoto.toString()),
+                                                File(_data.profilePhoto
+                                                    .toString()),
                                                 scale: 1),
                                           ),
                                   ),
@@ -149,7 +157,8 @@ class SetupProfile extends StatelessWidget {
                                     if (value == null || value.isEmpty) {
                                       return 'please enter the name !';
                                     }
-                                    if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                                    if (!RegExp(r'^[a-z A-Z]+$')
+                                        .hasMatch(value)) {
                                       return 'try to use alphabets !';
                                     }
                                     if (value.length < 4) {
@@ -179,10 +188,15 @@ class SetupProfile extends StatelessWidget {
                 height: 38,
                 child: defaultButton(
                   onPressed: () async {
+                    var profilePhoto;
+                    if (image != null) {
+                      profilePhoto = image.path;
+                    }
+
                     if (_formKey.currentState!.validate()) {
                       bool isLogged = true;
                       final name = _profileName.text;
-                      final profilePhoto = image.path ?? null;
+
                       ProfileModel _profileData = ProfileModel(
                           profileName: name,
                           notify: true,
@@ -211,13 +225,16 @@ class SetupProfile extends StatelessWidget {
   }
 
   void addprofileData() {
-    if (_profileName == null) {
-      return;
-    }
-  
+    // if (_profileName == null) {
+    //   return;
+    // }
+
     // if(image==null){
     //   return;
     // }
+    if (_profileName == null) {
+      return;
+    }
   }
 }
 

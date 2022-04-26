@@ -38,18 +38,12 @@ class AddScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     dropDownValue==null;
-
-    print("checking the isAdd is working or not");
-    print(isAdd);
     isAdd ?? false;
-    print('after the null aware ${isAdd}');
     ////////////// TO DO - null check operator used in a null value ////////////////////////
     if (!isAdd!) {
      _updateNoteController.text = selectedTransactionData!.note;
      _updateAmoutnController.text = selectedTransactionData!.amount.toString();
     }
-    print('selected Transaction Data printing>>>>>>>>>>>>>>>>>>>>>>>');
-    print(selectedTransactionData?.amount);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -58,6 +52,7 @@ class AddScreen extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.transparent,
           leading: IconButton(
+            tooltip: 'close',
               onPressed: () {
                  Navigator.pop(context);
                  dropDownValue=null;
@@ -68,6 +63,7 @@ class AddScreen extends StatelessWidget {
               )),
           actions: [
             IconButton(
+              tooltip: 'categories',
                 onPressed: () {
                   Navigator.push(
                       context,
@@ -75,6 +71,7 @@ class AddScreen extends StatelessWidget {
                           builder: (context) => const Categories()));
                 },
                 icon: const Icon(
+                  
                   Icons.list,
                   color: primaryDark,
                 ))
@@ -118,7 +115,7 @@ class AddScreen extends StatelessWidget {
                     SnackBar(
                       width: displayWidth(context)*03,
                       behavior: SnackBarBehavior.floating,
-                      margin: const EdgeInsets.all(10),
+                      // margin: const EdgeInsets.all(10),
                       backgroundColor: Colors.transparent,
                       content: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -150,11 +147,17 @@ class AddScreen extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       behavior: SnackBarBehavior
                           .floating, //behavior used to change decoration or change default config
-                      margin: const EdgeInsets.all(10),
+                      // margin: const EdgeInsets.all(10),
+                      width: displayWidth(context)*.5,
                       backgroundColor: defaultColor,
-                      content: Text(
-                        'Updated ${_updateNoteController.text}...',
-                        style: const TextStyle(color: Colors.white),
+                      content: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Updated ${_updateNoteController.text}...',
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ],
                       )));
                 }
                 // else

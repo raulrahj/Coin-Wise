@@ -145,6 +145,7 @@ class _AnalysisState extends State<Analysis> {
                   CategoryFunctions.instance.multiAmountCategoryListener,
               builder:
                   (context, List<CategoryModel> newAmountCategories, child) {
+                    Color bg = Theme.of(context).primaryColor;
                 //  CategoryFunctions.instance.categoryAmountAdding();
                 return ListView.builder(
                     shrinkWrap: true,
@@ -163,7 +164,8 @@ class _AnalysisState extends State<Analysis> {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(15)),
-                                      tileColor:brightness!=Brightness.light? defaultPrimaryColor:defaultColorDark,
+                                              tileColor: bg,
+                                      // tileColor:brightness!=Brightness.light? defaultPrimaryColor:defaultColorDark,
                                       title: Text(_data.name),
                                       trailing: Text(_data.categoryAmount !=
                                               null

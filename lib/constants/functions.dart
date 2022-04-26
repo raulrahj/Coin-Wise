@@ -195,10 +195,9 @@ Future<void> defaultCategoryAdding() async {
 // sort((first,csecond)=> first.date.comparedTo(second.date));
 
 void incomeList()  {
-  print('fuck its not working');
       CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
 
-  final _list0 =
+  var _list0 =
       CategoryFunctions.instance.incomeAmountCategoryListner.value.toList();
       print(_list0.length);
   if (_list0.isEmpty) {
@@ -217,7 +216,7 @@ void incomeList()  {
 void expenseList() {
   CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
 
-  final _list1 =
+  var _list1 =
       CategoryFunctions.instance.expenseAmountCategoryListner.value.toList();
   _list1.sort((first, second) =>
       second.categoryAmount!.compareTo(first.categoryAmount!));
