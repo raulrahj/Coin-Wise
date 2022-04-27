@@ -3,7 +3,6 @@ import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pandabar/fab-button.view.dart';
-import 'package:coin_wise/constants/sizes.dart';
 import 'package:coin_wise/constants/colors.dart';
 import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/models/category_model.dart';
@@ -21,7 +20,6 @@ class _CategoriesState extends State<Categories> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        
         floatingActionButton: PandaBarFabButton(
             colors: const [defaultColor, defaultColor],
             size: 50,
@@ -35,7 +33,7 @@ class _CategoriesState extends State<Categories> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor:brightness!=Brightness.light? defaultColor:defaultPrimaryColorDark,
+          backgroundColor: Theme.of(context).primaryColorDark,
           title: const Text('Categories'),
           centerTitle: true,
           leading: IconButton(
@@ -63,11 +61,11 @@ class _CategoriesState extends State<Categories> {
           children: [
             CategoryBuilder(
               category: CategoryFunctions().incomeCategoryListner,
-              color:brightness!=Brightness.light? defaultPrimaryColor:defaultColorDark,
+              color: Theme.of(context).primaryColorDark,
             ),
             CategoryBuilder(
               category: CategoryFunctions().expenseCategoryListner,
-              color:brightness!=Brightness.light? primaryRed:primaryRedDark,
+              color: Theme.of(context).indicatorColor,
             ),
           ],
         ),
@@ -92,44 +90,58 @@ class CategoryBuilder extends StatelessWidget {
             itemBuilder: (BuildContext context, index) {
               final data = newListener[index];
               return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
                 child: ClipRRect(
-          borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.circular(15),
                   child: Container(
-                    color:color,
+                    color: color,
                     child: ListTile(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15)),
-                      title: Text(data.name),
-                      trailing: PopupMenuButton(onSelected: (value) {
-                        (value == 1)
-                            ? showDialog(
-                                context: context,
-                                builder: (ctx) {
-                                  return deletionPopup(context, data.id);
-                                })
-                            : showDialog(
-                                context: context,
-                                builder: (ctx) {
-                                  return UpdateCategoryPopup(
-                                    currentVal: newListener,
-                                    oldName: data.name,
-                                    oldField: data.field,
-                                    oldId: data.id,
-                                  );
-                                });
-                      }, itemBuilder: (context) {
-                        return [
-                          const PopupMenuItem(
-                            child: Text('Delete'),
-                            value: 1,
-                          ),
-                          const PopupMenuItem(
-                            child: Text('Edit'),
-                            value: 2,
-                          )
-                        ];
-                      }),
+                      title: Text(
+                        data.name,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge!
+                            .copyWith(fontSize: 17, color: primaryLight),
+                      ),
+                      trailing: PopupMenuButton(
+                        tooltip: 'options',
+                        color: Theme.of(context).primaryColor,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15.0))),
+                          onSelected: (value) {
+                            (value == 1)
+                                ? showDialog(
+                                    context: context,
+                                    builder: (ctx) {
+                                      return deletionPopup(context, data.id);
+                                    })
+                                : showDialog(
+                                    context: context,
+                                    builder: (ctx) {
+                                      return UpdateCategoryPopup(
+                                        currentVal: newListener,
+                                        oldName: data.name,
+                                        oldField: data.field,
+                                        oldId: data.id,
+                                      );
+                                    });
+                          },
+                          itemBuilder: (context) {
+                            return [
+                               PopupMenuItem(
+                                child: Text('Delete',style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 18,),),
+                                value: 1,
+                              ),
+                               PopupMenuItem(
+                                child: Text('Edit',style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 18,),),
+                                value: 2,
+                              )
+                            ];
+                          }),
                     ),
                   ),
                 ),

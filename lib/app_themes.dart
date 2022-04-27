@@ -1,4 +1,5 @@
 import 'package:coin_wise/constants/colors.dart';
+import 'package:coin_wise/constants/text_styles.dart';
 import 'package:coin_wise/main.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,24 +30,52 @@ class MyThemes {
       ),
       primaryColorLight: defaultPrimaryColorDark,
       primaryColorDark: defaultColorDark,
-      primarySwatch: black,
-      // backgroundColor: defaultPrimaryColorDark,
-      
-      textTheme: const TextTheme());
+      indicatorColor: primaryRedDark,
+      dialogTheme: const DialogTheme(
+        backgroundColor: defaultColor,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15.0))),
+      ),
+     
+      selectedRowColor: Colors.green,
+      iconTheme: const IconThemeData(color: primaryGreyDark),
+      chipTheme: const ChipThemeData(backgroundColor: defaultPrimaryColorDark),
+      textTheme: const TextTheme(
+          titleMedium: boxSubBoldTitleDark,
+          titleSmall: TextStyle(
+            color: defaultLightColorDark,
+          ),
+          titleLarge: boxTitle),
+      floatingActionButtonTheme:
+          const FloatingActionButtonThemeData(backgroundColor: primaryGrey));
   static final lightTheme = ThemeData(
-    fontFamily: 'Antic',
-    scaffoldBackgroundColor: primaryLight,
-    // primarySwatch: defaultLightColor,
-    dialogBackgroundColor: defaultPrimaryColor,
-    brightness: Brightness.light,
-    colorScheme: const ColorScheme.light(),
-    primaryColor: defaultPrimaryColor,
-    primaryColorLight: defaultPrimaryColor,
-    primaryColorDark: defaultColor,
-    primarySwatch: black
-    // backgroundColor: defaultColor
-    //  canvasColor:
-  );
+      fontFamily: 'Antic',
+      scaffoldBackgroundColor: primaryLight,
+      // primarySwatch: defaultLightColor,
+      dialogBackgroundColor: defaultPrimaryColor,
+      brightness: Brightness.light,
+      colorScheme: const ColorScheme.light(),
+      primaryColor: defaultPrimaryColor,
+      primaryColorLight: defaultPrimaryColor,
+      primaryColorDark: defaultColor,
+      indicatorColor: primaryRed,
+      selectedRowColor: defaultColor,
+      dialogTheme: const DialogTheme(
+        backgroundColor: primaryLight,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15.0))),
+      ),
+      iconTheme: const IconThemeData(color: primaryGrey),
+      chipTheme: const ChipThemeData(backgroundColor: defaultPrimaryColor),
+      textTheme: const TextTheme(
+          titleMedium: boxSubBoldTitle,
+          titleSmall: TextStyle(
+            color: primaryGrey,
+          ),
+          titleLarge: boxTitle),
+      backgroundColor: primaryRed,
+      floatingActionButtonTheme:
+          const FloatingActionButtonThemeData(backgroundColor: defaultColor));
 }
 
 class ThemePreferences {

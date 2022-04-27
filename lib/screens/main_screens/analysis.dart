@@ -24,139 +24,65 @@ class _AnalysisState extends State<Analysis> {
   Widget build(BuildContext context) {
     Color bg = Theme.of(context).primaryColorDark;
     // isHome=true;
-    // if (dropDownValue == fields[0]) {
-    //   setState(() {
-    //     CategoryFunctions.instance.multiAmountCategoryListener =
-    //         CategoryFunctions.instance.incomeAmountCategoryListner;
-    //     CategoryFunctions.instance.multiAmountCategoryListener.notifyListeners();
-
-    //     incomeList();
-    //   });
-    // } else {
-    //   setState(() {
-    //     CategoryFunctions.instance.multiAmountCategoryListener =
-    //         CategoryFunctions.instance.expenseAmountCategoryListner;
-    //     expenseList();
-    //   });
-    // }
     setState(() {
-        if(dropDownValue.toString()==fields[1]){
-                     print('set state working');
-            //                CategoryFunctions.instance.multiAmountCategoryListener =
-            // CategoryFunctions.instance.expenseAmountCategoryListner;
+      if (dropDownValue.toString() == fields[1]) {
         expenseList();
-                   }else{
-            //              CategoryFunctions.instance.multiAmountCategoryListener =
-            // CategoryFunctions.instance.incomeAmountCategoryListner;
-            incomeList();
-                   }
+      } else {
+        incomeList();
+      }
     });
-    // CategoryFunctions.instance.categoryAmounts();
     refreshCategoryAmountListners();
     CategoryFunctions.instance.incomeAmountCategoryListner.value.clear();
-    // appbar = false;
+
     return SafeArea(
       child: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
             child: showBox(
-                color: bg,
-                // color: brightness != Brightness.light
-                //     ? defaultColor
-                //     : defaultColorDark,
-                y: displayHeight(context) * 0.05,
-                x: displayWidth(context) * 0.05,
-                alignment: Alignment.center,
-                item: DropdownButton(
-                  underline: const SizedBox(),
-                  alignment: Alignment.centerRight,
-                  value: dropDownValue,
-                  icon: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        width: displayWidth(context) * .6,
-                      ),
-                      const Icon(
-                        Icons.arrow_drop_down,
-                        color: defaultLightColor,
-                      ),
-                    ],
-                  ),
-                  items: fields.map((String items) {
-                    return DropdownMenuItem(
-                      value: items,
-                      child: Text(
-                        items,
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                 print(value);
-                    // setState(() {
-                    //   dropDownValue = value.toString();
-
-                    //   value == fields[0] ? incomeList() : expenseList();
-
-                    //   refreshCategoryAmountListners();
-                    // });
-    //                if ( value==fields[0]) {
-    //   setState(() {
-    //     CategoryFunctions.instance.multiAmountCategoryListener =
-    //         CategoryFunctions.instance.incomeAmountCategoryListner;
-    //     CategoryFunctions.instance.multiAmountCategoryListener.notifyListeners();
-
-    //     incomeList();
-    //   });
-    // } else {
-    //   setState(() {
-    //     CategoryFunctions.instance.multiAmountCategoryListener =
-    //         CategoryFunctions.instance.expenseAmountCategoryListner;
-    //     expenseList();
-    //   });
-    // }
-                 setState(() {
-                      dropDownValue = value.toString();
-
-                 
-
-                 });
-                 
-                 
-                  },
-                )),
+              color: bg,
+              y: displayHeight(context) * 0.05,
+              x: displayWidth(context) * 0.05,
+              alignment: Alignment.center,
+              item: DropdownButton(
+                underline: const SizedBox(),
+                alignment: Alignment.centerRight,
+                value: dropDownValue,
+                icon: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      width: displayWidth(context) * .6,
+                    ),
+                    const Icon(
+                      Icons.arrow_drop_down,
+                      color: defaultLightColor,
+                    ),
+                  ],
+                ),
+                items: fields.map((String items) {
+                  return DropdownMenuItem(
+                    value: items,
+                    child: Text(
+                      items,
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            fontSize: 16,
+                          ),
+                    ),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    dropDownValue = value.toString();
+                  });
+                },
+              ),
+            ),
           ),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //   children: [
-          //     ActionChip(
-          //       label: const Text("Today"),
-          //       onPressed: () {
-          //         print('today');
-          //       },
-          //     ),
-          //     ActionChip(
-          //       label: const Text('week'),
-          //       onPressed: () {
-          //         print('this week');
-          //       },
-          //     ),
-          //     ActionChip(
-          //         label: const Text('Month'),
-          //         onPressed: () {
-          //           print('Month');
-          //         }),
-          //     ActionChip(
-          //         label: const Text('Year'),
-          //         onPressed: () {
-          //           print('Year');
-          //         })
-          //   ],
-          // ),
+
           //___________________________PIE CHART _________________
 // const PieChartSample3(),
-          TransactionDbFunctions.instance.transactionListener.value!=null
+          TransactionDbFunctions.instance.transactionListener.value != null
               ? PieChartSample3()
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -207,7 +133,13 @@ class _AnalysisState extends State<Analysis> {
                                               BorderRadius.circular(15)),
                                       tileColor: bg,
                                       // tileColor:brightness!=Brightness.light? defaultPrimaryColor:defaultColorDark,
-                                      title: Text(_data.name),
+                                      title: Text(_data.name,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleLarge!
+                                              .copyWith(
+                                                fontSize: 17,
+                                              )),
                                       trailing: Text(_data.categoryAmount !=
                                               null
                                           ? '₹ ${_data.categoryAmount.toString()}'
@@ -220,7 +152,12 @@ class _AnalysisState extends State<Analysis> {
                                       tileColor: brightness != Brightness.light
                                           ? primaryRed
                                           : primaryRedDark,
-                                      title: Text(_data.name),
+                                      title: Text(
+                                        _data.name,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge!.copyWith(fontSize: 17)
+                                      ),
                                       trailing: Text(_data.categoryAmount !=
                                               null
                                           ? '₹ ${_data.categoryAmount.toString()}'

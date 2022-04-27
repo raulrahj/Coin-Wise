@@ -15,8 +15,6 @@ import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/screens/action_screens/add_screen.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
-
-import '../main.dart';
 import '../main.dart';
 
 final _categoryNameController = TextEditingController();
@@ -26,24 +24,31 @@ int? categoryMod;
 DateTime? date;
 //____________________ DEFAULT CONTAINER _________________________________
 
-Widget defaultContainer({required Widget item, double? height, Color? color,EdgeInsetsGeometry? padding,List<BoxShadow>? boxShadow}) {
+Widget defaultContainer(
+    {required Widget item,
+    double? height,
+    Color? color,
+    EdgeInsetsGeometry? padding,
+    List<BoxShadow>? boxShadow,
+    Color? shadowClr}) {
   return Padding(
-      padding: padding??decent2,
+      padding: padding ?? decent2,
       child: Opacity(
         opacity: 1,
         child: Container(
           decoration: BoxDecoration(
-            boxShadow: boxShadow?? const [
-              BoxShadow(
-                color: primaryBlack,
-                offset: Offset(
-                  1.0,
-                  1.0,
-                ),
-                blurRadius: 10.0,
-                spreadRadius: .5,
-              ),
-            ], //B,
+            boxShadow: boxShadow ??
+                [
+                  BoxShadow(
+                    color: shadowClr ?? primaryBlack,
+                    offset: const Offset(
+                      1.0,
+                      1.0,
+                    ),
+                    blurRadius: 10.0,
+                    spreadRadius: .5,
+                  ),
+                ], //B,
             color: color ?? const Color(0xFFDFDFDE),
             // gradient: defaultBoxGradient,
             borderRadius: BorderRadius.circular(15),
@@ -56,11 +61,11 @@ Widget defaultContainer({required Widget item, double? height, Color? color,Edge
 }
 
 //<<<<<<<<<<<<<< VERTICAL DEVIDER >>>>>>>>>
-Widget verticalDivider = Container(
-  height: 40,
-  width: 3,
-  color: brightness != Brightness.light ? defaultColor : defaultGreyDark,
-);
+Widget verticalDivider(context) => Container(
+      height: 40,
+      width: 3,
+      color: Theme.of(context).primaryColorDark,
+    );
 
 //__________ TEXTFORM FIELD IN SETUP PROFILE__________________
 
@@ -434,13 +439,6 @@ class _DateState extends State<Date> {
 //______________________________________CUSTOM TILE___________________
 
 class CustomTile extends StatelessWidget {
-  // void popupDeletion(BuildContext context,String key) {
-  //   showDialog(
-  //       context: context,
-  //       builder: (ctx) {
-  //         return transactionDeletePopup(this.context,deletion_key);
-  //       });
-  // }
   void popupEdit(BuildContext context) {
     isAdd = false;
     mainData?.field == CategoryField.income ? categoryMod = 0 : categoryMod = 1;
@@ -474,8 +472,11 @@ class CustomTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color red = Theme.of(context).indicatorColor;
+    Color green = Theme.of(context).selectedRowColor;
     Color bg = Theme.of(context).primaryColor;
     Color bgSub = Theme.of(context).primaryColorLight;
+    Color fg = Theme.of(context).primaryIconTheme.color!;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
       //_____________ SLIDABLE DELETION AND EDIT > UX <_______________________________
@@ -487,12 +488,8 @@ class CustomTile extends StatelessWidget {
             SlidableAction(
               flex: 1,
               onPressed: popupEdit,
-              backgroundColor: brightness != Brightness.light
-                  ? defaultPrimaryColor
-                  : defaultColorDark,
-              foregroundColor: brightness != Brightness.light
-                  ? primaryDark
-                  : defaultGreyDark,
+              backgroundColor: bgSub,
+              foregroundColor: fg,
               icon: Icons.edit,
               label: 'Edit',
             )
@@ -507,12 +504,8 @@ class CustomTile extends StatelessWidget {
               onPressed: (context) {
                 transactionDeletePopup(context, deletionKey);
               },
-              backgroundColor: brightness != Brightness.light
-                  ? defaultPrimaryColor
-                  : defaultColorDark,
-              foregroundColor: brightness != Brightness.light
-                  ? primaryDark
-                  : defaultGreyDark,
+              backgroundColor: bgSub,
+              foregroundColor: fg,
               icon: Icons.delete,
               label: 'Delete',
             )
@@ -523,16 +516,10 @@ class CustomTile extends StatelessWidget {
           child: Container(
             height: 60,
             color: bg,
-            // color: brightness != Brightness.light
-            //     ? defaultPrimaryColor
-            //     : defaultColorDark,
             child: Row(
               children: <Widget>[
                 Container(
-                  color: defaultColor,
-                  // color: brightness != Brightness.light
-                  //     ? defaultColor
-                  //     : defaultPrimaryColorDark,
+                  color: mainData!.field == CategoryField.income ? green : red,
                   width: 60,
                   height: 60,
                   child: const Icon(Icons.currency_rupee, color: Colors.white),
@@ -551,20 +538,16 @@ class CustomTile extends StatelessWidget {
                         children: [
                           Text(
                             subTitle1,
-                            style: TextStyle(
-                                color: brightness != Brightness.light
-                                    ? primaryBlack
-                                    : defaultLightColorDark),
+                            style: Theme.of(context).textTheme.titleSmall,
                           ),
                           const Text(
                             ' | ',
                             style: defaultTitle,
                           ),
-                          Text(subTitle2,
-                              style: TextStyle(
-                                  color: brightness != Brightness.light
-                                      ? primaryBlack
-                                      : defaultLightColorDark)),
+                          Text(
+                            subTitle2,
+                            style: Theme.of(context).textTheme.titleSmall,
+                          )
                         ],
                       )
                     ],
@@ -594,22 +577,17 @@ class AddCategoryPopup extends StatefulWidget {
 class _AddCategoryPopupState extends State<AddCategoryPopup> {
   @override
   Widget build(BuildContext context) {
-    Color bg= Theme.of(context).primaryColor;
+    Color bg = Theme.of(context).primaryColor;
     return AlertDialog(
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(15.0))),
-      // backgroundColor: brightness != Brightness.light
-      //     ? defaultPrimaryColor
-      //     : defaultColorDark,
       backgroundColor: bg,
       title: Row(
-        children: const [
+        children:  [
           decentWidth,
-          Icon(Icons.add_box),
+         const Icon(Icons.add_box),
           //<<<<<<<<<<<<< TITLE >>>>>>>>>>>>>>
           Text(
-            'ADD NEW CATEGORY',
-            style: defaultTitle,
+            ' ADD NEW CATEGORY',
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
         ],
       ),
@@ -640,13 +618,11 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
                       borderSide: BorderSide(color: primaryBlack)),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: brightness != Brightness.light
-                          ? primaryBlack
-                          : defaultGreyDark,
+                      color: Theme.of(context).iconTheme.color!
                     ),
                     borderRadius: BorderRadius.circular(5.0),
                   ),
-                  labelStyle: const TextStyle(color: primaryBlack),
+                labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 18),
                 ),
               ),
             ),
@@ -656,7 +632,7 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(
-                  color: primaryBlack,
+                  color:  Theme.of(context).iconTheme.color!,
                 ),
               ),
               //>>>>>>> CATEGORY FIELD SELECTION DROPDOWN <<<<<<<<<<<<<<<<<
@@ -677,7 +653,7 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
                         width: displayWidth(context) * .55,
                         child: Text(
                           '  ' + items,
-                          style: defaultTitle,
+                          style: Theme.of(context).textTheme.bodyText1,
                         )),
                   );
                 }).toList(),
@@ -763,20 +739,15 @@ class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
     Color bg = Theme.of(context).primaryColor;
     widget._categoryUpdateNameController.text = widget.oldName;
     return AlertDialog(
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(15.0))),
-      // backgroundColor: brightness != Brightness.light
-      //     ? defaultPrimaryColor
-      //     : defaultColorDark,
       backgroundColor: bg,
       title: Row(
-        children: const [
+        children:  [
           decentWidth,
           Icon(Icons.drive_folder_upload_outlined),
           // TITLE
           Text(
-            'UPDATE CATEGORY',
-            style: defaultTitle,
+            ' UPDATE CATEGORY',
+            style: Theme.of(context).textTheme.bodyLarge
           ),
         ],
       ),
@@ -802,16 +773,11 @@ class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: brightness != Brightness.light
-                        ? primaryBlack
-                        : defaultGreyDark,
+                    color:  Theme.of(context).iconTheme.color!
                   ),
                   borderRadius: BorderRadius.circular(5.0),
                 ),
-                labelStyle: TextStyle(
-                    color: brightness != Brightness.light
-                        ? primaryBlack
-                        : defaultGreyDark),
+                labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 18),
               ),
             ),
             Container(
@@ -820,7 +786,7 @@ class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(
-                  color: primaryBlack,
+                 color: Theme.of(context).iconTheme.color!
                 ),
               ),
               //______________________________ CATEGORY FIELD SELECTION DROPDOWN____________________________
@@ -843,7 +809,7 @@ class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
                       width: displayWidth(context) * .55,
                       child: Text(
                         '  ' + items,
-                        style: defaultTitle,
+                         style: Theme.of(context).textTheme.bodyText1,
                       ),
                     ),
                   );
@@ -908,10 +874,6 @@ class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
 
 Widget deletionPopup(context, value) {
   return SimpleDialog(
-    shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(15.0))),
-    backgroundColor:
-        brightness != Brightness.light ? defaultPrimaryColor : defaultColorDark,
     title: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -951,11 +913,6 @@ transactionDeletePopup(BuildContext context, String? key) {
     context: context,
     builder: (ctx) {
       return SimpleDialog(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15.0))),
-        backgroundColor: brightness != Brightness.light
-            ? defaultPrimaryColor
-            : defaultColorDark,
         children: [
           Column(
             mainAxisSize: MainAxisSize.min,
@@ -1065,28 +1022,22 @@ class addTransactionPopup extends StatelessWidget {
   }
 }
 
-Widget aboutApp(context) {
-  return SimpleDialog(
-    shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(15.0))),
-    backgroundColor: defaultPrimaryColor,
-    children: [
-      //      defaultContainer(
-      //  color: defaultColor,
-      //  height: displayHeight(context)*.5,
+class AboutApp extends StatelessWidget {
+  const AboutApp({Key? key}) : super(key: key);
 
-      //  item:
-      Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          //  Container(
-          //    child:  Text(aboutAppText,style:TextStyle(color: defaultPrimaryColor,)),
-          //  )
-        ],
-      ),
-      //  )
-    ],
-  );
+  @override
+  Widget build(BuildContext context) {
+    return SimpleDialog(
+      children: [
+        defaultContainer(
+            height: displayHeight(context) * .5,
+            color: defaultPrimaryColor,
+            item: Column(
+              children: const [],
+            ))
+      ],
+    );
+  }
 }
 
 class ThemePopup extends StatelessWidget {
@@ -1095,8 +1046,6 @@ class ThemePopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(15.0))),
       children: [
         RadioButton(text: 'Light', selection: currentTheme.lightTheme),
         RadioButton(text: 'Dark', selection: currentTheme.darkTheme),
@@ -1130,14 +1079,14 @@ class RadioButton extends StatelessWidget {
                       }
                       themeListenable.value = value;
                       themeListenable.notifyListeners();
-                    if(value==currentTheme.lightTheme){
-                      // themeNotifier.isDark
-                          // ? 
-                          themeNotifier.isDark = false;
-                    }else{
-                          // :
-                           themeNotifier.isDark = true;
-                    }
+                      if (value == currentTheme.lightTheme) {
+                        // themeNotifier.isDark
+                        // ?
+                        themeNotifier.isDark = false;
+                      } else {
+                        // :
+                        themeNotifier.isDark = true;
+                      }
                     });
               }),
               Text(text),

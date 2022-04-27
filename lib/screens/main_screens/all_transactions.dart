@@ -4,7 +4,6 @@ import 'package:coin_wise/constants/functions.dart';
 import 'package:coin_wise/constants/sizes.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/main.dart';
-// import 'package:coin_wise/main.dart';
 import 'package:coin_wise/models/transaction_model.dart';
 import 'package:coin_wise/screens/main_screens/home.dart';
 import 'package:coin_wise/trial.dart';
@@ -13,14 +12,10 @@ import 'package:coin_wise/widgets/widgets.dart';
 // import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-// import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-// import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-// import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class AllTransactions extends StatefulWidget {
   const AllTransactions({Key? key}) : super(key: key);
@@ -227,6 +222,7 @@ class _AllTransactionsState extends State<AllTransactions> {
                       },
                     ),
                     ActionChip(
+                      backgroundColor: Theme.of(context).chipTheme.backgroundColor,
                         label: const Text('Month'),
                         onPressed: () async {
                           DateTime? selectedDate;
@@ -257,8 +253,8 @@ class _AllTransactionsState extends State<AllTransactions> {
 
                         showBox(
                             color: _dropdownValue == allFields[0]
-                                ? defaultPrimaryColor
-                                : primaryGrey,
+                                ? Theme.of(context).chipTheme.backgroundColor
+                                : primaryGreyDark,
                             y: displayHeight(context) * .045,
                             x: displayWidth(context) * .35,
                             item: Row(
@@ -278,7 +274,7 @@ class _AllTransactionsState extends State<AllTransactions> {
                                   items: allFields.map((String items) {
                                     return DropdownMenuItem(
                                       value: items,
-                                      child: Text(items),
+                                      child: Text(items,style: Theme.of(context).textTheme.bodyMedium,),
                                     );
                                   }).toList(),
                                   onChanged: (value) {

@@ -6,6 +6,7 @@ import 'package:coin_wise/screens/intro_screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import '../../constants/colors.dart';
+
 class IntroScreen extends StatelessWidget {
   const IntroScreen({Key? key}) : super(key: key);
   @override
@@ -40,13 +41,13 @@ class IntroScreen extends StatelessWidget {
                 image: Image.asset('./assets/images/onboardlast.png'),
                 footer: ElevatedButton(
                   onPressed: () {
-    defaultCategoryAdding();
-                    isSplash?
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (ctx) => SetupProfile()),
-                    ):
-                    navigatorKey?.currentState?.pop();
+                    defaultCategoryAdding();
+                    isSplash
+                        ? Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (ctx) => SetupProfile()),
+                          )
+                        : navigatorKey?.currentState?.pop();
                   },
                   child: const Text('Get Started'),
                   style: ElevatedButton.styleFrom(

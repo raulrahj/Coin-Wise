@@ -11,25 +11,24 @@ import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'home.dart';
 class Settings extends StatelessWidget {
-  const Settings({Key? key}) : super(key: key);
+  TextStyle? title;
+  Color? shadowcolor;
+  Settings({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    title = Theme.of(context).textTheme.titleLarge;
+    shadowcolor = Theme.of(context).iconTheme.color;
     // appbar = true;
     return SafeArea(
       child: Padding(
         padding: decent0,
         child: Column(
           children: [
-            decentSpace20,
+            addHorizontalSpace(7.0),
             defaultContainer(
               color: Theme.of(context).primaryColor,
-
-              // color: brightness != Brightness.light
-              //     ? defaultPrimaryColor
-              //     : defaultColorDark,
               item: ValueListenableBuilder(
                   valueListenable: profileListner,
                   builder: (context, ProfileModel newProfileListener, child) {
@@ -67,23 +66,19 @@ class Settings extends StatelessWidget {
                                 addHorizontalSpace(10.0),
                                 Text(
                                   _data.profileName ?? 'Username',
-                                  style: boxSubBoldTitle,
-                                  // style: brightness != Brightness.light
-                                  //     ? boxSubBoldTitle
-                                  //     : const TextStyle(color: defaultGreyDark),
+                                  style: Theme.of(context).textTheme.titleLarge,
                                 ),
                               ],
                             ),
                             trailing: _data.profilePhoto == null
-                                ?  CircleAvatar(
+                                ? CircleAvatar(
                                     backgroundColor: primaryGrey,
                                     radius: 30,
-                                    child: FittedBox(
-                                      child: Icon(
-                                        Icons.person,
-                                        color: Theme.of(context).primaryColorLight,
-                                        size: 50,
-                                      ),
+                                    child: Icon(
+                                      Icons.person,
+                                      color:
+                                          Theme.of(context).primaryColorLight,
+                                      size: 50,
                                     ),
                                   )
                                 : CircleAvatar(
@@ -96,21 +91,18 @@ class Settings extends StatelessWidget {
                   }),
             ),
             settingsTile(
-              bg: Theme.of(context).primaryColor,
-
+                bg: Theme.of(context).primaryColor,
                 settingsFunction: () async => showDialog(
                     context: context, builder: (ctx) => ThemePopup()),
                 head: "Theme",
                 icn: const Icon(Icons.brightness_medium_rounded)),
             settingsTile(
-              bg: Theme.of(context).primaryColor,
-
+                bg: Theme.of(context).primaryColor,
                 head: "Notification",
                 icn: const Icon(Icons.notifications_active),
-                trail:const SwitchScreen()),
+                trail: const SwitchScreen()),
             settingsTile(
               bg: Theme.of(context).primaryColor,
-
               settingsFunction: () async {
                 showDialog(
                     context: context,
@@ -141,12 +133,11 @@ class Settings extends StatelessWidget {
                       );
                     });
               },
-              head: "Restore Data",
-              icn: const Icon(Icons.restart_alt_rounded),
+              head: "Reset Data",
+              icn: const Icon(Icons.new_releases_outlined),
             ),
             settingsTile(
-              bg: Theme.of(context).primaryColor,
-
+                bg: Theme.of(context).primaryColor,
                 settingsFunction: () {
                   Navigator.push(
                       context,
@@ -155,20 +146,24 @@ class Settings extends StatelessWidget {
                   isSplash = false;
                 },
                 head: "App Intro",
-                icn: const Icon(Icons.phone_android_rounded)),
+                icn: const Icon(Icons.amp_stories_rounded)),
             settingsTile(
-              bg: Theme.of(context).primaryColor,
-
+                head: 'Rate App',
+                bg: Theme.of(context).primaryColor,
+                icn: const Icon(Icons.star_purple500_outlined),
+                settingsFunction: ()=> null,
+                ),
+            settingsTile(
+                bg: Theme.of(context).primaryColor,
                 head: "Feedback",
                 icn: const Icon(Icons.chat),
                 settingsFunction: () async {
                   _launchURLBrowser();
                 }),
             settingsTile(
-                // settingsFunction: () => Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => MyHomePage(),)),
-                //  showDialog(
-                //     context: context, builder: (ctx) => aboutApp(context)),
-              bg: Theme.of(context).primaryColor,
+               settingsFunction:() =>   showDialog(
+                    context: context, builder: (ctx) => AboutApp()),
+                bg: Theme.of(context).primaryColor,
                 head: "About app",
                 icn: const Icon(Icons.info_outline)),
           ],
@@ -176,39 +171,39 @@ class Settings extends StatelessWidget {
       ),
     );
   }
+
   Widget settingsTile(
           {required String head,
           Widget? icn,
           Widget? trail,
-          Function()? settingsFunction, bg,fg}) =>
+          Function()? settingsFunction,
+          bg,
+          fg}) =>
       defaultContainer(
-        padding:const EdgeInsets.symmetric(vertical: 5,horizontal: 2),
+        shadowClr: shadowcolor,
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
         color: bg,
-        boxShadow:const  [
-              BoxShadow(
-                color: primaryBlack,
-                offset: Offset(
-                  1.0,
-                  1.0,
-                ),
-                blurRadius: 5.0,
-                spreadRadius: .2,
-              ),
-            ],
-        // ( !dark!) 
-        //     ? defaultPrimaryColor
-        //     : defaultColorDark,
+        boxShadow: const [
+          BoxShadow(
+            color: primaryBlack,
+            offset: Offset(
+              1.0,
+              1.0,
+            ),
+            blurRadius: 5.0,
+            spreadRadius: .2,
+          ),
+        ],
         item: ListTile(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           onTap: settingsFunction,
           title: Text(
             head,
-            style: boxTitle,
+            style: title,
           ),
           leading: icn,
           iconColor: fg,
-              // brightness != Brightness.light ? Colors.black : defaultGreyDark,
           trailing: trail,
         ),
       );

@@ -52,8 +52,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
-  statusBarColor: brightness!=Brightness.light? defaultColor : Colors.transparent,
+   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+  statusBarColor:  Colors.transparent,
   // systemNavigationBarColor: Colors.transparent
 ));
     return ChangeNotifierProvider(
@@ -61,7 +61,6 @@ class MyApp extends StatelessWidget {
 
       child: Consumer<ThemeModel>(
         builder: (context,ThemeModel themeNotifier, child) {
-          cntxt=context;
           dark=themeNotifier.isDark;
           return MaterialApp(
             navigatorKey: navigatorKey,

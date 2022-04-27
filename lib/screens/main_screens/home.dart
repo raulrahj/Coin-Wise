@@ -70,7 +70,6 @@ class Home extends StatelessWidget {
                       }),
                   defaultContainer(
                     color: bg,
-                    // color: brightness != Brightness.light ?  defaultColor : defaultColorDark,
                     height: 180,
                     item: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -98,14 +97,12 @@ class Home extends StatelessWidget {
                         showBox(
                           x: displayWidth(context) * .85,
                           color: bgSub,
-                          // color:brightness!=Brightness.light? defaultPrimaryColor: defaultPrimaryColorDark,
                           item: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               showBox(
                                 x: displayWidth(context) * 0.42,
                                 color: bgSub,
-                                // color:brightness!=Brightness.light? defaultPrimaryColor:defaultPrimaryColorDark,
                                 item: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment:
@@ -128,18 +125,17 @@ class Home extends StatelessWidget {
                                       builder: (context,double newIncome,child) {
                                         return Text(
                                           '₹ ${newIncome.toString()}',
-                                          style:brightness!=Brightness.light? boxSubBoldTitle: boxSubBoldTitleDark,
+                                          style:Theme.of(context).textTheme.titleMedium,
                                         );
                                       }
                                     )
                                   ],
                                 ),
                               ),
-                              verticalDivider,
+                              verticalDivider(context),
                               showBox(
                                 x: displayWidth(context) * 0.42,
                                 color: bgSub,
-                                // color:brightness!=Brightness.light? defaultPrimaryColor:defaultPrimaryColorDark,
                                 item: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment:
@@ -162,7 +158,7 @@ class Home extends StatelessWidget {
                                       builder: (context,double newExpense,childe) {
                                         return Text(
                                           '₹ ${newExpense.toString()}',
-                                          style:brightness!=Brightness.light? boxSubBoldTitle:boxSubBoldTitleDark,
+                                          style:Theme.of(context).textTheme.titleMedium,
                                         );
                                       }
                                     ),

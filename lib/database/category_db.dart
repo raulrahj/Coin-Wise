@@ -197,8 +197,10 @@ void incomeList()  {
     return;
     
   } else {
+    if(_list0.length>1 && _list0.isNotEmpty && _list0 !=null){
     _list0.sort((first, second) =>
         second.categoryAmount!.compareTo(first.categoryAmount!));
+    }
     // Future.forEach(_list0, (CategoryModel element) async {
       // if(element.field==CategoryField.income){
       CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
@@ -217,8 +219,10 @@ void expenseList() {
   final _list1 =
       CategoryFunctions.instance.expenseAmountCategoryListner.value.toList();
       print('Length of List 1 is : ${_list1.length}');
+     if(_list1.length>1 && _list1 !=null && _list1.isNotEmpty){ 
   _list1.sort((first, second) =>
       second.categoryAmount!.compareTo(first.categoryAmount!));
+     }
   CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
   CategoryFunctions.instance.multiAmountCategoryListener.value = _list1;
   print('list 1 length ${_list1.length}');
