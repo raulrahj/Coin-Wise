@@ -37,25 +37,25 @@ class AddScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dropDownValue==null;
+    dropDownValue == null;
     isAdd ?? false;
     ////////////// TO DO - null check operator used in a null value ////////////////////////
     if (!isAdd!) {
-     _updateNoteController.text = selectedTransactionData!.note;
-     _updateAmoutnController.text = selectedTransactionData!.amount.toString();
+      _updateNoteController.text = selectedTransactionData!.note;
+      _updateAmoutnController.text = selectedTransactionData!.amount.toString();
     }
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        backgroundColor: defaultLightColor,
+        backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,
           leading: IconButton(
-            tooltip: 'close',
+              tooltip: 'close',
               onPressed: () {
-                 Navigator.pop(context);
-                 dropDownValue=null;
+                Navigator.pop(context);
+                dropDownValue = null;
               },
               icon: const Icon(
                 Icons.close,
@@ -63,7 +63,7 @@ class AddScreen extends StatelessWidget {
               )),
           actions: [
             IconButton(
-              tooltip: 'categories',
+                tooltip: 'categories',
                 onPressed: () {
                   Navigator.push(
                       context,
@@ -71,7 +71,6 @@ class AddScreen extends StatelessWidget {
                           builder: (context) => const Categories()));
                 },
                 icon: const Icon(
-                  
                   Icons.list,
                   color: primaryDark,
                 ))
@@ -79,92 +78,86 @@ class AddScreen extends StatelessWidget {
         ),
         //<<<<<<<<<<<<<<<<<<< FLOATING ACTION BUTTON >>>>>>>>>>>>>>>>>>>>>
 
-        floatingActionButton: PandaBarFabButton(
-            icon: Text(
-              isAdd! ? 'ADD' : 'UPDATE',
-              style: const TextStyle(
-                  color: primaryLight, fontWeight: FontWeight.bold),
-            ),
-            colors: const [defaultColor, defaultColor],
-            size: 50,
-            onTap: () async {
-              if (_formKey.currentState!.validate()) {
-                if (isAdd!) {
-                  // isAdd! ?
-                  // var transactionData =await addTransaction();
-                  // if(transactionData!=null)
-                  double? parsed = double.tryParse(_amountController.text);
-                  field ?? 1;
-                  final transactionData = TransactionModel(
-                    id: DateTime.now().millisecondsSinceEpoch.toString(),
-                      date: date ?? DateTime.now(),
-                      amount: parsed ?? 0000.0,
-                      note: _noteController.text,
-                      field: field == 0
-                          ? CategoryField.income
-                          : CategoryField.expense,
-                      category: globalCategory!);
-                  TransactionDbFunctions.instance
-                      .addTransaction(transactionData);
-                  int count = 0;
-                  navigatorKey?.currentState?.pop();
-                  // Navigator.of(context).popUntil((_) => count++ >= 2);
-                  _amountController.clear();
-                  await TransactionDbFunctions.instance.getTransaction();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      width: displayWidth(context)*03,
-                      behavior: SnackBarBehavior.floating,
-                      // margin: const EdgeInsets.all(10),
-                      backgroundColor: Colors.transparent,
-                      content: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Added ${_noteController.text}...',
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                  _noteController.clear();
-                } else {
-                  double? parsedUpdate =
-                      double.tryParse(_updateAmoutnController.text);
-                  final updateTransactionData = TransactionModel(
-                    id: selectedTransactionData!.id,
-                      date: date??selectedTransactionData!.date,
-                      amount: parsedUpdate!,
-                      note: _updateNoteController.text,
-                      field: selectedTransactionData!.field,
-                      category: globalCategory ?? selectedTransactionData!.category);
-                  TransactionDbFunctions.instance.updateTransaction(
-                      selectedTransactionData!.id, updateTransactionData);
-                          dropDownValue=null;
-                  Navigator.of(context).pop();
-                  await TransactionDbFunctions.instance.getTransaction();
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      behavior: SnackBarBehavior
-                          .floating, //behavior used to change decoration or change default config
-                      // margin: const EdgeInsets.all(10),
-                      width: displayWidth(context)*.5,
-                      backgroundColor: defaultColor,
-                      content: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Updated ${_updateNoteController.text}...',
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      )));
-                }
-                // else
-                // print('transactiondata is null');
-              }
-            }),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        // floatingActionButton: PandaBarFabButton(
+        //     icon: Text(
+        //       isAdd! ? 'ADD' : 'UPDATE',
+        //       style: const TextStyle(
+        //           color: primaryLight, fontWeight: FontWeight.bold),
+        //     ),
+        //     colors: const [defaultColor, defaultColor],
+        //     size: 50,
+        //     onTap: () async {
+        //       if (_formKey.currentState!.validate()) {
+        //         if (isAdd!) {
+        //           // isAdd! ?
+        //           // var transactionData =await addTransaction();
+        //           // if(transactionData!=null)
+        //           double? parsed = double.tryParse(_amountController.text);
+        //           field ?? 1;
+        //           final transactionData = TransactionModel(
+        //               id: DateTime.now().millisecondsSinceEpoch.toString(),
+        //               date: date ?? DateTime.now(),
+        //               amount: parsed ?? 0000.0,
+        //               note: _noteController.text,
+        //               field: field == 0
+        //                   ? CategoryField.income
+        //                   : CategoryField.expense,
+        //               category: globalCategory!);
+        //           TransactionDbFunctions.instance
+        //               .addTransaction(transactionData);
+        //           navigatorKey?.currentState?.pop();
+        //           _amountController.clear();
+        //           await TransactionDbFunctions.instance.getTransaction();
+        //           ScaffoldMessenger.of(context).showSnackBar(
+        //             SnackBar(
+        //               width: displayWidth(context) * 03,
+        //               behavior: SnackBarBehavior.floating,
+        //               backgroundColor: Colors.transparent,
+        //               content: Row(
+        //                 mainAxisAlignment: MainAxisAlignment.center,
+        //                 children: [
+        //                   Text(
+        //                     'Added ${_noteController.text}...',
+        //                     style: const TextStyle(color: Colors.white),
+        //                   ),
+        //                 ],
+        //               ),
+        //             ),
+        //           );
+        //           _noteController.clear();
+        //         } else {
+        //           double? parsedUpdate =
+        //               double.tryParse(_updateAmoutnController.text);
+        //           final updateTransactionData = TransactionModel(
+        //               id: selectedTransactionData!.id,
+        //               date: date ?? selectedTransactionData!.date,
+        //               amount: parsedUpdate!,
+        //               note: _updateNoteController.text,
+        //               field: selectedTransactionData!.field,
+        //               category:
+        //                   globalCategory ?? selectedTransactionData!.category);
+        //           TransactionDbFunctions.instance.updateTransaction(
+        //               selectedTransactionData!.id, updateTransactionData);
+        //           dropDownValue = null;
+        //           Navigator.of(context).pop();
+        //           await TransactionDbFunctions.instance.getTransaction();
+        //           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        //               behavior: SnackBarBehavior.floating,
+        //               width: displayWidth(context) * .5,
+        //               backgroundColor: defaultColor,
+        //               content: Row(
+        //                 mainAxisAlignment: MainAxisAlignment.center,
+        //                 children: [
+        //                   Text(
+        //                     'Updated ${_updateNoteController.text}...',
+        //                     style: const TextStyle(color: Colors.white),
+        //                   ),
+        //                 ],
+        //               )));
+        //         }
+        //       }
+        //     }),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: Center(
           //<<<<<<<<<<<<<< Single child Scroll View >>>>>>>>>>>>>>>>>
 
@@ -179,7 +172,7 @@ class AddScreen extends StatelessWidget {
                   Row(
                     children: [
                       decentWidth,
-                    const  Icon(Icons.add_box),
+                      const Icon(Icons.add_box),
                       Text(
                         isAdd! ? 'Add transaction' : 'Update transaction',
                         style: defaultTitle,
@@ -190,7 +183,7 @@ class AddScreen extends StatelessWidget {
                   Container(
                     width: displayWidth(context),
                     height: displayHeight(context),
-                    decoration: const BoxDecoration(color: defaultPrimaryColor),
+                    decoration:  BoxDecoration(color: Theme.of(context).primaryColor),
                     child: Column(
                       children: [
                         Flexible(
@@ -204,34 +197,23 @@ class AddScreen extends StatelessWidget {
                                   keyboardType: TextInputType.none,
                                   enabled: true,
                                   decoration: InputDecoration(
-
                                     focusedBorder: const OutlineInputBorder(
                                         borderSide:
                                             BorderSide(color: primaryDark)),
-                                            
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0),
-                                      
-                                      borderSide: const BorderSide(
-                                        color: primaryDark,
+                                      borderSide:  BorderSide(
+                                        color: Theme.of(context).iconTheme.color!,
                                       ),
-                                      
-          // labelText: 'Select Date',labelStyle: TextStyle(color: defaultPrimaryColor),
                                     ),
                                     prefixIcon: const Date(),
                                   ),
-        //      decoration:const InputDecoration(
-        //   enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: primaryDark)),
-        //   labelText: 'Date Range',labelStyle: TextStyle(color: primaryDark),
-        //   prefixIcon: Icon(Icons.date_range,color: defaultPrimaryColor,),
-        //   hintText: 'Please select a start and end date',
-        //   border: OutlineInputBorder(borderSide: BorderSide(color: defaultPrimaryColor)),
-        // ),
                                   onTap: () {
                                     const Date();
                                   },
                                 ),
                                 ActionBox(
+                                  activeColor: Theme.of(context).iconTheme.color!,
                                   controller: isAdd!
                                       ? _amountController
                                       : _updateAmoutnController,
@@ -280,7 +262,126 @@ class AddScreen extends StatelessWidget {
                                         return null;
                                       },
                                     ),
-                                    bottomSpace,
+                                    addHorizontalSpace(displayHeight(context)*.1),
+                                    ElevatedButton(
+                                      onPressed: () async {
+                                        if (_formKey.currentState!.validate()) {
+                                          if (isAdd!) {
+                                            // isAdd! ?
+                                            // var transactionData =await addTransaction();
+                                            // if(transactionData!=null)
+                                            double? parsed = double.tryParse(
+                                                _amountController.text);
+                                            field ?? 1;
+                                            final transactionData =
+                                                TransactionModel(
+                                                    id:
+                                                        DateTime.now()
+                                                            .millisecondsSinceEpoch
+                                                            .toString(),
+                                                    date:
+                                                        date ?? DateTime.now(),
+                                                    amount: parsed ?? 0000.0,
+                                                    note: _noteController.text,
+                                                    field: field == 0
+                                                        ? CategoryField.income
+                                                        : CategoryField.expense,
+                                                    category: globalCategory!);
+                                            TransactionDbFunctions.instance
+                                                .addTransaction(
+                                                    transactionData);
+                                            navigatorKey?.currentState?.pop();
+                                            _amountController.clear();
+                                            await TransactionDbFunctions
+                                                .instance
+                                                .getTransaction();
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                width:
+                                                    displayWidth(context) * 03,
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                content: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      'Added ${_noteController.text}...',
+                                                      style: const TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                            _noteController.clear();
+                                          } else {
+                                            double? parsedUpdate =
+                                                double.tryParse(
+                                                    _updateAmoutnController
+                                                        .text);
+                                            final updateTransactionData =
+                                                TransactionModel(
+                                                    id: selectedTransactionData!
+                                                        .id,
+                                                    date: date ??
+                                                        selectedTransactionData!
+                                                            .date,
+                                                    amount: parsedUpdate!,
+                                                    note: _updateNoteController
+                                                        .text,
+                                                    field:
+                                                        selectedTransactionData!
+                                                            .field,
+                                                    category: globalCategory ??
+                                                        selectedTransactionData!
+                                                            .category);
+                                            TransactionDbFunctions.instance
+                                                .updateTransaction(
+                                                    selectedTransactionData!.id,
+                                                    updateTransactionData);
+                                            dropDownValue = null;
+                                            Navigator.of(context).pop();
+                                            await TransactionDbFunctions
+                                                .instance
+                                                .getTransaction();
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                                    behavior: SnackBarBehavior
+                                                        .floating,
+                                                    width:
+                                                        displayWidth(context) *
+                                                            .5,
+                                                    backgroundColor:
+                                                        defaultColor,
+                                                    content: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'Updated ${_updateNoteController.text}...',
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .white),
+                                                        ),
+                                                      ],
+                                                    )));
+                                          }
+                                        }
+                                      },
+                                      child: Text(
+                                        isAdd! ? 'SAVE' : 'UPDATE',
+                                        style: const TextStyle(
+                                            color: primaryLight,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    bottomSpace(displayHeight(context)*.10),
                                   ],
                                 ),
                               ),
@@ -312,7 +413,5 @@ class AddScreen extends StatelessWidget {
     if (_noteText.isEmpty) {
       return;
     }
-
-
   }
 }

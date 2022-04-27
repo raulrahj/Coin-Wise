@@ -1,4 +1,3 @@
-import 'package:coin_wise/screens/main_screens/home.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -20,17 +19,16 @@ class _CategoriesState extends State<Categories> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        floatingActionButton: PandaBarFabButton(
-            colors: const [defaultColor, defaultColor],
-            size: 50,
-            onTap: () {
+        floatingActionButton: FloatingActionButton(
+          child:const Icon(Icons.add,color: primaryLight,),
+            onPressed: () {
               showDialog(
                   context: context,
                   builder: (BuildContext ctx) {
                     return AddCategoryPopup();
                   });
             }),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Theme.of(context).primaryColorDark,

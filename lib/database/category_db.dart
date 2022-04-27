@@ -1,4 +1,3 @@
-import 'package:coin_wise/constants/functions.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/models/transaction_model.dart';
@@ -82,12 +81,10 @@ class CategoryFunctions {
       } else if (element.field == CategoryField.expense &&
           !availableExpenseCategories.contains(element.category.name)) {
         availableExpenseCategories.add(element.category.name);
-
       }
     });
     incomeListing();
     expenseListing();
-    print('Length of Available expenes categories is : ${availableExpenseCategories.length}');
   }
 
   void incomeListing() {
@@ -98,7 +95,7 @@ class CategoryFunctions {
     for (int i = 0; i < availableIncomeCategories.length; i++) {
       for (int j = 0; j < incomeCategories.length; j++) {
         if (availableIncomeCategories[i] == incomeCategories[j].name) {
-          inc = incomeCategories[i];
+          inc = incomeCategories[j];
         }
       }
       incomeAmountCategoryListner.value.add(inc);
@@ -108,28 +105,15 @@ class CategoryFunctions {
   void expenseListing() {
     print('FOUR');
     CategoryModel? exp;
-    List<CategoryModel> explist =[];
     final expenseCategories = expenseCategoryListner.value;
-  print("again checking the length ${availableExpenseCategories.length}");
-  print(expenseCategories.length);
-        expenseAmountCategoryListner.value.clear();
+    expenseAmountCategoryListner.value.clear();
     for (int i = 0; i < availableExpenseCategories.length; i++) {
-        print(' <<<<<<$i>>>>>');
       for (int j = 0; j < expenseCategories.length; j++) {
         if (availableExpenseCategories[i] == expenseCategories[j].name) {
           exp = expenseCategories[j];
-          print('match??');
-          print(expenseCategories[j].name);
-          print('available');
-          print(availableExpenseCategories[i]);
-
-          // explist.add(expenseCategories[i]);
         }
-      // print(explist[i].name);
       }
       expenseAmountCategoryListner.value.add(exp!);
-
-print(expenseAmountCategoryListner.value.length);
     }
   }
 
@@ -163,14 +147,11 @@ print(expenseAmountCategoryListner.value.length);
     for (int i = 0; i < expenseAmountCategoryListner.value.length; i++) {
       print('SiX');
       double amount = 0;
-      // expenseAmountCategoryListner.value[i].categoryAmount = 0;
 
       Future.forEach(allTransactions, (TransactionModel _transaction) async {
-        if (_transaction.category.name == expenseAmountCategoryListner.value[i].name) {
+        if (_transaction.category.name ==
+            expenseAmountCategoryListner.value[i].name) {
           amount += _transaction.amount;
-          print('amount of expense $amount');
-          
-          // print(expenseAmountCategoryListner.value[i].categoryAmount);
         }
 
         if (expenseAmountCategoryListner.value[i].name ==
@@ -181,58 +162,45 @@ print(expenseAmountCategoryListner.value.length);
         }
       });
     }
-    // refreshCategoryAmountListners();
     print('EXITED SUCCESSFULLY');
   }
 }
 
-
-void incomeList()  {
-      CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
+void incomeList() {
+  CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
 
   final _list0 =
       CategoryFunctions.instance.incomeAmountCategoryListner.value.toList();
-      print(_list0.length);
   if (_list0.isEmpty) {
     return;
-    
   } else {
-    if(_list0.length>1 && _list0.isNotEmpty && _list0 !=null){
-    _list0.sort((first, second) =>
-        second.categoryAmount!.compareTo(first.categoryAmount!));
+    if (_list0.length > 1 && _list0.isNotEmpty && _list0[1] == null) {
+      _list0.sort((first, second) =>
+          second.categoryAmount!.compareTo(first.categoryAmount!));
     }
-    // Future.forEach(_list0, (CategoryModel element) async {
-      // if(element.field==CategoryField.income){
-      CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
-      CategoryFunctions.instance.multiAmountCategoryListener.value = _list0;
-      // CategoryFunctions.instance.multiAmountCategoryListener.value.add(element);
-      refreshCategoryAmountListners();
-      // }
-    // });
+
+    CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
+    CategoryFunctions.instance.multiAmountCategoryListener.value = _list0;
+    refreshCategoryAmountListners();
   }
 }
 
 void expenseList() {
-  print('this is expense list');
   CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
 
   final _list1 =
       CategoryFunctions.instance.expenseAmountCategoryListner.value.toList();
-      print('Length of List 1 is : ${_list1.length}');
-     if(_list1.length>1 && _list1 !=null && _list1.isNotEmpty){ 
-  _list1.sort((first, second) =>
-      second.categoryAmount!.compareTo(first.categoryAmount!));
-     }
+  if (_list1.length > 1 && _list1[1] != null && _list1.isNotEmpty) {
+    _list1.sort((first, second) =>
+        second.categoryAmount!.compareTo(first.categoryAmount!));
+  }
   CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
   CategoryFunctions.instance.multiAmountCategoryListener.value = _list1;
-  print('list 1 length ${_list1.length}');
-  print('Related ${CategoryFunctions.instance.multiAmountCategoryListener.value.length}');
   refreshCategoryAmountListners();
 }
 
 void refreshCategoryAmountListners() {
   print('notifier called');
-  //  CategoryFunctions.instance. categoryAmounts();
   CategoryFunctions.instance.multiAmountCategoryListener.notifyListeners();
   CategoryFunctions.instance.incomeAmountCategoryListner.notifyListeners();
   CategoryFunctions.instance.expenseAmountCategoryListner.notifyListeners();

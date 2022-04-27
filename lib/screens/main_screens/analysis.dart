@@ -138,7 +138,7 @@ class _AnalysisState extends State<Analysis> {
                                               .textTheme
                                               .titleLarge!
                                               .copyWith(
-                                                fontSize: 17,
+                                                fontSize: 16,
                                               )),
                                       trailing: Text(_data.categoryAmount !=
                                               null
@@ -149,14 +149,12 @@ class _AnalysisState extends State<Analysis> {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(15)),
-                                      tileColor: brightness != Brightness.light
-                                          ? primaryRed
-                                          : primaryRedDark,
+                                      tileColor: Theme.of(context).indicatorColor,
                                       title: Text(
                                         _data.name,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .titleLarge!.copyWith(fontSize: 17)
+                                            .titleLarge!.copyWith(fontSize: 16,)
                                       ),
                                       trailing: Text(_data.categoryAmount !=
                                               null

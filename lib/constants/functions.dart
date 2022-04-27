@@ -4,9 +4,6 @@ import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/models/transaction_model.dart';
-import 'package:coin_wise/screens/action_screens/add_screen.dart';
-import 'package:coin_wise/widgets/widgets.dart';
-import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 bool isFilter = false;
@@ -167,14 +164,6 @@ Future<void> notifications() async {
   );
 }
 
-// void isExpense(context) {
-//   isAdd = true;
-//   categoryMod = 1;
-//   var field = 1;
-//   Navigator.push(
-//       context, MaterialPageRoute(builder: (ctx) => AddScreen(field: field)));
-//   dropDownValue = null;
-// }
 
 Future<void> defaultCategoryAdding() async {
   Future.forEach(defaultIncomeCategories, (String element) {

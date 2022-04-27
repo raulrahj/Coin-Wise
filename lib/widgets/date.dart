@@ -13,7 +13,7 @@ class MyFormField extends StatefulWidget {
   _MyFormFieldState createState() => _MyFormFieldState();
 }
 
-GlobalKey<FormState> myFormKey =  GlobalKey();
+GlobalKey<FormState> myFormKey = GlobalKey();
 
 class _MyFormFieldState extends State<MyFormField> {
   DateTimeRange? myDateRange;
@@ -27,16 +27,22 @@ class _MyFormFieldState extends State<MyFormField> {
   Widget build(BuildContext context) {
     return DateRangeField(
         firstDate: DateTime(2021),
-        lastDate: DateTime.now().add(Duration(days: 1)),
+        lastDate: DateTime.now().add(const Duration(days: 1)),
         enabled: true,
         initialValue: DateTimeRange(
-            end: DateTime.now().add(Duration(days: 1)), start: DateTime.now().subtract(const Duration(days: 2))),
-        decoration:const InputDecoration(
-          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: defaultPrimaryColor)),
-          labelText: 'Date Range',labelStyle: TextStyle(color: defaultPrimaryColor),
-          prefixIcon: Icon(Icons.date_range,color: defaultPrimaryColor,),
-          hintText: 'Please select a start and end date',
-          border: OutlineInputBorder(borderSide: BorderSide(color: defaultPrimaryColor)),
+            end: DateTime.now().add(const Duration(days: 1)),
+            start: DateTime.now().subtract(const Duration(days: 2))),
+        decoration: const InputDecoration(
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: defaultPrimaryColor)),
+          labelText: 'Date Range',
+          labelStyle: TextStyle(color: defaultPrimaryColor),
+          prefixIcon: Icon(
+            Icons.date_range,
+            color: defaultPrimaryColor,
+          ),
+          border: OutlineInputBorder(
+              borderSide: BorderSide(color: defaultPrimaryColor)),
         ),
         validator: (value) {
           if (value!.start.isBefore(DateTime.now())) {
@@ -44,14 +50,13 @@ class _MyFormFieldState extends State<MyFormField> {
           }
           return null;
         },
-        onChanged: (value) async{
+        onChanged: (value) async {
           setState(() {
             myDateRange = value!;
-            final startDate =myDateRange?.start;
-            final endDate = myDateRange?.end; 
-           selectedRangeTransactions(start: startDate,end: endDate);
+            final startDate = myDateRange?.start;
+            final endDate = myDateRange?.end;
+            selectedRangeTransactions(start: startDate, end: endDate);
           });
         });
-  
   }
 }

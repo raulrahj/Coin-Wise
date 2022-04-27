@@ -27,8 +27,8 @@ const Widget decentHieght = SizedBox(
 const Widget decentWidth = SizedBox(
   width: 10,
 );
-const Widget bottomSpace = SizedBox(
-  height: 220,
+ Widget bottomSpace (height)=>SizedBox(
+  height: height
 );
 
 double displayWidth(BuildContext context) {

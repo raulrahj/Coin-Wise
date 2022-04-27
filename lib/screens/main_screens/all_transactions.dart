@@ -6,7 +6,7 @@ import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/main.dart';
 import 'package:coin_wise/models/transaction_model.dart';
 import 'package:coin_wise/screens/main_screens/home.dart';
-import 'package:coin_wise/trial.dart';
+import 'package:coin_wise/widgets/date.dart';
 import 'package:coin_wise/widgets/list_views.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 // import 'package:date_time_picker/date_time_picker.dart';
@@ -51,67 +51,11 @@ class _AllTransactionsState extends State<AllTransactions> {
         children: [
           defaultContainer(
             color: bg,
-            // color: brightness != Brightness.light
-            //     ? defaultColor
-            //     : defaultColorDark,
             height: displayHeight(context) * .20,
             item: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 decentHieght,
-
-                // showBox(
-                //   color: defaultPrimaryColor,
-                //   x: displayWidth(context) * .88,
-                //   y: displayHeight(context) * .10,
-                //   item: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //     children: [
-                //       showBox(
-                //         x: displayWidth(context) * .36,
-                //         y: displayHeight(context) * .09,
-                //         color: defaultPrimaryColor,
-                //         item: Column(
-                //           mainAxisSize: MainAxisSize.min,
-                //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //           children: const [
-                //             SizedBox(
-                //                 child: Text(
-                //               'Total Income',
-                //               style: onboardBody,
-                //             )),
-                //             Text(
-                //               '₹ 4534535',
-                //               style: boxSubBoldTitle,
-                //             ),
-                //           ],
-                //         ),
-                //       ),
-                //       verticalDivider,
-                //       showBox(
-                //         color: defaultPrimaryColor,
-                //         x: displayWidth(context) * .36,
-                //         y: displayHeight(context) * .09,
-                //         item: Column(
-                //           mainAxisSize: MainAxisSize.min,
-                //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //           children: const [
-                //             SizedBox(
-                //               child: Text(
-                //                 'Total Expense',
-                //                 style: onboardBody,
-                //               ),
-                //             ),
-                //             Text(
-                //               '₹ 34535',
-                //               style: boxSubBoldTitle,
-                //             ),
-                //           ],
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -179,13 +123,9 @@ class _AllTransactionsState extends State<AllTransactions> {
                                             days: (firstDayOfWeek - day1)));
                                         DateTime dat2 = date2.add(Duration(
                                             days: (endDayOfWeek - day2)));
-
-                                        // if( !isSameDate(dat1, ranges.startDate)|| !isSameDate(dat2,ranges.endDate))
-                                        //  {
                                         _controller.selectedRange =
                                             PickerDateRange(dat1, dat2);
 
-                                        // }
                                       },
                                       monthViewSettings:
                                           const DateRangePickerMonthViewSettings(
@@ -217,8 +157,6 @@ class _AllTransactionsState extends State<AllTransactions> {
                                 ),
                               );
                             });
-
-                        print('this week');
                       },
                     ),
                     ActionChip(
@@ -238,13 +176,10 @@ class _AllTransactionsState extends State<AllTransactions> {
                             if (date != null) {
                               setState(() {
                                 selectedDate = date;
-                                print(selectedDate);
                                 selectedMonthTransactions(selectedDate);
                               });
                             }
                           });
-
-                          print('Month');
                         }),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -315,7 +250,6 @@ class _AllTransactionsState extends State<AllTransactions> {
                   ],
                 ),
                 const MyFormField(),
-// DateRangePickerDialog(firstDate: firstDate, lastDate: lastDate)
               ],
             ),
           ),
@@ -326,10 +260,6 @@ class _AllTransactionsState extends State<AllTransactions> {
                   dropDownList: dropDownListener,
                 );
               }),
-          //  TransactionList(
-          //    dropDownList: TransactionDbFunctions.instance.transactionExpenseListener,
-          //   isIncome: true,
-          // ),
         ],
       ),
     );

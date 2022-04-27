@@ -1,15 +1,14 @@
 import 'dart:io';
-
-import 'package:coin_wise/constants/colors.dart';
-import 'package:coin_wise/constants/sizes.dart';
-import 'package:coin_wise/constants/text_styles.dart';
-import 'package:coin_wise/database/profiledata.dart';
-import 'package:coin_wise/database/transactions_db.dart';
-import 'package:coin_wise/screens/intro_screens/onboarding_screen.dart';
-import 'package:coin_wise/screens/intro_screens/splash_screen.dart';
-import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:coin_wise/widgets/widgets.dart';
+import 'package:coin_wise/constants/sizes.dart';
+import 'package:coin_wise/constants/colors.dart';
+import 'package:coin_wise/database/profiledata.dart';
+import 'package:coin_wise/constants/text_styles.dart';
+import 'package:coin_wise/database/transactions_db.dart';
+import 'package:coin_wise/screens/intro_screens/splash_screen.dart';
+import 'package:coin_wise/screens/intro_screens/onboarding_screen.dart';
 
 class Settings extends StatelessWidget {
   TextStyle? title;
@@ -148,11 +147,11 @@ class Settings extends StatelessWidget {
                 head: "App Intro",
                 icn: const Icon(Icons.amp_stories_rounded)),
             settingsTile(
-                head: 'Rate App',
-                bg: Theme.of(context).primaryColor,
-                icn: const Icon(Icons.star_purple500_outlined),
-                settingsFunction: ()=> null,
-                ),
+              head: 'Rate App',
+              bg: Theme.of(context).primaryColor,
+              icn: const Icon(Icons.star_purple500_outlined),
+              settingsFunction: () => null,
+            ),
             settingsTile(
                 bg: Theme.of(context).primaryColor,
                 head: "Feedback",
@@ -161,8 +160,8 @@ class Settings extends StatelessWidget {
                   _launchURLBrowser();
                 }),
             settingsTile(
-               settingsFunction:() =>   showDialog(
-                    context: context, builder: (ctx) => AboutApp()),
+                settingsFunction: () =>
+                    showDialog(context: context, builder: (ctx) => AboutApp()),
                 bg: Theme.of(context).primaryColor,
                 head: "About app",
                 icn: const Icon(Icons.info_outline)),

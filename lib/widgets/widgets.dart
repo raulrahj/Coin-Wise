@@ -1,21 +1,21 @@
+import '../main.dart';
+import 'package:coin_wise/main.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:coin_wise/app_themes.dart';
 import 'package:coin_wise/constants/data.dart';
-import 'package:coin_wise/constants/functions.dart';
-import 'package:coin_wise/constants/text_styles.dart';
-import 'package:coin_wise/database/transactions_db.dart';
-import 'package:coin_wise/main.dart';
-import 'package:coin_wise/models/transaction_model.dart';
-import 'package:coin_wise/screens/main_screens/home.dart';
-import 'package:coin_wise/widgets/list_views.dart';
-import 'package:flutter/material.dart';
-import 'package:coin_wise/constants/colors.dart';
 import 'package:coin_wise/constants/sizes.dart';
+import 'package:coin_wise/constants/colors.dart';
+import 'package:coin_wise/widgets/list_views.dart';
+import 'package:coin_wise/constants/functions.dart';
 import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/models/category_model.dart';
-import 'package:coin_wise/screens/action_screens/add_screen.dart';
+import 'package:coin_wise/constants/text_styles.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:provider/provider.dart';
-import '../main.dart';
+import 'package:coin_wise/database/transactions_db.dart';
+import 'package:coin_wise/models/transaction_model.dart';
+import 'package:coin_wise/screens/main_screens/home.dart';
+import 'package:coin_wise/screens/action_screens/add_screen.dart';
 
 final _categoryNameController = TextEditingController();
 
@@ -133,11 +133,7 @@ Widget defaultButton({
       style: style ?? onboardTitle,
     ),
     style: ElevatedButton.styleFrom(
-      primary: color ?? defaultColor,
-      onPrimary: Colors.white,
-      shadowColor: primaryGrey,
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+      onPrimary: primaryLight,
       minimumSize: const Size(190, 45),
     ),
   );
@@ -172,7 +168,7 @@ class ActionBox extends StatelessWidget {
   TextInputType? keyboardtype;
   Widget? prefix;
   String? Function(String?)? validator;
-
+  Color? activeColor;
   ActionBox(
       {this.hint,
       this.itemColor = primaryDark,
@@ -180,7 +176,9 @@ class ActionBox extends StatelessWidget {
       this.keyboardtype,
       this.prefix,
       this.validator,
-      key})
+      key,
+      this.activeColor,
+      })
       : super(key: key);
 
   @override
@@ -202,10 +200,10 @@ class ActionBox extends StatelessWidget {
               )
             : null,
         focusedBorder:
-            OutlineInputBorder(borderSide: BorderSide(color: itemColor)),
+            OutlineInputBorder(borderSide: BorderSide(color:activeColor?? itemColor)),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: itemColor,
+            color:activeColor?? itemColor,
           ),
           borderRadius: BorderRadius.circular(5.0),
         ),
@@ -236,19 +234,23 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
     return showBox(
       x: displayWidth(context),
       y: displayHeight(context) * .06,
-      color: defaultColor,
+      color: Theme.of(context).primaryColorDark,
       item: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         mainAxisSize: MainAxisSize.min,
         children: [
 //<<<<<<<<<<<<<<<<<<<<<<< DROPDOWNN SECTION - ADD TRANSACTION SCREEN >>>>>>>>>>>>>>>>>>>>>>>>>
 
           DropdownButton(
-            hint: const Text('    Select Category'),
+            hint: Text(
+              '    Select Category',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
             underline: const SizedBox(),
             alignment: Alignment.center,
             value: dropDownValue,
             icon: SizedBox(
-              width: displayWidth(context) * .2,
+              width: displayWidth(context) * .1,
               child: const Align(
                   alignment: Alignment.centerRight,
                   child: Icon(
@@ -256,50 +258,37 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
                     color: Colors.black,
                   )),
             ),
-            items:
-                //  CategoryFunctions.instance.expenseCategoryListner.value
-                //     .map((e) {
-                //   return DropdownMenuItem(
-                //     child: Text(e.name),
-                //     value: e.id,
-                //     onTap: () => globalCategory = e,
-                //   );
-                // }).toList(),
-
-                (categoryMod == 0)
-                    ? CategoryFunctions.instance.incomeCategoryListner.value
-                        .map((e) {
-                        return DropdownMenuItem(
-                          value: e.name,
-                          child: Text(e.name),
-                          onTap: () {
-                            //dropDownValue= TransactionDbFunctions.instance.transactionIncomeListener.value[0].category;
-                            globalCategory = e;
-                          },
-                        );
-                      }).toList()
-                    : CategoryFunctions.instance.expenseCategoryListner.value
-                        .map((e) {
-                        return DropdownMenuItem(
-                          value: e.name,
-                          child: Text(e.name),
-                          onTap: () {
-                            //  dropDownValue= TransactionDbFunctions.instance.transactionIncomeListener.value[0].category;
-                            globalCategory = e;
-                          },
-                        );
-                      }).toList(),
+            items: (categoryMod == 0)
+                ? CategoryFunctions.instance.incomeCategoryListner.value
+                    .map((e) {
+                    return DropdownMenuItem(
+                      value: e.name,
+                      child: Text(e.name),
+                      onTap: () {
+                        globalCategory = e;
+                      },
+                    );
+                  }).toList()
+                : CategoryFunctions.instance.expenseCategoryListner.value
+                    .map((e) {
+                    return DropdownMenuItem(
+                      value: e.name,
+                      child: Text(e.name),
+                      onTap: () {
+                        globalCategory = e;
+                      },
+                    );
+                  }).toList(),
             onChanged: (value) {
               /** To  Do */
               setState(
                 () {
                   dropDownValue = value.toString();
-                  //dropDownValue = null;
                 },
               );
             },
           ),
-          ElevatedButton(
+          TextButton.icon(
             style: ElevatedButton.styleFrom(
                 primary: defaultColor, elevation: 0, shadowColor: defaultColor),
             onPressed: () {
@@ -313,16 +302,13 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
               // (cntx: context,);
             },
             //<<< ADD TRANSACTION SCREEN DROPDOWN POSITION  >>>>
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                Icon(
-                  Icons.add_box,
-                  size: 18,
-                ),
-                Text('New category'),
-              ],
+
+            icon: Icon(
+              Icons.add_box,
+              size: 18,
             ),
+
+            label: Text('New category'),
           ),
         ],
       ),
@@ -349,11 +335,6 @@ class SwitchClass extends State {
         () {
           isSwitched = true;
           notifications();
-          // AwesomeNotifications().actionStream.listen((event) {
-          //   Navigator.of(context).push(MaterialPageRoute(builder: (ctx){
-          //     return const addTransactionPopup();
-          // }));
-          // });
         },
       );
     } else {
@@ -581,9 +562,9 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
     return AlertDialog(
       backgroundColor: bg,
       title: Row(
-        children:  [
+        children: [
           decentWidth,
-         const Icon(Icons.add_box),
+          const Icon(Icons.add_box),
           //<<<<<<<<<<<<< TITLE >>>>>>>>>>>>>>
           Text(
             ' ADD NEW CATEGORY',
@@ -617,12 +598,14 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
                   focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: primaryBlack)),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Theme.of(context).iconTheme.color!
-                    ),
+                    borderSide:
+                        BorderSide(color: Theme.of(context).iconTheme.color!),
                     borderRadius: BorderRadius.circular(5.0),
                   ),
-                labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 18),
+                  labelStyle: Theme.of(context)
+                      .textTheme
+                      .titleSmall!
+                      .copyWith(fontSize: 18),
                 ),
               ),
             ),
@@ -632,7 +615,7 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(
-                  color:  Theme.of(context).iconTheme.color!,
+                  color: Theme.of(context).iconTheme.color!,
                 ),
               ),
               //>>>>>>> CATEGORY FIELD SELECTION DROPDOWN <<<<<<<<<<<<<<<<<
@@ -696,7 +679,7 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
                         children: [
                           Text(
                             'Added ${_categoryNameController.text}...',
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ),
                         ],
                       )));
@@ -712,7 +695,6 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
 
 //________________________________________________ADD CATEGROY POPUP SCREEN END_____________________________________________//
 
-// final _categoryUpdateNameController = TextEditingController();
 ///_______________________________________________ UPDATE CATEGORY POPUP ______________________________________
 
 class UpdateCategoryPopup extends StatefulWidget {
@@ -741,14 +723,12 @@ class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
     return AlertDialog(
       backgroundColor: bg,
       title: Row(
-        children:  [
+        children: [
           decentWidth,
           Icon(Icons.drive_folder_upload_outlined),
           // TITLE
-          Text(
-            ' UPDATE CATEGORY',
-            style: Theme.of(context).textTheme.bodyLarge
-          ),
+          Text(' UPDATE CATEGORY',
+              style: Theme.of(context).textTheme.bodyLarge),
         ],
       ),
       content: Container(
@@ -772,12 +752,14 @@ class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
                           : defaultGreyDark),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color:  Theme.of(context).iconTheme.color!
-                  ),
+                  borderSide:
+                      BorderSide(color: Theme.of(context).iconTheme.color!),
                   borderRadius: BorderRadius.circular(5.0),
                 ),
-                labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 18),
+                labelStyle: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(fontSize: 18),
               ),
             ),
             Container(
@@ -785,9 +767,7 @@ class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
               height: displayHeight(context) * .070,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                border: Border.all(
-                 color: Theme.of(context).iconTheme.color!
-                ),
+                border: Border.all(color: Theme.of(context).iconTheme.color!),
               ),
               //______________________________ CATEGORY FIELD SELECTION DROPDOWN____________________________
               child: DropdownButton(
@@ -809,22 +789,14 @@ class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
                       width: displayWidth(context) * .55,
                       child: Text(
                         '  ' + items,
-                         style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                     ),
                   );
                 }).toList(),
                 onChanged: (value) {
-                  // String newval=widget.currentVal==CategoryFunctions().incomeCategoryListner.value? fields[0]:fields[1];
                   setState(() {
-                    dropValue =
-                        // newval;
-                        //  newval= (widget.oldField == CategoryField.income ||
-                        //           value == CategoryField.income|| value==CategoryField.expense||
-                        //           widget.currentVal==CategoryFunctions().incomeCategoryListner.value)
-                        //       ? fields[0]
-                        //       : fields[1];
-                        value.toString();
+                    dropValue = value.toString();
 
                     if (value == fields[1]) {
                       categoryType = 1;
@@ -850,14 +822,18 @@ class _UpdateCategoryPopupState extends State<UpdateCategoryPopup> {
                 widget._categoryUpdateNameController.clear();
                 Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    behavior: SnackBarBehavior
-                        .floating, //behavior used to change decoration or change default config
-                    margin: EdgeInsets.all(10),
+                  SnackBar(
+                    width: displayWidth(context) * .5,
+                    behavior: SnackBarBehavior.floating,
                     backgroundColor: defaultColor,
-                    content: Text(
-                      'Updated...',
-                      style: TextStyle(color: Colors.white),
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          'Updated...',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
                   ),
                 );

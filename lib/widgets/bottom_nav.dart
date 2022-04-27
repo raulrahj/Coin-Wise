@@ -110,15 +110,15 @@ class _HomePageState extends State<HomePage>
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: FloatingActionBubble(
-          // Menu items
+        
           items: <Bubble>[
-            // Floating action menu item
+            
             Bubble(
               title: "Categories",
-              iconColor: Colors.white,
+              iconColor: primaryLight,
               bubbleColor: bg,
               icon: Icons.category,
-              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+              titleStyle: const TextStyle(fontSize: 16, color: primaryLight),
               onPress: () {
                 Navigator.push(
                     context,
@@ -127,13 +127,13 @@ class _HomePageState extends State<HomePage>
                 _animationController.reverse();
               },
             ),
-            // Floating action menu item
+            
             Bubble(
               title: "Expense",
-              iconColor: Colors.white,
+              iconColor: primaryLight,
               bubbleColor: bg,
               icon: Icons.arrow_circle_up_sharp,
-              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+              titleStyle: const TextStyle(fontSize: 16, color: primaryLight),
               onPress: () {
                 isAdd = true;
                 categoryMod = 1;
@@ -146,13 +146,13 @@ class _HomePageState extends State<HomePage>
                 _animationController.reverse();
               },
             ),
-            //Floating action menu item
+            
             Bubble(
               title: "Income",
-              iconColor: Colors.white,
+              iconColor: primaryLight,
               bubbleColor: bg,
               icon: Icons.arrow_circle_down_rounded,
-              titleStyle: TextStyle(fontSize: 16, color: Colors.white),
+              titleStyle:const TextStyle(fontSize: 16, color: primaryLight),
               onPress: () {
                 isAdd = true;
                 categoryMod = 0;
@@ -173,7 +173,7 @@ class _HomePageState extends State<HomePage>
               ? _animationController.reverse()
               : _animationController.forward(),
 
-          iconColor: Theme.of(context).iconTheme.color!,
+          iconColor: primaryLight,
           iconData: Icons.add_outlined,
           backGroundColor: Theme.of(context).floatingActionButtonTheme.backgroundColor!,
         ),
@@ -193,7 +193,6 @@ class _HomePageState extends State<HomePage>
               title: const Text('Home'),
               activeColor: Theme.of(context).iconTheme.color!,
               textAlign: TextAlign.center,
-              // inactiveColor: brightness!=Brightness.light? primaryDark :defaultGreyDark
             ),
             BottomNavyBarItem(
               icon: const Icon(Icons.account_balance_wallet),
