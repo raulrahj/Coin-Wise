@@ -40,3 +40,40 @@ Color colour(context) {
   Color colour = Theme.of(context).primaryColor;
   return colour;
 }
+
+
+
+const MaterialColor primaryColorShades = MaterialColor(
+  0xFF181861,
+  <int, Color>{
+    50: Color(0xFFA4A4BF),
+    100: Color(0xFFA4A4BF),
+    200: Color(0xFFA4A4BF),
+    300: Color(0xFF9191B3),
+    400: Color(0xFF7F7FA6),
+    500: Color(0xFF181861),
+    600: Color(0xFF6D6D99),
+    700: Color(0xFF5B5B8D),
+    800: Color(0xFF494980),
+    900: Color(0xFF181861),
+  },
+);
+
+
+  const _blackPrimaryValue = 0xFF000000;
+
+   const MaterialColor black =  MaterialColor(
+    _blackPrimaryValue,
+     <int, Color>{
+      50:   Color(0xFFe0e0e0),
+      100:  Color(0xFFb3b3b3),
+      200:  Color(0xFF808080),
+      300:  Color(0xFF4d4d4d),
+      400:  Color(0xFF262626),
+      500:  Color(_blackPrimaryValue),
+      600:  Color(0xFF000000),
+      700:  Color(0xFF000000),
+      800:  Color(0xFF000000),
+      900:  Color(0xFF000000),
+    },
+  );

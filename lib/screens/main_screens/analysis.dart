@@ -1,6 +1,5 @@
 import 'package:coin_wise/constants/colors.dart';
 import 'package:coin_wise/constants/data.dart';
-import 'package:coin_wise/constants/functions.dart';
 import 'package:coin_wise/constants/sizes.dart';
 import 'package:coin_wise/constants/text_styles.dart';
 import 'package:coin_wise/database/category_db.dart';
@@ -25,12 +24,33 @@ class _AnalysisState extends State<Analysis> {
   Widget build(BuildContext context) {
     Color bg = Theme.of(context).primaryColorDark;
     // isHome=true;
-    // if(isHome){
+    // if (dropDownValue == fields[0]) {
     //   setState(() {
-    //               CategoryFunctions.instance.multiAmountCategoryListener=CategoryFunctions.instance.incomeAmountCategoryListner;
-        
+    //     CategoryFunctions.instance.multiAmountCategoryListener =
+    //         CategoryFunctions.instance.incomeAmountCategoryListner;
+    //     CategoryFunctions.instance.multiAmountCategoryListener.notifyListeners();
+
+    //     incomeList();
+    //   });
+    // } else {
+    //   setState(() {
+    //     CategoryFunctions.instance.multiAmountCategoryListener =
+    //         CategoryFunctions.instance.expenseAmountCategoryListner;
+    //     expenseList();
     //   });
     // }
+    setState(() {
+        if(dropDownValue.toString()==fields[1]){
+                     print('set state working');
+            //                CategoryFunctions.instance.multiAmountCategoryListener =
+            // CategoryFunctions.instance.expenseAmountCategoryListner;
+        expenseList();
+                   }else{
+            //              CategoryFunctions.instance.multiAmountCategoryListener =
+            // CategoryFunctions.instance.incomeAmountCategoryListner;
+            incomeList();
+                   }
+    });
     // CategoryFunctions.instance.categoryAmounts();
     refreshCategoryAmountListners();
     CategoryFunctions.instance.incomeAmountCategoryListner.value.clear();
@@ -39,9 +59,9 @@ class _AnalysisState extends State<Analysis> {
       child: ListView(
         children: [
           Padding(
-            padding:const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
             child: showBox(
-              color: bg,
+                color: bg,
                 // color: brightness != Brightness.light
                 //     ? defaultColor
                 //     : defaultColorDark,
@@ -73,16 +93,37 @@ class _AnalysisState extends State<Analysis> {
                     );
                   }).toList(),
                   onChanged: (value) {
-                    // CategoryFunctions.instance.categoryAmounts();
+                 print(value);
+                    // setState(() {
+                    //   dropDownValue = value.toString();
 
-                    // CategoryFunctions.instance.categoryAmounts();
-                    setState(() {
+                    //   value == fields[0] ? incomeList() : expenseList();
+
+                    //   refreshCategoryAmountListners();
+                    // });
+    //                if ( value==fields[0]) {
+    //   setState(() {
+    //     CategoryFunctions.instance.multiAmountCategoryListener =
+    //         CategoryFunctions.instance.incomeAmountCategoryListner;
+    //     CategoryFunctions.instance.multiAmountCategoryListener.notifyListeners();
+
+    //     incomeList();
+    //   });
+    // } else {
+    //   setState(() {
+    //     CategoryFunctions.instance.multiAmountCategoryListener =
+    //         CategoryFunctions.instance.expenseAmountCategoryListner;
+    //     expenseList();
+    //   });
+    // }
+                 setState(() {
                       dropDownValue = value.toString();
 
-                      value == fields[0] ? incomeList() : expenseList();
+                 
 
-                      refreshCategoryAmountListners();
-                    });
+                 });
+                 
+                 
                   },
                 )),
           ),
@@ -114,8 +155,8 @@ class _AnalysisState extends State<Analysis> {
           //   ],
           // ),
           //___________________________PIE CHART _________________
-
-          TransactionDbFunctions.instance.transactionListener.value != null
+// const PieChartSample3(),
+          TransactionDbFunctions.instance.transactionListener.value!=null
               ? PieChartSample3()
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -145,7 +186,7 @@ class _AnalysisState extends State<Analysis> {
                   CategoryFunctions.instance.multiAmountCategoryListener,
               builder:
                   (context, List<CategoryModel> newAmountCategories, child) {
-                    Color bg = Theme.of(context).primaryColor;
+                Color bg = Theme.of(context).primaryColor;
                 //  CategoryFunctions.instance.categoryAmountAdding();
                 return ListView.builder(
                     shrinkWrap: true,
@@ -164,7 +205,7 @@ class _AnalysisState extends State<Analysis> {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(15)),
-                                              tileColor: bg,
+                                      tileColor: bg,
                                       // tileColor:brightness!=Brightness.light? defaultPrimaryColor:defaultColorDark,
                                       title: Text(_data.name),
                                       trailing: Text(_data.categoryAmount !=
@@ -176,7 +217,9 @@ class _AnalysisState extends State<Analysis> {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(15)),
-                                      tileColor:brightness!=Brightness.light? primaryRed:primaryRedDark,
+                                      tileColor: brightness != Brightness.light
+                                          ? primaryRed
+                                          : primaryRedDark,
                                       title: Text(_data.name),
                                       trailing: Text(_data.categoryAmount !=
                                               null

@@ -29,6 +29,7 @@ class MyThemes {
       ),
       primaryColorLight: defaultPrimaryColorDark,
       primaryColorDark: defaultColorDark,
+      primarySwatch: black,
       // backgroundColor: defaultPrimaryColorDark,
       
       textTheme: const TextTheme());
@@ -42,7 +43,7 @@ class MyThemes {
     primaryColor: defaultPrimaryColor,
     primaryColorLight: defaultPrimaryColor,
     primaryColorDark: defaultColor,
-    // primarySwatch: defaultColor
+    primarySwatch: black
     // backgroundColor: defaultColor
     //  canvasColor:
   );

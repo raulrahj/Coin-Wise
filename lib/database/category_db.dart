@@ -82,10 +82,12 @@ class CategoryFunctions {
       } else if (element.field == CategoryField.expense &&
           !availableExpenseCategories.contains(element.category.name)) {
         availableExpenseCategories.add(element.category.name);
+
       }
     });
     incomeListing();
     expenseListing();
+    print('Length of Available expenes categories is : ${availableExpenseCategories.length}');
   }
 
   void incomeListing() {
@@ -106,17 +108,28 @@ class CategoryFunctions {
   void expenseListing() {
     print('FOUR');
     CategoryModel? exp;
-    final expenseCategories = expenseCategoryListner.value.toList();
-
+    List<CategoryModel> explist =[];
+    final expenseCategories = expenseCategoryListner.value;
+  print("again checking the length ${availableExpenseCategories.length}");
+  print(expenseCategories.length);
+        expenseAmountCategoryListner.value.clear();
     for (int i = 0; i < availableExpenseCategories.length; i++) {
-
+        print(' <<<<<<$i>>>>>');
       for (int j = 0; j < expenseCategories.length; j++) {
         if (availableExpenseCategories[i] == expenseCategories[j].name) {
-          exp = expenseCategories[i];
-        }
-      }
+          exp = expenseCategories[j];
+          print('match??');
+          print(expenseCategories[j].name);
+          print('available');
+          print(availableExpenseCategories[i]);
 
+          // explist.add(expenseCategories[i]);
+        }
+      // print(explist[i].name);
+      }
       expenseAmountCategoryListner.value.add(exp!);
+
+print(expenseAmountCategoryListner.value.length);
     }
   }
 
@@ -148,12 +161,15 @@ class CategoryFunctions {
     }
 
     for (int i = 0; i < expenseAmountCategoryListner.value.length; i++) {
+      print('SiX');
       double amount = 0;
       // expenseAmountCategoryListner.value[i].categoryAmount = 0;
 
       Future.forEach(allTransactions, (TransactionModel _transaction) async {
-        if (_transaction.category == expenseAmountCategoryListner.value[i]) {
+        if (_transaction.category.name == expenseAmountCategoryListner.value[i].name) {
           amount += _transaction.amount;
+          print('amount of expense $amount');
+          
           // print(expenseAmountCategoryListner.value[i].categoryAmount);
         }
 
@@ -165,7 +181,55 @@ class CategoryFunctions {
         }
       });
     }
-    refreshCategoryAmountListners();
+    // refreshCategoryAmountListners();
     print('EXITED SUCCESSFULLY');
   }
+}
+
+
+void incomeList()  {
+      CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
+
+  final _list0 =
+      CategoryFunctions.instance.incomeAmountCategoryListner.value.toList();
+      print(_list0.length);
+  if (_list0.isEmpty) {
+    return;
+    
+  } else {
+    _list0.sort((first, second) =>
+        second.categoryAmount!.compareTo(first.categoryAmount!));
+    // Future.forEach(_list0, (CategoryModel element) async {
+      // if(element.field==CategoryField.income){
+      CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
+      CategoryFunctions.instance.multiAmountCategoryListener.value = _list0;
+      // CategoryFunctions.instance.multiAmountCategoryListener.value.add(element);
+      refreshCategoryAmountListners();
+      // }
+    // });
+  }
+}
+
+void expenseList() {
+  print('this is expense list');
+  CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
+
+  final _list1 =
+      CategoryFunctions.instance.expenseAmountCategoryListner.value.toList();
+      print('Length of List 1 is : ${_list1.length}');
+  _list1.sort((first, second) =>
+      second.categoryAmount!.compareTo(first.categoryAmount!));
+  CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
+  CategoryFunctions.instance.multiAmountCategoryListener.value = _list1;
+  print('list 1 length ${_list1.length}');
+  print('Related ${CategoryFunctions.instance.multiAmountCategoryListener.value.length}');
+  refreshCategoryAmountListners();
+}
+
+void refreshCategoryAmountListners() {
+  print('notifier called');
+  //  CategoryFunctions.instance. categoryAmounts();
+  CategoryFunctions.instance.multiAmountCategoryListener.notifyListeners();
+  CategoryFunctions.instance.incomeAmountCategoryListner.notifyListeners();
+  CategoryFunctions.instance.expenseAmountCategoryListner.notifyListeners();
 }

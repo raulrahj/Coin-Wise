@@ -75,13 +75,15 @@ class Settings extends StatelessWidget {
                               ],
                             ),
                             trailing: _data.profilePhoto == null
-                                ? const CircleAvatar(
+                                ?  CircleAvatar(
                                     backgroundColor: primaryGrey,
                                     radius: 30,
-                                    child: Icon(
-                                      Icons.person,
-                                      color: primaryBlack,
-                                      size: 40,
+                                    child: FittedBox(
+                                      child: Icon(
+                                        Icons.person,
+                                        color: Theme.of(context).primaryColorLight,
+                                        size: 50,
+                                      ),
                                     ),
                                   )
                                 : CircleAvatar(
@@ -180,7 +182,19 @@ class Settings extends StatelessWidget {
           Widget? trail,
           Function()? settingsFunction, bg,fg}) =>
       defaultContainer(
+        padding:const EdgeInsets.symmetric(vertical: 5,horizontal: 2),
         color: bg,
+        boxShadow:const  [
+              BoxShadow(
+                color: primaryBlack,
+                offset: Offset(
+                  1.0,
+                  1.0,
+                ),
+                blurRadius: 5.0,
+                spreadRadius: .2,
+              ),
+            ],
         // ( !dark!) 
         //     ? defaultPrimaryColor
         //     : defaultColorDark,

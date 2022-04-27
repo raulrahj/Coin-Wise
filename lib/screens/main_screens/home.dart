@@ -56,9 +56,10 @@ class Home extends StatelessWidget {
                               ]),
                           trailing: _data.profilePhoto == null
                               ? const CircleAvatar(
-                                  backgroundColor: primaryGrey,
+                                  // backgroundColor: primaryGrey,
                                   child: Icon(
                                     Icons.person,
+                                    size: 33,
                                     color: primaryBlack,
                                   ),
                                 )

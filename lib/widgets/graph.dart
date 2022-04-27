@@ -24,71 +24,88 @@ class PieChartSample3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('pie chart is called');
     Color bg =Theme.of(context).primaryColor;
     TransactionDbFunctions.instance.refreshData();
 
-    final list =
+  
+    return 
+         ValueListenableBuilder(
+           valueListenable:CategoryFunctions.instance.multiAmountCategoryListener ,
+           builder: (context,List<CategoryModel> newListener, child) {
+  final list =
         CategoryFunctions.instance.multiAmountCategoryListener.value.toList();
     if (list.isEmpty) {
       // throw 'list value is empty';
-
+print('list of pie chart is empty now..');
+print(CategoryFunctions.instance.multiAmountCategoryListener.value.toList().length);
+print('new Listener length ${newListener.length}');
     }
     final map1 = <String, double>{
       for (CategoryModel e in list) e.name.toString(): e.categoryAmount ?? 0
     };
     print(map1);
-    return map1.values.isEmpty
-        ? Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-                SizedBox(
-                  height: displayHeight(context) * .2,
-                ),
-                Row(
+
+
+
+
+             return Container(
+              child:
+              map1.values.isEmpty ?
+               Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.find_in_page,
-                      size: 40,
-                    ),
-                    Text(
-                      "No data found !",
-                      style: boxTitle,
-                    )
-                  ],
-                ),
-                const Text('add new transactions for monitering...'),
-              ])
-        : Padding(
-          padding: const EdgeInsets.symmetric(horizontal:8.0),
-          child: AspectRatio(
-              aspectRatio: 1.2,
-              child: Card(
-                color: bg,
-                // color:brightness!=Brightness.light? primaryLight : defaultColorDark,
-                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    AspectRatio(
-                      aspectRatio: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16,),
-                        child: PieChart(
-                          dataMap: map1,
-                          chartType: ChartType.ring,
-                          // //baseChartColor: Colors.grey[50]!.withOpacity(0.15),
-                          // colorList: colorList,
-                          chartValuesOptions: const ChartValuesOptions(
-                            showChartValuesOutside: true,
-                              showChartValuesInPercentage: true,
-                              decimalPlaces: 1),
-                        ),
+                      SizedBox(
+                        height: displayHeight(context) * .2,
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(
+                            Icons.find_in_page,
+                            size: 40,
+                          ),
+                          Text(
+                            "No data found !",
+                            style: boxTitle,
+                          )
+                        ],
+                      ),
+                      const Text('add new transactions for monitering...'),
+                    ])
+        
+        : Padding(
+              padding: const EdgeInsets.symmetric(horizontal:8.0),
+              child: AspectRatio(
+                  aspectRatio: 1.2,
+                  child: Card(
+                    color: bg,
+                    // color:brightness!=Brightness.light? primaryLight : defaultColorDark,
+                    child: Row(
+                      children: [
+                        AspectRatio(
+                          aspectRatio: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16,),
+                            child: PieChart(
+                              dataMap: map1,
+                              chartType: ChartType.ring,
+                              // //baseChartColor: Colors.grey[50]!.withOpacity(0.15),
+                              // colorList: colorList,
+                              chartValuesOptions: const ChartValuesOptions(
+                                showChartValuesOutside: true,
+                                  showChartValuesInPercentage: true,
+                                  decimalPlaces: 1),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-        );
+        ));
+           }
+         );
   }
 }

@@ -26,14 +26,14 @@ int? categoryMod;
 DateTime? date;
 //____________________ DEFAULT CONTAINER _________________________________
 
-Widget defaultContainer({required Widget item, double? height, Color? color}) {
+Widget defaultContainer({required Widget item, double? height, Color? color,EdgeInsetsGeometry? padding,List<BoxShadow>? boxShadow}) {
   return Padding(
-      padding: decent2,
+      padding: padding??decent2,
       child: Opacity(
         opacity: 1,
         child: Container(
           decoration: BoxDecoration(
-            boxShadow: const [
+            boxShadow: boxShadow?? const [
               BoxShadow(
                 color: primaryBlack,
                 offset: Offset(
