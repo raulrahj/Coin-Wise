@@ -216,7 +216,7 @@ class AddScreen extends StatelessWidget {
                                                 .showSnackBar(
                                               SnackBar(
                                                 width:
-                                                    displayWidth(context) * 03,
+                                                    displayWidth(context) * 02,
                                                 behavior:
                                                     SnackBarBehavior.floating,
                                                 backgroundColor:
