@@ -171,9 +171,9 @@ void incomeList() {
 
   final _list0 =
       CategoryFunctions.instance.incomeAmountCategoryListner.value.toList();
-  if (_list0.isEmpty) {
-    return;
-  } else {
+  // if (_list0.isEmpty) {
+  //   return;
+  // } else {
     if (_list0.length > 1 && _list0.isNotEmpty && _list0[1] == null) {
       _list0.sort((first, second) =>
           second.categoryAmount!.compareTo(first.categoryAmount!));
@@ -183,7 +183,7 @@ void incomeList() {
     CategoryFunctions.instance.multiAmountCategoryListener.value = _list0;
     refreshCategoryAmountListners();
   }
-}
+// }
 
 void expenseList() {
   CategoryFunctions.instance.multiAmountCategoryListener.value.clear();

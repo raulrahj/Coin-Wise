@@ -1,6 +1,5 @@
 import 'package:coin_wise/main.dart';
 import 'package:flutter/material.dart';
-import 'package:pandabar/fab-button.view.dart';
 import 'package:coin_wise/constants/sizes.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:coin_wise/constants/colors.dart';
@@ -31,7 +30,7 @@ class AddScreen extends StatelessWidget {
     this.selectedTransactionData,
     this.dropvalue,
   }) : super(key: key);
-
+   
 //  TransactionModel get transactionData => transactionData;
   final _formKey = GlobalKey<FormState>();
 
@@ -40,10 +39,7 @@ class AddScreen extends StatelessWidget {
     dropDownValue == null;
     isAdd ?? false;
     ////////////// TO DO - null check operator used in a null value ////////////////////////
-    if (!isAdd!) {
-      _updateNoteController.text = selectedTransactionData!.note;
-      _updateAmoutnController.text = selectedTransactionData!.amount.toString();
-    }
+ 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -57,9 +53,9 @@ class AddScreen extends StatelessWidget {
                 Navigator.pop(context);
                 dropDownValue = null;
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.close,
-                color: primaryDark,
+                color: Theme.of(context).iconTheme.color,
               )),
           actions: [
             IconButton(
@@ -70,94 +66,12 @@ class AddScreen extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => const Categories()));
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.list,
-                  color: primaryDark,
+                  color: Theme.of(context).iconTheme.color,
                 ))
           ],
         ),
-        //<<<<<<<<<<<<<<<<<<< FLOATING ACTION BUTTON >>>>>>>>>>>>>>>>>>>>>
-
-        // floatingActionButton: PandaBarFabButton(
-        //     icon: Text(
-        //       isAdd! ? 'ADD' : 'UPDATE',
-        //       style: const TextStyle(
-        //           color: primaryLight, fontWeight: FontWeight.bold),
-        //     ),
-        //     colors: const [defaultColor, defaultColor],
-        //     size: 50,
-        //     onTap: () async {
-        //       if (_formKey.currentState!.validate()) {
-        //         if (isAdd!) {
-        //           // isAdd! ?
-        //           // var transactionData =await addTransaction();
-        //           // if(transactionData!=null)
-        //           double? parsed = double.tryParse(_amountController.text);
-        //           field ?? 1;
-        //           final transactionData = TransactionModel(
-        //               id: DateTime.now().millisecondsSinceEpoch.toString(),
-        //               date: date ?? DateTime.now(),
-        //               amount: parsed ?? 0000.0,
-        //               note: _noteController.text,
-        //               field: field == 0
-        //                   ? CategoryField.income
-        //                   : CategoryField.expense,
-        //               category: globalCategory!);
-        //           TransactionDbFunctions.instance
-        //               .addTransaction(transactionData);
-        //           navigatorKey?.currentState?.pop();
-        //           _amountController.clear();
-        //           await TransactionDbFunctions.instance.getTransaction();
-        //           ScaffoldMessenger.of(context).showSnackBar(
-        //             SnackBar(
-        //               width: displayWidth(context) * 03,
-        //               behavior: SnackBarBehavior.floating,
-        //               backgroundColor: Colors.transparent,
-        //               content: Row(
-        //                 mainAxisAlignment: MainAxisAlignment.center,
-        //                 children: [
-        //                   Text(
-        //                     'Added ${_noteController.text}...',
-        //                     style: const TextStyle(color: Colors.white),
-        //                   ),
-        //                 ],
-        //               ),
-        //             ),
-        //           );
-        //           _noteController.clear();
-        //         } else {
-        //           double? parsedUpdate =
-        //               double.tryParse(_updateAmoutnController.text);
-        //           final updateTransactionData = TransactionModel(
-        //               id: selectedTransactionData!.id,
-        //               date: date ?? selectedTransactionData!.date,
-        //               amount: parsedUpdate!,
-        //               note: _updateNoteController.text,
-        //               field: selectedTransactionData!.field,
-        //               category:
-        //                   globalCategory ?? selectedTransactionData!.category);
-        //           TransactionDbFunctions.instance.updateTransaction(
-        //               selectedTransactionData!.id, updateTransactionData);
-        //           dropDownValue = null;
-        //           Navigator.of(context).pop();
-        //           await TransactionDbFunctions.instance.getTransaction();
-        //           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        //               behavior: SnackBarBehavior.floating,
-        //               width: displayWidth(context) * .5,
-        //               backgroundColor: defaultColor,
-        //               content: Row(
-        //                 mainAxisAlignment: MainAxisAlignment.center,
-        //                 children: [
-        //                   Text(
-        //                     'Updated ${_updateNoteController.text}...',
-        //                     style: const TextStyle(color: Colors.white),
-        //                   ),
-        //                 ],
-        //               )));
-        //         }
-        //       }
-        //     }),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: Center(
           //<<<<<<<<<<<<<< Single child Scroll View >>>>>>>>>>>>>>>>>
 
@@ -183,7 +97,8 @@ class AddScreen extends StatelessWidget {
                   Container(
                     width: displayWidth(context),
                     height: displayHeight(context),
-                    decoration:  BoxDecoration(color: Theme.of(context).primaryColor),
+                    decoration:
+                        BoxDecoration(color: Theme.of(context).primaryColor),
                     child: Column(
                       children: [
                         Flexible(
@@ -202,8 +117,9 @@ class AddScreen extends StatelessWidget {
                                             BorderSide(color: primaryDark)),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0),
-                                      borderSide:  BorderSide(
-                                        color: Theme.of(context).iconTheme.color!,
+                                      borderSide: BorderSide(
+                                        color:
+                                            Theme.of(context).iconTheme.color!,
                                       ),
                                     ),
                                     prefixIcon: const Date(),
@@ -213,7 +129,8 @@ class AddScreen extends StatelessWidget {
                                   },
                                 ),
                                 ActionBox(
-                                  activeColor: Theme.of(context).iconTheme.color!,
+                                  activeColor:
+                                      Theme.of(context).iconTheme.color!,
                                   controller: isAdd!
                                       ? _amountController
                                       : _updateAmoutnController,
@@ -246,6 +163,7 @@ class AddScreen extends StatelessWidget {
                                   children: [
                                     CategoryDropdown(contxt: context),
                                     ActionBox(
+                                      activeColor: primaryGreyDark,
                                       controller: isAdd!
                                           ? _noteController
                                           : _updateNoteController,
@@ -262,14 +180,13 @@ class AddScreen extends StatelessWidget {
                                         return null;
                                       },
                                     ),
-                                    addHorizontalSpace(displayHeight(context)*.1),
+                                    addHorizontalSpace(
+                                        displayHeight(context) * .1),
                                     ElevatedButton(
                                       onPressed: () async {
                                         if (_formKey.currentState!.validate()) {
                                           if (isAdd!) {
-                                            // isAdd! ?
-                                            // var transactionData =await addTransaction();
-                                            // if(transactionData!=null)
+                                           
                                             double? parsed = double.tryParse(
                                                 _amountController.text);
                                             field ?? 1;
@@ -381,7 +298,7 @@ class AddScreen extends StatelessWidget {
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
-                                    bottomSpace(displayHeight(context)*.10),
+                                    bottomSpace(displayHeight(context) * .10),
                                   ],
                                 ),
                               ),

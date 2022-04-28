@@ -169,17 +169,16 @@ class ActionBox extends StatelessWidget {
   Widget? prefix;
   String? Function(String?)? validator;
   Color? activeColor;
-  ActionBox(
-      {this.hint,
-      this.itemColor = primaryDark,
-      this.controller,
-      this.keyboardtype,
-      this.prefix,
-      this.validator,
-      key,
-      this.activeColor,
-      })
-      : super(key: key);
+  ActionBox({
+    this.hint,
+    this.itemColor = primaryDark,
+    this.controller,
+    this.keyboardtype,
+    this.prefix,
+    this.validator,
+    key,
+    this.activeColor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -199,15 +198,15 @@ class ActionBox extends StatelessWidget {
                 },
               )
             : null,
-        focusedBorder:
-            OutlineInputBorder(borderSide: BorderSide(color:activeColor?? itemColor)),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: activeColor ?? itemColor)),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color:activeColor?? itemColor,
+            color: activeColor ?? itemColor,
           ),
           borderRadius: BorderRadius.circular(5.0),
         ),
-        labelStyle: TextStyle(color: itemColor),
+        labelStyle: TextStyle(color: activeColor ?? itemColor, fontSize: 16),
       ),
     );
   }
@@ -244,7 +243,10 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
           DropdownButton(
             hint: Text(
               '    Select Category',
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(fontSize: 16, color: primaryLight),
             ),
             underline: const SizedBox(),
             alignment: Alignment.center,
@@ -255,7 +257,7 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
                   alignment: Alignment.centerRight,
                   child: Icon(
                     Icons.arrow_drop_down,
-                    color: Colors.black,
+                    color: primaryLight,
                   )),
             ),
             items: (categoryMod == 0)
@@ -263,7 +265,12 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
                     .map((e) {
                     return DropdownMenuItem(
                       value: e.name,
-                      child: Text(e.name),
+                      child: Text(
+                        e.name,
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                              fontSize: 16,
+                            ),
+                      ),
                       onTap: () {
                         globalCategory = e;
                       },
@@ -290,7 +297,9 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
           ),
           TextButton.icon(
             style: ElevatedButton.styleFrom(
-                primary: defaultColor, elevation: 0, shadowColor: defaultColor),
+                primary: Theme.of(context).primaryColorDark,
+                elevation: 0,
+                shadowColor: defaultColor),
             onPressed: () {
               //>>>>>> NEW CATEGORY ADDING POPUP <<<<<<<<<
               showDialog(
@@ -356,14 +365,9 @@ class SwitchClass extends State {
           child: Switch(
             onChanged: toggleSwitch,
             value: isSwitched,
-            activeColor: brightness != Brightness.light
-                ? primaryDark
-                : defaultPrimaryColorDark,
-            activeTrackColor:
-                brightness != Brightness.light ? primaryGrey : defaultGreyDark,
-            inactiveThumbColor: primaryRed,
-            inactiveTrackColor:
-                brightness != Brightness.light ? primaryGrey : defaultGreyDark,
+            activeColor: Theme.of(context).iconTheme.color,
+            activeTrackColor: defaultGreyDark,
+            inactiveTrackColor: primaryRed,
           ),
         ),
       ],
@@ -403,12 +407,14 @@ class _DateState extends State<Date> {
             },
             child: Row(
               children: [
-                const Icon(Icons.calendar_month),
+                Icon(Icons.calendar_month,
+                    color: Theme.of(context).iconTheme.color),
                 Text(
                   (date == null)
                       ? onTime
                       : '${date!.year}/${date!.month}/${date!.day}',
-                  style: const TextStyle(fontSize: 13),
+                  style: TextStyle(
+                      fontSize: 13, color: Theme.of(context).iconTheme.color),
                 ),
               ],
             )),
@@ -901,7 +907,7 @@ transactionDeletePopup(BuildContext context, String? key) {
                     onPressed: () {
                       navigatorKey?.currentState?.pop();
                     },
-                    child: const Text('Cancel'),
+                    child:  Text('Cancel',style: Theme.of(context).textTheme.bodyMedium,),
                   ),
                   TextButton(
                     onPressed: () async {
@@ -910,7 +916,7 @@ transactionDeletePopup(BuildContext context, String? key) {
                       //  Navigator.of(context).pop();
                       navigatorKey?.currentState?.pop();
                     },
-                    child: const Text('Ok'),
+                    child:  Text('Ok',style: Theme.of(context).textTheme.bodyMedium,),
                   ),
                 ],
               ),
@@ -1005,12 +1011,25 @@ class AboutApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SimpleDialog(
       children: [
-        defaultContainer(
-            height: displayHeight(context) * .5,
-            color: defaultPrimaryColor,
-            item: Column(
-              children: const [],
-            ))
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children:const [
+            Text('Coin Wise'),
+          ],
+        ),
+     const   Divider(),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            alignment: Alignment.center,
+            child: Text(aboutAppText,style:const TextStyle(),textAlign: TextAlign.center,)),
+        ),
+        Row(
+          mainAxisAlignment:MainAxisAlignment.center,
+          children:const   [
+
+          ],
+        )
       ],
     );
   }
@@ -1046,6 +1065,7 @@ class RadioButton extends StatelessWidget {
               Consumer<ThemeModel>(
                   builder: (context, ThemeModel themeNotifier, child) {
                 return Radio<currentTheme>(
+                  activeColor: Theme.of(context).iconTheme.color,
                     value: selection,
                     groupValue: newValue,
                     onChanged: (value) {

@@ -133,10 +133,10 @@ class SetupProfile extends StatelessWidget {
                                         ? const CircleAvatar(
                                             maxRadius: 70,
                                             minRadius: 50,
-                                            backgroundColor: primaryGrey,
+                                            backgroundColor: primaryGreyDark,
                                             child: Icon(
                                               Icons.person,
-                                              size: 60,
+                                              size: 70,
                                               color: primaryBlack,
                                             ),
                                           )
@@ -184,38 +184,35 @@ class SetupProfile extends StatelessWidget {
                 ),
               ),
               blockSpace,
-              SizedBox(
-                height: 38,
-                child: defaultButton(
-                  onPressed: () async {
-                    var profilePhoto;
-                    if (image != null) {
-                      profilePhoto = image.path;
-                    }
+              defaultButton(
+                onPressed: () async {
+                  var profilePhoto;
+                  if (image != null) {
+                    profilePhoto = image.path;
+                  }
 
-                    if (_formKey.currentState!.validate()) {
-                      bool isLogged = true;
-                      final name = _profileName.text;
+                  if (_formKey.currentState!.validate()) {
+                    bool isLogged = true;
+                    final name = _profileName.text;
 
-                      ProfileModel _profileData = ProfileModel(
-                          profileName: name,
-                          notify: true,
-                          profilePhoto: profilePhoto,
-                          isLogged: isLogged);
-                      ProflieDb().addprofileData(_profileData);
-                      // bool check = checkLoggedIn as bool;
-                      if (isLogged) {
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(builder: (BuildContext ctx) {
-                          return const HomePage();
-                        }), (route) => false);
-                      }
+                    ProfileModel _profileData = ProfileModel(
+                        profileName: name,
+                        notify: true,
+                        profilePhoto: profilePhoto,
+                        isLogged: isLogged);
+                    ProflieDb().addprofileData(_profileData);
+                    // bool check = checkLoggedIn as bool;
+                    if (isLogged) {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (BuildContext ctx) {
+                        return const HomePage();
+                      }), (route) => false);
                     }
-                  },
-                  text: 'Start',
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w500, fontSize: 18),
-                ),
+                  }
+                },
+                text: 'Start',
+                style: const TextStyle(
+                    fontWeight: FontWeight.w500, fontSize: 18),
               )
             ],
           ),

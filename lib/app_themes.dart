@@ -35,7 +35,7 @@ class MyThemes {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0))),
     ),
-    selectedRowColor: Colors.green,
+    selectedRowColor: const Color.fromARGB(255, 48, 113, 51),
     iconTheme: const IconThemeData(color: primaryGreyDark),
     chipTheme: const ChipThemeData(backgroundColor: defaultPrimaryColorDark),
     textTheme: const TextTheme(
@@ -48,7 +48,7 @@ class MyThemes {
         const FloatingActionButtonThemeData(backgroundColor: primaryGrey),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-      primary: defaultColor,
+      primary: defaultColorDark,
       shadowColor: primaryGrey,
       elevation: 3,
       minimumSize: const Size(190, 45),

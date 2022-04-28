@@ -15,18 +15,19 @@ import 'package:coin_wise/models/transaction_model.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:provider/provider.dart';
 
-GlobalKey<NavigatorState>?navigatorKey=GlobalKey<NavigatorState>();
-bool? dark ;
+GlobalKey<NavigatorState>? navigatorKey = GlobalKey<NavigatorState>();
+bool? dark;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  AwesomeNotifications().initialize(null, 
-  [
-    NotificationChannel(channelKey: 'key1', channelName: "Coin Wise", channelDescription: 'Coin Wise',
-    playSound: true ,
-    enableLights: true,
+  AwesomeNotifications().initialize(null, [
+    NotificationChannel(
+      channelKey: 'key1',
+      channelName: "Coin Wise",
+      channelDescription: 'Coin Wise',
+      playSound: true,
+      enableLights: true,
     )
-  ]
-  );
+  ]);
   await Hive.initFlutter();
 
   if (!Hive.isAdapterRegistered(CategoryFieldAdapter().typeId)) {
@@ -52,41 +53,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-  statusBarColor:  Colors.transparent,
-  // systemNavigationBarColor: Colors.transparent
-));
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      // systemNavigationBarColor: Colors.transparent
+    ));
     return ChangeNotifierProvider(
-      create:  (_) => ThemeModel(),
-
+      create: (_) => ThemeModel(),
       child: Consumer<ThemeModel>(
-        builder: (context,ThemeModel themeNotifier, child) {
-          dark=themeNotifier.isDark;
-          return MaterialApp(
-            navigatorKey: navigatorKey,
-            debugShowCheckedModeBanner: false,
-            title: 'Coin Wise',
-            theme:
-            themeNotifier.isDark ?
-            // ValueListenableBuilder(valueListenable: currentTheme, builder: (context, newtheme,child){
-            //   return ThemeData();
-            // }),
-              MyThemes.darkTheme : MyThemes.lightTheme,
-            //  ThemeData(
-            //   fontFamily: 'Antic',
-            //   scaffoldBackgroundColor: primaryLight,
-            //   primarySwatch: Colors.blueGrey,
-            //   dialogBackgroundColor: defaultPrimaryColor,
-            //   brightness: Brightness.light,
-            // colorScheme: const ColorScheme.light(),
-    
-              
-            // //  canvasColor: 
-            // ),
-            home:const SplashScreen(),
-          );
-        }
-      ),
+          builder: (context, ThemeModel themeNotifier, child) {
+        dark = themeNotifier.isDark;
+        return MaterialApp(
+          navigatorKey: navigatorKey,
+          debugShowCheckedModeBanner: false,
+          title: 'Coin Wise',
+          theme:
+              themeNotifier.isDark ? MyThemes.darkTheme : MyThemes.lightTheme,
+          home: const SplashScreen(),
+        );
+      }),
     );
   }
 }

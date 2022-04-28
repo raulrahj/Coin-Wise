@@ -1,7 +1,6 @@
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:pandabar/fab-button.view.dart';
 import 'package:coin_wise/constants/colors.dart';
 import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/models/category_model.dart';
