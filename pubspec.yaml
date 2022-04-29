@@ -47,6 +47,7 @@ flutter:
     - ./assets/images/onboard2.png
     - ./assets/images/onboardlast.png
     - ./assets/images/user.jpg
+    - ./assets/images/flutter.jpg
   fonts:
     - family: Antic
       fonts:

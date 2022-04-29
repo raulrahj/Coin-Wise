@@ -431,6 +431,7 @@ class _DateState extends State<Date> {
 
 class CustomTile extends StatelessWidget {
   void popupEdit(BuildContext context) {
+    inUpdate=true;
     isAdd = false;
     mainData?.field == CategoryField.income ? categoryMod = 0 : categoryMod = 1;
     dropDownValue == null;
@@ -1028,11 +1029,20 @@ class AboutApp extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(aboutAppText,style:const TextStyle(),textAlign: TextAlign.center,)),
         ),
-        Row(
-          mainAxisAlignment:MainAxisAlignment.center,
-          children:const   [
-
-          ],
+        Container(
+          color: primaryBlack,
+          height: displayHeight(context)*.04,
+          child: Padding(
+            padding: const EdgeInsets.all(3.0),
+            child: Row(
+              mainAxisAlignment:MainAxisAlignment.center,
+              children:   [
+             const  Image(image: AssetImage('./assets/images/log.jpg',)),
+               addVerticalSpace(10.0),
+              const Image(image: AssetImage('./assets/images/flutter.jpg',)),
+              ],
+            ),
+          ),
         )
       ],
     );

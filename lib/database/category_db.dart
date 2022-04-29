@@ -1,8 +1,8 @@
-import 'package:coin_wise/database/transactions_db.dart';
-import 'package:coin_wise/models/category_model.dart';
-import 'package:coin_wise/models/transaction_model.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:coin_wise/models/category_model.dart';
+import 'package:coin_wise/database/transactions_db.dart';
+import 'package:coin_wise/models/transaction_model.dart';
 
 class CategoryFunctions {
   CategoryFunctions._internal();
@@ -71,7 +71,6 @@ class CategoryFunctions {
   List<String> availableIncomeCategories = [];
   List<String> availableExpenseCategories = [];
   void availableCategories() {
-    print('TWO');
     List<TransactionModel> _list =
         TransactionDbFunctions.instance.transactionListener.value.toList();
     Future.forEach<TransactionModel>(_list, (element) {
@@ -88,7 +87,6 @@ class CategoryFunctions {
   }
 
   void incomeListing() {
-    print('THREEE ');
     late CategoryModel inc;
     final incomeCategories = incomeCategoryListner.value.toList();
 
@@ -103,7 +101,6 @@ class CategoryFunctions {
   }
 
   void expenseListing() {
-    print('FOUR');
     CategoryModel? exp;
     final expenseCategories = expenseCategoryListner.value;
     expenseAmountCategoryListner.value.clear();
@@ -118,13 +115,13 @@ class CategoryFunctions {
   }
 
   Future<void> categoryAmounts() async {
-    print('ONE');
+ 
     availableCategories();
     final allTransactions =
         await TransactionDbFunctions.instance.getTransaction();
 
     for (int i = 0; i < incomeAmountCategoryListner.value.length; i++) {
-      print('FIVE');
+
 
       double amount = 0;
 
@@ -145,7 +142,6 @@ class CategoryFunctions {
     }
 
     for (int i = 0; i < expenseAmountCategoryListner.value.length; i++) {
-      print('SiX');
       double amount = 0;
 
       Future.forEach(allTransactions, (TransactionModel _transaction) async {
@@ -162,7 +158,6 @@ class CategoryFunctions {
         }
       });
     }
-    print('EXITED SUCCESSFULLY');
   }
 }
 
@@ -200,7 +195,6 @@ void expenseList() {
 }
 
 void refreshCategoryAmountListners() {
-  print('notifier called');
   CategoryFunctions.instance.multiAmountCategoryListener.notifyListeners();
   CategoryFunctions.instance.incomeAmountCategoryListner.notifyListeners();
   CategoryFunctions.instance.expenseAmountCategoryListner.notifyListeners();

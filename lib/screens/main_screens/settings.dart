@@ -114,8 +114,10 @@ class Settings extends StatelessWidget {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(15.0))),
                           children: [
+                            addHorizontalSpace(5.0),
                             const Text(
-                                ' Do you really want to clear all the transactions'),
+                              
+                                ' Do you really want to clear all the\n transactions',textAlign: TextAlign.center,),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [

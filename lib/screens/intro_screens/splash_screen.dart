@@ -1,11 +1,11 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:coin_wise/constants/colors.dart';
-import 'package:coin_wise/database/category_db.dart';
+import 'package:coin_wise/widgets/bottom_nav.dart';
 import 'package:coin_wise/database/profiledata.dart';
+import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/screens/intro_screens/onboarding_screen.dart';
-import 'package:coin_wise/widgets/bottom_nav.dart';
-import 'package:flutter/material.dart';
 bool isSplash=true;
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

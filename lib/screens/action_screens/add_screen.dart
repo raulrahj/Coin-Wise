@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:coin_wise/constants/sizes.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:coin_wise/constants/colors.dart';
-import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/constants/text_styles.dart';
 import 'package:coin_wise/models/category_model.dart';
+import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/models/transaction_model.dart';
 import 'package:coin_wise/screens/action_screens/categories.dart';
 
@@ -40,8 +40,8 @@ class AddScreen extends StatelessWidget {
     dropDownValue == null;
     isAdd ?? false;
     ////////////// TO DO - null check operator used in a null value ////////////////////////
-  if(!isAdd!&&inUpdate==false){
-   _updateAmoutnController.text=selectedTransactionData!.amount.toStringAsExponential();
+  if(!isAdd!&&inUpdate!=false){
+   _updateAmoutnController.text=selectedTransactionData!.amount.toString();
    _updateNoteController.text=selectedTransactionData!.note;
  }
 
@@ -144,6 +144,7 @@ class AddScreen extends StatelessWidget {
                                   hint: 'Amount',
                                   validator: (value) {
                                     inUpdate=true;
+                                    inUpdate=true;
                                     if (value == null || value.isEmpty) {
                                       return 'enter the amount !';
                                     }
@@ -181,6 +182,7 @@ class AddScreen extends StatelessWidget {
                                       hint: 'Note',
                                       itemColor: primaryLight,
                                       validator: (value) {
+                                        inUpdate=true;
                                         if (value == null || value.isEmpty) {
                                           return 'try to add a note !';
                                         }

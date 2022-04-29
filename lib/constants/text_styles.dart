@@ -1,6 +1,6 @@
 
-import 'package:coin_wise/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:coin_wise/constants/colors.dart';
 
 const TextStyle onboardTitle =  TextStyle(fontFamily: 'Antic',fontSize: 22,fontWeight: FontWeight.w700);
 const TextStyle onboardBody =   TextStyle(fontFamily: 'Sans');

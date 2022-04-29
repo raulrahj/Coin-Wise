@@ -1,13 +1,12 @@
-// import 'package:coin_wise/database/transactions_db.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:coin_wise/widgets/widgets.dart';
 import 'package:coin_wise/constants/sizes.dart';
 import 'package:coin_wise/constants/text_styles.dart';
 import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/models/transaction_model.dart';
 import 'package:coin_wise/screens/main_screens/all_transactions.dart';
-import 'package:coin_wise/widgets/widgets.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
   final int? count;

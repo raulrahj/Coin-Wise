@@ -33,8 +33,7 @@ class ProflieDb {
 
     profileListner.value = _data;
     profileListner.notifyListeners();
-    print(
-        'THE PROFILE LISTENER VALUES PRINTING ${profileListner.value.profileName} ');
+ 
   }
 }
 

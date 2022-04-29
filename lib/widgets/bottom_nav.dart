@@ -1,18 +1,18 @@
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:coin_wise/constants/colors.dart';
+import 'package:flutter/material.dart';
 import 'package:coin_wise/constants/data.dart';
+import 'package:coin_wise/widgets/widgets.dart';
 import 'package:coin_wise/constants/sizes.dart';
+import 'package:coin_wise/constants/colors.dart';
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:coin_wise/constants/text_styles.dart';
+import 'package:coin_wise/screens/main_screens/home.dart';
+import 'package:coin_wise/screens/main_screens/analysis.dart';
+import 'package:coin_wise/screens/main_screens/settings.dart';
 import 'package:coin_wise/screens/action_screens/add_screen.dart';
 import 'package:coin_wise/screens/action_screens/categories.dart';
 import 'package:coin_wise/screens/main_screens/all_transactions.dart';
-import 'package:coin_wise/screens/main_screens/analysis.dart';
-import 'package:coin_wise/screens/main_screens/home.dart';
-import 'package:coin_wise/screens/main_screens/settings.dart';
-import 'package:coin_wise/widgets/widgets.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
-import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

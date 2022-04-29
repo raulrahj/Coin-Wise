@@ -12,7 +12,7 @@ const Color defaultLightColor = Color(0xFFF7F5F2);
 const Color defaultColorDark = Color(0XFF044A42);
 const Color defaultPrimaryColorDark = Color(0xFF1d1716);
 const Color defaultLightColorDark = Color(0xFFB8E1DD);
-const Color defaultScaffoldDark = Color(0xFF1d1716);
+const Color defaultScaffoldDark = Color(0xFF1F1F1F);
 const Color defaultGreyDark = Color(0xFFEEEEEE);
 
 

@@ -1,11 +1,11 @@
+import 'package:coin_wise/main.dart';
+import '../../constants/colors.dart';
+import 'package:flutter/material.dart';
 import 'package:coin_wise/constants/functions.dart';
 import 'package:coin_wise/constants/text_styles.dart';
-import 'package:coin_wise/main.dart';
-import 'package:coin_wise/screens/intro_screens/profile_screen.dart';
-import 'package:coin_wise/screens/intro_screens/splash_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import '../../constants/colors.dart';
+import 'package:coin_wise/screens/intro_screens/splash_screen.dart';
+import 'package:coin_wise/screens/intro_screens/profile_screen.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({Key? key}) : super(key: key);

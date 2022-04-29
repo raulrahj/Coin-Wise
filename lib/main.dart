@@ -1,15 +1,14 @@
-import 'package:coin_wise/app_themes.dart';
-import 'package:coin_wise/database/profiledata.dart';
-import 'package:coin_wise/screens/intro_screens/profile_screen.dart';
-import 'package:coin_wise/screens/intro_screens/splash_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:coin_wise/app_themes.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:coin_wise/database/profiledata.dart';
 import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/models/transaction_model.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:provider/provider.dart';
+import 'package:coin_wise/screens/intro_screens/splash_screen.dart';
 
 GlobalKey<NavigatorState>? navigatorKey = GlobalKey<NavigatorState>();
 bool? dark;

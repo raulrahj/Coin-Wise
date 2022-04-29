@@ -1,14 +1,13 @@
 import 'dart:io';
 import 'dart:ui';
-import 'package:coin_wise/constants/colors.dart';
-import 'package:coin_wise/constants/sizes.dart';
-import 'package:coin_wise/constants/text_styles.dart';
-import 'package:coin_wise/database/profiledata.dart';
-import 'package:coin_wise/widgets/bottom_nav.dart';
-import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:coin_wise/constants/sizes.dart';
+import 'package:coin_wise/widgets/widgets.dart';
 import 'package:image_picker/image_picker.dart';
-import '../main_screens/home.dart';
+import 'package:coin_wise/constants/colors.dart';
+import 'package:coin_wise/widgets/bottom_nav.dart';
+import 'package:coin_wise/database/profiledata.dart';
+import 'package:coin_wise/constants/text_styles.dart';
 
 class SetupProfile extends StatefulWidget {
   SetupProfile({Key? key}) : super(key: key);

@@ -1,14 +1,13 @@
 import 'dart:io';
-import 'package:coin_wise/app_themes.dart';
+import 'package:flutter/material.dart';
+import 'package:coin_wise/widgets/widgets.dart';
 import 'package:coin_wise/constants/sizes.dart';
+import 'package:coin_wise/constants/colors.dart';
+import 'package:coin_wise/widgets/list_views.dart';
 import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/database/profiledata.dart';
 import 'package:coin_wise/constants/text_styles.dart';
 import 'package:coin_wise/database/transactions_db.dart';
-import 'package:coin_wise/widgets/list_views.dart';
-import 'package:coin_wise/constants/colors.dart';
-import 'package:coin_wise/widgets/widgets.dart';
-import 'package:flutter/material.dart';
 
 final String? profilepic = loginData?.profilePhoto;
 final  brightness = MediaQueryData.fromWindow(WidgetsBinding.instance!.window).platformBrightness;
@@ -177,9 +176,9 @@ class Home extends StatelessWidget {
                       style: boxTitle,
                     ),
                     trailing: TextButton(
-                        child: const Text(
+                        child:  Text(
                           'See all',
-                          style: TextStyle(color: primaryDark),
+                          style: TextStyle(color: Theme.of(context).iconTheme.color),
                         ),
                         ////////////// ToDo -gesture detector exeption issue ////////////
                         onPressed: () async {
