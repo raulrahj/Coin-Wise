@@ -169,6 +169,7 @@ class ActionBox extends StatelessWidget {
   Widget? prefix;
   String? Function(String?)? validator;
   Color? activeColor;
+  TextStyle? style;
   ActionBox({
     this.hint,
     this.itemColor = primaryDark,
@@ -178,6 +179,7 @@ class ActionBox extends StatelessWidget {
     this.validator,
     key,
     this.activeColor,
+    this.style
   }) : super(key: key);
 
   @override
@@ -185,7 +187,7 @@ class ActionBox extends StatelessWidget {
     print(data);
     return TextFormField(
       validator: validator,
-      style: TextStyle(color: itemColor),
+      style: style?? TextStyle(color: itemColor),
       controller: controller,
       keyboardType: keyboardtype,
       decoration: InputDecoration(
@@ -280,7 +282,9 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
                     .map((e) {
                     return DropdownMenuItem(
                       value: e.name,
-                      child: Text(e.name),
+                      child: Text(e.name,style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                              fontSize: 16,
+                            ),),
                       onTap: () {
                         globalCategory = e;
                       },

@@ -32,7 +32,7 @@ class _AllTransactionsState extends State<AllTransactions> {
   @override
   void initState() {
     //TransactionDbFunctions.instance.getWallet();
-    TransactionDbFunctions.instance.refreshData();
+    // TransactionDbFunctions.instance.refreshData();
     super.initState();
   }
 
@@ -95,6 +95,7 @@ class _AllTransactionsState extends State<AllTransactions> {
                                 child: Column(
                                   children: [
                                     SfDateRangePicker(
+                                      // backgroundColor: primaryBlack,
                                       controller: _controller,
                                       view: DateRangePickerView.month,
                                       selectionMode:
@@ -138,7 +139,7 @@ class _AllTransactionsState extends State<AllTransactions> {
                                             onPressed: () {
                                               navigatorKey?.currentState?.pop();
                                             },
-                                            child: const Text('Cancel')),
+                                            child:  Text('Cancel',style: Theme.of(context).textTheme.titleLarge,)),
                                         TextButton(
                                             onPressed: () {
                                               if (_controller.selectedRange ==
@@ -150,7 +151,7 @@ class _AllTransactionsState extends State<AllTransactions> {
                                                   _controller.selectedRange);
                                               navigatorKey?.currentState?.pop();
                                             },
-                                            child: const Text('Ok'))
+                                            child:  Text('Ok',style: Theme.of(context).textTheme.titleLarge,))
                                       ],
                                     )
                                   ],

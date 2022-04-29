@@ -4,7 +4,6 @@ import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/database/profiledata.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/screens/intro_screens/onboarding_screen.dart';
-import 'package:coin_wise/screens/main_screens/home.dart';
 import 'package:coin_wise/widgets/bottom_nav.dart';
 import 'package:flutter/material.dart';
 bool isSplash=true;
@@ -86,16 +85,16 @@ class _SplashScreenState extends State<SplashScreen>
               AnimatedContainer(
                   duration: const Duration(milliseconds: 2000),
                   curve: Curves.fastLinearToSlowEaseIn,
-                  height: _height * .7 / _fontSize),
+                  height: _height * .62 / _fontSize),
               AnimatedOpacity(
                 duration: const Duration(milliseconds: 1000),
                 opacity: _textOpacity,
                 child: const Text(
                   'Coin Wise',
                   style: TextStyle(
-                    color: defaultColor,
+                    color: black,
                     fontWeight: FontWeight.w900,
-                    fontSize: 22,
+                    fontSize: 24,
                     fontFamily: 'Antic',
                   ),
                 ),
@@ -122,10 +121,6 @@ class _SplashScreenState extends State<SplashScreen>
                     width: 100,
                     height: 100,
                   )
-                  // child: const Icon(
-                  //   Icons.account_balance_wallet,
-                  //   size: 122,
-                  // ),
                   ),
             ),
           ),

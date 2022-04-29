@@ -19,10 +19,11 @@ final _noteController = TextEditingController();
 
 final _updateAmoutnController = TextEditingController();
 final _updateNoteController = TextEditingController();
-
+bool inUpdate =false;
 class AddScreen extends StatelessWidget {
   final int? field;
   final dropvalue;
+  
   final TransactionModel? selectedTransactionData;
   AddScreen({
     Key? key,
@@ -39,7 +40,11 @@ class AddScreen extends StatelessWidget {
     dropDownValue == null;
     isAdd ?? false;
     ////////////// TO DO - null check operator used in a null value ////////////////////////
- 
+  if(!isAdd!&&inUpdate==false){
+   _updateAmoutnController.text=selectedTransactionData!.amount.toStringAsExponential();
+   _updateNoteController.text=selectedTransactionData!.note;
+ }
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -129,6 +134,7 @@ class AddScreen extends StatelessWidget {
                                   },
                                 ),
                                 ActionBox(
+                                  style: Theme.of(context).textTheme.titleLarge,
                                   activeColor:
                                       Theme.of(context).iconTheme.color!,
                                   controller: isAdd!
@@ -137,6 +143,7 @@ class AddScreen extends StatelessWidget {
                                   keyboardtype: TextInputType.number,
                                   hint: 'Amount',
                                   validator: (value) {
+                                    inUpdate=true;
                                     if (value == null || value.isEmpty) {
                                       return 'enter the amount !';
                                     }
@@ -209,6 +216,7 @@ class AddScreen extends StatelessWidget {
                                                     transactionData);
                                             navigatorKey?.currentState?.pop();
                                             _amountController.clear();
+                                            _noteController.clear();
                                             await TransactionDbFunctions
                                                 .instance
                                                 .getTransaction();

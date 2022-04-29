@@ -1,14 +1,10 @@
 import 'package:coin_wise/app_themes.dart';
 import 'package:coin_wise/database/profiledata.dart';
-import 'package:coin_wise/screens/intro_screens/onboarding_screen.dart';
 import 'package:coin_wise/screens/intro_screens/profile_screen.dart';
 import 'package:coin_wise/screens/intro_screens/splash_screen.dart';
-import 'package:coin_wise/screens/main_screens/home.dart';
-import 'package:coin_wise/screens/main_screens/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:coin_wise/constants/colors.dart';
 import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/models/transaction_model.dart';
