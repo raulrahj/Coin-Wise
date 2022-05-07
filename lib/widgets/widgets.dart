@@ -100,19 +100,8 @@ class TextFormBox extends StatelessWidget {
               borderRadius: BorderRadius.circular(25.0),
               borderSide: const BorderSide(color: primaryDark),
             ),
-            //fillColor: Colors.green
           ),
-          // validator: (val) {
-          //   if(val.length==0) {
-          //     return "Email cannot be empty";
-          //   }else{
-          //     return null;
-          //   }
-          // },
-          // keyboardType: TextInputType.emailAddress,
-          style: const TextStyle(
-              // fontFamily: "Poppins",
-              ),
+          style: const TextStyle(color: primaryDark),
         ),
       ),
     );
@@ -170,24 +159,24 @@ class ActionBox extends StatelessWidget {
   String? Function(String?)? validator;
   Color? activeColor;
   TextStyle? style;
-  ActionBox({
-    this.hint,
-    this.itemColor = primaryDark,
-    this.controller,
-    this.keyboardtype,
-    this.prefix,
-    this.validator,
-    key,
-    this.activeColor,
-    this.style
-  }) : super(key: key);
+  ActionBox(
+      {this.hint,
+      this.itemColor = primaryDark,
+      this.controller,
+      this.keyboardtype,
+      this.prefix,
+      this.validator,
+      key,
+      this.activeColor,
+      this.style})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     print(data);
     return TextFormField(
       validator: validator,
-      style: style?? TextStyle(color: itemColor),
+      style: style ?? TextStyle(color: itemColor),
       controller: controller,
       keyboardType: keyboardtype,
       decoration: InputDecoration(
@@ -282,9 +271,12 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
                     .map((e) {
                     return DropdownMenuItem(
                       value: e.name,
-                      child: Text(e.name,style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      child: Text(
+                        e.name,
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
                               fontSize: 16,
-                            ),),
+                            ),
+                      ),
                       onTap: () {
                         globalCategory = e;
                       },
@@ -431,7 +423,7 @@ class _DateState extends State<Date> {
 
 class CustomTile extends StatelessWidget {
   void popupEdit(BuildContext context) {
-    inUpdate=true;
+    inUpdate = true;
     isAdd = false;
     mainData?.field == CategoryField.income ? categoryMod = 0 : categoryMod = 1;
     dropDownValue == null;
@@ -665,8 +657,11 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
               ),
             ),
             //>>>>>>>>>> ADD BUTTON <<<<<<<<<
-            defaultButton(
-              text: 'Done',
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: Theme.of(context).iconTheme.color),
+              // color: Theme.of(context).iconTheme.color,
+              child: const Text('Done'),
               onPressed: () {
                 if (widget._formKey.currentState!.validate()) {
                   @override
@@ -872,7 +867,11 @@ Widget deletionPopup(context, value) {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('Cancel')),
+                child: Text('Cancel',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(fontSize: 16))),
             TextButton(
                 onPressed: () async {
                   CategoryFunctions.instance.deleteCategory(value, context);
@@ -886,7 +885,11 @@ Widget deletionPopup(context, value) {
                         style: TextStyle(color: Colors.white),
                       )));
                 },
-                child: const Text('OK'))
+                child: Text('OK',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(fontSize: 16)))
           ],
         )
       ],
@@ -912,7 +915,10 @@ transactionDeletePopup(BuildContext context, String? key) {
                     onPressed: () {
                       navigatorKey?.currentState?.pop();
                     },
-                    child:  Text('Cancel',style: Theme.of(context).textTheme.bodyMedium,),
+                    child: Text(
+                      'Cancel',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                   ),
                   TextButton(
                     onPressed: () async {
@@ -921,7 +927,10 @@ transactionDeletePopup(BuildContext context, String? key) {
                       //  Navigator.of(context).pop();
                       navigatorKey?.currentState?.pop();
                     },
-                    child:  Text('Ok',style: Theme.of(context).textTheme.bodyMedium,),
+                    child: Text(
+                      'Ok',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                   ),
                 ],
               ),
@@ -1018,28 +1027,38 @@ class AboutApp extends StatelessWidget {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children:const [
+          children: const [
             Text('Coin Wise'),
           ],
         ),
-     const   Divider(),
+        const Divider(),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            alignment: Alignment.center,
-            child: Text(aboutAppText,style:const TextStyle(),textAlign: TextAlign.center,)),
+              alignment: Alignment.center,
+              child: Text(
+                aboutAppText,
+                style: const TextStyle(),
+                textAlign: TextAlign.center,
+              )),
         ),
         Container(
           color: primaryBlack,
-          height: displayHeight(context)*.04,
+          height: displayHeight(context) * .04,
           child: Padding(
             padding: const EdgeInsets.all(3.0),
             child: Row(
-              mainAxisAlignment:MainAxisAlignment.center,
-              children:   [
-             const  Image(image: AssetImage('./assets/images/log.jpg',)),
-               addVerticalSpace(10.0),
-              const Image(image: AssetImage('./assets/images/flutter.jpg',)),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Image(
+                    image: AssetImage(
+                  './assets/images/log.jpg',
+                )),
+                addVerticalSpace(10.0),
+                const Image(
+                    image: AssetImage(
+                  './assets/images/flutter.jpg',
+                )),
               ],
             ),
           ),
@@ -1079,7 +1098,7 @@ class RadioButton extends StatelessWidget {
               Consumer<ThemeModel>(
                   builder: (context, ThemeModel themeNotifier, child) {
                 return Radio<currentTheme>(
-                  activeColor: Theme.of(context).iconTheme.color,
+                    activeColor: Theme.of(context).iconTheme.color,
                     value: selection,
                     groupValue: newValue,
                     onChanged: (value) {

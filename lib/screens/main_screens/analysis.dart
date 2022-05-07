@@ -21,17 +21,36 @@ class _AnalysisState extends State<Analysis> {
 
   @override
   Widget build(BuildContext context) {
+    CategoryFunctions.instance.categoryAmounts();
+
     Color bg = Theme.of(context).primaryColorDark;
     // isHome=true;
     setState(() {
       if (dropDownValue.toString() == fields[1]) {
         expenseList();
-      } else {
+      } else if(dropDownValue.toString() == fields[0]) {
+      CategoryFunctions.instance.availableCategories();
         incomeList();
+
       }
+        //  if(TransactionDbFunctions.instance.transactionIncomeListener.value.isEmpty){
+        //   // CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
+        //   CategoryFunctions.instance.incomeAmountCategoryListner.value.clear();
+        // }
+        //   if(TransactionDbFunctions.instance.transactionExpenseListener.value.isEmpty){
+        //   // CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
+        //   CategoryFunctions.instance.expenseAmountCategoryListner.value.clear();
+        // }
+        // if(TransactionDbFunctions.instance.transactionIncomeListener.value.isEmpty&& CategoryFunctions.instance.expenseAmountCategoryListner.value.isNotEmpty){
+        //   CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
+        // }
+        // if(TransactionDbFunctions.instance.transactionExpenseListener.value.isEmpty && CategoryFunctions.instance.incomeAmountCategoryListner.value.isNotEmpty){
+        //   CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
+        // }
+
     });
     refreshCategoryAmountListners();
-    CategoryFunctions.instance.incomeAmountCategoryListner.value.clear();
+    // CategoryFunctions.instance.incomeAmountCategoryListner.value.clear();
 
     return SafeArea(
       child: ListView(
@@ -81,7 +100,7 @@ class _AnalysisState extends State<Analysis> {
 
           //___________________________PIE CHART _________________
 // const PieChartSample3(),
-          TransactionDbFunctions.instance.transactionListener.value != null
+        (  TransactionDbFunctions.instance.transactionListener.value != null &&CategoryFunctions.instance.multiAmountCategoryListener.value.isNotEmpty)
               ? PieChartSample3()
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -106,6 +125,8 @@ class _AnalysisState extends State<Analysis> {
                       const Text('add new transactions for monitering...')
                     ]),
           //__________________________LIST VIEW ________________________
+
+          (CategoryFunctions.instance.multiAmountCategoryListener.value.isNotEmpty)?
           ValueListenableBuilder(
               valueListenable:
                   CategoryFunctions.instance.multiAmountCategoryListener,
@@ -163,7 +184,7 @@ class _AnalysisState extends State<Analysis> {
                         ),
                       );
                     });
-              })
+              }):Text('')
         ],
       ),
     );

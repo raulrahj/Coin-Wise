@@ -1,3 +1,4 @@
+import 'package:coin_wise/screens/intro_screens/profile_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -63,7 +64,7 @@ class MyApp extends StatelessWidget {
           title: 'Coin Wise',
           theme:
               themeNotifier.isDark ? MyThemes.darkTheme : MyThemes.lightTheme,
-          home: const SplashScreen(),
+          home: SetupProfile(),
         );
       }),
     );

@@ -47,7 +47,7 @@ class Home extends StatelessWidget {
                                   message,
                                   style: const TextStyle(
                                       color: defaultColor, fontSize: 12),
-                                ),
+                                ),addHorizontalSpace(4.0),
                                 Text(
                                   _data.profileName!,
                                   style: boxTitle,

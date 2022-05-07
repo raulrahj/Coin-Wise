@@ -64,7 +64,6 @@ class TransactionDbFunctions {
       transactionIncomeListener.notifyListeners();
     });
     refreshCategoryAmountListners();
-    CategoryFunctions.instance.categoryAmounts();
   }
 
   //<<<<<<<<<<< GETTING DATA FROM DATABASE >>>>>>>>>>>>>>>>
@@ -81,6 +80,7 @@ class TransactionDbFunctions {
     _transactionDb.delete(key);
     refreshData();
     walletData();
+    // CategoryFunctions.instance.availableCategories();
   }
 
   //<<<<<<<<<<<<<<<< UPDATING TRANSACTION >>>>>>>>>>>
