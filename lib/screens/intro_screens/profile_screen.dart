@@ -165,8 +165,14 @@ class _SetupProfileState extends State<SetupProfile> {
                                             );
                                           });
                                     },
-                                    child: _data.profilePhoto == null
-                                        ? const CircleAvatar(
+                                    child: ( image!=null)
+                                        ? 
+                                             CircleAvatar(
+                                                   maxRadius: 70,
+                                            minRadius: 50,
+                                              backgroundImage:
+                                                      FileImage(File( image.path.toString()),scale: .9),                                          )
+                                        : const CircleAvatar(
                                             maxRadius: 70,
                                             minRadius: 50,
                                             backgroundColor: primaryGreyDark,
@@ -175,27 +181,7 @@ class _SetupProfileState extends State<SetupProfile> {
                                               size: 70,
                                               color: primaryBlack,
                                             ),
-                                          )
-                                        : CircleAvatar(
-                                            maxRadius: 70,
-                                            minRadius: 50,
-                                            backgroundImage: FileImage(
-                                                File(_data.profilePhoto
-                                                    .toString()),
-                                                scale: 1),
-                                            child: CircleAvatar(
-                                              backgroundImage:const ExactAssetImage(
-                                                  './assets/images/log.jpg'),
-                                              child:
-                                                  (_data.profilePhoto != null)
-                                                      ? Image(width: 70,
-                                                      height: 70,
-                                                          image: FileImage(File(
-                                                              _data.profilePhoto
-                                                                  .toString())))
-                                                      : Text(''),
-                                            ),
-                                          ),
+                                          )                                      
                                   ),
                                 ),
                                 TextFormBox(
