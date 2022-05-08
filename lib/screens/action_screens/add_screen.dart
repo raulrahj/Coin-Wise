@@ -19,11 +19,12 @@ final _noteController = TextEditingController();
 
 final _updateAmoutnController = TextEditingController();
 final _updateNoteController = TextEditingController();
-bool inUpdate =false;
+bool inUpdate = false;
+
 class AddScreen extends StatelessWidget {
   final int? field;
   final dropvalue;
-  
+
   final TransactionModel? selectedTransactionData;
   AddScreen({
     Key? key,
@@ -31,7 +32,7 @@ class AddScreen extends StatelessWidget {
     this.selectedTransactionData,
     this.dropvalue,
   }) : super(key: key);
-   
+
 //  TransactionModel get transactionData => transactionData;
   final _formKey = GlobalKey<FormState>();
 
@@ -40,10 +41,11 @@ class AddScreen extends StatelessWidget {
     dropDownValue == null;
     isAdd ?? false;
     ////////////// TO DO - null check operator used in a null value ////////////////////////
-  if(!isAdd!&&inUpdate!=false){
-   _updateAmoutnController.text=selectedTransactionData!.amount.toString();
-   _updateNoteController.text=selectedTransactionData!.note;
- }
+    if (isAdd! == false && inUpdate == true) {
+      print('working');
+      _updateAmoutnController.text = selectedTransactionData!.amount.toString();
+      _updateNoteController.text = selectedTransactionData!.note;
+    }
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -134,6 +136,7 @@ class AddScreen extends StatelessWidget {
                                   },
                                 ),
                                 ActionBox(
+                                  onTap:() => inUpdate=false,
                                   style: Theme.of(context).textTheme.titleLarge,
                                   activeColor:
                                       Theme.of(context).iconTheme.color!,
@@ -143,8 +146,8 @@ class AddScreen extends StatelessWidget {
                                   keyboardtype: TextInputType.number,
                                   hint: 'Amount',
                                   validator: (value) {
-                                    inUpdate=true;
-                                    inUpdate=true;
+                                    inUpdate = false;
+                                    // inUpdate=true;
                                     if (value == null || value.isEmpty) {
                                       return 'enter the amount !';
                                     }
@@ -171,6 +174,7 @@ class AddScreen extends StatelessWidget {
                                   children: [
                                     CategoryDropdown(contxt: context),
                                     ActionBox(
+                                      onTap: (() => inUpdate=false),
                                       activeColor: primaryGreyDark,
                                       controller: isAdd!
                                           ? _noteController
@@ -182,7 +186,8 @@ class AddScreen extends StatelessWidget {
                                       hint: 'Note',
                                       itemColor: primaryLight,
                                       validator: (value) {
-                                        inUpdate=true;
+                                        
+                                        inUpdate = false;
                                         if (value == null || value.isEmpty) {
                                           return 'try to add a note !';
                                         }
@@ -195,7 +200,6 @@ class AddScreen extends StatelessWidget {
                                       onPressed: () async {
                                         if (_formKey.currentState!.validate()) {
                                           if (isAdd!) {
-                                           
                                             double? parsed = double.tryParse(
                                                 _amountController.text);
                                             field ?? 1;

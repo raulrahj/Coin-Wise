@@ -73,11 +73,9 @@ class CategoryFunctions {
   void availableCategories() {
     List<TransactionModel> _list =
         TransactionDbFunctions.instance.transactionListener.value.toList();
-        print('the main list ${_list.length}');
     Future.forEach<TransactionModel>(_list, (element) {
       if (element.field == CategoryField.income &&
           !availableIncomeCategories.contains(element.category.name)) {
-            print('item listing${element.category.name}');
         availableIncomeCategories.add(element.category.name);
       } else if (element.field == CategoryField.expense &&
           !availableExpenseCategories.contains(element.category.name)) {
@@ -86,27 +84,23 @@ class CategoryFunctions {
     });
     incomeListing();
     expenseListing();
-    print('new');
-    print(availableIncomeCategories.length);
-    availableIncomeCategories.remove('Bonus');
-    print(availableIncomeCategories);
+ 
   }
 
   void incomeListing() async{
     late CategoryModel inc;
     final incomeCategories = incomeCategoryListner.value.toList();
     for (int i = 0; i < availableIncomeCategories.length; i++) {
-      print("listener lenght ${incomeCategoryListner.value.length}");
+
       for (int j = 0; j < incomeCategories.length; j++) {
         if (availableIncomeCategories[i] == incomeCategories[j].name) {
-          print(!incomeAmountCategoryListner.value.toList().contains(incomeCategories[j]));
           inc = incomeCategories[j];
-          print(incomeCategories[j].name);
+
         }
       }
       // incomeAmountCategoryListner.value.clear();
       // for(int i=0;i<incomeAmountCategoryListner.value.length;i++){
-        if(!incomeAmountCategoryListner.value.contains(inc)&&!availableIncomeCategories.contains(inc.name)){
+        if(!incomeAmountCategoryListner.value.contains(inc)&&availableIncomeCategories.contains(inc.name)){
                 incomeAmountCategoryListner.value.add(inc);
 
         // }
@@ -186,7 +180,7 @@ void incomeList()async {
     _list0.sort((first, second) =>
         second.categoryAmount!.compareTo(first.categoryAmount!));
   }
-  print(CategoryFunctions.instance.incomeAmountCategoryListner.value.length);
+
 
   // if (_list0[0] == null ||
   //     CategoryFunctions.instance.incomeAmountCategoryListner.value.isEmpty) {
@@ -194,9 +188,9 @@ void incomeList()async {
   //   CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
   // }
 for(int i =0; i<_list0.length; i++){
-  print('l0 ${_list0.length}');
+
   if(_list0[i].categoryAmount!=null){
-    print('is it');
+
   // CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
    CategoryFunctions.instance.multiAmountCategoryListener.value.add(_list0[i]);
   // CategoryFunctions.instance.multiAmountCategoryListener.value = _list0;

@@ -157,6 +157,7 @@ class ActionBox extends StatelessWidget {
   TextInputType? keyboardtype;
   Widget? prefix;
   String? Function(String?)? validator;
+  Function()? onTap;
   Color? activeColor;
   TextStyle? style;
   ActionBox(
@@ -168,13 +169,14 @@ class ActionBox extends StatelessWidget {
       this.validator,
       key,
       this.activeColor,
-      this.style})
+      this.style,this.onTap})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     print(data);
     return TextFormField(
+      onTap: onTap,
       validator: validator,
       style: style ?? TextStyle(color: itemColor),
       controller: controller,
