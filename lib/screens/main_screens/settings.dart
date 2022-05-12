@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:coin_wise/constants/sizes.dart';
 import 'package:coin_wise/constants/colors.dart';
+import 'package:launch_review/launch_review.dart';
 import 'package:coin_wise/database/profiledata.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/screens/intro_screens/splash_screen.dart';
@@ -155,7 +156,10 @@ class Settings extends StatelessWidget {
                 head: 'Rate App',
                 bg: Theme.of(context).primaryColor,
                 icn: const Icon(Icons.star_purple500_outlined),
-                settingsFunction: () => null,
+                settingsFunction: (){
+                  LaunchReview.launch(androidAppId: "in.brototype.coin_wise",
+                    );
+                },
               ),
               settingsTile(
                   bg: Theme.of(context).primaryColor,

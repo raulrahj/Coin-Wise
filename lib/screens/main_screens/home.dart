@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:coin_wise/constants/data.dart';
+import 'package:coin_wise/screens/main_screens/analysis.dart';
 import 'package:flutter/material.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:coin_wise/constants/sizes.dart';

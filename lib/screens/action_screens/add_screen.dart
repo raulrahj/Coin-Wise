@@ -229,12 +229,11 @@ class AddScreen extends StatelessWidget {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                               SnackBar(
-                                                width:
-                                                    displayWidth(context) * 02,
+                                               width: displayWidth(context)*.5,
                                                 behavior:
                                                     SnackBarBehavior.floating,
                                                 backgroundColor:
-                                                    Colors.transparent,
+                                                    Theme.of(context).snackBarTheme.backgroundColor,
                                                 content: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
@@ -287,7 +286,7 @@ class AddScreen extends StatelessWidget {
                                                         displayWidth(context) *
                                                             .5,
                                                     backgroundColor:
-                                                        defaultColor,
+                                                        Theme.of(context).snackBarTheme.backgroundColor,
                                                     content: Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment

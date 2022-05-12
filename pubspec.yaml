@@ -28,6 +28,7 @@ dependencies:
   shared_preferences: ^2.0.13
   syncfusion_flutter_datepicker: ^20.1.48
   url_launcher: ^6.0.3
+  launch_review: 3.0.1
 dev_dependencies:
   build_runner: ^2.1.8
   flutter_lints: ^1.0.0

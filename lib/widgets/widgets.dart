@@ -169,7 +169,8 @@ class ActionBox extends StatelessWidget {
       this.validator,
       key,
       this.activeColor,
-      this.style,this.onTap})
+      this.style,
+      this.onTap})
       : super(key: key);
 
   @override

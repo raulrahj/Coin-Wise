@@ -4,7 +4,7 @@ import 'package:coin_wise/constants/data.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:coin_wise/constants/sizes.dart';
 import 'package:coin_wise/constants/colors.dart';
-import 'package:coin_wise/database/category_db.dart'; 
+import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/constants/text_styles.dart';
 import 'package:coin_wise/database/transactions_db.dart';
@@ -17,37 +17,21 @@ class Analysis extends StatefulWidget {
 }
 
 class _AnalysisState extends State<Analysis> {
-  String dropDownValue = fields[0];
+  String dropDownVal = fields[0];
 
   @override
   Widget build(BuildContext context) {
+   
     CategoryFunctions.instance.categoryAmounts();
-
     Color bg = Theme.of(context).primaryColorDark;
     // isHome=true;
     setState(() {
-      if (dropDownValue.toString() == fields[1]) {
-        expenseList();
-      } else if(dropDownValue.toString() == fields[0]) {
-      CategoryFunctions.instance.availableCategories();
+      if (dropDownVal.toString() == fields[0]) {
         incomeList();
-
+      } else if (dropDownVal.toString() == fields[1]) {
+        CategoryFunctions.instance.availableCategories();
+        expenseList();
       }
-        //  if(TransactionDbFunctions.instance.transactionIncomeListener.value.isEmpty){
-        //   // CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
-        //   CategoryFunctions.instance.incomeAmountCategoryListner.value.clear();
-        // }
-        //   if(TransactionDbFunctions.instance.transactionExpenseListener.value.isEmpty){
-        //   // CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
-        //   CategoryFunctions.instance.expenseAmountCategoryListner.value.clear();
-        // }
-        // if(TransactionDbFunctions.instance.transactionIncomeListener.value.isEmpty&& CategoryFunctions.instance.expenseAmountCategoryListner.value.isNotEmpty){
-        //   CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
-        // }
-        // if(TransactionDbFunctions.instance.transactionExpenseListener.value.isEmpty && CategoryFunctions.instance.incomeAmountCategoryListner.value.isNotEmpty){
-        //   CategoryFunctions.instance.multiAmountCategoryListener.value.clear();
-        // }
-
     });
     refreshCategoryAmountListners();
     // CategoryFunctions.instance.incomeAmountCategoryListner.value.clear();
@@ -65,7 +49,7 @@ class _AnalysisState extends State<Analysis> {
               item: DropdownButton(
                 underline: const SizedBox(),
                 alignment: Alignment.centerRight,
-                value: dropDownValue,
+                value: dropDownVal,
                 icon: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -91,7 +75,7 @@ class _AnalysisState extends State<Analysis> {
                 }).toList(),
                 onChanged: (value) {
                   setState(() {
-                    dropDownValue = value.toString();
+                    dropDownVal = value.toString();
                   });
                 },
               ),
@@ -100,8 +84,10 @@ class _AnalysisState extends State<Analysis> {
 
           //___________________________PIE CHART _________________
 // const PieChartSample3(),
-        (  TransactionDbFunctions.instance.transactionListener.value != null &&CategoryFunctions.instance.multiAmountCategoryListener.value.isNotEmpty)
-              ? PieChartSample3()
+          (TransactionDbFunctions.instance.transactionListener.value != null &&
+                  CategoryFunctions
+                      .instance.multiAmountCategoryListener.value.isNotEmpty)
+              ? const PieChartSample3()
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -126,65 +112,69 @@ class _AnalysisState extends State<Analysis> {
                     ]),
           //__________________________LIST VIEW ________________________
 
-          (CategoryFunctions.instance.multiAmountCategoryListener.value.isNotEmpty)?
-          ValueListenableBuilder(
-              valueListenable:
-                  CategoryFunctions.instance.multiAmountCategoryListener,
-              builder:
-                  (context, List<CategoryModel> newAmountCategories, child) {
-                Color bg = Theme.of(context).primaryColor;
-                //  CategoryFunctions.instance.categoryAmountAdding();
-                return ListView.builder(
-                    shrinkWrap: true,
-                    physics: const ClampingScrollPhysics(),
-                    itemCount: newAmountCategories.length,
-                    itemBuilder: (BuildContext context, index) {
-                      CategoryModel _data = newAmountCategories[index];
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 4.0, horizontal: 12.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(30),
-                          child: Container(
-                              child: dropDownValue == fields[0]
-                                  ? ListTile(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                      tileColor: bg,
-                                      // tileColor:brightness!=Brightness.light? defaultPrimaryColor:defaultColorDark,
-                                      title: Text(_data.name,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleLarge!
-                                              .copyWith(
-                                                fontSize: 16,
-                                              )),
-                                      trailing: Text(_data.categoryAmount !=
-                                              null
-                                          ? '₹ ${_data.categoryAmount.toString()}'
-                                          : '₹ 0.0'),
-                                    )
-                                  : ListTile(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                      tileColor: Theme.of(context).indicatorColor,
-                                      title: Text(
-                                        _data.name,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleLarge!.copyWith(fontSize: 16,)
-                                      ),
-                                      trailing: Text(_data.categoryAmount !=
-                                              null
-                                          ? '₹ ${_data.categoryAmount.toString()}'
-                                          : '0.0'),
-                                    )),
-                        ),
-                      );
-                    });
-              }):Text('')
+          (CategoryFunctions
+                  .instance.multiAmountCategoryListener.value.isNotEmpty)
+              ? ValueListenableBuilder(
+                  valueListenable:
+                      CategoryFunctions.instance.multiAmountCategoryListener,
+                  builder: (context, List<CategoryModel> newAmountCategories,
+                      child) {
+                    Color bg = Theme.of(context).primaryColor;
+                    //  CategoryFunctions.instance.categoryAmountAdding();
+                    return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: newAmountCategories.length,
+                        itemBuilder: (BuildContext context, index) {
+                          CategoryModel _data = newAmountCategories[index];
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 4.0, horizontal: 12.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(30),
+                              child: Container(
+                                  child: dropDownVal == fields[0]
+                                      ? ListTile(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          tileColor: bg,
+                                          // tileColor:brightness!=Brightness.light? defaultPrimaryColor:defaultColorDark,
+                                          title: Text(_data.name,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleLarge!
+                                                  .copyWith(
+                                                    fontSize: 16,
+                                                  )),
+                                          trailing: Text(_data.categoryAmount !=
+                                                  null
+                                              ? '₹ ${_data.categoryAmount.toString()}'
+                                              : '₹ 0.0'),
+                                        )
+                                      : ListTile(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          tileColor:
+                                              Theme.of(context).indicatorColor,
+                                          title: Text(_data.name,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleLarge!
+                                                  .copyWith(
+                                                    fontSize: 16,
+                                                  )),
+                                          trailing: Text(_data.categoryAmount !=
+                                                  null
+                                              ? '₹ ${_data.categoryAmount.toString()}'
+                                              : '0.0'),
+                                        )),
+                            ),
+                          );
+                        });
+                  })
+              : Text('')
         ],
       ),
     );

@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
           title: 'Coin Wise',
           theme:
               themeNotifier.isDark ? MyThemes.darkTheme : MyThemes.lightTheme,
-          home: SetupProfile(),
+          home: const SplashScreen(),
         );
       }),
     );

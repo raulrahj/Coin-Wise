@@ -53,7 +53,6 @@ class _AllTransactionsState extends State<AllTransactions> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 decentHieght,
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -123,7 +122,6 @@ class _AllTransactionsState extends State<AllTransactions> {
                                             days: (endDayOfWeek - day2)));
                                         _controller.selectedRange =
                                             PickerDateRange(dat1, dat2);
-
                                       },
                                       monthViewSettings:
                                           const DateRangePickerMonthViewSettings(
@@ -136,7 +134,12 @@ class _AllTransactionsState extends State<AllTransactions> {
                                             onPressed: () {
                                               navigatorKey?.currentState?.pop();
                                             },
-                                            child:  Text('Cancel',style: Theme.of(context).textTheme.titleLarge,)),
+                                            child: Text(
+                                              'Cancel',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleLarge,
+                                            )),
                                         TextButton(
                                             onPressed: () {
                                               if (_controller.selectedRange ==
@@ -148,7 +151,12 @@ class _AllTransactionsState extends State<AllTransactions> {
                                                   _controller.selectedRange);
                                               navigatorKey?.currentState?.pop();
                                             },
-                                            child:  Text('Ok',style: Theme.of(context).textTheme.titleLarge,))
+                                            child: Text(
+                                              'Ok',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleLarge,
+                                            ))
                                       ],
                                     )
                                   ],
@@ -158,7 +166,8 @@ class _AllTransactionsState extends State<AllTransactions> {
                       },
                     ),
                     ActionChip(
-                      backgroundColor: Theme.of(context).chipTheme.backgroundColor,
+                        backgroundColor:
+                            Theme.of(context).chipTheme.backgroundColor,
                         label: const Text('Month'),
                         onPressed: () async {
                           DateTime? selectedDate;
@@ -185,64 +194,70 @@ class _AllTransactionsState extends State<AllTransactions> {
                         //_______________DROPDOWN - ALL TRANSACTION ____________
 
                         showBox(
-                            color: _dropdownValue == allFields[0]
-                                ? Theme.of(context).chipTheme.backgroundColor
-                                : primaryGreyDark,
-                            y: displayHeight(context) * .045,
-                            x: displayWidth(context) * .35,
-                            item: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                DropdownButton(
-                                  underline: const SizedBox(),
-                                  alignment: Alignment.centerRight,
-                                  value: _dropdownValue,
-                                  icon: SizedBox(
-                                    width: displayWidth(context) * .10,
-                                    child: const Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Icon(Icons.arrow_drop_down),
-                                    ),
+                          color: _dropdownValue == allFields[0]
+                              ? Theme.of(context).chipTheme.backgroundColor
+                              : primaryGreyDark,
+                          y: displayHeight(context) * .045,
+                          x: displayWidth(context) * .35,
+                          item: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              DropdownButton(
+                                underline: const SizedBox(),
+                                alignment: Alignment.centerRight,
+                                value: _dropdownValue,
+                                icon: SizedBox(
+                                  width: displayWidth(context) * .10,
+                                  child: const Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Icon(Icons.arrow_drop_down),
                                   ),
-                                  items: allFields.map((String items) {
-                                    return DropdownMenuItem(
-                                      value: items,
-                                      child: Text(items,style: Theme.of(context).textTheme.bodyMedium,),
-                                    );
-                                  }).toList(),
-                                  onChanged: (value) {
-                                    isHome = false;
-
-                                    setState(() {
-                                      _dropdownValue = value.toString();
-                                      switch (value) {
-                                        case 'All':
-                                          dropDownListener = (isFilter)
-                                              ? TransactionDbFunctions.instance
-                                                  .selectedRangeTransactionsListener
-                                              : TransactionDbFunctions
-                                                  .instance.transactionListener;
-                                          break;
-                                        case 'Income':
-                                          dropDownListener =
-                                              TransactionDbFunctions.instance
-                                                  .transactionIncomeListener;
-                                          break;
-                                        case 'Expense':
-                                          dropDownListener =
-                                              TransactionDbFunctions.instance
-                                                  .transactionExpenseListener;
-                                          break;
-                                        default:
-                                          dropDownListener =
-                                              TransactionDbFunctions
-                                                  .instance.transactionListener;
-                                      }
-                                    });
-                                  },
                                 ),
-                              ],
-                            )),
+                                items: allFields.map((String items) {
+                                  return DropdownMenuItem(
+                                    value: items,
+                                    child: Text(
+                                      items,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium,
+                                    ),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {
+                                  isHome = false;
+
+                                  setState(() {
+                                    _dropdownValue = value.toString();
+                                    switch (value) {
+                                      case 'All':
+                                        dropDownListener = (isFilter)
+                                            ? TransactionDbFunctions.instance
+                                                .selectedRangeTransactionsListener
+                                            : TransactionDbFunctions
+                                                .instance.transactionListener;
+                                        break;
+                                      case 'Income':
+                                        dropDownListener =
+                                            TransactionDbFunctions.instance
+                                                .transactionIncomeListener;
+                                        break;
+                                      case 'Expense':
+                                        dropDownListener =
+                                            TransactionDbFunctions.instance
+                                                .transactionExpenseListener;
+                                        break;
+                                      default:
+                                        dropDownListener =
+                                            TransactionDbFunctions
+                                                .instance.transactionListener;
+                                    }
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ],

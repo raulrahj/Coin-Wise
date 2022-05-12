@@ -33,9 +33,6 @@ class PieChartSample3 extends StatelessWidget {
           if (list.isEmpty) {
             // throw 'list value is empty';
 
-            print(CategoryFunctions.instance.multiAmountCategoryListener.value
-                .toList()
-                .length);
           }
           final map1 = <String, double>{
             for (CategoryModel e in list)
@@ -72,7 +69,6 @@ class PieChartSample3 extends StatelessWidget {
                         aspectRatio: 1.2,
                         child: Card(
                           color: bg,
-                          // color:brightness!=Brightness.light? primaryLight : defaultColorDark,
                           child: Row(
                             children: [
                               AspectRatio(
@@ -84,8 +80,6 @@ class PieChartSample3 extends StatelessWidget {
                                   child: PieChart(
                                     dataMap: map1,
                                     chartType: ChartType.ring,
-                                    // //baseChartColor: Colors.grey[50]!.withOpacity(0.15),
-                                    // colorList: colorList,
                                     chartValuesOptions:
                                         const ChartValuesOptions(
                                             showChartValuesOutside: true,
@@ -102,3 +96,5 @@ class PieChartSample3 extends StatelessWidget {
         });
   }
 }
+
+ 
