@@ -111,30 +111,30 @@ class ThemePreferences {
     sharedPreferences.setBool(PREF_KEY, value);
   }
 
-  getTheme() async {
+  Future<bool> getTheme() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     return sharedPreferences.getBool(PREF_KEY) ?? false;
   }
 }
 
-class ThemeModel extends ChangeNotifier {
-  bool _isDark = true;
-  ThemePreferences _preferences = ThemePreferences();
-  bool get isDark => _isDark;
+// class ThemeModel extends ChangeNotifier {
+//   bool _isDark = true;
+//   ThemePreferences _preferences = ThemePreferences();
+//   bool get isDark => _isDark;
 
-  ThemeModel() {
-    _isDark = false;
-    _preferences = ThemePreferences();
-    getPreferences();
-  }
-  set isDark(bool value) {
-    _isDark = value;
-    _preferences.setTheme(value);
-    notifyListeners();
-  }
+//   ThemeModel() {
+//     _isDark = false;
+//     _preferences = ThemePreferences();
+//     getPreferences();
+//   }
+//   set isDark(bool value) {
+//     _isDark = value;
+//     _preferences.setTheme(value);
+//     notifyListeners();
+//   }
 
-  getPreferences() async {
-    _isDark = await _preferences.getTheme();
-    notifyListeners();
-  }
-}
+//   getPreferences() async {
+//     _isDark = await _preferences.getTheme();
+//     notifyListeners();
+//   }
+// }

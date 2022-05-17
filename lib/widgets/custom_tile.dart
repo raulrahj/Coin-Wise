@@ -77,7 +77,7 @@ class CustomTile extends StatelessWidget {
             SlidableAction(
               flex: 1,
               onPressed: (context) {
-                transactionDeletePopup(context, deletionKey);
+                transactionDeletePopup(context, mainData!.id);
               },
               backgroundColor: bgSub,
               foregroundColor: fg,

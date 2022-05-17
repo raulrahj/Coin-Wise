@@ -1,6 +1,9 @@
+import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
+import 'package:coin_wise/logic/cubit/theme/theme_cubit.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:coin_wise/config/app_themes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:coin_wise/database/profiledata.dart';
 import 'package:coin_wise/database/category_db.dart';
@@ -52,23 +55,30 @@ class MyApp extends StatelessWidget {
       statusBarColor: Colors.transparent,
       // systemNavigationBarColor: Colors.transparent
     ));
-    // return MultiBlocProvider(
-    //   providers: [
-    //     BlocProvider<ThemeCubit>(
-    //       create: (BuildContext context) => ThemeCubit(),
-    //     ),
-    //   ],
-    //   child: BlocBuilder<ThemeCubit, ThemeState>(builder: (context, state) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<TransactionsBloc>(
+          
+          create: (BuildContext context) => TransactionsBloc(),
+        ),
+        BlocProvider<ThemeCubit>(
+          create: (BuildContext  context) => ThemeCubit()
+        )
+      ],
+      child: BlocBuilder<ThemeCubit, ThemeState>(builder: (context, state) {
         // dark = themeNotifier.isDark;
-        return MaterialApp(
+        return
+      //  child:
+         MaterialApp(
           navigatorKey: navigatorKey,
           debugShowCheckedModeBanner: false,
           title: 'Coin Wise',
-          theme:MyThemes.darkTheme,
-          // state.isDark ? MyThemes.darkTheme : MyThemes.lightTheme,
+          theme:
+          // MyThemes.darkTheme,
+          state.isDark ? MyThemes.darkTheme : MyThemes.lightTheme,
           home: const SplashScreen(),
         );
-  //     }),
-  //   );
+      }),
+    );
   }
 }

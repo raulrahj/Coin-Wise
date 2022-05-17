@@ -1,21 +1,9 @@
 part of 'transactions_bloc.dart';
 
-abstract class TransactionsEvent extends Equatable {
-  const TransactionsEvent();
-
-}
-class AddTransaction extends TransactionsEvent{
-
-  @override
-  List<Object> get props => [];
-}
-class UpdateTransaction extends TransactionsEvent{
-
-  @override
-  List<Object> get props => [];
-}
-class DeleteTransaction extends TransactionsEvent{
-
-  @override
-  List<Object> get props => [];
+@freezed
+class TransactionsEvent with _$TransactionsEvent {
+  const factory TransactionsEvent.getAllTransactions() = GetAllTransactions;
+  const factory TransactionsEvent.addTransaction({required TransactionModel model}) = AddTransaction;
+  const factory TransactionsEvent.updateTransaction({required String id, required TransactionModel model}) = UpdateTransaction;
+  const factory TransactionsEvent.deleteTransaction({required String keey}) = DeleteTransaction;
 }

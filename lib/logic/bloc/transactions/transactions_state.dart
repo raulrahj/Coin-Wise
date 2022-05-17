@@ -1,15 +1,10 @@
 part of 'transactions_bloc.dart';
 
-abstract class TransactionsState extends Equatable {
-  const TransactionsState();
+@freezed
+class TransactionsState with _$TransactionsState {
+  const factory TransactionsState({
+    required List<TransactionModel> transactionList,
+  }) = _TransactionsState;
 
-}
-
-class TransactionsInitial extends TransactionsState {
-  final List<TransactionModel> transactionList;
-
-  const TransactionsInitial({required this.transactionList});
-  
-  @override
-  List<Object> get props => [];
+  factory TransactionsState.initial() => TransactionsState(transactionList: []);
 }

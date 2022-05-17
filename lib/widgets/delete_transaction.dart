@@ -1,9 +1,9 @@
-
 //__________________________ TRANSACTION DELETION POPUP SCREEN ______________________________
 
-import 'package:coin_wise/database/transactions_db.dart';
+import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
 import 'package:coin_wise/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 transactionDeletePopup(BuildContext context, String? key) {
   return showDialog(
@@ -29,8 +29,13 @@ transactionDeletePopup(BuildContext context, String? key) {
                   ),
                   TextButton(
                     onPressed: () async {
-                      TransactionDbFunctions.instance
-                          .deleteTransaction(context, key);
+                      // TransactionDbFunctions.instance
+                      //     .deleteTransaction(context, key);
+                      if (key != null) {
+                        context
+                            .read<TransactionsBloc>()
+                            .add(DeleteTransaction(keey: key));
+                      }
                       //  Navigator.of(context).pop();
                       navigatorKey?.currentState?.pop();
                     },

@@ -1,6 +1,7 @@
 import 'package:coin_wise/core/constants/colors.dart';
 import 'package:coin_wise/core/constants/sizes.dart';
 import 'package:coin_wise/core/constants/text_styles.dart';
+import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
 import 'package:coin_wise/main.dart';
 import 'package:coin_wise/widgets/dropdown_category.dart';
 import 'package:coin_wise/screens/action_screens/add_transaction/widgets/textformfield1.dart';
@@ -10,6 +11,7 @@ import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/models/transaction_model.dart';
 import 'package:coin_wise/screens/action_screens/categories/categories.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 bool? isAdd;
 Color? ontapColor;
@@ -218,9 +220,10 @@ class AddScreen extends StatelessWidget {
                                                         ? CategoryField.income
                                                         : CategoryField.expense,
                                                     category: globalCategory!);
-                                            TransactionDbFunctions.instance
-                                                .addTransaction(
-                                                    transactionData);
+                                            // TransactionDbFunctions.instance
+                                            //     .addTransaction(
+                                            //         transactionData);
+                                            context.read<TransactionsBloc>().add(AddTransaction(model: transactionData));
                                             navigatorKey?.currentState?.pop();
                                             _amountController.clear();
                                             _noteController.clear();

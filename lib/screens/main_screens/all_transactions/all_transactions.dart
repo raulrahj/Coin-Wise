@@ -2,6 +2,7 @@ import 'package:coin_wise/core/constants/colors.dart';
 import 'package:coin_wise/core/constants/data.dart';
 import 'package:coin_wise/core/constants/functions.dart';
 import 'package:coin_wise/core/constants/sizes.dart';
+import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
 import 'package:coin_wise/main.dart';
 import 'package:coin_wise/widgets/common_container.dart';
 import 'package:coin_wise/widgets/default_container.dart';
@@ -13,6 +14,7 @@ import 'package:coin_wise/widgets/list_views.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/models/transaction_model.dart';
 import 'package:coin_wise/screens/main_screens/home/home.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -267,14 +269,20 @@ class _AllTransactionsState extends State<AllTransactions> {
                 const MyFormField(),
               ],
             ),
+          // ),
+          // ValueListenableBuilder(
+          //     valueListenable: dropDownListener,
+          //     builder: (context, newDropdownListener, child) {
+                // return 
           ),
-          ValueListenableBuilder(
-              valueListenable: dropDownListener,
-              builder: (context, newDropdownListener, child) {
-                return TransactionList(
-                  dropDownList: dropDownListener,
-                );
-              }),
+                BlocBuilder<TransactionsBloc, TransactionsState>(
+                  builder: (context, state) {
+                    return TransactionList(
+                                 dataList: [] ,
+                                );
+                  },
+                )
+              // }),
         ],
       ),
     );

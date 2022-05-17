@@ -1,4 +1,5 @@
 import 'package:coin_wise/config/app_themes.dart';
+import 'package:coin_wise/logic/cubit/theme/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,33 +20,40 @@ class RadioButton extends StatelessWidget {
               // Consumer<ThemeModel>(
               //     builder: (context, ThemeModel themeNotifier, child) {
               //   return
-                 Radio<currentTheme>(
-                    activeColor: Theme.of(context).iconTheme.color,
-                    value: selection,
-                    groupValue: newValue,
-                    onChanged: (value) async {
-                      if (value == null) {
-                        return;
-                      } else {
-                        SharedPreferences sharedPreferences =
-                            await SharedPreferences.getInstance();
-                            if(value ==currentTheme.lightTheme){
-                            sharedPreferences.setBool(ThemePreferences.PREF_KEY, false);
-                            }else{
-                              sharedPreferences.setBool(ThemePreferences.PREF_KEY, true);
-                            }
-                      }
-                      themeListenable.value = value;
-                      themeListenable.notifyListeners();
+              Radio<currentTheme>(
+                  activeColor: Theme.of(context).iconTheme.color,
+                  value: selection,
+                  groupValue: newValue,
+                  onChanged: (value) async {
+
+                    if (value == null) {
+                      return;
+                    } else {
+                      SharedPreferences sharedPreferences =
+                          await SharedPreferences.getInstance();
                       if (value == currentTheme.lightTheme) {
-                        // themeNotifier.isDark
-                        // ?
-                        // themeNotifier.isDark = false;
+                        sharedPreferences.setBool(
+                            ThemePreferences.PREF_KEY, false);
+                    context.read<ThemeCubit>().themeChange();
+
                       } else {
-                        // :
-                        // themeNotifier.isDark = true;
+                        sharedPreferences.setBool(
+                            ThemePreferences.PREF_KEY, true);
+                    context.read<ThemeCubit>().themeChange();
+
                       }
-                    }),
+                    }
+                    themeListenable.value = value;
+                    themeListenable.notifyListeners();
+                    if (value == currentTheme.lightTheme) {
+                      // themeNotifier.isDark
+                      // ?
+                      // themeNotifier.isDark = false;
+                    } else {
+                      // :
+                      // themeNotifier.isDark = true;
+                    }
+                  }),
               // }),
               Text(text),
             ],

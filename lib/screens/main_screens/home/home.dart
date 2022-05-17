@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:coin_wise/core/constants/colors.dart';
 import 'package:coin_wise/core/constants/sizes.dart';
 import 'package:coin_wise/core/constants/text_styles.dart';
+import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
+import 'package:coin_wise/models/transaction_model.dart';
 import 'package:coin_wise/widgets/common_container.dart';
 import 'package:coin_wise/widgets/default_container.dart';
 import 'package:flutter/material.dart';
@@ -10,16 +12,20 @@ import 'package:coin_wise/widgets/list_views.dart';
 import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/database/profiledata.dart';
 import 'package:coin_wise/database/transactions_db.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 final String? profilepic = loginData?.profilePhoto;
-final  brightness = MediaQueryData.fromWindow(WidgetsBinding.instance!.window).platformBrightness;
-bool isHome =true;
+final brightness = MediaQueryData.fromWindow(WidgetsBinding.instance!.window)
+    .platformBrightness;
+bool isHome = true;
+
 // _______________________________ HOME PAGE _____________________________________ //
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({Key? key}) : super(key: key);  
 
   @override
   Widget build(BuildContext context) {
+    context.read<TransactionsBloc>().add(GetAllTransactions());
     Color bg = Theme.of(context).primaryColorDark;
     Color bgSub = Theme.of(context).primaryColorLight;
     CategoryFunctions.instance.refreshUI();
@@ -27,20 +33,23 @@ class Home extends StatelessWidget {
     // TransactionDbFunctions.instance.refreshData();
     final String message =
         DateTime.now().hour < 12 ? "Good morning..." : "Good Afternoon...";
-
+  final ProfileModel  _data;
     // appbar = false;
     return SafeArea(
       child: SingleChildScrollView(
-        child: ValueListenableBuilder(
-            valueListenable: TransactionDbFunctions.instance.walletDataListener,
-            builder: (context, double newWalletDataListner, child) {
-              return Column(
+        // child: ValueListenableBuilder(
+        //     valueListenable: TransactionDbFunctions.instance.walletDataListener,
+        //     builder: (context, double newWalletDataListner, child) {
+              // return
+            child: Column(
                 children: [
-                  ValueListenableBuilder(
-                      valueListenable: profileListner,
-                      builder: (context,ProfileModel newProfileListener, child) {
-                        final ProfileModel _data =newProfileListener;
-                        return ListTile(
+                  // ValueListenableBuilder(
+                  //     valueListenable: profileListner,
+                  //     builder:
+                  //         (context, ProfileModel newProfileListener, child) {
+                        // final ProfileModel _data = newProfileListener;
+                        // return
+                         ListTile(
                           leading: Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,13 +58,16 @@ class Home extends StatelessWidget {
                                   message,
                                   style: const TextStyle(
                                       color: defaultColor, fontSize: 12),
-                                ),addHorizontalSpace(4.0),
-                                Text(
-                                  _data.profileName!,
+                                ),
+                                addHorizontalSpace(4.0),
+                                Text('loading...',
+                                  // _data.profileName!,
                                   style: boxTitle,
                                 ),
                               ]),
-                          trailing: _data.profilePhoto == null
+                          trailing:
+                          //  _data.profilePhoto == null
+                          1>0
                               ? const CircleAvatar(
                                   // backgroundColor: primaryGrey,
                                   child: Icon(
@@ -65,10 +77,11 @@ class Home extends StatelessWidget {
                                   ),
                                 )
                               : CircleAvatar(
-                                  backgroundImage: FileImage(File(_data.profilePhoto!)),
+                                  // backgroundImage:
+                                      // FileImage(File(_data.profilePhoto!)),
                                 ),
-                        );
-                      }),
+                        ),
+                      // }),
                   defaultContainer(
                     color: bg,
                     height: 180,
@@ -86,9 +99,9 @@ class Home extends StatelessWidget {
                                 'Total Balance',
                                 style: boxTitle,
                               ),
-                              Text(
-                                '₹ ${newWalletDataListner.toString()}',
-                                style: (newWalletDataListner < 0)
+                              Text('loading...',
+                                // '₹ ${newWalletDataListner.toString()}',
+                                style: (1 < 0)
                                     ? fortotalNegBal
                                     : fortotalBal,
                               ),
@@ -121,15 +134,19 @@ class Home extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    ValueListenableBuilder(
-                                        valueListenable: TransactionDbFunctions.instance.walletIncomeListener,
-                                      builder: (context,double newIncome,child) {
-                                        return Text(
-                                          '₹ ${newIncome.toString()}',
-                                          style:Theme.of(context).textTheme.titleMedium,
-                                        );
-                                      }
-                                    )
+                                    // ValueListenableBuilder(
+                                    //     valueListenable: TransactionDbFunctions
+                                    //         .instance.walletIncomeListener,
+                                    //     builder:
+                                    //         (context, double newIncome, child) {
+                                          // return
+                                           Text('loading...',
+                                            // '₹ ${newIncome.toString()}',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium,
+                                          )
+                                        // })
                                   ],
                                 ),
                               ),
@@ -154,15 +171,19 @@ class Home extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    ValueListenableBuilder(
-                                      valueListenable: TransactionDbFunctions.instance.walletExpenseListener,
-                                      builder: (context,double newExpense,childe) {
-                                        return Text(
-                                          '₹ ${newExpense.toString()}',
-                                          style:Theme.of(context).textTheme.titleMedium,
-                                        );
-                                      }
-                                    ),
+                                    // ValueListenableBuilder(
+                                    //     valueListenable: TransactionDbFunctions
+                                    //         .instance.walletExpenseListener,
+                                    //     builder: (context, double newExpense,
+                                    //         childe) {
+                                    //       return 
+                                          Text('loading...',
+                                            // '₹ ${newExpense.toString()}',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium,
+                                          ),
+                                        // }),
                                   ],
                                 ),
                               ),
@@ -178,23 +199,28 @@ class Home extends StatelessWidget {
                       style: boxTitle,
                     ),
                     trailing: TextButton(
-                        child:  Text(
+                        child: Text(
                           'See all',
-                          style: TextStyle(color: Theme.of(context).iconTheme.color),
+                          style: TextStyle(
+                              color: Theme.of(context).iconTheme.color),
                         ),
                         ////////////// ToDo -gesture detector exeption issue ////////////
                         onPressed: () async {
                           page = 1;
                         }),
                   ),
-                  TransactionList(
-                    dropDownList:
-                        TransactionDbFunctions.instance.transactionListener,
-                    count: 4,
+                  BlocBuilder<TransactionsBloc, TransactionsState>(
+                    // bloc: TransactionsBloc(),
+                    builder: (context, state) {
+                      return TransactionList(
+                        dataList: state.transactionList,
+                        count: 4,
+                      );
+                    },
                   ),
                 ],
-              );
-            }),
+              )
+            // }),
       ),
     );
   }
