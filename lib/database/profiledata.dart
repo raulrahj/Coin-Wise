@@ -20,7 +20,7 @@ class ProflieDb {
   Future<ProfileModel?> getProfileData() async {
     final profileDb = await Hive.openBox<ProfileModel>('profileDB');
 
-    final ProfileModel? _data = await profileDb.get('profile');
+    final ProfileModel? _data =  profileDb.get('profile');
     return _data;
   }
 

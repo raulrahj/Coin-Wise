@@ -1,13 +1,15 @@
 import 'dart:io';
 import 'dart:ui';
+import 'package:coin_wise/core/constants/colors.dart';
+import 'package:coin_wise/core/constants/sizes.dart';
+import 'package:coin_wise/core/constants/text_styles.dart';
+import 'package:coin_wise/widgets/default_container.dart';
+import 'package:coin_wise/widgets/textformfield2.dart';
 import 'package:flutter/material.dart';
-import 'package:coin_wise/constants/sizes.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:coin_wise/constants/colors.dart';
 import 'package:coin_wise/widgets/bottom_nav.dart';
 import 'package:coin_wise/database/profiledata.dart';
-import 'package:coin_wise/constants/text_styles.dart';
 
 class SetupProfile extends StatefulWidget {
   SetupProfile({Key? key}) : super(key: key);
@@ -78,7 +80,7 @@ class _SetupProfileState extends State<SetupProfile> {
                           valueListenable: profileListner,
                           builder:
                               (context, ProfileModel newProfileListner, child) {
-                            final ProfileModel _data = newProfileListner;
+                            // final ProfileModel _data = newProfileListner;
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -150,7 +152,7 @@ class _SetupProfileState extends State<SetupProfile> {
                                                                     ImageSource
                                                                         .gallery)
                                                             .whenComplete(() {
-                                                          setState(() {print('builded')});
+                                                          setState(() {});
                                                         });
                                                         if (img != null) {
                                                           image =

@@ -1,13 +1,15 @@
+import 'package:coin_wise/core/constants/colors.dart';
+import 'package:coin_wise/core/constants/sizes.dart';
+import 'package:coin_wise/core/constants/text_styles.dart';
 import 'package:coin_wise/main.dart';
+import 'package:coin_wise/widgets/dropdown_category.dart';
+import 'package:coin_wise/screens/action_screens/add_transaction/widgets/textformfield1.dart';
 import 'package:flutter/material.dart';
-import 'package:coin_wise/constants/sizes.dart';
 import 'package:coin_wise/widgets/widgets.dart';
-import 'package:coin_wise/constants/colors.dart';
-import 'package:coin_wise/constants/text_styles.dart';
 import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/models/transaction_model.dart';
-import 'package:coin_wise/screens/action_screens/categories.dart';
+import 'package:coin_wise/screens/action_screens/categories/categories.dart';
 
 bool? isAdd;
 Color? ontapColor;
@@ -42,7 +44,6 @@ class AddScreen extends StatelessWidget {
     isAdd ?? false;
     ////////////// TO DO - null check operator used in a null value ////////////////////////
     if (isAdd! == false && inUpdate == true) {
-      print('working');
       _updateAmoutnController.text = selectedTransactionData!.amount.toString();
       _updateNoteController.text = selectedTransactionData!.note;
     }

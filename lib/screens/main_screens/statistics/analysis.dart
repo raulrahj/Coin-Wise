@@ -1,12 +1,12 @@
+import 'package:coin_wise/core/constants/colors.dart';
+import 'package:coin_wise/core/constants/data.dart';
+import 'package:coin_wise/core/constants/sizes.dart';
+import 'package:coin_wise/core/constants/text_styles.dart';
+import 'package:coin_wise/widgets/common_container.dart';
 import 'package:flutter/material.dart';
 import 'package:coin_wise/widgets/graph.dart';
-import 'package:coin_wise/constants/data.dart';
-import 'package:coin_wise/widgets/widgets.dart';
-import 'package:coin_wise/constants/sizes.dart';
-import 'package:coin_wise/constants/colors.dart';
 import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/models/category_model.dart';
-import 'package:coin_wise/constants/text_styles.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 
 class Analysis extends StatefulWidget {
@@ -174,7 +174,7 @@ class _AnalysisState extends State<Analysis> {
                           );
                         });
                   })
-              : Text('')
+              :const Text('')
         ],
       ),
     );

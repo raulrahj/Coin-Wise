@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'package:coin_wise/core/constants/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:coin_wise/constants/colors.dart';
 import 'package:coin_wise/widgets/bottom_nav.dart';
 import 'package:coin_wise/database/profiledata.dart';
 import 'package:coin_wise/database/category_db.dart';

@@ -1,4 +1,4 @@
-import 'package:coin_wise/constants/data.dart';
+import 'package:coin_wise/core/constants/data.dart';
 import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/models/transaction_model.dart';

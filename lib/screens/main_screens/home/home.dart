@@ -1,14 +1,14 @@
 import 'dart:io';
-import 'package:coin_wise/constants/data.dart';
-import 'package:coin_wise/screens/main_screens/analysis.dart';
+import 'package:coin_wise/core/constants/colors.dart';
+import 'package:coin_wise/core/constants/sizes.dart';
+import 'package:coin_wise/core/constants/text_styles.dart';
+import 'package:coin_wise/widgets/common_container.dart';
+import 'package:coin_wise/widgets/default_container.dart';
 import 'package:flutter/material.dart';
 import 'package:coin_wise/widgets/widgets.dart';
-import 'package:coin_wise/constants/sizes.dart';
-import 'package:coin_wise/constants/colors.dart';
 import 'package:coin_wise/widgets/list_views.dart';
 import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/database/profiledata.dart';
-import 'package:coin_wise/constants/text_styles.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 
 final String? profilepic = loginData?.profilePhoto;

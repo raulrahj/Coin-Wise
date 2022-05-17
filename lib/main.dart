@@ -1,8 +1,6 @@
-import 'package:coin_wise/screens/intro_screens/profile_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:coin_wise/app_themes.dart';
+import 'package:coin_wise/config/app_themes.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:coin_wise/database/profiledata.dart';
 import 'package:coin_wise/database/category_db.dart';
@@ -15,6 +13,7 @@ GlobalKey<NavigatorState>? navigatorKey = GlobalKey<NavigatorState>();
 bool? dark;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
   AwesomeNotifications().initialize(null, [
     NotificationChannel(
       channelKey: 'key1',
@@ -53,20 +52,23 @@ class MyApp extends StatelessWidget {
       statusBarColor: Colors.transparent,
       // systemNavigationBarColor: Colors.transparent
     ));
-    return ChangeNotifierProvider(
-      create: (_) => ThemeModel(),
-      child: Consumer<ThemeModel>(
-          builder: (context, ThemeModel themeNotifier, child) {
-        dark = themeNotifier.isDark;
+    // return MultiBlocProvider(
+    //   providers: [
+    //     BlocProvider<ThemeCubit>(
+    //       create: (BuildContext context) => ThemeCubit(),
+    //     ),
+    //   ],
+    //   child: BlocBuilder<ThemeCubit, ThemeState>(builder: (context, state) {
+        // dark = themeNotifier.isDark;
         return MaterialApp(
           navigatorKey: navigatorKey,
           debugShowCheckedModeBanner: false,
           title: 'Coin Wise',
-          theme:
-              themeNotifier.isDark ? MyThemes.darkTheme : MyThemes.lightTheme,
+          theme:MyThemes.darkTheme,
+          // state.isDark ? MyThemes.darkTheme : MyThemes.lightTheme,
           home: const SplashScreen(),
         );
-      }),
-    );
+  //     }),
+  //   );
   }
 }

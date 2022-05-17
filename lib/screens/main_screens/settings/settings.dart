@@ -1,9 +1,12 @@
 import 'dart:io';
+import 'package:coin_wise/core/constants/colors.dart';
+import 'package:coin_wise/core/constants/sizes.dart';
+import 'package:coin_wise/screens/main_screens/settings/widgets/about_app.dart';
+import 'package:coin_wise/screens/main_screens/settings/widgets/theme_popup.dart';
+import 'package:coin_wise/widgets/default_container.dart';
+import 'package:coin_wise/widgets/switch_button.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:coin_wise/widgets/widgets.dart';
-import 'package:coin_wise/constants/sizes.dart';
-import 'package:coin_wise/constants/colors.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:coin_wise/database/profiledata.dart';
 import 'package:coin_wise/database/transactions_db.dart';

@@ -1,7 +1,7 @@
+import 'package:coin_wise/core/constants/colors.dart';
+import 'package:coin_wise/core/constants/text_styles.dart';
 import 'package:coin_wise/main.dart';
 import 'package:flutter/material.dart';
-import 'package:coin_wise/constants/colors.dart';
-import 'package:coin_wise/constants/text_styles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum currentTheme {

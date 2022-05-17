@@ -130,7 +130,6 @@ class CategoryFunctions {
         // }
       }
       incomeAmountCategoryListner.notifyListeners();
-      print(incomeAmountCategoryListner.value.length);
     }
   }
 
