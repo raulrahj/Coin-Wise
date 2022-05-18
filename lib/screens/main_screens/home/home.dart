@@ -2,16 +2,14 @@ import 'dart:io';
 import 'package:coin_wise/core/constants/colors.dart';
 import 'package:coin_wise/core/constants/sizes.dart';
 import 'package:coin_wise/core/constants/text_styles.dart';
+import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
 import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
-import 'package:coin_wise/models/transaction_model.dart';
 import 'package:coin_wise/widgets/common_container.dart';
 import 'package:coin_wise/widgets/default_container.dart';
 import 'package:flutter/material.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:coin_wise/widgets/list_views.dart';
-import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/database/profiledata.dart';
-import 'package:coin_wise/database/transactions_db.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 final String? profilepic = loginData?.profilePhoto;
@@ -25,10 +23,12 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<TransactionsBloc>().add(GetAllTransactions());
+    context.read<TransactionsBloc>().add(const GetAllTransactions());
+    context.read<CategoryBloc>().add(const CategoryEvent.getAllCategory());
     Color bg = Theme.of(context).primaryColorDark;
     Color bgSub = Theme.of(context).primaryColorLight;
-    CategoryFunctions.instance.refreshUI();
+
+    // CategoryFunctions.instance.refreshUI();
     ProflieDb().refreshProfile();
     // TransactionDbFunctions.instance.refreshData();
     final String message =

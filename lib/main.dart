@@ -1,3 +1,4 @@
+import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
 import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
 import 'package:coin_wise/logic/cubit/theme/theme_cubit.dart';
 import 'package:flutter/services.dart';
@@ -6,7 +7,6 @@ import 'package:coin_wise/config/app_themes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:coin_wise/database/profiledata.dart';
-import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/models/transaction_model.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
@@ -40,7 +40,7 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(ProfileModelAdapter().typeId)) {
     Hive.registerAdapter(ProfileModelAdapter());
   }
-  CategoryFunctions.instance.refreshUI();
+  // CategoryFunctions.instance.refreshUI();
   ProflieDb().refreshProfile();
 
   runApp(const MyApp());
@@ -63,7 +63,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<ThemeCubit>(
           create: (BuildContext  context) => ThemeCubit()
-        )
+        ),
+        BlocProvider<CategoryBloc>(
+          create: (BuildContext context)=> CategoryBloc())
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(builder: (context, state) {
         // dark = themeNotifier.isDark;

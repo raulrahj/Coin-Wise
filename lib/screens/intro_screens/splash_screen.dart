@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'package:coin_wise/core/constants/colors.dart';
+import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:coin_wise/widgets/bottom_nav.dart';
 import 'package:coin_wise/database/profiledata.dart';
-import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/screens/intro_screens/onboarding_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 bool isSplash=true;
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -27,7 +28,8 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     TransactionDbFunctions.instance.refreshData();
-    CategoryFunctions.instance.refreshUI();
+    context.read<CategoryBloc>().add(const CategoryEvent.getAllCategory());
+    // CategoryFunctions.instance.refreshUI();
     // TransactionDbFunctions.instance.getWallet();
     ProflieDb().refreshProfile();
     super.initState();

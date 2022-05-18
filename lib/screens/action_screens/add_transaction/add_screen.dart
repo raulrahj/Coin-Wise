@@ -336,7 +336,7 @@ class AddScreen extends StatelessWidget {
 
   Future addTransaction() async {
     final _noteText = _noteController.text;
-    if (date == null) {
+    if (date == null ||globalCategory==null) {
       return;
     }
 

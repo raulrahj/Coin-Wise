@@ -1,11 +1,11 @@
-
 //______________________________ CATEGORY DELETION POPUP SCREEN___________________
 
 import 'package:coin_wise/core/constants/colors.dart';
-import 'package:coin_wise/database/category_db.dart';
+import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-Widget deletionPopup(context, value) {
+Widget deletionPopup(context, String value) {
   return SimpleDialog(
     title: Column(
       mainAxisSize: MainAxisSize.min,
@@ -15,17 +15,21 @@ Widget deletionPopup(context, value) {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('Cancel',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge!
-                        .copyWith(fontSize: 16))),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Cancel',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge!
+                    .copyWith(fontSize: 16),
+              ),
+            ),
             TextButton(
                 onPressed: () async {
-                  CategoryFunctions.instance.deleteCategory(value, context);
+                  // CategoryFunctions.instance.deleteCategory(value, context);
+                  context.read<CategoryBloc>().add(DeleteCategory(keey: value));
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       behavior: SnackBarBehavior
                           .floating, //behavior used to change decoration or change default config
@@ -40,7 +44,7 @@ Widget deletionPopup(context, value) {
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge!
-                        .copyWith(fontSize: 16)))
+                        .copyWith(fontSize: 16),),),
           ],
         )
       ],

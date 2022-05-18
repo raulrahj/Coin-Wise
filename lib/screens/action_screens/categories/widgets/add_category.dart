@@ -6,10 +6,12 @@ import 'package:coin_wise/core/constants/colors.dart';
 import 'package:coin_wise/core/constants/data.dart';
 import 'package:coin_wise/core/constants/sizes.dart';
 import 'package:coin_wise/database/category_db.dart';
+import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
 import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/screens/action_screens/add_transaction/add_screen.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 final _categoryNameController = TextEditingController();
 
@@ -134,7 +136,8 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
                       field: categoryType == 0
                           ? CategoryField.income
                           : CategoryField.expense);
-                  CategoryFunctions().insertCategory(_categories);
+                          context.read<CategoryBloc>().add(AddCategory(model: _categories));
+                  // CategoryFunctions().insertCategory(_categories);
                   _categoryNameController.clear();
                   Navigator.of(context).pop();
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(

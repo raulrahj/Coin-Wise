@@ -6,30 +6,18 @@ import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 
-class PieChartSample3 extends StatelessWidget {
-  const PieChartSample3({Key? key}) : super(key: key);
-
-  // final dataMap = <String, double>{
-  //   "Flutter": 5004223,
-  //   "dart":400,
-
-  // };
-
-  // final colorList = <Color>[
-  //   Colors.greenAccent,
-  // ];
-
+class PieChart1 extends StatelessWidget {
+  final List<CategoryModel> statisticsList;
+  const PieChart1({Key? key,required this.statisticsList}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Color bg = Theme.of(context).primaryColor;
     TransactionDbFunctions.instance.refreshData();
 
-    return ValueListenableBuilder(
-        valueListenable: CategoryFunctions.instance.multiAmountCategoryListener,
-        builder: (context, List<CategoryModel> newListener, child) {
-          final list = CategoryFunctions
-              .instance.multiAmountCategoryListener.value
-              .toList();
+    // return ValueListenableBuilder(
+    //     valueListenable: CategoryFunctions.instance.multiAmountCategoryListener,
+    //     builder: (context, List<CategoryModel> newListener, child) {
+          final list = statisticsList;
           if (list.isEmpty) {
             // throw 'list value is empty';
 
@@ -40,30 +28,7 @@ class PieChartSample3 extends StatelessWidget {
           };
 
           return Container(
-              child: map1.values.isEmpty
-                  ? Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                          SizedBox(
-                            height: displayHeight(context) * .2,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Icon(
-                                Icons.find_in_page,
-                                size: 40,
-                              ),
-                              Text(
-                                "No data found !",
-                                style: boxTitle,
-                              )
-                            ],
-                          ),
-                          const Text('add new transactions for monitering...'),
-                        ])
-                  : Padding(
+              child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: AspectRatio(
                         aspectRatio: 1.2,
@@ -93,8 +58,6 @@ class PieChartSample3 extends StatelessWidget {
                         ),
                       ),
                     ));
-        });
+        // });
   }
 }
-
- 

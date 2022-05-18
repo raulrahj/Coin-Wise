@@ -1,10 +1,13 @@
+
 import 'package:coin_wise/core/constants/data.dart';
 import 'package:coin_wise/database/category_db.dart';
+import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
 import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/models/transaction_model.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 bool isFilter = false;
 
@@ -171,14 +174,15 @@ Future<void> defaultCategoryAdding() async {
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         name: element,
         field: CategoryField.income);
-    CategoryFunctions.instance.insertCategory(_defaultCategories);
+        // context.read<CategoryBloc>().add();
+    // CategoryFunctions.instance.insertCategory(_defaultCategories);
   });
   Future.forEach(defaultExpenseCategories, (String element) {
     final _defaultCategories = CategoryModel(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         name: element,
         field: CategoryField.expense);
-    CategoryFunctions.instance.insertCategory(_defaultCategories);
+    // CategoryFunctions.instance.insertCategory(_defaultCategories);
   });
 }
 // sort((first,csecond)=> first.date.comparedTo(second.date));

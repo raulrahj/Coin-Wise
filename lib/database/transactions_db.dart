@@ -63,7 +63,7 @@ class TransactionDbFunctions {
       transactionExpenseListener.notifyListeners();
       transactionIncomeListener.notifyListeners();
     });
-    refreshCategoryAmountListners();
+    // refreshCategoryAmountListners();
   }
 
   //<<<<<<<<<<< GETTING DATA FROM DATABASE >>>>>>>>>>>>>>>>
