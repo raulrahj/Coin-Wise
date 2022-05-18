@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:coin_wise/core/constants/data.dart';
 import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/models/transaction_model.dart';
+import 'package:coin_wise/widgets/dropdown_category.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -13,19 +15,19 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     on<GetAllCategory>((event, emit) async {
       final categoryDB = await Hive.openBox<CategoryModel>('categoryDb');
 
-      emit(CategoryState(
-          categoryList: categoryDB.values.toList(),
+      emit(state.copyWith( categoryList: categoryDB.values.toList(),
           expenseCategoryList: [],
           incomeCategoryList: [],
           incomeCategoryAmount: [],
-          expenseCategoryAmout: []));
+          expenseCategoryAmout: [],
+          dropDownValue: state.dropDownValue));
     });
     on<AddCategory>((event, emit) async {
       final categoryDB = await Hive.openBox<CategoryModel>('categoryDb');
       // await categoryDB.clear();
       categoryDB.put(event.model.id, event.model);
       add(const CategoryEvent.getAllCategory());
-      emit(state.copyWith(categoryList: state.categoryList));
+      emit(state.copyWith(categoryList: state.categoryList,incomeCategoryList: state.incomeCategoryList,expenseCategoryList: state.expenseCategoryList,));
     });
     on<UpdateCategory>((event, emit) async {
       final categoryDb = await Hive.openBox<CategoryModel>('categoryDb');
@@ -196,6 +198,28 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
           expenseCategoryList: state.expenseCategoryList,
           incomeCategoryAmount: incomeCategoryAmountList,
           expenseCategoryAmout: expenseCategoryAmountList));
+    });
+    on<DropdownOnChange>((event, emit) async{
+        emit(state.copyWith( categoryList: state.categoryList,
+          expenseCategoryList: state.expenseCategoryList,
+          incomeCategoryList: state.incomeCategoryList,
+          incomeCategoryAmount: state.incomeCategoryAmount,
+          expenseCategoryAmout: state.expenseCategoryAmout,
+          visibleList: event.changeList,
+          dropDownValue: event.newValue
+          ));
+    });
+    on<CategoryDropDownChange>((event, emit) {
+      emit(state.copyWith(categoryDropDown: event.newCategoryValue,categoryList: state.categoryList,
+        expenseCategoryList: state.expenseCategoryList,
+          incomeCategoryList: state.incomeCategoryList,
+          incomeCategoryAmount: state.incomeCategoryAmount,
+          expenseCategoryAmout: state.expenseCategoryAmout,
+          // visibleList: state.changeList,
+          // dropDownValue: event.newValue
+          isIncome: event.isIncome,
+          isAdd: event.isAdd
+      ));
     });
   }
 }

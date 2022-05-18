@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/models/transaction_model.dart';
 import 'package:coin_wise/widgets/dropdown_category.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -12,7 +13,10 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
   TransactionsBloc() : super(TransactionsState.initial()) {
     on<GetAllTransactions>((event, emit) async {
       final data = await Hive.openBox<TransactionModel>('transaction_Db');
-      emit(TransactionsState(transactionList: data.values.toList()));
+      emit(state.copyWith(
+          transactionList: data.values.toList(),
+          isAdd: state.isAdd,
+          isIncome: state.isIncome));
     });
     on<AddTransaction>((event, emit) async {
       final transactionDB =
@@ -22,18 +26,24 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
       // emit(state.copyWith(TransactionsState(transactionList: )))
       add(const GetAllTransactions());
     });
-    on<UpdateTransaction>((event, emit) async{
-            final _transactionDb =
-        await Hive.openBox<TransactionModel>('transaction_Db');
-    _transactionDb.put(event.id, event.model);
-    add(const TransactionsEvent.getAllTransactions());
-    dropDownValue = null;
+    on<UpdateTransaction>((event, emit) async {
+      final _transactionDb =
+          await Hive.openBox<TransactionModel>('transaction_Db');
+      _transactionDb.put(event.id, event.model);
+      add(const TransactionsEvent.getAllTransactions());
+      dropDownValue = null;
     });
-    on<DeleteTransaction>((event, emit) async{
-       final _transactionDb =
-        await Hive.openBox<TransactionModel>('transaction_Db');
-    _transactionDb.delete(event.keey);
-    add(const TransactionsEvent.getAllTransactions());
+    on<DeleteTransaction>((event, emit) async {
+      final _transactionDb =
+          await Hive.openBox<TransactionModel>('transaction_Db');
+      _transactionDb.delete(event.keey);
+      add(const TransactionsEvent.getAllTransactions());
+    });
+    on<TransactionController>((event, emit) {
+      emit(state.copyWith(
+          transactionList: state.transactionList,
+          isAdd: event.isAdd,
+          isIncome: event.isIncome));
     });
   }
 }

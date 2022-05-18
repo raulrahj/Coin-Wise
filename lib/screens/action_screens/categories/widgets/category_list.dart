@@ -1,9 +1,12 @@
 
 import 'package:coin_wise/core/constants/colors.dart';
+import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
 import 'package:coin_wise/models/category_model.dart';
+import 'package:coin_wise/screens/action_screens/categories/widgets/add_category.dart';
 import 'package:coin_wise/screens/action_screens/categories/widgets/delete_category.dart';
 import 'package:coin_wise/screens/action_screens/categories/widgets/update_category.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoryBuilder extends StatelessWidget {
   const CategoryBuilder({required this.categoryList, this.color, Key? key})
@@ -42,22 +45,28 @@ class CategoryBuilder extends StatelessWidget {
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(15.0))),
                     onSelected: (value) {
-                      (value == 1)
-                          ? showDialog(
+                      if(value == 1){
+                           showDialog(
                               context: context,
                               builder: (ctx) {
                                 return deletionPopup(context, data.id);
-                              })
-                          : showDialog(
+                              });
+                       }else{
+                          BlocListener<CategoryBloc, CategoryState>(
+                  listener: (context, state) {
+                    // TODO: implement listener
+                         context.read<CategoryBloc>().add(CategoryDropDownChange(newCategoryValue: state.categoryDropDown, isIncome: state.isIncome, isAdd: false));
+                  },
+                  //child:_,
+                );
+                          showDialog(
                               context: context,
                               builder: (ctx) {
-                                return UpdateCategoryPopup(
-                                  currentVal: categoryList,
-                                  oldName: data.name,
-                                  oldField: data.field,
-                                  oldId: data.id,
+                                return AddCategoryPopup(
+                                 oldData: data,
                                 );
                               });
+                       }
                     },
                     itemBuilder: (context) {
                       return [

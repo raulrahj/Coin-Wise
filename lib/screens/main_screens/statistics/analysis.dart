@@ -37,43 +37,51 @@ class _AnalysisState extends State<Analysis> {
           SizedBox(
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
               child: showBox(
                 color: bg,
                 y: displayHeight(context) * 0.05,
                 x: displayWidth(context) * 0.05,
                 alignment: Alignment.center,
-                item: DropdownButton(
-                  underline: const SizedBox(),
-                  alignment: Alignment.centerRight,
-                  value: dropDownVal,
-                  icon: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        width: displayWidth(context) * .6,
+                item: BlocBuilder<CategoryBloc, CategoryState>(
+                  builder: (context, state) {
+                    return DropdownButton(
+                      underline: const SizedBox(),
+                      alignment: Alignment.centerRight,
+                      value: dropDownVal,
+                      icon: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          SizedBox(
+                            width: displayWidth(context) * .6,
+                          ),
+                          const Icon(
+                            Icons.arrow_drop_down,
+                            color: defaultLightColor,
+                          ),
+                        ],
                       ),
-                      const Icon(
-                        Icons.arrow_drop_down,
-                        color: defaultLightColor,
-                      ),
-                    ],
-                  ),
-                  items: fields.map((String items) {
-                    return DropdownMenuItem(
-                      value: items,
-                      child: Text(
-                        items,
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              fontSize: 16,
-                            ),
-                      ),
+                      items: fields.map((String items) {
+                        return DropdownMenuItem(
+                          value: items,
+                          child: Text(
+                            items,
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      fontSize: 16,
+                                    ),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        context.read<CategoryBloc>().add(DropdownOnChange(newValue: value.toString(),changeList: state.dropDownValue==fields[1]? state.expenseCategoryList:state.incomeCategoryList));
+                        dropDownVal=state.dropDownValue;
+                        // setState(() {
+                        //   dropDownVal = value.toString();
+                        // });
+                      },
                     );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      dropDownVal = value.toString();
-                    });
                   },
                 ),
               ),
@@ -88,7 +96,7 @@ class _AnalysisState extends State<Analysis> {
                 //     incomeCategories: state.incomeCategoryList,
                 //     expenseCategories: state.expenseCategoryList));
                 context.read<CategoryBloc>().add(FilterCategories());
-                return AnalysisView(dataList: state.incomeCategoryList);
+                return AnalysisView(dataList: state.visibleList);
               },
             ),
           ),

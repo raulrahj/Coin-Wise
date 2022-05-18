@@ -23,6 +23,9 @@ mixin _$TransactionsEvent {
     required TResult Function(String id, TransactionModel model)
         updateTransaction,
     required TResult Function(String keey) deleteTransaction,
+    required TResult Function(bool isAdd, bool isIncome,
+            List<CategoryModel> categories, String dropDownValue)
+        transactionController,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,6 +34,9 @@ mixin _$TransactionsEvent {
     TResult Function(TransactionModel model)? addTransaction,
     TResult Function(String id, TransactionModel model)? updateTransaction,
     TResult Function(String keey)? deleteTransaction,
+    TResult Function(bool isAdd, bool isIncome, List<CategoryModel> categories,
+            String dropDownValue)?
+        transactionController,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,6 +45,9 @@ mixin _$TransactionsEvent {
     TResult Function(TransactionModel model)? addTransaction,
     TResult Function(String id, TransactionModel model)? updateTransaction,
     TResult Function(String keey)? deleteTransaction,
+    TResult Function(bool isAdd, bool isIncome, List<CategoryModel> categories,
+            String dropDownValue)?
+        transactionController,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +57,8 @@ mixin _$TransactionsEvent {
     required TResult Function(AddTransaction value) addTransaction,
     required TResult Function(UpdateTransaction value) updateTransaction,
     required TResult Function(DeleteTransaction value) deleteTransaction,
+    required TResult Function(TransactionController value)
+        transactionController,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +67,7 @@ mixin _$TransactionsEvent {
     TResult Function(AddTransaction value)? addTransaction,
     TResult Function(UpdateTransaction value)? updateTransaction,
     TResult Function(DeleteTransaction value)? deleteTransaction,
+    TResult Function(TransactionController value)? transactionController,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,6 +76,7 @@ mixin _$TransactionsEvent {
     TResult Function(AddTransaction value)? addTransaction,
     TResult Function(UpdateTransaction value)? updateTransaction,
     TResult Function(DeleteTransaction value)? deleteTransaction,
+    TResult Function(TransactionController value)? transactionController,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -132,6 +145,9 @@ class _$GetAllTransactions implements GetAllTransactions {
     required TResult Function(String id, TransactionModel model)
         updateTransaction,
     required TResult Function(String keey) deleteTransaction,
+    required TResult Function(bool isAdd, bool isIncome,
+            List<CategoryModel> categories, String dropDownValue)
+        transactionController,
   }) {
     return getAllTransactions();
   }
@@ -143,6 +159,9 @@ class _$GetAllTransactions implements GetAllTransactions {
     TResult Function(TransactionModel model)? addTransaction,
     TResult Function(String id, TransactionModel model)? updateTransaction,
     TResult Function(String keey)? deleteTransaction,
+    TResult Function(bool isAdd, bool isIncome, List<CategoryModel> categories,
+            String dropDownValue)?
+        transactionController,
   }) {
     return getAllTransactions?.call();
   }
@@ -154,6 +173,9 @@ class _$GetAllTransactions implements GetAllTransactions {
     TResult Function(TransactionModel model)? addTransaction,
     TResult Function(String id, TransactionModel model)? updateTransaction,
     TResult Function(String keey)? deleteTransaction,
+    TResult Function(bool isAdd, bool isIncome, List<CategoryModel> categories,
+            String dropDownValue)?
+        transactionController,
     required TResult orElse(),
   }) {
     if (getAllTransactions != null) {
@@ -169,6 +191,8 @@ class _$GetAllTransactions implements GetAllTransactions {
     required TResult Function(AddTransaction value) addTransaction,
     required TResult Function(UpdateTransaction value) updateTransaction,
     required TResult Function(DeleteTransaction value) deleteTransaction,
+    required TResult Function(TransactionController value)
+        transactionController,
   }) {
     return getAllTransactions(this);
   }
@@ -180,6 +204,7 @@ class _$GetAllTransactions implements GetAllTransactions {
     TResult Function(AddTransaction value)? addTransaction,
     TResult Function(UpdateTransaction value)? updateTransaction,
     TResult Function(DeleteTransaction value)? deleteTransaction,
+    TResult Function(TransactionController value)? transactionController,
   }) {
     return getAllTransactions?.call(this);
   }
@@ -191,6 +216,7 @@ class _$GetAllTransactions implements GetAllTransactions {
     TResult Function(AddTransaction value)? addTransaction,
     TResult Function(UpdateTransaction value)? updateTransaction,
     TResult Function(DeleteTransaction value)? deleteTransaction,
+    TResult Function(TransactionController value)? transactionController,
     required TResult orElse(),
   }) {
     if (getAllTransactions != null) {
@@ -274,6 +300,9 @@ class _$AddTransaction implements AddTransaction {
     required TResult Function(String id, TransactionModel model)
         updateTransaction,
     required TResult Function(String keey) deleteTransaction,
+    required TResult Function(bool isAdd, bool isIncome,
+            List<CategoryModel> categories, String dropDownValue)
+        transactionController,
   }) {
     return addTransaction(model);
   }
@@ -285,6 +314,9 @@ class _$AddTransaction implements AddTransaction {
     TResult Function(TransactionModel model)? addTransaction,
     TResult Function(String id, TransactionModel model)? updateTransaction,
     TResult Function(String keey)? deleteTransaction,
+    TResult Function(bool isAdd, bool isIncome, List<CategoryModel> categories,
+            String dropDownValue)?
+        transactionController,
   }) {
     return addTransaction?.call(model);
   }
@@ -296,6 +328,9 @@ class _$AddTransaction implements AddTransaction {
     TResult Function(TransactionModel model)? addTransaction,
     TResult Function(String id, TransactionModel model)? updateTransaction,
     TResult Function(String keey)? deleteTransaction,
+    TResult Function(bool isAdd, bool isIncome, List<CategoryModel> categories,
+            String dropDownValue)?
+        transactionController,
     required TResult orElse(),
   }) {
     if (addTransaction != null) {
@@ -311,6 +346,8 @@ class _$AddTransaction implements AddTransaction {
     required TResult Function(AddTransaction value) addTransaction,
     required TResult Function(UpdateTransaction value) updateTransaction,
     required TResult Function(DeleteTransaction value) deleteTransaction,
+    required TResult Function(TransactionController value)
+        transactionController,
   }) {
     return addTransaction(this);
   }
@@ -322,6 +359,7 @@ class _$AddTransaction implements AddTransaction {
     TResult Function(AddTransaction value)? addTransaction,
     TResult Function(UpdateTransaction value)? updateTransaction,
     TResult Function(DeleteTransaction value)? deleteTransaction,
+    TResult Function(TransactionController value)? transactionController,
   }) {
     return addTransaction?.call(this);
   }
@@ -333,6 +371,7 @@ class _$AddTransaction implements AddTransaction {
     TResult Function(AddTransaction value)? addTransaction,
     TResult Function(UpdateTransaction value)? updateTransaction,
     TResult Function(DeleteTransaction value)? deleteTransaction,
+    TResult Function(TransactionController value)? transactionController,
     required TResult orElse(),
   }) {
     if (addTransaction != null) {
@@ -432,6 +471,9 @@ class _$UpdateTransaction implements UpdateTransaction {
     required TResult Function(String id, TransactionModel model)
         updateTransaction,
     required TResult Function(String keey) deleteTransaction,
+    required TResult Function(bool isAdd, bool isIncome,
+            List<CategoryModel> categories, String dropDownValue)
+        transactionController,
   }) {
     return updateTransaction(id, model);
   }
@@ -443,6 +485,9 @@ class _$UpdateTransaction implements UpdateTransaction {
     TResult Function(TransactionModel model)? addTransaction,
     TResult Function(String id, TransactionModel model)? updateTransaction,
     TResult Function(String keey)? deleteTransaction,
+    TResult Function(bool isAdd, bool isIncome, List<CategoryModel> categories,
+            String dropDownValue)?
+        transactionController,
   }) {
     return updateTransaction?.call(id, model);
   }
@@ -454,6 +499,9 @@ class _$UpdateTransaction implements UpdateTransaction {
     TResult Function(TransactionModel model)? addTransaction,
     TResult Function(String id, TransactionModel model)? updateTransaction,
     TResult Function(String keey)? deleteTransaction,
+    TResult Function(bool isAdd, bool isIncome, List<CategoryModel> categories,
+            String dropDownValue)?
+        transactionController,
     required TResult orElse(),
   }) {
     if (updateTransaction != null) {
@@ -469,6 +517,8 @@ class _$UpdateTransaction implements UpdateTransaction {
     required TResult Function(AddTransaction value) addTransaction,
     required TResult Function(UpdateTransaction value) updateTransaction,
     required TResult Function(DeleteTransaction value) deleteTransaction,
+    required TResult Function(TransactionController value)
+        transactionController,
   }) {
     return updateTransaction(this);
   }
@@ -480,6 +530,7 @@ class _$UpdateTransaction implements UpdateTransaction {
     TResult Function(AddTransaction value)? addTransaction,
     TResult Function(UpdateTransaction value)? updateTransaction,
     TResult Function(DeleteTransaction value)? deleteTransaction,
+    TResult Function(TransactionController value)? transactionController,
   }) {
     return updateTransaction?.call(this);
   }
@@ -491,6 +542,7 @@ class _$UpdateTransaction implements UpdateTransaction {
     TResult Function(AddTransaction value)? addTransaction,
     TResult Function(UpdateTransaction value)? updateTransaction,
     TResult Function(DeleteTransaction value)? deleteTransaction,
+    TResult Function(TransactionController value)? transactionController,
     required TResult orElse(),
   }) {
     if (updateTransaction != null) {
@@ -582,6 +634,9 @@ class _$DeleteTransaction implements DeleteTransaction {
     required TResult Function(String id, TransactionModel model)
         updateTransaction,
     required TResult Function(String keey) deleteTransaction,
+    required TResult Function(bool isAdd, bool isIncome,
+            List<CategoryModel> categories, String dropDownValue)
+        transactionController,
   }) {
     return deleteTransaction(keey);
   }
@@ -593,6 +648,9 @@ class _$DeleteTransaction implements DeleteTransaction {
     TResult Function(TransactionModel model)? addTransaction,
     TResult Function(String id, TransactionModel model)? updateTransaction,
     TResult Function(String keey)? deleteTransaction,
+    TResult Function(bool isAdd, bool isIncome, List<CategoryModel> categories,
+            String dropDownValue)?
+        transactionController,
   }) {
     return deleteTransaction?.call(keey);
   }
@@ -604,6 +662,9 @@ class _$DeleteTransaction implements DeleteTransaction {
     TResult Function(TransactionModel model)? addTransaction,
     TResult Function(String id, TransactionModel model)? updateTransaction,
     TResult Function(String keey)? deleteTransaction,
+    TResult Function(bool isAdd, bool isIncome, List<CategoryModel> categories,
+            String dropDownValue)?
+        transactionController,
     required TResult orElse(),
   }) {
     if (deleteTransaction != null) {
@@ -619,6 +680,8 @@ class _$DeleteTransaction implements DeleteTransaction {
     required TResult Function(AddTransaction value) addTransaction,
     required TResult Function(UpdateTransaction value) updateTransaction,
     required TResult Function(DeleteTransaction value) deleteTransaction,
+    required TResult Function(TransactionController value)
+        transactionController,
   }) {
     return deleteTransaction(this);
   }
@@ -630,6 +693,7 @@ class _$DeleteTransaction implements DeleteTransaction {
     TResult Function(AddTransaction value)? addTransaction,
     TResult Function(UpdateTransaction value)? updateTransaction,
     TResult Function(DeleteTransaction value)? deleteTransaction,
+    TResult Function(TransactionController value)? transactionController,
   }) {
     return deleteTransaction?.call(this);
   }
@@ -641,6 +705,7 @@ class _$DeleteTransaction implements DeleteTransaction {
     TResult Function(AddTransaction value)? addTransaction,
     TResult Function(UpdateTransaction value)? updateTransaction,
     TResult Function(DeleteTransaction value)? deleteTransaction,
+    TResult Function(TransactionController value)? transactionController,
     required TResult orElse(),
   }) {
     if (deleteTransaction != null) {
@@ -661,9 +726,226 @@ abstract class DeleteTransaction implements TransactionsEvent {
 }
 
 /// @nodoc
+abstract class _$$TransactionControllerCopyWith<$Res> {
+  factory _$$TransactionControllerCopyWith(_$TransactionController value,
+          $Res Function(_$TransactionController) then) =
+      __$$TransactionControllerCopyWithImpl<$Res>;
+  $Res call(
+      {bool isAdd,
+      bool isIncome,
+      List<CategoryModel> categories,
+      String dropDownValue});
+}
+
+/// @nodoc
+class __$$TransactionControllerCopyWithImpl<$Res>
+    extends _$TransactionsEventCopyWithImpl<$Res>
+    implements _$$TransactionControllerCopyWith<$Res> {
+  __$$TransactionControllerCopyWithImpl(_$TransactionController _value,
+      $Res Function(_$TransactionController) _then)
+      : super(_value, (v) => _then(v as _$TransactionController));
+
+  @override
+  _$TransactionController get _value => super._value as _$TransactionController;
+
+  @override
+  $Res call({
+    Object? isAdd = freezed,
+    Object? isIncome = freezed,
+    Object? categories = freezed,
+    Object? dropDownValue = freezed,
+  }) {
+    return _then(_$TransactionController(
+      isAdd: isAdd == freezed
+          ? _value.isAdd
+          : isAdd // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isIncome: isIncome == freezed
+          ? _value.isIncome
+          : isIncome // ignore: cast_nullable_to_non_nullable
+              as bool,
+      categories: categories == freezed
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<CategoryModel>,
+      dropDownValue: dropDownValue == freezed
+          ? _value.dropDownValue
+          : dropDownValue // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TransactionController implements TransactionController {
+  const _$TransactionController(
+      {required this.isAdd,
+      required this.isIncome,
+      required final List<CategoryModel> categories,
+      required this.dropDownValue})
+      : _categories = categories;
+
+  @override
+  final bool isAdd;
+  @override
+  final bool isIncome;
+  final List<CategoryModel> _categories;
+  @override
+  List<CategoryModel> get categories {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categories);
+  }
+
+  @override
+  final String dropDownValue;
+
+  @override
+  String toString() {
+    return 'TransactionsEvent.transactionController(isAdd: $isAdd, isIncome: $isIncome, categories: $categories, dropDownValue: $dropDownValue)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TransactionController &&
+            const DeepCollectionEquality().equals(other.isAdd, isAdd) &&
+            const DeepCollectionEquality().equals(other.isIncome, isIncome) &&
+            const DeepCollectionEquality()
+                .equals(other._categories, _categories) &&
+            const DeepCollectionEquality()
+                .equals(other.dropDownValue, dropDownValue));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(isAdd),
+      const DeepCollectionEquality().hash(isIncome),
+      const DeepCollectionEquality().hash(_categories),
+      const DeepCollectionEquality().hash(dropDownValue));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$TransactionControllerCopyWith<_$TransactionController> get copyWith =>
+      __$$TransactionControllerCopyWithImpl<_$TransactionController>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getAllTransactions,
+    required TResult Function(TransactionModel model) addTransaction,
+    required TResult Function(String id, TransactionModel model)
+        updateTransaction,
+    required TResult Function(String keey) deleteTransaction,
+    required TResult Function(bool isAdd, bool isIncome,
+            List<CategoryModel> categories, String dropDownValue)
+        transactionController,
+  }) {
+    return transactionController(isAdd, isIncome, categories, dropDownValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? getAllTransactions,
+    TResult Function(TransactionModel model)? addTransaction,
+    TResult Function(String id, TransactionModel model)? updateTransaction,
+    TResult Function(String keey)? deleteTransaction,
+    TResult Function(bool isAdd, bool isIncome, List<CategoryModel> categories,
+            String dropDownValue)?
+        transactionController,
+  }) {
+    return transactionController?.call(
+        isAdd, isIncome, categories, dropDownValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getAllTransactions,
+    TResult Function(TransactionModel model)? addTransaction,
+    TResult Function(String id, TransactionModel model)? updateTransaction,
+    TResult Function(String keey)? deleteTransaction,
+    TResult Function(bool isAdd, bool isIncome, List<CategoryModel> categories,
+            String dropDownValue)?
+        transactionController,
+    required TResult orElse(),
+  }) {
+    if (transactionController != null) {
+      return transactionController(isAdd, isIncome, categories, dropDownValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetAllTransactions value) getAllTransactions,
+    required TResult Function(AddTransaction value) addTransaction,
+    required TResult Function(UpdateTransaction value) updateTransaction,
+    required TResult Function(DeleteTransaction value) deleteTransaction,
+    required TResult Function(TransactionController value)
+        transactionController,
+  }) {
+    return transactionController(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(GetAllTransactions value)? getAllTransactions,
+    TResult Function(AddTransaction value)? addTransaction,
+    TResult Function(UpdateTransaction value)? updateTransaction,
+    TResult Function(DeleteTransaction value)? deleteTransaction,
+    TResult Function(TransactionController value)? transactionController,
+  }) {
+    return transactionController?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetAllTransactions value)? getAllTransactions,
+    TResult Function(AddTransaction value)? addTransaction,
+    TResult Function(UpdateTransaction value)? updateTransaction,
+    TResult Function(DeleteTransaction value)? deleteTransaction,
+    TResult Function(TransactionController value)? transactionController,
+    required TResult orElse(),
+  }) {
+    if (transactionController != null) {
+      return transactionController(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TransactionController implements TransactionsEvent {
+  const factory TransactionController(
+      {required final bool isAdd,
+      required final bool isIncome,
+      required final List<CategoryModel> categories,
+      required final String dropDownValue}) = _$TransactionController;
+
+  bool get isAdd => throw _privateConstructorUsedError;
+  bool get isIncome => throw _privateConstructorUsedError;
+  List<CategoryModel> get categories => throw _privateConstructorUsedError;
+  String get dropDownValue => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$TransactionControllerCopyWith<_$TransactionController> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$TransactionsState {
   List<TransactionModel> get transactionList =>
       throw _privateConstructorUsedError;
+  List<CategoryModel> get categories => throw _privateConstructorUsedError;
+  String get dropDownValue => throw _privateConstructorUsedError;
+  bool get isAdd => throw _privateConstructorUsedError;
+  bool get isIncome => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TransactionsStateCopyWith<TransactionsState> get copyWith =>
@@ -675,7 +957,12 @@ abstract class $TransactionsStateCopyWith<$Res> {
   factory $TransactionsStateCopyWith(
           TransactionsState value, $Res Function(TransactionsState) then) =
       _$TransactionsStateCopyWithImpl<$Res>;
-  $Res call({List<TransactionModel> transactionList});
+  $Res call(
+      {List<TransactionModel> transactionList,
+      List<CategoryModel> categories,
+      String dropDownValue,
+      bool isAdd,
+      bool isIncome});
 }
 
 /// @nodoc
@@ -690,12 +977,32 @@ class _$TransactionsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? transactionList = freezed,
+    Object? categories = freezed,
+    Object? dropDownValue = freezed,
+    Object? isAdd = freezed,
+    Object? isIncome = freezed,
   }) {
     return _then(_value.copyWith(
       transactionList: transactionList == freezed
           ? _value.transactionList
           : transactionList // ignore: cast_nullable_to_non_nullable
               as List<TransactionModel>,
+      categories: categories == freezed
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<CategoryModel>,
+      dropDownValue: dropDownValue == freezed
+          ? _value.dropDownValue
+          : dropDownValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      isAdd: isAdd == freezed
+          ? _value.isAdd
+          : isAdd // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isIncome: isIncome == freezed
+          ? _value.isIncome
+          : isIncome // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -707,7 +1014,12 @@ abstract class _$$_TransactionsStateCopyWith<$Res>
           $Res Function(_$_TransactionsState) then) =
       __$$_TransactionsStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<TransactionModel> transactionList});
+  $Res call(
+      {List<TransactionModel> transactionList,
+      List<CategoryModel> categories,
+      String dropDownValue,
+      bool isAdd,
+      bool isIncome});
 }
 
 /// @nodoc
@@ -724,12 +1036,32 @@ class __$$_TransactionsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? transactionList = freezed,
+    Object? categories = freezed,
+    Object? dropDownValue = freezed,
+    Object? isAdd = freezed,
+    Object? isIncome = freezed,
   }) {
     return _then(_$_TransactionsState(
       transactionList: transactionList == freezed
           ? _value._transactionList
           : transactionList // ignore: cast_nullable_to_non_nullable
               as List<TransactionModel>,
+      categories: categories == freezed
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<CategoryModel>,
+      dropDownValue: dropDownValue == freezed
+          ? _value.dropDownValue
+          : dropDownValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      isAdd: isAdd == freezed
+          ? _value.isAdd
+          : isAdd // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isIncome: isIncome == freezed
+          ? _value.isIncome
+          : isIncome // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -738,8 +1070,13 @@ class __$$_TransactionsStateCopyWithImpl<$Res>
 
 class _$_TransactionsState implements _TransactionsState {
   const _$_TransactionsState(
-      {required final List<TransactionModel> transactionList})
-      : _transactionList = transactionList;
+      {required final List<TransactionModel> transactionList,
+      required final List<CategoryModel> categories,
+      required this.dropDownValue,
+      required this.isAdd,
+      required this.isIncome})
+      : _transactionList = transactionList,
+        _categories = categories;
 
   final List<TransactionModel> _transactionList;
   @override
@@ -748,9 +1085,23 @@ class _$_TransactionsState implements _TransactionsState {
     return EqualUnmodifiableListView(_transactionList);
   }
 
+  final List<CategoryModel> _categories;
+  @override
+  List<CategoryModel> get categories {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categories);
+  }
+
+  @override
+  final String dropDownValue;
+  @override
+  final bool isAdd;
+  @override
+  final bool isIncome;
+
   @override
   String toString() {
-    return 'TransactionsState(transactionList: $transactionList)';
+    return 'TransactionsState(transactionList: $transactionList, categories: $categories, dropDownValue: $dropDownValue, isAdd: $isAdd, isIncome: $isIncome)';
   }
 
   @override
@@ -759,12 +1110,23 @@ class _$_TransactionsState implements _TransactionsState {
         (other.runtimeType == runtimeType &&
             other is _$_TransactionsState &&
             const DeepCollectionEquality()
-                .equals(other._transactionList, _transactionList));
+                .equals(other._transactionList, _transactionList) &&
+            const DeepCollectionEquality()
+                .equals(other._categories, _categories) &&
+            const DeepCollectionEquality()
+                .equals(other.dropDownValue, dropDownValue) &&
+            const DeepCollectionEquality().equals(other.isAdd, isAdd) &&
+            const DeepCollectionEquality().equals(other.isIncome, isIncome));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_transactionList));
+      runtimeType,
+      const DeepCollectionEquality().hash(_transactionList),
+      const DeepCollectionEquality().hash(_categories),
+      const DeepCollectionEquality().hash(dropDownValue),
+      const DeepCollectionEquality().hash(isAdd),
+      const DeepCollectionEquality().hash(isIncome));
 
   @JsonKey(ignore: true)
   @override
@@ -775,12 +1137,23 @@ class _$_TransactionsState implements _TransactionsState {
 
 abstract class _TransactionsState implements TransactionsState {
   const factory _TransactionsState(
-          {required final List<TransactionModel> transactionList}) =
-      _$_TransactionsState;
+      {required final List<TransactionModel> transactionList,
+      required final List<CategoryModel> categories,
+      required final String dropDownValue,
+      required final bool isAdd,
+      required final bool isIncome}) = _$_TransactionsState;
 
   @override
   List<TransactionModel> get transactionList =>
       throw _privateConstructorUsedError;
+  @override
+  List<CategoryModel> get categories => throw _privateConstructorUsedError;
+  @override
+  String get dropDownValue => throw _privateConstructorUsedError;
+  @override
+  bool get isAdd => throw _privateConstructorUsedError;
+  @override
+  bool get isIncome => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_TransactionsStateCopyWith<_$_TransactionsState> get copyWith =>

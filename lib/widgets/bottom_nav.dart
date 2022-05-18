@@ -2,6 +2,8 @@ import 'package:coin_wise/core/constants/colors.dart';
 import 'package:coin_wise/core/constants/data.dart';
 import 'package:coin_wise/core/constants/sizes.dart';
 import 'package:coin_wise/core/constants/text_styles.dart';
+import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
+import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
 import 'package:coin_wise/screens/main_screens/all_transactions/all_transactions.dart';
 import 'package:coin_wise/widgets/dropdown_category.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,7 @@ import 'package:coin_wise/screens/action_screens/add_transaction/add_screen.dart
 import 'package:coin_wise/screens/action_screens/categories/categories.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -100,10 +103,10 @@ class _HomePageState extends State<HomePage>
                   _pageController.jumpToPage(index);
                 });
               },
-              children:  <Widget>[
-               const Home(),
-               const AllTransactions(),
-               const Analysis(),
+              children: <Widget>[
+                const Home(),
+                const AllTransactions(),
+                const Analysis(),
                 Settings(),
               ],
             ),
@@ -111,9 +114,7 @@ class _HomePageState extends State<HomePage>
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: FloatingActionBubble(
-        
           items: <Bubble>[
-            
             Bubble(
               title: "Categories",
               iconColor: primaryLight,
@@ -121,6 +122,16 @@ class _HomePageState extends State<HomePage>
               icon: Icons.category,
               titleStyle: const TextStyle(fontSize: 16, color: primaryLight),
               onPress: () {
+                BlocListener<CategoryBloc, CategoryState>(
+                  listener: (context, state) {
+                    // TODO: implement listener
+                    context.read<CategoryBloc>().add(CategoryDropDownChange(
+                        newCategoryValue: state.categoryDropDown,
+                        isIncome: state.isIncome,
+                        isAdd: false));
+                  },
+                  //child:_,
+                );
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -128,7 +139,6 @@ class _HomePageState extends State<HomePage>
                 _animationController.reverse();
               },
             ),
-            
             Bubble(
               title: "Expense",
               iconColor: primaryLight,
@@ -136,7 +146,17 @@ class _HomePageState extends State<HomePage>
               icon: Icons.arrow_circle_up_sharp,
               titleStyle: const TextStyle(fontSize: 16, color: primaryLight),
               onPress: () {
-                isAdd = true;
+                BlocListener<TransactionsBloc, TransactionsState>(
+                  listener: (context, state) {
+                    // TODO: implement listener
+                    context.read<TransactionsBloc>().add(TransactionController(
+                        isAdd: true,
+                        isIncome: false,
+                        categories: state.categories,
+                        dropDownValue: state.dropDownValue));
+                  },
+                  //child:_,
+                );
                 categoryMod = 1;
                 field = 1;
                 Navigator.push(
@@ -147,17 +167,23 @@ class _HomePageState extends State<HomePage>
                 _animationController.reverse();
               },
             ),
-            
             Bubble(
               title: "Income",
               iconColor: primaryLight,
               bubbleColor: bg,
               icon: Icons.arrow_circle_down_rounded,
-              titleStyle:const TextStyle(fontSize: 16, color: primaryLight),
+              titleStyle: const TextStyle(fontSize: 16, color: primaryLight),
               onPress: () {
-                isAdd = true;
-                categoryMod = 0;
-                field = 0;
+                BlocListener<TransactionsBloc, TransactionsState>(
+                  listener: (context, state) {
+                    context.read<TransactionsBloc>().add(TransactionController(
+                        isAdd: true,
+                        isIncome: true,
+                        categories: state.categories,
+                        dropDownValue: state.dropDownValue));
+                  },
+                  //child:_,
+                );
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -167,16 +193,14 @@ class _HomePageState extends State<HomePage>
               },
             ),
           ],
-
           animation: _animation,
-
           onPress: () => _animationController.isCompleted
               ? _animationController.reverse()
               : _animationController.forward(),
-
           iconColor: primaryLight,
           iconData: Icons.add_outlined,
-          backGroundColor: Theme.of(context).floatingActionButtonTheme.backgroundColor!,
+          backGroundColor:
+              Theme.of(context).floatingActionButtonTheme.backgroundColor!,
         ),
         bottomNavigationBar: BottomNavyBar(
           backgroundColor: Theme.of(context).primaryColorLight,

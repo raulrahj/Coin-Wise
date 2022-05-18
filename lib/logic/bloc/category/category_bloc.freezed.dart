@@ -26,6 +26,11 @@ mixin _$CategoryEvent {
     required TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)
         categoryAmounts,
+    required TResult Function(String newValue, List<CategoryModel> changeList)
+        dropDownOnChange,
+    required TResult Function(
+            String newCategoryValue, bool isIncome, bool isAdd)
+        onCategoryDropDownChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +43,10 @@ mixin _$CategoryEvent {
     TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)?
         categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +59,10 @@ mixin _$CategoryEvent {
     TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)?
         categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,6 +74,9 @@ mixin _$CategoryEvent {
     required TResult Function(DeleteCategory value) deleteCategory,
     required TResult Function(FilterCategories value) filterCategory,
     required TResult Function(CategoryAmounts value) categoryAmounts,
+    required TResult Function(DropdownOnChange value) dropDownOnChange,
+    required TResult Function(CategoryDropDownChange value)
+        onCategoryDropDownChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,6 +87,8 @@ mixin _$CategoryEvent {
     TResult Function(DeleteCategory value)? deleteCategory,
     TResult Function(FilterCategories value)? filterCategory,
     TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +99,8 @@ mixin _$CategoryEvent {
     TResult Function(DeleteCategory value)? deleteCategory,
     TResult Function(FilterCategories value)? filterCategory,
     TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -152,6 +172,11 @@ class _$GetAllCategory implements GetAllCategory {
     required TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)
         categoryAmounts,
+    required TResult Function(String newValue, List<CategoryModel> changeList)
+        dropDownOnChange,
+    required TResult Function(
+            String newCategoryValue, bool isIncome, bool isAdd)
+        onCategoryDropDownChange,
   }) {
     return getAllCategory();
   }
@@ -167,6 +192,10 @@ class _$GetAllCategory implements GetAllCategory {
     TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)?
         categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
   }) {
     return getAllCategory?.call();
   }
@@ -182,6 +211,10 @@ class _$GetAllCategory implements GetAllCategory {
     TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)?
         categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
     required TResult orElse(),
   }) {
     if (getAllCategory != null) {
@@ -199,6 +232,9 @@ class _$GetAllCategory implements GetAllCategory {
     required TResult Function(DeleteCategory value) deleteCategory,
     required TResult Function(FilterCategories value) filterCategory,
     required TResult Function(CategoryAmounts value) categoryAmounts,
+    required TResult Function(DropdownOnChange value) dropDownOnChange,
+    required TResult Function(CategoryDropDownChange value)
+        onCategoryDropDownChange,
   }) {
     return getAllCategory(this);
   }
@@ -212,6 +248,8 @@ class _$GetAllCategory implements GetAllCategory {
     TResult Function(DeleteCategory value)? deleteCategory,
     TResult Function(FilterCategories value)? filterCategory,
     TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
   }) {
     return getAllCategory?.call(this);
   }
@@ -225,6 +263,8 @@ class _$GetAllCategory implements GetAllCategory {
     TResult Function(DeleteCategory value)? deleteCategory,
     TResult Function(FilterCategories value)? filterCategory,
     TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
     required TResult orElse(),
   }) {
     if (getAllCategory != null) {
@@ -311,6 +351,11 @@ class _$AddCategory implements AddCategory {
     required TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)
         categoryAmounts,
+    required TResult Function(String newValue, List<CategoryModel> changeList)
+        dropDownOnChange,
+    required TResult Function(
+            String newCategoryValue, bool isIncome, bool isAdd)
+        onCategoryDropDownChange,
   }) {
     return addCategory(model);
   }
@@ -326,6 +371,10 @@ class _$AddCategory implements AddCategory {
     TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)?
         categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
   }) {
     return addCategory?.call(model);
   }
@@ -341,6 +390,10 @@ class _$AddCategory implements AddCategory {
     TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)?
         categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
     required TResult orElse(),
   }) {
     if (addCategory != null) {
@@ -358,6 +411,9 @@ class _$AddCategory implements AddCategory {
     required TResult Function(DeleteCategory value) deleteCategory,
     required TResult Function(FilterCategories value) filterCategory,
     required TResult Function(CategoryAmounts value) categoryAmounts,
+    required TResult Function(DropdownOnChange value) dropDownOnChange,
+    required TResult Function(CategoryDropDownChange value)
+        onCategoryDropDownChange,
   }) {
     return addCategory(this);
   }
@@ -371,6 +427,8 @@ class _$AddCategory implements AddCategory {
     TResult Function(DeleteCategory value)? deleteCategory,
     TResult Function(FilterCategories value)? filterCategory,
     TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
   }) {
     return addCategory?.call(this);
   }
@@ -384,6 +442,8 @@ class _$AddCategory implements AddCategory {
     TResult Function(DeleteCategory value)? deleteCategory,
     TResult Function(FilterCategories value)? filterCategory,
     TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
     required TResult orElse(),
   }) {
     if (addCategory != null) {
@@ -476,6 +536,11 @@ class _$UpdateCategory implements UpdateCategory {
     required TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)
         categoryAmounts,
+    required TResult Function(String newValue, List<CategoryModel> changeList)
+        dropDownOnChange,
+    required TResult Function(
+            String newCategoryValue, bool isIncome, bool isAdd)
+        onCategoryDropDownChange,
   }) {
     return updateCategory(model);
   }
@@ -491,6 +556,10 @@ class _$UpdateCategory implements UpdateCategory {
     TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)?
         categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
   }) {
     return updateCategory?.call(model);
   }
@@ -506,6 +575,10 @@ class _$UpdateCategory implements UpdateCategory {
     TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)?
         categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
     required TResult orElse(),
   }) {
     if (updateCategory != null) {
@@ -523,6 +596,9 @@ class _$UpdateCategory implements UpdateCategory {
     required TResult Function(DeleteCategory value) deleteCategory,
     required TResult Function(FilterCategories value) filterCategory,
     required TResult Function(CategoryAmounts value) categoryAmounts,
+    required TResult Function(DropdownOnChange value) dropDownOnChange,
+    required TResult Function(CategoryDropDownChange value)
+        onCategoryDropDownChange,
   }) {
     return updateCategory(this);
   }
@@ -536,6 +612,8 @@ class _$UpdateCategory implements UpdateCategory {
     TResult Function(DeleteCategory value)? deleteCategory,
     TResult Function(FilterCategories value)? filterCategory,
     TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
   }) {
     return updateCategory?.call(this);
   }
@@ -549,6 +627,8 @@ class _$UpdateCategory implements UpdateCategory {
     TResult Function(DeleteCategory value)? deleteCategory,
     TResult Function(FilterCategories value)? filterCategory,
     TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
     required TResult orElse(),
   }) {
     if (updateCategory != null) {
@@ -641,6 +721,11 @@ class _$DeleteCategory implements DeleteCategory {
     required TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)
         categoryAmounts,
+    required TResult Function(String newValue, List<CategoryModel> changeList)
+        dropDownOnChange,
+    required TResult Function(
+            String newCategoryValue, bool isIncome, bool isAdd)
+        onCategoryDropDownChange,
   }) {
     return deleteCategory(keey);
   }
@@ -656,6 +741,10 @@ class _$DeleteCategory implements DeleteCategory {
     TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)?
         categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
   }) {
     return deleteCategory?.call(keey);
   }
@@ -671,6 +760,10 @@ class _$DeleteCategory implements DeleteCategory {
     TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)?
         categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
     required TResult orElse(),
   }) {
     if (deleteCategory != null) {
@@ -688,6 +781,9 @@ class _$DeleteCategory implements DeleteCategory {
     required TResult Function(DeleteCategory value) deleteCategory,
     required TResult Function(FilterCategories value) filterCategory,
     required TResult Function(CategoryAmounts value) categoryAmounts,
+    required TResult Function(DropdownOnChange value) dropDownOnChange,
+    required TResult Function(CategoryDropDownChange value)
+        onCategoryDropDownChange,
   }) {
     return deleteCategory(this);
   }
@@ -701,6 +797,8 @@ class _$DeleteCategory implements DeleteCategory {
     TResult Function(DeleteCategory value)? deleteCategory,
     TResult Function(FilterCategories value)? filterCategory,
     TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
   }) {
     return deleteCategory?.call(this);
   }
@@ -714,6 +812,8 @@ class _$DeleteCategory implements DeleteCategory {
     TResult Function(DeleteCategory value)? deleteCategory,
     TResult Function(FilterCategories value)? filterCategory,
     TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
     required TResult orElse(),
   }) {
     if (deleteCategory != null) {
@@ -781,6 +881,11 @@ class _$FilterCategories implements FilterCategories {
     required TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)
         categoryAmounts,
+    required TResult Function(String newValue, List<CategoryModel> changeList)
+        dropDownOnChange,
+    required TResult Function(
+            String newCategoryValue, bool isIncome, bool isAdd)
+        onCategoryDropDownChange,
   }) {
     return filterCategory();
   }
@@ -796,6 +901,10 @@ class _$FilterCategories implements FilterCategories {
     TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)?
         categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
   }) {
     return filterCategory?.call();
   }
@@ -811,6 +920,10 @@ class _$FilterCategories implements FilterCategories {
     TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)?
         categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
     required TResult orElse(),
   }) {
     if (filterCategory != null) {
@@ -828,6 +941,9 @@ class _$FilterCategories implements FilterCategories {
     required TResult Function(DeleteCategory value) deleteCategory,
     required TResult Function(FilterCategories value) filterCategory,
     required TResult Function(CategoryAmounts value) categoryAmounts,
+    required TResult Function(DropdownOnChange value) dropDownOnChange,
+    required TResult Function(CategoryDropDownChange value)
+        onCategoryDropDownChange,
   }) {
     return filterCategory(this);
   }
@@ -841,6 +957,8 @@ class _$FilterCategories implements FilterCategories {
     TResult Function(DeleteCategory value)? deleteCategory,
     TResult Function(FilterCategories value)? filterCategory,
     TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
   }) {
     return filterCategory?.call(this);
   }
@@ -854,6 +972,8 @@ class _$FilterCategories implements FilterCategories {
     TResult Function(DeleteCategory value)? deleteCategory,
     TResult Function(FilterCategories value)? filterCategory,
     TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
     required TResult orElse(),
   }) {
     if (filterCategory != null) {
@@ -967,6 +1087,11 @@ class _$CategoryAmounts implements CategoryAmounts {
     required TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)
         categoryAmounts,
+    required TResult Function(String newValue, List<CategoryModel> changeList)
+        dropDownOnChange,
+    required TResult Function(
+            String newCategoryValue, bool isIncome, bool isAdd)
+        onCategoryDropDownChange,
   }) {
     return categoryAmounts(incomeCategories, expenseCategories);
   }
@@ -982,6 +1107,10 @@ class _$CategoryAmounts implements CategoryAmounts {
     TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)?
         categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
   }) {
     return categoryAmounts?.call(incomeCategories, expenseCategories);
   }
@@ -997,6 +1126,10 @@ class _$CategoryAmounts implements CategoryAmounts {
     TResult Function(List<CategoryModel> incomeCategories,
             List<CategoryModel> expenseCategories)?
         categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
     required TResult orElse(),
   }) {
     if (categoryAmounts != null) {
@@ -1014,6 +1147,9 @@ class _$CategoryAmounts implements CategoryAmounts {
     required TResult Function(DeleteCategory value) deleteCategory,
     required TResult Function(FilterCategories value) filterCategory,
     required TResult Function(CategoryAmounts value) categoryAmounts,
+    required TResult Function(DropdownOnChange value) dropDownOnChange,
+    required TResult Function(CategoryDropDownChange value)
+        onCategoryDropDownChange,
   }) {
     return categoryAmounts(this);
   }
@@ -1027,6 +1163,8 @@ class _$CategoryAmounts implements CategoryAmounts {
     TResult Function(DeleteCategory value)? deleteCategory,
     TResult Function(FilterCategories value)? filterCategory,
     TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
   }) {
     return categoryAmounts?.call(this);
   }
@@ -1040,6 +1178,8 @@ class _$CategoryAmounts implements CategoryAmounts {
     TResult Function(DeleteCategory value)? deleteCategory,
     TResult Function(FilterCategories value)? filterCategory,
     TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
     required TResult orElse(),
   }) {
     if (categoryAmounts != null) {
@@ -1065,6 +1205,424 @@ abstract class CategoryAmounts implements CategoryEvent {
 }
 
 /// @nodoc
+abstract class _$$DropdownOnChangeCopyWith<$Res> {
+  factory _$$DropdownOnChangeCopyWith(
+          _$DropdownOnChange value, $Res Function(_$DropdownOnChange) then) =
+      __$$DropdownOnChangeCopyWithImpl<$Res>;
+  $Res call({String newValue, List<CategoryModel> changeList});
+}
+
+/// @nodoc
+class __$$DropdownOnChangeCopyWithImpl<$Res>
+    extends _$CategoryEventCopyWithImpl<$Res>
+    implements _$$DropdownOnChangeCopyWith<$Res> {
+  __$$DropdownOnChangeCopyWithImpl(
+      _$DropdownOnChange _value, $Res Function(_$DropdownOnChange) _then)
+      : super(_value, (v) => _then(v as _$DropdownOnChange));
+
+  @override
+  _$DropdownOnChange get _value => super._value as _$DropdownOnChange;
+
+  @override
+  $Res call({
+    Object? newValue = freezed,
+    Object? changeList = freezed,
+  }) {
+    return _then(_$DropdownOnChange(
+      newValue: newValue == freezed
+          ? _value.newValue
+          : newValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      changeList: changeList == freezed
+          ? _value._changeList
+          : changeList // ignore: cast_nullable_to_non_nullable
+              as List<CategoryModel>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DropdownOnChange implements DropdownOnChange {
+  const _$DropdownOnChange(
+      {required this.newValue, required final List<CategoryModel> changeList})
+      : _changeList = changeList;
+
+  @override
+  final String newValue;
+  final List<CategoryModel> _changeList;
+  @override
+  List<CategoryModel> get changeList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_changeList);
+  }
+
+  @override
+  String toString() {
+    return 'CategoryEvent.dropDownOnChange(newValue: $newValue, changeList: $changeList)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DropdownOnChange &&
+            const DeepCollectionEquality().equals(other.newValue, newValue) &&
+            const DeepCollectionEquality()
+                .equals(other._changeList, _changeList));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(newValue),
+      const DeepCollectionEquality().hash(_changeList));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$DropdownOnChangeCopyWith<_$DropdownOnChange> get copyWith =>
+      __$$DropdownOnChangeCopyWithImpl<_$DropdownOnChange>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getAllCategory,
+    required TResult Function(CategoryModel model) addCategory,
+    required TResult Function(CategoryModel model) updateCategory,
+    required TResult Function(String keey) deleteCategory,
+    required TResult Function() filterCategory,
+    required TResult Function(List<CategoryModel> incomeCategories,
+            List<CategoryModel> expenseCategories)
+        categoryAmounts,
+    required TResult Function(String newValue, List<CategoryModel> changeList)
+        dropDownOnChange,
+    required TResult Function(
+            String newCategoryValue, bool isIncome, bool isAdd)
+        onCategoryDropDownChange,
+  }) {
+    return dropDownOnChange(newValue, changeList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? getAllCategory,
+    TResult Function(CategoryModel model)? addCategory,
+    TResult Function(CategoryModel model)? updateCategory,
+    TResult Function(String keey)? deleteCategory,
+    TResult Function()? filterCategory,
+    TResult Function(List<CategoryModel> incomeCategories,
+            List<CategoryModel> expenseCategories)?
+        categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
+  }) {
+    return dropDownOnChange?.call(newValue, changeList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getAllCategory,
+    TResult Function(CategoryModel model)? addCategory,
+    TResult Function(CategoryModel model)? updateCategory,
+    TResult Function(String keey)? deleteCategory,
+    TResult Function()? filterCategory,
+    TResult Function(List<CategoryModel> incomeCategories,
+            List<CategoryModel> expenseCategories)?
+        categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
+    required TResult orElse(),
+  }) {
+    if (dropDownOnChange != null) {
+      return dropDownOnChange(newValue, changeList);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetAllCategory value) getAllCategory,
+    required TResult Function(AddCategory value) addCategory,
+    required TResult Function(UpdateCategory value) updateCategory,
+    required TResult Function(DeleteCategory value) deleteCategory,
+    required TResult Function(FilterCategories value) filterCategory,
+    required TResult Function(CategoryAmounts value) categoryAmounts,
+    required TResult Function(DropdownOnChange value) dropDownOnChange,
+    required TResult Function(CategoryDropDownChange value)
+        onCategoryDropDownChange,
+  }) {
+    return dropDownOnChange(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(GetAllCategory value)? getAllCategory,
+    TResult Function(AddCategory value)? addCategory,
+    TResult Function(UpdateCategory value)? updateCategory,
+    TResult Function(DeleteCategory value)? deleteCategory,
+    TResult Function(FilterCategories value)? filterCategory,
+    TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
+  }) {
+    return dropDownOnChange?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetAllCategory value)? getAllCategory,
+    TResult Function(AddCategory value)? addCategory,
+    TResult Function(UpdateCategory value)? updateCategory,
+    TResult Function(DeleteCategory value)? deleteCategory,
+    TResult Function(FilterCategories value)? filterCategory,
+    TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
+    required TResult orElse(),
+  }) {
+    if (dropDownOnChange != null) {
+      return dropDownOnChange(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DropdownOnChange implements CategoryEvent {
+  const factory DropdownOnChange(
+      {required final String newValue,
+      required final List<CategoryModel> changeList}) = _$DropdownOnChange;
+
+  String get newValue => throw _privateConstructorUsedError;
+  List<CategoryModel> get changeList => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$DropdownOnChangeCopyWith<_$DropdownOnChange> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CategoryDropDownChangeCopyWith<$Res> {
+  factory _$$CategoryDropDownChangeCopyWith(_$CategoryDropDownChange value,
+          $Res Function(_$CategoryDropDownChange) then) =
+      __$$CategoryDropDownChangeCopyWithImpl<$Res>;
+  $Res call({String newCategoryValue, bool isIncome, bool isAdd});
+}
+
+/// @nodoc
+class __$$CategoryDropDownChangeCopyWithImpl<$Res>
+    extends _$CategoryEventCopyWithImpl<$Res>
+    implements _$$CategoryDropDownChangeCopyWith<$Res> {
+  __$$CategoryDropDownChangeCopyWithImpl(_$CategoryDropDownChange _value,
+      $Res Function(_$CategoryDropDownChange) _then)
+      : super(_value, (v) => _then(v as _$CategoryDropDownChange));
+
+  @override
+  _$CategoryDropDownChange get _value =>
+      super._value as _$CategoryDropDownChange;
+
+  @override
+  $Res call({
+    Object? newCategoryValue = freezed,
+    Object? isIncome = freezed,
+    Object? isAdd = freezed,
+  }) {
+    return _then(_$CategoryDropDownChange(
+      newCategoryValue: newCategoryValue == freezed
+          ? _value.newCategoryValue
+          : newCategoryValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      isIncome: isIncome == freezed
+          ? _value.isIncome
+          : isIncome // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAdd: isAdd == freezed
+          ? _value.isAdd
+          : isAdd // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CategoryDropDownChange implements CategoryDropDownChange {
+  const _$CategoryDropDownChange(
+      {required this.newCategoryValue,
+      required this.isIncome,
+      required this.isAdd});
+
+  @override
+  final String newCategoryValue;
+  @override
+  final bool isIncome;
+  @override
+  final bool isAdd;
+
+  @override
+  String toString() {
+    return 'CategoryEvent.onCategoryDropDownChange(newCategoryValue: $newCategoryValue, isIncome: $isIncome, isAdd: $isAdd)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CategoryDropDownChange &&
+            const DeepCollectionEquality()
+                .equals(other.newCategoryValue, newCategoryValue) &&
+            const DeepCollectionEquality().equals(other.isIncome, isIncome) &&
+            const DeepCollectionEquality().equals(other.isAdd, isAdd));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(newCategoryValue),
+      const DeepCollectionEquality().hash(isIncome),
+      const DeepCollectionEquality().hash(isAdd));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$CategoryDropDownChangeCopyWith<_$CategoryDropDownChange> get copyWith =>
+      __$$CategoryDropDownChangeCopyWithImpl<_$CategoryDropDownChange>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getAllCategory,
+    required TResult Function(CategoryModel model) addCategory,
+    required TResult Function(CategoryModel model) updateCategory,
+    required TResult Function(String keey) deleteCategory,
+    required TResult Function() filterCategory,
+    required TResult Function(List<CategoryModel> incomeCategories,
+            List<CategoryModel> expenseCategories)
+        categoryAmounts,
+    required TResult Function(String newValue, List<CategoryModel> changeList)
+        dropDownOnChange,
+    required TResult Function(
+            String newCategoryValue, bool isIncome, bool isAdd)
+        onCategoryDropDownChange,
+  }) {
+    return onCategoryDropDownChange(newCategoryValue, isIncome, isAdd);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? getAllCategory,
+    TResult Function(CategoryModel model)? addCategory,
+    TResult Function(CategoryModel model)? updateCategory,
+    TResult Function(String keey)? deleteCategory,
+    TResult Function()? filterCategory,
+    TResult Function(List<CategoryModel> incomeCategories,
+            List<CategoryModel> expenseCategories)?
+        categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
+  }) {
+    return onCategoryDropDownChange?.call(newCategoryValue, isIncome, isAdd);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getAllCategory,
+    TResult Function(CategoryModel model)? addCategory,
+    TResult Function(CategoryModel model)? updateCategory,
+    TResult Function(String keey)? deleteCategory,
+    TResult Function()? filterCategory,
+    TResult Function(List<CategoryModel> incomeCategories,
+            List<CategoryModel> expenseCategories)?
+        categoryAmounts,
+    TResult Function(String newValue, List<CategoryModel> changeList)?
+        dropDownOnChange,
+    TResult Function(String newCategoryValue, bool isIncome, bool isAdd)?
+        onCategoryDropDownChange,
+    required TResult orElse(),
+  }) {
+    if (onCategoryDropDownChange != null) {
+      return onCategoryDropDownChange(newCategoryValue, isIncome, isAdd);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetAllCategory value) getAllCategory,
+    required TResult Function(AddCategory value) addCategory,
+    required TResult Function(UpdateCategory value) updateCategory,
+    required TResult Function(DeleteCategory value) deleteCategory,
+    required TResult Function(FilterCategories value) filterCategory,
+    required TResult Function(CategoryAmounts value) categoryAmounts,
+    required TResult Function(DropdownOnChange value) dropDownOnChange,
+    required TResult Function(CategoryDropDownChange value)
+        onCategoryDropDownChange,
+  }) {
+    return onCategoryDropDownChange(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(GetAllCategory value)? getAllCategory,
+    TResult Function(AddCategory value)? addCategory,
+    TResult Function(UpdateCategory value)? updateCategory,
+    TResult Function(DeleteCategory value)? deleteCategory,
+    TResult Function(FilterCategories value)? filterCategory,
+    TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
+  }) {
+    return onCategoryDropDownChange?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetAllCategory value)? getAllCategory,
+    TResult Function(AddCategory value)? addCategory,
+    TResult Function(UpdateCategory value)? updateCategory,
+    TResult Function(DeleteCategory value)? deleteCategory,
+    TResult Function(FilterCategories value)? filterCategory,
+    TResult Function(CategoryAmounts value)? categoryAmounts,
+    TResult Function(DropdownOnChange value)? dropDownOnChange,
+    TResult Function(CategoryDropDownChange value)? onCategoryDropDownChange,
+    required TResult orElse(),
+  }) {
+    if (onCategoryDropDownChange != null) {
+      return onCategoryDropDownChange(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CategoryDropDownChange implements CategoryEvent {
+  const factory CategoryDropDownChange(
+      {required final String newCategoryValue,
+      required final bool isIncome,
+      required final bool isAdd}) = _$CategoryDropDownChange;
+
+  String get newCategoryValue => throw _privateConstructorUsedError;
+  bool get isIncome => throw _privateConstructorUsedError;
+  bool get isAdd => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$CategoryDropDownChangeCopyWith<_$CategoryDropDownChange> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$CategoryState {
   List<CategoryModel> get categoryList => throw _privateConstructorUsedError;
   List<CategoryModel> get incomeCategoryList =>
@@ -1075,6 +1633,11 @@ mixin _$CategoryState {
       throw _privateConstructorUsedError;
   List<CategoryModel> get expenseCategoryAmout =>
       throw _privateConstructorUsedError;
+  List<CategoryModel> get visibleList => throw _privateConstructorUsedError;
+  String get dropDownValue => throw _privateConstructorUsedError;
+  String get categoryDropDown => throw _privateConstructorUsedError;
+  bool get isIncome => throw _privateConstructorUsedError;
+  bool get isAdd => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CategoryStateCopyWith<CategoryState> get copyWith =>
@@ -1091,7 +1654,12 @@ abstract class $CategoryStateCopyWith<$Res> {
       List<CategoryModel> incomeCategoryList,
       List<CategoryModel> expenseCategoryList,
       List<CategoryModel> incomeCategoryAmount,
-      List<CategoryModel> expenseCategoryAmout});
+      List<CategoryModel> expenseCategoryAmout,
+      List<CategoryModel> visibleList,
+      String dropDownValue,
+      String categoryDropDown,
+      bool isIncome,
+      bool isAdd});
 }
 
 /// @nodoc
@@ -1110,6 +1678,11 @@ class _$CategoryStateCopyWithImpl<$Res>
     Object? expenseCategoryList = freezed,
     Object? incomeCategoryAmount = freezed,
     Object? expenseCategoryAmout = freezed,
+    Object? visibleList = freezed,
+    Object? dropDownValue = freezed,
+    Object? categoryDropDown = freezed,
+    Object? isIncome = freezed,
+    Object? isAdd = freezed,
   }) {
     return _then(_value.copyWith(
       categoryList: categoryList == freezed
@@ -1132,6 +1705,26 @@ class _$CategoryStateCopyWithImpl<$Res>
           ? _value.expenseCategoryAmout
           : expenseCategoryAmout // ignore: cast_nullable_to_non_nullable
               as List<CategoryModel>,
+      visibleList: visibleList == freezed
+          ? _value.visibleList
+          : visibleList // ignore: cast_nullable_to_non_nullable
+              as List<CategoryModel>,
+      dropDownValue: dropDownValue == freezed
+          ? _value.dropDownValue
+          : dropDownValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      categoryDropDown: categoryDropDown == freezed
+          ? _value.categoryDropDown
+          : categoryDropDown // ignore: cast_nullable_to_non_nullable
+              as String,
+      isIncome: isIncome == freezed
+          ? _value.isIncome
+          : isIncome // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAdd: isAdd == freezed
+          ? _value.isAdd
+          : isAdd // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1148,7 +1741,12 @@ abstract class _$$_CategoryStateCopyWith<$Res>
       List<CategoryModel> incomeCategoryList,
       List<CategoryModel> expenseCategoryList,
       List<CategoryModel> incomeCategoryAmount,
-      List<CategoryModel> expenseCategoryAmout});
+      List<CategoryModel> expenseCategoryAmout,
+      List<CategoryModel> visibleList,
+      String dropDownValue,
+      String categoryDropDown,
+      bool isIncome,
+      bool isAdd});
 }
 
 /// @nodoc
@@ -1169,6 +1767,11 @@ class __$$_CategoryStateCopyWithImpl<$Res>
     Object? expenseCategoryList = freezed,
     Object? incomeCategoryAmount = freezed,
     Object? expenseCategoryAmout = freezed,
+    Object? visibleList = freezed,
+    Object? dropDownValue = freezed,
+    Object? categoryDropDown = freezed,
+    Object? isIncome = freezed,
+    Object? isAdd = freezed,
   }) {
     return _then(_$_CategoryState(
       categoryList: categoryList == freezed
@@ -1191,6 +1794,26 @@ class __$$_CategoryStateCopyWithImpl<$Res>
           ? _value._expenseCategoryAmout
           : expenseCategoryAmout // ignore: cast_nullable_to_non_nullable
               as List<CategoryModel>,
+      visibleList: visibleList == freezed
+          ? _value._visibleList
+          : visibleList // ignore: cast_nullable_to_non_nullable
+              as List<CategoryModel>,
+      dropDownValue: dropDownValue == freezed
+          ? _value.dropDownValue
+          : dropDownValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      categoryDropDown: categoryDropDown == freezed
+          ? _value.categoryDropDown
+          : categoryDropDown // ignore: cast_nullable_to_non_nullable
+              as String,
+      isIncome: isIncome == freezed
+          ? _value.isIncome
+          : isIncome // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAdd: isAdd == freezed
+          ? _value.isAdd
+          : isAdd // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1203,12 +1826,18 @@ class _$_CategoryState implements _CategoryState {
       required final List<CategoryModel> incomeCategoryList,
       required final List<CategoryModel> expenseCategoryList,
       required final List<CategoryModel> incomeCategoryAmount,
-      required final List<CategoryModel> expenseCategoryAmout})
+      required final List<CategoryModel> expenseCategoryAmout,
+      required final List<CategoryModel> visibleList,
+      required this.dropDownValue,
+      required this.categoryDropDown,
+      required this.isIncome,
+      required this.isAdd})
       : _categoryList = categoryList,
         _incomeCategoryList = incomeCategoryList,
         _expenseCategoryList = expenseCategoryList,
         _incomeCategoryAmount = incomeCategoryAmount,
-        _expenseCategoryAmout = expenseCategoryAmout;
+        _expenseCategoryAmout = expenseCategoryAmout,
+        _visibleList = visibleList;
 
   final List<CategoryModel> _categoryList;
   @override
@@ -1245,9 +1874,25 @@ class _$_CategoryState implements _CategoryState {
     return EqualUnmodifiableListView(_expenseCategoryAmout);
   }
 
+  final List<CategoryModel> _visibleList;
+  @override
+  List<CategoryModel> get visibleList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_visibleList);
+  }
+
+  @override
+  final String dropDownValue;
+  @override
+  final String categoryDropDown;
+  @override
+  final bool isIncome;
+  @override
+  final bool isAdd;
+
   @override
   String toString() {
-    return 'CategoryState(categoryList: $categoryList, incomeCategoryList: $incomeCategoryList, expenseCategoryList: $expenseCategoryList, incomeCategoryAmount: $incomeCategoryAmount, expenseCategoryAmout: $expenseCategoryAmout)';
+    return 'CategoryState(categoryList: $categoryList, incomeCategoryList: $incomeCategoryList, expenseCategoryList: $expenseCategoryList, incomeCategoryAmount: $incomeCategoryAmount, expenseCategoryAmout: $expenseCategoryAmout, visibleList: $visibleList, dropDownValue: $dropDownValue, categoryDropDown: $categoryDropDown, isIncome: $isIncome, isAdd: $isAdd)';
   }
 
   @override
@@ -1264,7 +1909,15 @@ class _$_CategoryState implements _CategoryState {
             const DeepCollectionEquality()
                 .equals(other._incomeCategoryAmount, _incomeCategoryAmount) &&
             const DeepCollectionEquality()
-                .equals(other._expenseCategoryAmout, _expenseCategoryAmout));
+                .equals(other._expenseCategoryAmout, _expenseCategoryAmout) &&
+            const DeepCollectionEquality()
+                .equals(other._visibleList, _visibleList) &&
+            const DeepCollectionEquality()
+                .equals(other.dropDownValue, dropDownValue) &&
+            const DeepCollectionEquality()
+                .equals(other.categoryDropDown, categoryDropDown) &&
+            const DeepCollectionEquality().equals(other.isIncome, isIncome) &&
+            const DeepCollectionEquality().equals(other.isAdd, isAdd));
   }
 
   @override
@@ -1274,7 +1927,12 @@ class _$_CategoryState implements _CategoryState {
       const DeepCollectionEquality().hash(_incomeCategoryList),
       const DeepCollectionEquality().hash(_expenseCategoryList),
       const DeepCollectionEquality().hash(_incomeCategoryAmount),
-      const DeepCollectionEquality().hash(_expenseCategoryAmout));
+      const DeepCollectionEquality().hash(_expenseCategoryAmout),
+      const DeepCollectionEquality().hash(_visibleList),
+      const DeepCollectionEquality().hash(dropDownValue),
+      const DeepCollectionEquality().hash(categoryDropDown),
+      const DeepCollectionEquality().hash(isIncome),
+      const DeepCollectionEquality().hash(isAdd));
 
   @JsonKey(ignore: true)
   @override
@@ -1284,12 +1942,16 @@ class _$_CategoryState implements _CategoryState {
 
 abstract class _CategoryState implements CategoryState {
   const factory _CategoryState(
-          {required final List<CategoryModel> categoryList,
-          required final List<CategoryModel> incomeCategoryList,
-          required final List<CategoryModel> expenseCategoryList,
-          required final List<CategoryModel> incomeCategoryAmount,
-          required final List<CategoryModel> expenseCategoryAmout}) =
-      _$_CategoryState;
+      {required final List<CategoryModel> categoryList,
+      required final List<CategoryModel> incomeCategoryList,
+      required final List<CategoryModel> expenseCategoryList,
+      required final List<CategoryModel> incomeCategoryAmount,
+      required final List<CategoryModel> expenseCategoryAmout,
+      required final List<CategoryModel> visibleList,
+      required final String dropDownValue,
+      required final String categoryDropDown,
+      required final bool isIncome,
+      required final bool isAdd}) = _$_CategoryState;
 
   @override
   List<CategoryModel> get categoryList => throw _privateConstructorUsedError;
@@ -1305,6 +1967,16 @@ abstract class _CategoryState implements CategoryState {
   @override
   List<CategoryModel> get expenseCategoryAmout =>
       throw _privateConstructorUsedError;
+  @override
+  List<CategoryModel> get visibleList => throw _privateConstructorUsedError;
+  @override
+  String get dropDownValue => throw _privateConstructorUsedError;
+  @override
+  String get categoryDropDown => throw _privateConstructorUsedError;
+  @override
+  bool get isIncome => throw _privateConstructorUsedError;
+  @override
+  bool get isAdd => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_CategoryStateCopyWith<_$_CategoryState> get copyWith =>

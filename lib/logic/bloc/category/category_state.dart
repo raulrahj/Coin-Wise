@@ -7,12 +7,21 @@ class CategoryState with _$CategoryState {
       required List<CategoryModel> incomeCategoryList,
       required List<CategoryModel> expenseCategoryList,
       required List<CategoryModel> incomeCategoryAmount,
-      required List<CategoryModel> expenseCategoryAmout}) = _CategoryState;
+      required List<CategoryModel> expenseCategoryAmout,
+      required List<CategoryModel> visibleList,
+      required String dropDownValue,
+      required String categoryDropDown,
+      required bool isIncome,
+      required bool isAdd}) = _CategoryState;
 
   factory CategoryState.initial() => CategoryState(
       categoryList: [],
       incomeCategoryList: [],
       expenseCategoryList: [],
       incomeCategoryAmount: [],
-      expenseCategoryAmout: []);
+      expenseCategoryAmout: [],
+      visibleList: [],
+      dropDownValue: fields[0],
+      categoryDropDown: fields[0],
+      isIncome: true, isAdd: true);
 }
