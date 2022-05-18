@@ -1,8 +1,5 @@
-import 'package:coin_wise/core/constants/sizes.dart';
-import 'package:coin_wise/core/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
-import 'package:coin_wise/database/category_db.dart';
 import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/database/transactions_db.dart';
 
@@ -12,7 +9,7 @@ class PieChart1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color bg = Theme.of(context).primaryColor;
-    TransactionDbFunctions.instance.refreshData();
+    // TransactionDbFunctions.instance.refreshData();
 
     // return ValueListenableBuilder(
     //     valueListenable: CategoryFunctions.instance.multiAmountCategoryListener,
@@ -27,37 +24,36 @@ class PieChart1 extends StatelessWidget {
               e.name.toString(): e.categoryAmount ?? 0
           };
 
-          return Container(
-              child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: AspectRatio(
-                        aspectRatio: 1.2,
-                        child: Card(
-                          color: bg,
-                          child: Row(
-                            children: [
-                              AspectRatio(
-                                aspectRatio: 1,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 16,
-                                  ),
-                                  child: PieChart(
-                                    dataMap: map1,
-                                    chartType: ChartType.ring,
-                                    chartValuesOptions:
-                                        const ChartValuesOptions(
-                                            showChartValuesOutside: true,
-                                            showChartValuesInPercentage: true,
-                                            decimalPlaces: 1),
-                                  ),
-                                ),
+          return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: AspectRatio(
+                    aspectRatio: 1.2,
+                    child: Card(
+                      color: bg,
+                      child: Row(
+                        children: [
+                          AspectRatio(
+                            aspectRatio: 1,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                left: 16,
                               ),
-                            ],
+                              child: PieChart(
+                                dataMap: map1,
+                                chartType: ChartType.ring,
+                                chartValuesOptions:
+                                    const ChartValuesOptions(
+                                        showChartValuesOutside: true,
+                                        showChartValuesInPercentage: true,
+                                        decimalPlaces: 1),
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ));
+                    ),
+                  ),
+                );
         // });
   }
 }

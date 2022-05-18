@@ -1,8 +1,8 @@
 import 'package:coin_wise/core/constants/colors.dart';
 import 'package:coin_wise/core/constants/data.dart';
-import 'package:coin_wise/core/constants/functions.dart';
 import 'package:coin_wise/core/constants/sizes.dart';
 import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
+import 'package:coin_wise/logic/cubit/filter_transactions/filtertransaction_cubit.dart';
 import 'package:coin_wise/main.dart';
 import 'package:coin_wise/widgets/common_container.dart';
 import 'package:coin_wise/widgets/default_container.dart';
@@ -11,7 +11,6 @@ import 'package:flutter/foundation.dart';
 import 'package:coin_wise/widgets/date.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:coin_wise/widgets/list_views.dart';
-import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/models/transaction_model.dart';
 import 'package:coin_wise/screens/main_screens/home/home.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,23 +31,20 @@ var _dropdownValue = allFields[0];
 class _AllTransactionsState extends State<AllTransactions> {
   @override
   void initState() {
-    //TransactionDbFunctions.instance.getWallet();
-    // TransactionDbFunctions.instance.refreshData();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     Color bg = Theme.of(context).primaryColorDark;
-    // TransactionDbFunctions.instance.getWallet;
-    TransactionDbFunctions.instance.getTransaction();
     if (isHome) {
       setState(() {
-        dropDownListener = TransactionDbFunctions.instance.transactionListener;
       });
     }
-    return SafeArea(
-      child: ListView(
+    return SafeArea(child:
+        BlocBuilder<FiltertransactionCubit, FiltertransactionState>(
+            builder: (context, state) {
+      return ListView(
         children: [
           defaultContainer(
             color: bg,
@@ -73,12 +69,11 @@ class _AllTransactionsState extends State<AllTransactions> {
                               lastDate: DateTime.now());
 
                           if (newdata == null) return;
-                          setState(
-                            () {
-                              selectdate = newdata;
-                            },
-                          );
-                          selectedDayTransaction(selectdate);
+                          selectdate = newdata;
+                          context
+                              .read<FiltertransactionCubit>()
+                              .selectedRangeTransactions(
+                                  isDay: true, selectedDay: selectdate);
                           date;
                         }),
                     ActionChip(
@@ -151,8 +146,13 @@ class _AllTransactionsState extends State<AllTransactions> {
                                                 navigatorKey?.currentState
                                                     ?.pop();
                                               }
-                                              selectedWeekTransactions(
-                                                  _controller.selectedRange);
+                                              context
+                                                  .read<
+                                                      FiltertransactionCubit>()
+                                                  .selectedRangeTransactions(
+                                                      isWeek: true,
+                                                      selectedWeek: _controller
+                                                          .selectedRange);
                                               navigatorKey?.currentState?.pop();
                                             },
                                             child: Text(
@@ -185,10 +185,12 @@ class _AllTransactionsState extends State<AllTransactions> {
                             locale: const Locale("en"),
                           ).then((date) {
                             if (date != null) {
-                              setState(() {
-                                selectedDate = date;
-                                selectedMonthTransactions(selectedDate);
-                              });
+                              selectedDate = date;
+                              context
+                                  .read<FiltertransactionCubit>()
+                                  .selectedRangeTransactions(
+                                      isMonth: true,
+                                      selectedMonth: selectedDate);
                             }
                           });
                         }),
@@ -228,35 +230,34 @@ class _AllTransactionsState extends State<AllTransactions> {
                                     ),
                                   );
                                 }).toList(),
+                                onTap: () {
+                                  context
+                                      .read<FiltertransactionCubit>()
+                                      .filterDropDownChange(
+                                        newValue: state.fitlerDropdownValue,
+                                      );
+                                },
                                 onChanged: (value) {
                                   isHome = false;
-
-                                  setState(() {
-                                    _dropdownValue = value.toString();
-                                    switch (value) {
-                                      case 'All':
-                                        dropDownListener = (isFilter)
-                                            ? TransactionDbFunctions.instance
-                                                .selectedRangeTransactionsListener
-                                            : TransactionDbFunctions
-                                                .instance.transactionListener;
-                                        break;
-                                      case 'Income':
-                                        dropDownListener =
-                                            TransactionDbFunctions.instance
-                                                .transactionIncomeListener;
-                                        break;
-                                      case 'Expense':
-                                        dropDownListener =
-                                            TransactionDbFunctions.instance
-                                                .transactionExpenseListener;
-                                        break;
-                                      default:
-                                        dropDownListener =
-                                            TransactionDbFunctions
-                                                .instance.transactionListener;
-                                    }
-                                  });
+                                  context
+                                      .read<FiltertransactionCubit>()
+                                      .filterDropDownChange(
+                                          newValue: value.toString());
+                                  // setState(() {
+                                  _dropdownValue = state.fitlerDropdownValue;
+                                  if (_dropdownValue == allFields[1]) {
+                                    context.read<TransactionsBloc>().add(
+                                        SeparateTransactions(
+                                            listType: allFields[1]));
+                                  } else if (_dropdownValue == allFields[2]) {
+                                    context.read<TransactionsBloc>().add(
+                                        SeparateTransactions(
+                                            listType: allFields[2]));
+                                  } else {
+                                    context.read<TransactionsBloc>().add(
+                                        SeparateTransactions(
+                                            listType: allFields[0]));
+                                  }
                                 },
                               ),
                             ],
@@ -269,22 +270,20 @@ class _AllTransactionsState extends State<AllTransactions> {
                 const MyFormField(),
               ],
             ),
-          // ),
-          // ValueListenableBuilder(
-          //     valueListenable: dropDownListener,
-          //     builder: (context, newDropdownListener, child) {
-                // return 
           ),
-                BlocBuilder<TransactionsBloc, TransactionsState>(
+          !state.isFilter
+              ? BlocBuilder<TransactionsBloc, TransactionsState>(
                   builder: (context, state) {
                     return TransactionList(
-                                 dataList: [] ,
-                                );
+                      dataList: state.transactionList,
+                    );
                   },
                 )
-              // }),
+              : TransactionList(dataList: state.filterList)
+          // });
         ],
-      ),
-    );
+        // )
+      );
+    }));
   }
 }

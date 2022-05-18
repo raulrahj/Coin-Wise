@@ -1,9 +1,10 @@
 // import 'package:date_range_form_field/date_range_form_field.dart';
 import 'package:coin_wise/core/constants/colors.dart';
-import 'package:coin_wise/core/constants/functions.dart';
+import 'package:coin_wise/logic/cubit/filter_transactions/filtertransaction_cubit.dart';
 import 'package:flutter/material.dart';
 
 import 'package:date_range_form_field/date_range_form_field.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyFormField extends StatefulWidget {
   const MyFormField({Key? key}) : super(key: key);
@@ -56,7 +57,9 @@ class _MyFormFieldState extends State<MyFormField> {
             myDateRange = value!;
             final startDate = myDateRange?.start;
             final endDate = myDateRange?.end;
-            selectedRangeTransactions(start: startDate, end: endDate);
+            // selectedRangeTransactions(start: startDate, end: endDate);
+            context.read<FiltertransactionCubit>().selectedRangeTransactions(
+                isRange: true, start: startDate, end: endDate);
           });
         });
   }

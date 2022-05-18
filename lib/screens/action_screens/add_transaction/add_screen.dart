@@ -44,8 +44,9 @@ class AddScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     dropDownValue == null;
     // isAdd ?? false;
-    ////////////// TO DO - null check operator used in a null value ////////////////////////
-
+/**
+ * TODO - null check operator used in a null value
+ */
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -256,9 +257,9 @@ class AddScreen extends StatelessWidget {
                                                     ?.pop();
                                                 _amountController.clear();
                                                 _noteController.clear();
-                                                await TransactionDbFunctions
-                                                    .instance
-                                                    .getTransaction();
+                                                // await TransactionDbFunctions
+                                                //     .instance
+                                                // .getTransaction();
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(
                                                   SnackBar(
@@ -308,16 +309,21 @@ class AddScreen extends StatelessWidget {
                                                     category: globalCategory ??
                                                         selectedTransactionData!
                                                             .category);
-                                                TransactionDbFunctions.instance
-                                                    .updateTransaction(
-                                                        selectedTransactionData!
-                                                            .id,
-                                                        updateTransactionData);
+                                                /** 
+                                            * ! To Do
+                                            * TODO: something penging here
+                                            *? should implement the update function here
+                                                * ! TransactionDbFunctions.instance
+                                                * !     .updateTransaction(
+                                                * !         selectedTransactionData!
+                                                * !             .id,
+                                                * !         updateTransactionData);
+                                                */  
                                                 dropDownValue = null;
                                                 Navigator.of(context).pop();
-                                                await TransactionDbFunctions
-                                                    .instance
-                                                    .getTransaction();
+                                                // await TransactionDbFunctions
+                                                //     .instance
+                                                // .getTransaction();
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(SnackBar(
                                                         behavior:

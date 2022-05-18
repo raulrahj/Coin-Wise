@@ -24,7 +24,7 @@ List<String> defaultExpenseCategories = [
   "Family",
 ];
 List<String> fields = ['Income', 'Expense'];
-List<String> allFields = ['All', 'Income', 'Expense'];
+const List<String> allFields = ['All', 'Income', 'Expense'];
 
 var items = [
   'Others',

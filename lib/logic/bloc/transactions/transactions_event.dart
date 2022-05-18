@@ -10,6 +10,7 @@ class TransactionsEvent with _$TransactionsEvent {
       required TransactionModel model}) = UpdateTransaction;
   const factory TransactionsEvent.deleteTransaction({required String keey}) =
       DeleteTransaction;
+       factory TransactionsEvent.separateTransactions({required String listType}) = SeparateTransactions;
   const factory TransactionsEvent.transactionController(
       {required bool isAdd,
       required bool isIncome,

@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:coin_wise/core/constants/data.dart';
 import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/models/transaction_model.dart';
-import 'package:coin_wise/widgets/dropdown_category.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

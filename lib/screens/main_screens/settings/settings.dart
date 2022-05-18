@@ -38,7 +38,7 @@ class Settings extends StatelessWidget {
                       valueListenable: profileListner,
                       builder: (context, ProfileModel newProfileListener, child) {
                         final ProfileModel _data = newProfileListener;
-                        return Container(
+                        return SizedBox(
                           height: displayHeight(context) * .14,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 18.0,horizontal: 5),
@@ -131,8 +131,8 @@ class Settings extends StatelessWidget {
                                     child: const Text("Cancel")),
                                 TextButton(
                                     onPressed: () {
-                                      TransactionDbFunctions.instance
-                                          .clearTransaction();
+                                      // TransactionDbFunctions.instance
+                                      //     .clearTransaction();
                                     },
                                     child: const Text('Ok'))
                               ],
@@ -173,7 +173,7 @@ class Settings extends StatelessWidget {
                   }),
               settingsTile(
                   settingsFunction: () =>
-                      showDialog(context: context, builder: (ctx) => AboutApp()),
+                      showDialog(context: context, builder: (ctx) =>const AboutApp()),
                   bg: Theme.of(context).primaryColor,
                   head: "About app",
                   icn: const Icon(Icons.info_outline)),

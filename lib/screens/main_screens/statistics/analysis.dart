@@ -95,7 +95,7 @@ class _AnalysisState extends State<Analysis> {
                 // context.read<CategoryBloc>().add(CategoryAmounts(
                 //     incomeCategories: state.incomeCategoryList,
                 //     expenseCategories: state.expenseCategoryList));
-                context.read<CategoryBloc>().add(FilterCategories());
+                context.read<CategoryBloc>().add(const FilterCategories());
                 return AnalysisView(dataList: state.visibleList);
               },
             ),

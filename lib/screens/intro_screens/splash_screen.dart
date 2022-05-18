@@ -27,10 +27,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void initState() {
-    TransactionDbFunctions.instance.refreshData();
     context.read<CategoryBloc>().add(const CategoryEvent.getAllCategory());
-    // CategoryFunctions.instance.refreshUI();
-    // TransactionDbFunctions.instance.getWallet();
     ProflieDb().refreshProfile();
     super.initState();
 

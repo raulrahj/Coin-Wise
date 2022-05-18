@@ -1,5 +1,6 @@
 import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
 import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
+import 'package:coin_wise/logic/cubit/filter_transactions/filtertransaction_cubit.dart';
 import 'package:coin_wise/logic/cubit/theme/theme_cubit.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,9 @@ class MyApp extends StatelessWidget {
           create: (BuildContext  context) => ThemeCubit()
         ),
         BlocProvider<CategoryBloc>(
-          create: (BuildContext context)=> CategoryBloc())
+          create: (BuildContext context)=> CategoryBloc()),
+          BlocProvider<FiltertransactionCubit>(
+            create: ((context) => FiltertransactionCubit()))
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(builder: (context, state) {
         // dark = themeNotifier.isDark;
