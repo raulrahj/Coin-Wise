@@ -1,4 +1,3 @@
-
 //________________________ COMMON CONTAINER BOX________________________________
 
 import 'package:coin_wise/core/constants/colors.dart';

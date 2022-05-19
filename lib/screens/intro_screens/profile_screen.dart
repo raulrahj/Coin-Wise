@@ -1,17 +1,17 @@
 import 'dart:io';
 import 'dart:ui';
-import 'package:coin_wise/core/constants/colors.dart';
-import 'package:coin_wise/core/constants/sizes.dart';
-import 'package:coin_wise/core/constants/text_styles.dart';
-import 'package:coin_wise/logic/cubit/config/config_cubit.dart';
-import 'package:coin_wise/widgets/default_container.dart';
-import 'package:coin_wise/widgets/textformfield2.dart';
 import 'package:flutter/material.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:coin_wise/widgets/bottom_nav.dart';
-import 'package:coin_wise/database/profiledata.dart';
+import 'package:coin_wise/data/model/profiledata.dart';
+import 'package:coin_wise/core/constants/sizes.dart';
+import 'package:coin_wise/core/constants/colors.dart';
+import 'package:coin_wise/screens/intro_screens/widgets/textformfield2.dart';
+import 'package:coin_wise/widgets/default_container.dart';
+import 'package:coin_wise/core/constants/text_styles.dart';
+import 'package:coin_wise/logic/cubit/config/config_cubit.dart';
 
 class SetupProfile extends StatefulWidget {
   SetupProfile({Key? key}) : super(key: key);
@@ -78,11 +78,6 @@ class _SetupProfileState extends State<SetupProfile> {
                     height: displayHeight(context) * .38,
                     item: Form(
                       key: _formKey,
-                      // child: ValueListenableBuilder(
-                      //     valueListenable: profileListner,
-                      //     builder:
-                      //         (context, ProfileModel newProfileListner, child) {
-                            // final ProfileModel _data = newProfileListner;
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -91,8 +86,6 @@ class _SetupProfileState extends State<SetupProfile> {
                                       top: 10.0, bottom: 1),
                                   child: GestureDetector(
                                     onTap: () async {
-                                      // _data.profilePhoto=await image.toString();
-                                      // profileListner.value.profilePhoto = null;
                                       await showDialog(
                                           context: context,
                                           builder: (context) {
@@ -251,18 +244,18 @@ class _SetupProfileState extends State<SetupProfile> {
     );
   }
 
-  // void addprofileData() {
-  //   // if (_profileName == null) {
-  //   //   return;
-  //   // }
+  // ! void addprofileData() {
+    // ! if (_profileName == null) {
+    // !   return;
+    // ! }
 
-  //   // if(image==null){
-  //   //   return;
-  //   // }
-  //   if (_profileName == null) {
-  //     return;
-    // }
-  // }
+    // ! if(image==null){
+    // !   return;
+    // ! }
+  // !   if (_profileName == null) {
+  // !     return;
+    // ! }
+  // ! }
 }
 
 void getStarted(context) {

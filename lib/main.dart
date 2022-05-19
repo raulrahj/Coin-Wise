@@ -1,18 +1,18 @@
-import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
-import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
-import 'package:coin_wise/logic/cubit/config/config_cubit.dart';
-import 'package:coin_wise/logic/cubit/filter_transactions/filtertransaction_cubit.dart';
-import 'package:coin_wise/logic/cubit/theme/theme_cubit.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:coin_wise/config/app_themes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:coin_wise/database/profiledata.dart';
-import 'package:coin_wise/models/category_model.dart';
-import 'package:coin_wise/models/transaction_model.dart';
+import 'package:coin_wise/config/app_themes.dart';
+import 'package:coin_wise/data/model/profiledata.dart';
+import 'package:coin_wise/data/model/category_model.dart';
+import 'package:coin_wise/data/model/transaction_model.dart';
+import 'package:coin_wise/logic/cubit/theme/theme_cubit.dart';
+import 'package:coin_wise/logic/cubit/config/config_cubit.dart';
+import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:coin_wise/screens/intro_screens/splash_screen.dart';
+import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
+import 'package:coin_wise/logic/cubit/filter_transactions/filtertransaction_cubit.dart';
 
 GlobalKey<NavigatorState>? navigatorKey = GlobalKey<NavigatorState>();
 bool? dark;

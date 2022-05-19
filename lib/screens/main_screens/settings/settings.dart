@@ -1,19 +1,17 @@
 import 'dart:io';
-import 'package:coin_wise/core/constants/colors.dart';
-import 'package:coin_wise/core/constants/sizes.dart';
-import 'package:coin_wise/logic/cubit/config/config_cubit.dart';
-import 'package:coin_wise/screens/main_screens/settings/widgets/about_app.dart';
-import 'package:coin_wise/screens/main_screens/settings/widgets/theme_popup.dart';
-import 'package:coin_wise/widgets/default_container.dart';
-import 'package:coin_wise/widgets/switch_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:launch_review/launch_review.dart';
-import 'package:coin_wise/database/profiledata.dart';
-import 'package:coin_wise/database/transactions_db.dart';
+import 'package:coin_wise/core/constants/sizes.dart';
+import 'package:coin_wise/core/constants/colors.dart';
+import 'package:coin_wise/widgets/switch_button.dart';
+import 'package:coin_wise/widgets/default_container.dart';
+import 'package:coin_wise/logic/cubit/config/config_cubit.dart';
 import 'package:coin_wise/screens/intro_screens/splash_screen.dart';
 import 'package:coin_wise/screens/intro_screens/onboarding_screen.dart';
+import 'package:coin_wise/screens/main_screens/settings/widgets/about_app.dart';
+import 'package:coin_wise/screens/main_screens/settings/widgets/theme_popup.dart';
 
 class Settings extends StatelessWidget {
   TextStyle? title;
@@ -38,10 +36,6 @@ class Settings extends StatelessWidget {
                   builder: (context, state) {
                     return defaultContainer(
                                   color: Theme.of(context).primaryColor,
-                                  // item: ValueListenableBuilder(
-                                  //     valueListenable: profileListner,
-                                  //     builder: (context, ProfileModel newProfileListener, child) {
-                                        // final ProfileModel _data = st
                                         item:  SizedBox(
                                           height: displayHeight(context) * .14,
                                           child: Padding(
@@ -137,8 +131,8 @@ class Settings extends StatelessWidget {
                                     child: const Text("Cancel")),
                                 TextButton(
                                     onPressed: () {
-                                      // TransactionDbFunctions.instance
-                                      //     .clearTransaction();
+                                      // TODO TransactionDbFunctions.instance
+                                      // TODO     .clearTransaction();
                                     },
                                     child: const Text('Ok'))
                               ],

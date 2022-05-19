@@ -1,15 +1,14 @@
 //_________________CATEGORY SELECTION DROP DOWN _______________
 
-import 'package:coin_wise/core/constants/colors.dart';
-import 'package:coin_wise/core/constants/data.dart';
-import 'package:coin_wise/core/constants/sizes.dart';
-import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
-import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
-import 'package:coin_wise/models/category_model.dart';
-import 'package:coin_wise/screens/action_screens/categories/widgets/add_category.dart';
-import 'package:coin_wise/widgets/common_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:coin_wise/core/constants/sizes.dart';
+import 'package:coin_wise/core/constants/colors.dart';
+import 'package:coin_wise/widgets/common_container.dart';
+import 'package:coin_wise/data/model/category_model.dart';
+import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
+import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
+import 'package:coin_wise/screens/action_screens/categories/widgets/add_category.dart';
 
 CategoryModel? globalCategory;
 

@@ -1,10 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:coin_wise/core/constants/data.dart';
-import 'package:coin_wise/models/category_model.dart';
-import 'package:coin_wise/models/transaction_model.dart';
-import 'package:coin_wise/screens/action_screens/add_transaction/widgets/dropdown_category.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:coin_wise/data/model/category_model.dart';
+import 'package:coin_wise/data/model/transaction_model.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:coin_wise/screens/action_screens/add_transaction/widgets/dropdown_category.dart';
 
 part 'transactions_event.dart';
 part 'transactions_state.dart';

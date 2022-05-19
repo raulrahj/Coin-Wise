@@ -1,16 +1,14 @@
 import 'dart:async';
-import 'package:coin_wise/config/app_themes.dart';
-import 'package:coin_wise/core/constants/colors.dart';
-import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
-import 'package:coin_wise/logic/cubit/config/config_cubit.dart';
-import 'package:coin_wise/logic/cubit/theme/theme_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:coin_wise/widgets/bottom_nav.dart';
-import 'package:coin_wise/database/profiledata.dart';
-import 'package:coin_wise/screens/intro_screens/onboarding_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:coin_wise/widgets/bottom_nav.dart';
+import 'package:coin_wise/data/model/profiledata.dart';
+import 'package:coin_wise/core/constants/colors.dart';
+import 'package:coin_wise/logic/cubit/theme/theme_cubit.dart';
+import 'package:coin_wise/logic/cubit/config/config_cubit.dart';
+import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
+import 'package:coin_wise/screens/intro_screens/onboarding_screen.dart';
 
 bool isSplash = true;
 
@@ -34,12 +32,6 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     context.read<CategoryBloc>().add(const CategoryEvent.getAllCategory());
-    // ProflieDb().refreshProfile();
-    //  SharedPreferences sharedPreferences =
-    //                     await SharedPreferences.getInstance();
-
-    //                   sharedPreferences.getBool(
-    //                       ThemePreferences.PREF_KEY, );
     context.read<ThemeCubit>().themeChange();
     super.initState();
 

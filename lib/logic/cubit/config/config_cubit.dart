@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:coin_wise/database/profiledata.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:coin_wise/data/model/profiledata.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'config_state.dart';
 part 'config_cubit.freezed.dart';

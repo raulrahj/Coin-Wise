@@ -1,6 +1,4 @@
-
 //_______________________________________SWITH BUTTON___________________________
-
 
 import 'package:coin_wise/core/constants/colors.dart';
 import 'package:coin_wise/core/constants/functions.dart';

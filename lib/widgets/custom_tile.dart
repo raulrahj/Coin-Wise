@@ -1,16 +1,16 @@
 //______________________________________CUSTOM TILE___________________
 
-import 'package:coin_wise/core/constants/text_styles.dart';
-import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
-import 'package:coin_wise/models/category_model.dart';
-import 'package:coin_wise/models/transaction_model.dart';
-import 'package:coin_wise/screens/action_screens/add_transaction/add_screen.dart';
-import 'package:coin_wise/widgets/delete_transaction.dart';
-import 'package:coin_wise/screens/action_screens/add_transaction/widgets/dropdown_category.dart';
-import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:coin_wise/widgets/widgets.dart';
+import 'package:coin_wise/data/model/category_model.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:coin_wise/data/model/transaction_model.dart';
+import 'package:coin_wise/widgets/delete_transaction.dart';
+import 'package:coin_wise/core/constants/text_styles.dart';
+import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
+import 'package:coin_wise/screens/action_screens/add_transaction/add_screen.dart';
+import 'package:coin_wise/screens/action_screens/add_transaction/widgets/dropdown_category.dart';
 
 class CustomTile extends StatelessWidget {
   void popupEdit(BuildContext context) {

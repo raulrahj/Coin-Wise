@@ -1,17 +1,16 @@
-import 'package:coin_wise/core/constants/sizes.dart';
-import 'package:coin_wise/core/constants/text_styles.dart';
-import 'package:coin_wise/screens/main_screens/all_transactions/all_transactions.dart';
-import 'package:coin_wise/widgets/custom_tile.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/foundation.dart';
-import 'package:coin_wise/models/category_model.dart';
-import 'package:coin_wise/models/transaction_model.dart';
+import 'package:coin_wise/widgets/custom_tile.dart';
+import 'package:coin_wise/core/constants/sizes.dart';
+import 'package:coin_wise/data/model/category_model.dart';
+import 'package:coin_wise/core/constants/text_styles.dart';
+import 'package:coin_wise/data/model/transaction_model.dart';
+import 'package:coin_wise/screens/main_screens/all_transactions/all_transactions.dart';
 
 class TransactionList extends StatelessWidget {
   final int? count;
   final bool? isIncome;
-  // final ValueListenable<List<TransactionModel>> dropDownList;
+
   final List<TransactionModel> dataList;
   const TransactionList({
     this.count,
@@ -22,19 +21,12 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TransactionDbFunctions.instance.refreshData();
-    // return BlocBuilder(
-    //   valueListenable: dropDownList,
-    //   builder: (context, List<TransactionModel> newTransactionListener, child) {
-    //     int? homeCount = newTransactionListener.length >= 4 ? count : 0;
     return dataList.isNotEmpty
         ? ListView.builder(
             // reverse: true,
             shrinkWrap: true,
             physics: const ClampingScrollPhysics(),
             itemCount: dataList.length,
-            // (homeCount!=0)?homeCount :
-            // newTransactionListener.length,
             itemBuilder: (BuildContext context, index) {
               final data = dataList[index];
               return CustomTile(
@@ -90,7 +82,7 @@ String formatedDate(DateTime parsedate) {
   return '${_format.last} ${_format.first}';
 }
 
-//___________________ for categorized transactions list selection ____________________________
+// *___________________ for categorized transactions list selection ____________________________
 
 class FieldTransactions extends StatelessWidget {
   const FieldTransactions({Key? key}) : super(key: key);

@@ -1,9 +1,9 @@
 import 'package:coin_wise/core/constants/sizes.dart';
 import 'package:coin_wise/core/constants/text_styles.dart';
-import 'package:coin_wise/models/category_model.dart';
+import 'package:coin_wise/data/model/category_model.dart';
+import 'package:flutter/material.dart';
 import 'package:coin_wise/screens/main_screens/statistics/widgets/list_view.dart';
 import 'package:coin_wise/screens/main_screens/statistics/widgets/pie_chart.dart';
-import 'package:flutter/material.dart';
 
 class AnalysisView extends StatelessWidget {
   final List<CategoryModel> dataList;

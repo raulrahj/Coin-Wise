@@ -1,7 +1,7 @@
-import 'package:coin_wise/core/constants/colors.dart';
-import 'package:coin_wise/core/constants/text_styles.dart';
 import 'package:coin_wise/main.dart';
 import 'package:flutter/material.dart';
+import 'package:coin_wise/core/constants/colors.dart';
+import 'package:coin_wise/core/constants/text_styles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum currentTheme {
@@ -35,7 +35,7 @@ class MyThemes {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0))),
     ),
-    // inputDecorationTheme: InputDecorationTheme(),
+    //  inputDecorationTheme: InputDecorationTheme(),
     selectedRowColor: const Color.fromARGB(255, 48, 113, 51),
     iconTheme: const IconThemeData(color: primaryGreyDark),
     chipTheme: const ChipThemeData(backgroundColor: defaultPrimaryColorDark),
@@ -117,24 +117,24 @@ class ThemePreferences {
   }
 }
 
-// class ThemeModel extends ChangeNotifier {
-//   bool _isDark = true;
-//   ThemePreferences _preferences = ThemePreferences();
-//   bool get isDark => _isDark;
+// ! class ThemeModel extends ChangeNotifier {
+// !   bool _isDark = true;
+// !   ThemePreferences _preferences = ThemePreferences();
+// !   bool get isDark => _isDark;
 
-//   ThemeModel() {
-//     _isDark = false;
-//     _preferences = ThemePreferences();
-//     getPreferences();
-//   }
-//   set isDark(bool value) {
-//     _isDark = value;
-//     _preferences.setTheme(value);
-//     notifyListeners();
-//   }
+// !   ThemeModel() {
+// !     _isDark = false;
+// !     _preferences = ThemePreferences();
+// !     getPreferences();
+// !   }
+// !   set isDark(bool value) {
+// !     _isDark = value;
+// !     _preferences.setTheme(value);
+// !     notifyListeners();
+// !   }
 
-//   getPreferences() async {
-//     _isDark = await _preferences.getTheme();
-//     notifyListeners();
-//   }
-// }
+// !   getPreferences() async {
+// !     _isDark = await _preferences.getTheme();
+// !     notifyListeners();
+// !   }
+// ! }

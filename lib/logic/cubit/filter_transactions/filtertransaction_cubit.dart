@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:coin_wise/core/constants/data.dart';
-import 'package:coin_wise/models/transaction_model.dart';
+import 'package:coin_wise/data/model/transaction_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';

@@ -1,6 +1,6 @@
-import 'package:coin_wise/core/constants/data.dart';
-import 'package:coin_wise/models/category_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:coin_wise/core/constants/data.dart';
+import 'package:coin_wise/data/model/category_model.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 
 Future<void> notifications() async {

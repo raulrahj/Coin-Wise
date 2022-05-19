@@ -1,5 +1,5 @@
-import 'package:coin_wise/models/category_model.dart';
 import 'package:flutter/material.dart';
+import 'package:coin_wise/data/model/category_model.dart';
 
 class StatisticsList extends StatelessWidget {
   final List<CategoryModel> categoryList;

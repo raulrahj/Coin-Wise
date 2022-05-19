@@ -1,7 +1,6 @@
-import 'package:coin_wise/models/category_model.dart';
+import 'package:coin_wise/data/model/category_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 part 'transaction_model.g.dart';
-
 @HiveType(typeId: 3)
 class TransactionModel {
   @HiveField(0)

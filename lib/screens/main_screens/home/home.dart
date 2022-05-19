@@ -1,19 +1,18 @@
 import 'dart:io';
-import 'package:coin_wise/core/constants/colors.dart';
-import 'package:coin_wise/core/constants/sizes.dart';
-import 'package:coin_wise/core/constants/text_styles.dart';
-import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
-import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
-import 'package:coin_wise/logic/cubit/config/config_cubit.dart';
-import 'package:coin_wise/widgets/common_container.dart';
-import 'package:coin_wise/widgets/default_container.dart';
 import 'package:flutter/material.dart';
 import 'package:coin_wise/widgets/widgets.dart';
-import 'package:coin_wise/widgets/list_views.dart';
-import 'package:coin_wise/database/profiledata.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:coin_wise/widgets/list_views.dart';
+import 'package:coin_wise/data/model/profiledata.dart';
+import 'package:coin_wise/core/constants/sizes.dart';
+import 'package:coin_wise/core/constants/colors.dart';
+import 'package:coin_wise/widgets/common_container.dart';
+import 'package:coin_wise/widgets/default_container.dart';
+import 'package:coin_wise/core/constants/text_styles.dart';
+import 'package:coin_wise/logic/cubit/config/config_cubit.dart';
+import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
+import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
 
-// final String? profilepic = loginData?.profilePhoto;
 final brightness = MediaQueryData.fromWindow(WidgetsBinding.instance!.window)
     .platformBrightness;
 bool isHome = true;
@@ -28,7 +27,6 @@ class Home extends StatelessWidget {
     context.read<CategoryBloc>().add(const CategoryEvent.getAllCategory());
     Color bg = Theme.of(context).primaryColorDark;
     Color bgSub = Theme.of(context).primaryColorLight;
-    // ProflieDb().refreshProfile();
     final String message =
         DateTime.now().hour < 12 ? "Good morning..." : "Good Afternoon...";
     final ProfileModel _data;

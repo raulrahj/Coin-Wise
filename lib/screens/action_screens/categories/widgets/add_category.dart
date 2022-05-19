@@ -1,13 +1,13 @@
 //__________________POPUP FOR ADD NEW CATEGORY_____________________________
 
-import 'package:coin_wise/core/constants/colors.dart';
-import 'package:coin_wise/core/constants/data.dart';
-import 'package:coin_wise/core/constants/sizes.dart';
-import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
-import 'package:coin_wise/models/category_model.dart';
-import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:coin_wise/widgets/widgets.dart';
+import 'package:coin_wise/core/constants/data.dart';
+import 'package:coin_wise/core/constants/sizes.dart';
+import 'package:coin_wise/core/constants/colors.dart';
+import 'package:coin_wise/data/model/category_model.dart';
+import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
 
 final _categoryNameController = TextEditingController();
 

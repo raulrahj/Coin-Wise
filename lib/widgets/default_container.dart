@@ -1,15 +1,8 @@
-
-
 //____________________ DEFAULT CONTAINER _________________________________
-
 
 import 'package:coin_wise/core/constants/colors.dart';
 import 'package:coin_wise/core/constants/sizes.dart';
 import 'package:flutter/material.dart';
-
-
-
-
 
 Widget defaultContainer(
     {required Widget item,
