@@ -9,6 +9,9 @@ class TransactionsState with _$TransactionsState {
     required String dropDownValue,
     required bool isAdd,
     required bool isIncome,
+    required double incomeBal,
+    required double expenseBal,
+    required double totalBal,
   }) = _TransactionsState;
 
   factory TransactionsState.initial() => const TransactionsState(
@@ -17,6 +20,6 @@ class TransactionsState with _$TransactionsState {
         dropDownValue: '',
         categories: [],
         transactionList: [],
-        separateTransactionList: [],
+        separateTransactionList: [], expenseBal: 0.0, incomeBal: 0.0, totalBal: 0.0,
       );
 }

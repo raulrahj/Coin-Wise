@@ -1,9 +1,10 @@
 import 'package:coin_wise/core/constants/colors.dart';
 import 'package:coin_wise/core/constants/sizes.dart';
 import 'package:coin_wise/core/constants/text_styles.dart';
+import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
 import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
 import 'package:coin_wise/main.dart';
-import 'package:coin_wise/widgets/dropdown_category.dart';
+import 'package:coin_wise/screens/action_screens/add_transaction/widgets/dropdown_category.dart';
 import 'package:coin_wise/screens/action_screens/add_transaction/widgets/textformfield1.dart';
 import 'package:flutter/material.dart';
 import 'package:coin_wise/widgets/widgets.dart';
@@ -87,6 +88,7 @@ class AddScreen extends StatelessWidget {
             child: BlocConsumer<TransactionsBloc, TransactionsState>(
               listener: (context, state) {},
               builder: (context, state) {
+                context.read<CategoryBloc>().add(GetAllCategory());
                 if (state.isAdd == false && inUpdate == true) {
                   _updateAmoutnController.text =
                       selectedTransactionData!.amount.toString();
@@ -220,7 +222,7 @@ class AddScreen extends StatelessWidget {
                                         ElevatedButton(
                                           onPressed: () async {
                                             if (_formKey.currentState!
-                                                .validate()) {
+                                                .validate()&& globalCategory!=null) {
                                               if (state.isAdd) {
                                                 double? parsed =
                                                     double.tryParse(
@@ -244,15 +246,18 @@ class AddScreen extends StatelessWidget {
                                                                 : CategoryField
                                                                     .expense,
                                                         category:
-                                                            globalCategory!);
+                                                            globalCategory??state.categories[0]);
                                                 // TransactionDbFunctions.instance
                                                 //     .addTransaction(
                                                 //         transactionData);
-                                                context
-                                                    .read<TransactionsBloc>()
-                                                    .add(AddTransaction(
-                                                        model:
-                                                            transactionData));
+                                                // if (globalCategory != null) {
+                                                  context
+                                                      .read<TransactionsBloc>()
+                                                      .add(AddTransaction(
+                                                          model:
+                                                              transactionData));
+                                                // }
+
                                                 navigatorKey?.currentState
                                                     ?.pop();
                                                 _amountController.clear();
@@ -318,7 +323,7 @@ class AddScreen extends StatelessWidget {
                                                 * !         selectedTransactionData!
                                                 * !             .id,
                                                 * !         updateTransactionData);
-                                                */  
+                                                */
                                                 dropDownValue = null;
                                                 Navigator.of(context).pop();
                                                 // await TransactionDbFunctions
@@ -381,7 +386,7 @@ class AddScreen extends StatelessWidget {
     );
   }
 
-  Future addTransaction() async {
+  Future addTransactions() async {
     final _noteText = _noteController.text;
     if (date == null || globalCategory == null) {
       return;

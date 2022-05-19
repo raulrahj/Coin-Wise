@@ -6,7 +6,7 @@ import 'package:coin_wise/models/category_model.dart';
 import 'package:coin_wise/models/transaction_model.dart';
 import 'package:coin_wise/screens/action_screens/add_transaction/add_screen.dart';
 import 'package:coin_wise/widgets/delete_transaction.dart';
-import 'package:coin_wise/widgets/dropdown_category.dart';
+import 'package:coin_wise/screens/action_screens/add_transaction/widgets/dropdown_category.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'package:coin_wise/core/constants/colors.dart';
 import 'package:coin_wise/core/constants/sizes.dart';
+import 'package:coin_wise/logic/cubit/config/config_cubit.dart';
 import 'package:coin_wise/screens/main_screens/settings/widgets/about_app.dart';
 import 'package:coin_wise/screens/main_screens/settings/widgets/theme_popup.dart';
 import 'package:coin_wise/widgets/default_container.dart';
 import 'package:coin_wise/widgets/switch_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:coin_wise/database/profiledata.dart';
@@ -32,68 +34,72 @@ class Settings extends StatelessWidget {
               addHorizontalSpace(7.0),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: defaultContainer(
-                  color: Theme.of(context).primaryColor,
-                  item: ValueListenableBuilder(
-                      valueListenable: profileListner,
-                      builder: (context, ProfileModel newProfileListener, child) {
-                        final ProfileModel _data = newProfileListener;
-                        return SizedBox(
-                          height: displayHeight(context) * .14,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 18.0,horizontal: 5),
-                            child: ListTile(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)),
-                                title: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    // addHorizontalSpace(20.0),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Wrap(
-                                          children:  [
-                                          const  Icon(
-                                              Icons.person_outlined,
-                                              size: 16,
-                                            ),
-                                            Text(
-                                              "Profile",
-                                              style: Theme.of(context).textTheme.titleSmall,
-                                            ),
-                                          ],
+                child: BlocBuilder<ConfigCubit, ConfigState>(
+                  builder: (context, state) {
+                    return defaultContainer(
+                                  color: Theme.of(context).primaryColor,
+                                  // item: ValueListenableBuilder(
+                                  //     valueListenable: profileListner,
+                                  //     builder: (context, ProfileModel newProfileListener, child) {
+                                        // final ProfileModel _data = st
+                                        item:  SizedBox(
+                                          height: displayHeight(context) * .14,
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(vertical: 18.0,horizontal: 5),
+                                            child: ListTile(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(15)),
+                                                title: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: [
+                                                    // addHorizontalSpace(20.0),
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      mainAxisSize: MainAxisSize.min,
+                                                      children: [
+                                                        Wrap(
+                                                          children:  [
+                                                          const  Icon(
+                                                              Icons.person_outlined,
+                                                              size: 16,
+                                                            ),
+                                                            Text(
+                                                              "Profile",
+                                                              style: Theme.of(context).textTheme.titleSmall,
+                                                            ),
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                    addHorizontalSpace(10.0),
+                                                    Text(
+                                                      state.profile.profileName ?? 'Username',
+                                                      style: Theme.of(context).textTheme.titleLarge,
+                                                    ),
+                                                  ],
+                                                ),
+                                                trailing: state.profile.profilePhoto == null
+                                                    ? CircleAvatar(
+                                                        backgroundColor: primaryGrey,
+                                                        radius: 30,
+                                                        child: Icon(
+                                                          Icons.person,
+                                                          color:
+                                                              Theme.of(context).primaryColorLight,
+                                                          size: 50,
+                                                        ),
+                                                      )
+                                                    : CircleAvatar(
+                                                        radius: 30,
+                                                        backgroundImage:
+                                                            FileImage(File(state.profile.profilePhoto!)),
+                                                      )),
+                                          ),
                                         )
-                                      ],
-                                    ),
-                                    addHorizontalSpace(10.0),
-                                    Text(
-                                      _data.profileName ?? 'Username',
-                                      style: Theme.of(context).textTheme.titleLarge,
-                                    ),
-                                  ],
-                                ),
-                                trailing: _data.profilePhoto == null
-                                    ? CircleAvatar(
-                                        backgroundColor: primaryGrey,
-                                        radius: 30,
-                                        child: Icon(
-                                          Icons.person,
-                                          color:
-                                              Theme.of(context).primaryColorLight,
-                                          size: 50,
-                                        ),
-                                      )
-                                    : CircleAvatar(
-                                        radius: 30,
-                                        backgroundImage:
-                                            FileImage(File(_data.profilePhoto!)),
-                                      )),
-                          ),
-                        );
-                      }),
+                                      // }),
+                                );
+                  },
                 ),
               ),
               settingsTile(

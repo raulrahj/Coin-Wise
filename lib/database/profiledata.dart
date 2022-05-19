@@ -2,40 +2,41 @@ import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/adapters.dart';
 part 'profiledata.g.dart';
 
-ProfileModel? loginData;
-ProfileModel _value = ProfileModel(
-    profilePhoto: null,
-    isLogged: false,
-    notify: true,
-    profileName: 'Guest User');
-ValueNotifier<ProfileModel> profileListner = ValueNotifier(_value);
+// ProfileModel? loginDat;
 
-class ProflieDb {
-  Future<void> addprofileData(ProfileModel _value) async {
-    final profileDB = await Hive.openBox<ProfileModel>('profileDB');
-    await profileDB.clear();
-    await profileDB.put('profile', _value);
-  }
+// ProfileModel _value = ProfileModel(
+//     profilePhoto: null,
+//     isLogged: false,
+//     notify: true,
+//     profileName: 'Guest User');
+// ValueNotifier<ProfileModel> profileListner = ValueNotifier(_value);
 
-  Future<ProfileModel?> getProfileData() async {
-    final profileDb = await Hive.openBox<ProfileModel>('profileDB');
+// class ProflieDb {
+//   Future<void> addprofileData(ProfileModel _value) async {
+//     final profileDB = await Hive.openBox<ProfileModel>('profileDB');
+//     await profileDB.clear();
+//     await profileDB.put('profile', _value);
+//   }
 
-    final ProfileModel? _data =  profileDb.get('profile');
-    return _data;
-  }
+//   Future<ProfileModel?> getProfileData() async {
+//     final profileDb = await Hive.openBox<ProfileModel>('profileDB');
 
-  Future<void> refreshProfile() async {
-    final profileDb = await Hive.openBox<ProfileModel>('profileDB');
-    final ProfileModel? _data = profileDb.get('profile');
-    if (_data == null) {
-      return;
-    }
+//     final ProfileModel? _data =  profileDb.get('profile');
+//     return _data;
+//   }
 
-    profileListner.value = _data;
-    profileListner.notifyListeners();
+//   Future<void> refreshProfile() async {
+//     final profileDb = await Hive.openBox<ProfileModel>('profileDB');
+//     final ProfileModel? _data = profileDb.get('profile');
+//     if (_data == null) {
+//       return;
+//     }
+
+//     profileListner.value = _data;
+//     profileListner.notifyListeners();
  
-  }
-}
+//   }
+// }
 
 @HiveType(typeId: 4)
 class ProfileModel {

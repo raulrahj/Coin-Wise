@@ -1,6 +1,7 @@
 //_________________CATEGORY SELECTION DROP DOWN _______________
 
 import 'package:coin_wise/core/constants/colors.dart';
+import 'package:coin_wise/core/constants/data.dart';
 import 'package:coin_wise/core/constants/sizes.dart';
 import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
 import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
@@ -16,6 +17,7 @@ class CategoryDropdown extends StatefulWidget {
   final List<CategoryModel> items;
   final BuildContext contxt;
   final TransactionsState newState;
+
   // final bool isAdd;
   const CategoryDropdown(
       {required this.contxt,
@@ -30,7 +32,8 @@ class CategoryDropdown extends StatefulWidget {
 }
 
 String? dropDownValue;
-
+List<CategoryModel> incDrop=[];
+List<CategoryModel> expDrop=[];
 class _CategoryDropdownState extends State<CategoryDropdown> {
   @override
   Widget build(BuildContext context) {
@@ -42,10 +45,12 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         mainAxisSize: MainAxisSize.min,
         children: [
-//<<<<<<<<<<<<<<<<<<<<<<< DROPDOWNN SECTION - ADD TRANSACTION SCREEN >>>>>>>>>>>>>>>>>>>>>>>>>
+// *<<<<<<<<<<<<<<<<<<<<<<< DROPDOWNN SECTION - ADD TRANSACTION SCREEN >>>>>>>>>>>>>>>>>>>>>>>>>
 
           BlocBuilder<CategoryBloc, CategoryState>(
             builder: (context, state) {
+              incDrop=state.incomeCategoryList;
+              expDrop=state.expenseCategoryList;
               return DropdownButton(
                 hint: Text(
                   '    Select Category',
@@ -66,8 +71,10 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
                         color: primaryLight,
                       )),
                 ),
-                items: widget.newState.isAdd
-                    ? state.incomeCategoryList.map((e) {
+                items: 
+                 widget.newState.isIncome
+                    ?
+                     state.incomeCategoryList.map((e) {
                         return DropdownMenuItem(
                           value: e.name,
                           child: Text(
@@ -84,7 +91,8 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
                           },
                         );
                       }).toList()
-                    : state.expenseCategoryList.map((e) {
+                    : 
+                    state.expenseCategoryList.map((e) {
                         return DropdownMenuItem(
                           value: e.name,
                           child: Text(

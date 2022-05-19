@@ -1152,6 +1152,9 @@ mixin _$TransactionsState {
   String get dropDownValue => throw _privateConstructorUsedError;
   bool get isAdd => throw _privateConstructorUsedError;
   bool get isIncome => throw _privateConstructorUsedError;
+  double get incomeBal => throw _privateConstructorUsedError;
+  double get expenseBal => throw _privateConstructorUsedError;
+  double get totalBal => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TransactionsStateCopyWith<TransactionsState> get copyWith =>
@@ -1169,7 +1172,10 @@ abstract class $TransactionsStateCopyWith<$Res> {
       List<CategoryModel> categories,
       String dropDownValue,
       bool isAdd,
-      bool isIncome});
+      bool isIncome,
+      double incomeBal,
+      double expenseBal,
+      double totalBal});
 }
 
 /// @nodoc
@@ -1189,6 +1195,9 @@ class _$TransactionsStateCopyWithImpl<$Res>
     Object? dropDownValue = freezed,
     Object? isAdd = freezed,
     Object? isIncome = freezed,
+    Object? incomeBal = freezed,
+    Object? expenseBal = freezed,
+    Object? totalBal = freezed,
   }) {
     return _then(_value.copyWith(
       transactionList: transactionList == freezed
@@ -1215,6 +1224,18 @@ class _$TransactionsStateCopyWithImpl<$Res>
           ? _value.isIncome
           : isIncome // ignore: cast_nullable_to_non_nullable
               as bool,
+      incomeBal: incomeBal == freezed
+          ? _value.incomeBal
+          : incomeBal // ignore: cast_nullable_to_non_nullable
+              as double,
+      expenseBal: expenseBal == freezed
+          ? _value.expenseBal
+          : expenseBal // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalBal: totalBal == freezed
+          ? _value.totalBal
+          : totalBal // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -1232,7 +1253,10 @@ abstract class _$$_TransactionsStateCopyWith<$Res>
       List<CategoryModel> categories,
       String dropDownValue,
       bool isAdd,
-      bool isIncome});
+      bool isIncome,
+      double incomeBal,
+      double expenseBal,
+      double totalBal});
 }
 
 /// @nodoc
@@ -1254,6 +1278,9 @@ class __$$_TransactionsStateCopyWithImpl<$Res>
     Object? dropDownValue = freezed,
     Object? isAdd = freezed,
     Object? isIncome = freezed,
+    Object? incomeBal = freezed,
+    Object? expenseBal = freezed,
+    Object? totalBal = freezed,
   }) {
     return _then(_$_TransactionsState(
       transactionList: transactionList == freezed
@@ -1280,6 +1307,18 @@ class __$$_TransactionsStateCopyWithImpl<$Res>
           ? _value.isIncome
           : isIncome // ignore: cast_nullable_to_non_nullable
               as bool,
+      incomeBal: incomeBal == freezed
+          ? _value.incomeBal
+          : incomeBal // ignore: cast_nullable_to_non_nullable
+              as double,
+      expenseBal: expenseBal == freezed
+          ? _value.expenseBal
+          : expenseBal // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalBal: totalBal == freezed
+          ? _value.totalBal
+          : totalBal // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -1293,7 +1332,10 @@ class _$_TransactionsState implements _TransactionsState {
       required final List<CategoryModel> categories,
       required this.dropDownValue,
       required this.isAdd,
-      required this.isIncome})
+      required this.isIncome,
+      required this.incomeBal,
+      required this.expenseBal,
+      required this.totalBal})
       : _transactionList = transactionList,
         _separateTransactionList = separateTransactionList,
         _categories = categories;
@@ -1325,10 +1367,16 @@ class _$_TransactionsState implements _TransactionsState {
   final bool isAdd;
   @override
   final bool isIncome;
+  @override
+  final double incomeBal;
+  @override
+  final double expenseBal;
+  @override
+  final double totalBal;
 
   @override
   String toString() {
-    return 'TransactionsState(transactionList: $transactionList, separateTransactionList: $separateTransactionList, categories: $categories, dropDownValue: $dropDownValue, isAdd: $isAdd, isIncome: $isIncome)';
+    return 'TransactionsState(transactionList: $transactionList, separateTransactionList: $separateTransactionList, categories: $categories, dropDownValue: $dropDownValue, isAdd: $isAdd, isIncome: $isIncome, incomeBal: $incomeBal, expenseBal: $expenseBal, totalBal: $totalBal)';
   }
 
   @override
@@ -1345,7 +1393,11 @@ class _$_TransactionsState implements _TransactionsState {
             const DeepCollectionEquality()
                 .equals(other.dropDownValue, dropDownValue) &&
             const DeepCollectionEquality().equals(other.isAdd, isAdd) &&
-            const DeepCollectionEquality().equals(other.isIncome, isIncome));
+            const DeepCollectionEquality().equals(other.isIncome, isIncome) &&
+            const DeepCollectionEquality().equals(other.incomeBal, incomeBal) &&
+            const DeepCollectionEquality()
+                .equals(other.expenseBal, expenseBal) &&
+            const DeepCollectionEquality().equals(other.totalBal, totalBal));
   }
 
   @override
@@ -1356,7 +1408,10 @@ class _$_TransactionsState implements _TransactionsState {
       const DeepCollectionEquality().hash(_categories),
       const DeepCollectionEquality().hash(dropDownValue),
       const DeepCollectionEquality().hash(isAdd),
-      const DeepCollectionEquality().hash(isIncome));
+      const DeepCollectionEquality().hash(isIncome),
+      const DeepCollectionEquality().hash(incomeBal),
+      const DeepCollectionEquality().hash(expenseBal),
+      const DeepCollectionEquality().hash(totalBal));
 
   @JsonKey(ignore: true)
   @override
@@ -1372,7 +1427,10 @@ abstract class _TransactionsState implements TransactionsState {
       required final List<CategoryModel> categories,
       required final String dropDownValue,
       required final bool isAdd,
-      required final bool isIncome}) = _$_TransactionsState;
+      required final bool isIncome,
+      required final double incomeBal,
+      required final double expenseBal,
+      required final double totalBal}) = _$_TransactionsState;
 
   @override
   List<TransactionModel> get transactionList =>
@@ -1388,6 +1446,12 @@ abstract class _TransactionsState implements TransactionsState {
   bool get isAdd => throw _privateConstructorUsedError;
   @override
   bool get isIncome => throw _privateConstructorUsedError;
+  @override
+  double get incomeBal => throw _privateConstructorUsedError;
+  @override
+  double get expenseBal => throw _privateConstructorUsedError;
+  @override
+  double get totalBal => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_TransactionsStateCopyWith<_$_TransactionsState> get copyWith =>

@@ -1,5 +1,6 @@
 import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
 import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
+import 'package:coin_wise/logic/cubit/config/config_cubit.dart';
 import 'package:coin_wise/logic/cubit/filter_transactions/filtertransaction_cubit.dart';
 import 'package:coin_wise/logic/cubit/theme/theme_cubit.dart';
 import 'package:flutter/services.dart';
@@ -42,7 +43,6 @@ Future<void> main() async {
     Hive.registerAdapter(ProfileModelAdapter());
   }
   // CategoryFunctions.instance.refreshUI();
-  ProflieDb().refreshProfile();
 
   runApp(const MyApp());
 }
@@ -68,7 +68,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<CategoryBloc>(
           create: (BuildContext context)=> CategoryBloc()),
           BlocProvider<FiltertransactionCubit>(
-            create: ((context) => FiltertransactionCubit()))
+            create: ((context) => FiltertransactionCubit())),
+            BlocProvider(
+              create: ( (context) => ConfigCubit()))
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(builder: (context, state) {
         // dark = themeNotifier.isDark;

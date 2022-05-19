@@ -1,13 +1,19 @@
 import 'dart:async';
+import 'package:coin_wise/config/app_themes.dart';
 import 'package:coin_wise/core/constants/colors.dart';
 import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
+import 'package:coin_wise/logic/cubit/config/config_cubit.dart';
+import 'package:coin_wise/logic/cubit/theme/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:coin_wise/widgets/bottom_nav.dart';
 import 'package:coin_wise/database/profiledata.dart';
-import 'package:coin_wise/database/transactions_db.dart';
 import 'package:coin_wise/screens/intro_screens/onboarding_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-bool isSplash=true;
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+bool isSplash = true;
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -28,7 +34,13 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     context.read<CategoryBloc>().add(const CategoryEvent.getAllCategory());
-    ProflieDb().refreshProfile();
+    // ProflieDb().refreshProfile();
+    //  SharedPreferences sharedPreferences =
+    //                     await SharedPreferences.getInstance();
+
+    //                   sharedPreferences.getBool(
+    //                       ThemePreferences.PREF_KEY, );
+    context.read<ThemeCubit>().themeChange();
     super.initState();
 
     _controller =
@@ -60,6 +72,7 @@ class _SplashScreenState extends State<SplashScreen>
     Timer(const Duration(seconds: 4), () {
       setState(() {
         checkLogin(context);
+        context.read<ConfigCubit>().refreshProfile();
       });
     });
   }
@@ -119,8 +132,7 @@ class _SplashScreenState extends State<SplashScreen>
                     './assets/images/log.jpg',
                     width: 100,
                     height: 100,
-                  )
-                  ),
+                  )),
             ),
           ),
         ],
@@ -148,7 +160,15 @@ class PageTransition extends PageRouteBuilder {
 }
 
 Future<void> checkLogin(context) async {
-  final ProfileModel? logData = await ProflieDb().getProfileData();
+  Future<ProfileModel?> getProfileData() async {
+    final profileDb = await Hive.openBox<ProfileModel>('profileDB');
+
+    final ProfileModel? _data = profileDb.get('profile');
+    return _data;
+  }
+
+  final ProfileModel? logData = await getProfileData();
+
   bool? isLogged = logData?.isLogged;
   FocusManager.instance.primaryFocus?.unfocus();
   // return isLogged;

@@ -40,8 +40,8 @@ class IntroScreen extends StatelessWidget {
                 ),
                 image: Image.asset('./assets/images/onboardlast.png'),
                 footer: ElevatedButton(
-                  onPressed: () {
-                    defaultCategoryAdding();
+                  onPressed: ()async {
+                    defaultCategoryAdding(context);
                     isSplash
                         ? Navigator.pushReplacement(
                             context,

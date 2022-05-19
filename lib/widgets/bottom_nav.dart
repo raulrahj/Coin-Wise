@@ -5,7 +5,7 @@ import 'package:coin_wise/core/constants/text_styles.dart';
 import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
 import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
 import 'package:coin_wise/screens/main_screens/all_transactions/all_transactions.dart';
-import 'package:coin_wise/widgets/dropdown_category.dart';
+import 'package:coin_wise/screens/action_screens/add_transaction/widgets/dropdown_category.dart';
 import 'package:flutter/material.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
