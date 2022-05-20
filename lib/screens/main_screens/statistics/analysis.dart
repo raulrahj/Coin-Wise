@@ -75,8 +75,12 @@ class _AnalysisState extends State<Analysis> {
                         );
                       }).toList(),
                       onChanged: (value) {
-                        context.read<CategoryBloc>().add(DropdownOnChange(newValue: value.toString(),changeList: state.dropDownValue==fields[1]? state.expenseCategoryList:state.incomeCategoryList));
-                        dropDownVal=state.dropDownValue;
+                        context.read<CategoryBloc>().add(DropdownOnChange(
+                            newValue: value.toString(),
+                            changeList: state.dropDownValue == fields[1]
+                                ? state.expenseCategoryList
+                                : state.incomeCategoryList));
+                        dropDownVal = state.dropDownValue;
                         // setState(() {
                         //   dropDownVal = value.toString();
                         // });
@@ -92,9 +96,9 @@ class _AnalysisState extends State<Analysis> {
             flex: 9,
             child: BlocBuilder<CategoryBloc, CategoryState>(
               builder: (context, state) {
-                // context.read<CategoryBloc>().add(CategoryAmounts(
-                //     incomeCategories: state.incomeCategoryList,
-                //     expenseCategories: state.expenseCategoryList));
+                context.read<CategoryBloc>().add(CategoryAmounts(
+                    incomeCategories: state.incomeCategoryList,
+                    expenseCategories: state.expenseCategoryList));
                 context.read<CategoryBloc>().add(const FilterCategories());
                 return AnalysisView(dataList: state.visibleList);
               },

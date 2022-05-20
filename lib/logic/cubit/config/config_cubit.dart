@@ -17,7 +17,10 @@ class ConfigCubit extends Cubit<ConfigState> {
   }
   void refreshProfile()async{
     final profileDB = await Hive.openBox<ProfileModel>('profileDB');
+    if(profileDB.values.isNotEmpty){
     emit(state.copyWith(profile: profileDB.values.first));
+
+    }
   }
 
 }

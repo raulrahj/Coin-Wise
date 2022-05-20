@@ -38,8 +38,8 @@ class _AllTransactionsState extends State<AllTransactions> {
   Widget build(BuildContext context) {
     Color bg = Theme.of(context).primaryColorDark;
     if (isHome) {
-      setState(() {
-      });
+      // setState(() {
+      // });
     }
     return SafeArea(child:
         BlocBuilder<FiltertransactionCubit, FiltertransactionState>(
@@ -228,21 +228,31 @@ class _AllTransactionsState extends State<AllTransactions> {
                                           .textTheme
                                           .bodyMedium,
                                     ),
+                                    onTap:()async{
+                                        context
+                                      .read<FiltertransactionCubit>()
+                                      .filterDropDownChange(
+                                        newValue: items,
+                                      );
+
+                                    } ,
                                   );
                                 }).toList(),
-                                onTap: () {
-                                  context
-                                      .read<FiltertransactionCubit>()
-                                      .filterDropDownChange(
-                                        newValue: state.fitlerDropdownValue,
-                                      );
+                                onTap: () async{
+                                    // context
+                                    //   .read<FiltertransactionCubit>()
+                                    //   .filterDropDownChange(
+                                    //     newValue: ,
+                                    //   );
                                 },
-                                onChanged: (value) {
+                                onChanged: (value)async {
+                                    //  context
+                                    //   .read<FiltertransactionCubit>()
+                                    //   .filterDropDownChange(
+                                    //     newValue: value.toString(),
+                                    //   );
                                   isHome = false;
-                                  context
-                                      .read<FiltertransactionCubit>()
-                                      .filterDropDownChange(
-                                          newValue: value.toString());
+                                
                                   // setState(() {
                                   _dropdownValue = state.fitlerDropdownValue;
                                   if (_dropdownValue == allFields[1]) {

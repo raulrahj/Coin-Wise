@@ -1,4 +1,6 @@
 import 'package:coin_wise/main.dart';
+import 'package:coin_wise/screens/action_screens/add_transaction/widgets/expense_dropdown.dart';
+import 'package:coin_wise/screens/action_screens/add_transaction/widgets/income_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,21 +13,22 @@ import 'package:coin_wise/logic/bloc/category/category_bloc.dart';
 import 'package:coin_wise/logic/bloc/transactions/transactions_bloc.dart';
 import 'package:coin_wise/screens/action_screens/categories/categories.dart';
 import 'package:coin_wise/screens/action_screens/add_transaction/widgets/textformfield1.dart';
-import 'package:coin_wise/screens/action_screens/add_transaction/widgets/dropdown_category.dart';
 
 // bool? isAdd;
 Color? ontapColor;
 double? ontapBorder;
+CategoryModel? globalCategory;
+
 // int categoryType = 0;
 
-final _amountController = TextEditingController();
-final _noteController = TextEditingController();
+// final _amountController = TextEditingController();
+// final _noteController = TextEditingController();
 
-final _updateAmoutnController = TextEditingController();
-final _updateNoteController = TextEditingController();
-bool inUpdate = false;
+// final _updateAmoutnController = TextEditingController();
+// final _updateNoteController = TextEditingController();
+// bool inUpdate = false;
 
-class AddScreen extends StatelessWidget {
+class AddScreen extends StatefulWidget {
   final int? field;
   final dropvalue;
 
@@ -36,13 +39,25 @@ class AddScreen extends StatelessWidget {
     this.selectedTransactionData,
     this.dropvalue,
   }) : super(key: key);
+  final _amountController = TextEditingController();
+  final _noteController = TextEditingController();
 
+  final _updateAmoutnController = TextEditingController();
+  final _updateNoteController = TextEditingController();
+
+  @override
+  State<AddScreen> createState() => _AddScreenState();
+}
+
+class _AddScreenState extends State<AddScreen> {
 //  TransactionModel get transactionData => transactionData;
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    dropDownValue == null;
+    // context.read<CategoryBloc>().add(GetAllCategory());
+
+    // dropDownValue == null;
     // isAdd ?? false;
 /**
  * TODO - null check operator used in a null value
@@ -58,7 +73,7 @@ class AddScreen extends StatelessWidget {
               tooltip: 'close',
               onPressed: () {
                 Navigator.pop(context);
-                dropDownValue = null;
+                // dropDownValue = null;
               },
               icon: Icon(
                 Icons.close,
@@ -87,11 +102,14 @@ class AddScreen extends StatelessWidget {
             child: BlocConsumer<TransactionsBloc, TransactionsState>(
               listener: (context, state) {},
               builder: (context, state) {
+                print('ischanging ?');
+                print(state.isIncome);
                 context.read<CategoryBloc>().add(GetAllCategory());
-                if (state.isAdd == false && inUpdate == true) {
-                  _updateAmoutnController.text =
-                      selectedTransactionData!.amount.toString();
-                  _updateNoteController.text = selectedTransactionData!.note;
+                if (state.isAdd == false) {
+                  widget._updateAmoutnController.text =
+                      widget.selectedTransactionData!.amount.toString();
+                  widget._updateNoteController.text =
+                      widget.selectedTransactionData!.note;
                 }
                 return SingleChildScrollView(
                   keyboardDismissBehavior:
@@ -107,7 +125,7 @@ class AddScreen extends StatelessWidget {
                           Text(
                             state.isAdd
                                 ? 'Add transaction'
-                                : 'Update transaction',
+                                : 'Edit transaction',
                             style: defaultTitle,
                           )
                         ],
@@ -151,19 +169,19 @@ class AddScreen extends StatelessWidget {
                                       },
                                     ),
                                     ActionBox(
-                                      onTap: () => inUpdate = false,
+                                      // onTap: () => inUpdate = false,
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleLarge,
                                       activeColor:
                                           Theme.of(context).iconTheme.color!,
                                       controller: state.isAdd
-                                          ? _amountController
-                                          : _updateAmoutnController,
+                                          ? widget._amountController
+                                          : widget._updateAmoutnController,
                                       keyboardtype: TextInputType.number,
                                       hint: 'Amount',
                                       validator: (value) {
-                                        inUpdate = false;
+                                        // inUpdate = false;
                                         // inUpdate=true;
                                         if (value == null || value.isEmpty) {
                                           return 'enter the amount !';
@@ -190,17 +208,27 @@ class AddScreen extends StatelessWidget {
                                           MainAxisAlignment.spaceEvenly,
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        CategoryDropdown(
-                                          contxt: context,
-                                          items: state.categories,
-                                          newState: state,
+                                        BlocBuilder<TransactionsBloc, TransactionsState>(
+                                          builder: (context, tstate) {
+                                            print(tstate.isIncome);
+                                            print('eeey state print');
+                                            return Container(
+                                                child: tstate.isIncome
+                                                    ? IncomeDropDown()
+                                                    : ExpenseDropDown());
+                                          },
                                         ),
+                                        // CategoryDropdown(
+                                        //   contxt: context,
+                                        //   // items: state.categories,
+                                        //   newState: state,
+                                        // ),
                                         ActionBox(
-                                          onTap: (() => inUpdate = false),
+                                          // onTap: (() => inUpdate = false),
                                           activeColor: primaryGreyDark,
                                           controller: state.isAdd
-                                              ? _noteController
-                                              : _updateNoteController,
+                                              ? widget._noteController
+                                              : widget._updateNoteController,
                                           prefix: const Icon(
                                             Icons.note_alt,
                                             color: defaultPrimaryColor,
@@ -208,7 +236,7 @@ class AddScreen extends StatelessWidget {
                                           hint: 'Note',
                                           itemColor: primaryLight,
                                           validator: (value) {
-                                            inUpdate = false;
+                                            // inUpdate = false;
                                             if (value == null ||
                                                 value.isEmpty) {
                                               return 'try to add a note !';
@@ -221,12 +249,14 @@ class AddScreen extends StatelessWidget {
                                         ElevatedButton(
                                           onPressed: () async {
                                             if (_formKey.currentState!
-                                                .validate()&& globalCategory!=null) {
+                                                    .validate() &&
+                                                globalCategory != null) {
                                               if (state.isAdd) {
                                                 double? parsed =
-                                                    double.tryParse(
-                                                        _amountController.text);
-                                                field ?? 1;
+                                                    double.tryParse(widget
+                                                        ._amountController
+                                                        .text);
+                                                widget.field ?? 1;
                                                 final transactionData =
                                                     TransactionModel(
                                                         id: DateTime.now()
@@ -234,33 +264,36 @@ class AddScreen extends StatelessWidget {
                                                             .toString(),
                                                         date: date ??
                                                             DateTime.now(),
-                                                        amount:
-                                                            parsed ?? 0000.0,
-                                                        note: _noteController
-                                                            .text,
-                                                        field:
-                                                            field == 0
-                                                                ? CategoryField
-                                                                    .income
-                                                                : CategoryField
-                                                                    .expense,
+                                                        amount: parsed ??
+                                                            0000.0,
+                                                        note:
+                                                            widget
+                                                                ._noteController
+                                                                .text,
+                                                        field: state.isIncome
+                                                            ? CategoryField
+                                                                .income
+                                                            : CategoryField
+                                                                .expense,
                                                         category:
-                                                            globalCategory??state.categories[0]);
+                                                            globalCategory!);
                                                 // TransactionDbFunctions.instance
                                                 //     .addTransaction(
                                                 //         transactionData);
                                                 // if (globalCategory != null) {
-                                                  context
-                                                      .read<TransactionsBloc>()
-                                                      .add(AddTransaction(
-                                                          model:
-                                                              transactionData));
+                                                context
+                                                    .read<TransactionsBloc>()
+                                                    .add(TransactionsEvent
+                                                        .addTransaction(
+                                                            model:
+                                                                transactionData));
                                                 // }
 
                                                 navigatorKey?.currentState
                                                     ?.pop();
-                                                _amountController.clear();
-                                                _noteController.clear();
+                                                widget._amountController
+                                                    .clear();
+                                                widget._noteController.clear();
                                                 // await TransactionDbFunctions
                                                 //     .instance
                                                 // .getTransaction();
@@ -282,7 +315,7 @@ class AddScreen extends StatelessWidget {
                                                               .center,
                                                       children: [
                                                         Text(
-                                                          'Added ${_noteController.text}...',
+                                                          'Added ${widget._noteController.text}...',
                                                           style:
                                                               const TextStyle(
                                                                   color: Colors
@@ -292,26 +325,30 @@ class AddScreen extends StatelessWidget {
                                                     ),
                                                   ),
                                                 );
-                                                _noteController.clear();
+                                                widget._noteController.clear();
                                               } else {
                                                 double? parsedUpdate =
-                                                    double.tryParse(
-                                                        _updateAmoutnController
-                                                            .text);
+                                                    double.tryParse(widget
+                                                        ._updateAmoutnController
+                                                        .text);
                                                 final updateTransactionData = TransactionModel(
-                                                    id: selectedTransactionData!
+                                                    id: widget
+                                                        .selectedTransactionData!
                                                         .id,
                                                     date: date ??
-                                                        selectedTransactionData!
+                                                        widget
+                                                            .selectedTransactionData!
                                                             .date,
                                                     amount: parsedUpdate!,
-                                                    note: _updateNoteController
+                                                    note: widget
+                                                        ._updateNoteController
                                                         .text,
-                                                    field:
-                                                        selectedTransactionData!
-                                                            .field,
+                                                    field: widget
+                                                        .selectedTransactionData!
+                                                        .field,
                                                     category: globalCategory ??
-                                                        selectedTransactionData!
+                                                        widget
+                                                            .selectedTransactionData!
                                                             .category);
                                                 /** 
                                             * ! To Do
@@ -323,7 +360,15 @@ class AddScreen extends StatelessWidget {
                                                 * !             .id,
                                                 * !         updateTransactionData);
                                                 */
-                                                dropDownValue = null;
+                                                context
+                                                    .read<TransactionsBloc>()
+                                                    .add(UpdateTransaction(
+                                                        id: widget
+                                                            .selectedTransactionData!
+                                                            .id!,
+                                                        model: widget
+                                                            .selectedTransactionData!));
+                                                // dropDownValue = null;
                                                 Navigator.of(context).pop();
                                                 // await TransactionDbFunctions
                                                 //     .instance
@@ -346,7 +391,7 @@ class AddScreen extends StatelessWidget {
                                                                   .center,
                                                           children: [
                                                             Text(
-                                                              'Updated ${_updateNoteController.text}...',
+                                                              'Updated ${widget._updateNoteController.text}...',
                                                               style: const TextStyle(
                                                                   color: Colors
                                                                       .white),
@@ -385,18 +430,29 @@ class AddScreen extends StatelessWidget {
     );
   }
 
-  Future addTransactions() async {
-    final _noteText = _noteController.text;
-    if (date == null || globalCategory == null) {
-      return;
-    }
+  // Future addTransactions() async {
+  //   final _noteText = widget._noteController.text;
+  //   if (date == null || globalCategory == null) {
+  //     return;
+  //   }
 
-    final _parsedAmount = double.tryParse(_amountController.text);
-    if (_parsedAmount == null) {
-      return;
-    }
-    if (_noteText.isEmpty) {
-      return;
-    }
-  }
+  //   final _parsedAmount = double.tryParse(widget._amountController.text);
+  //   if (_parsedAmount == null) {
+  //     return;
+  //   }
+  //   if (_noteText.isEmpty) {
+  //     return;
+  //   }
+  // }
+
+  // @override
+  // void dispose() {
+  //   print('yes this is the matter');
+  //   widget._amountController.dispose();
+  //   widget._noteController.dispose();
+  //   widget._updateAmoutnController.dispose();
+  //   widget._updateNoteController.dispose();
+
+  //   super.dispose();
+  // }
 }

@@ -29,12 +29,15 @@ transactionDeletePopup(BuildContext context, String? key) {
                   ),
                   TextButton(
                     onPressed: () async {
+                      print('on tap working');
                       // TransactionDbFunctions.instance
                       //     .deleteTransaction(context, key);
                       if (key != null) {
-                        context
+                        print('key is here $key');
+                        ctx
                             .read<TransactionsBloc>()
                             .add(DeleteTransaction(keey: key));
+                        print('key is here $key');
                       }
                       //  Navigator.of(context).pop();
                       navigatorKey?.currentState?.pop();

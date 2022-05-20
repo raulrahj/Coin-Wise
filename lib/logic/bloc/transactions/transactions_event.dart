@@ -14,6 +14,8 @@ class TransactionsEvent with _$TransactionsEvent {
   const factory TransactionsEvent.transactionController(
       {required bool isAdd,
       required bool isIncome,
-      required List<CategoryModel> categories,
-      required String dropDownValue}) = TransactionController;
+      }) = TransactionController;
+      // const factory TransactionsEvent.transactionType({required bool isAdd,
+      // required bool isIncome,}) = TransactionType;
+  const factory TransactionsEvent.changeddValue({required String? ddValue})=ChangeddValue;
 }

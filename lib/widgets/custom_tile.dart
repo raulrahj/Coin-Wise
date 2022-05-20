@@ -1,6 +1,7 @@
 //______________________________________CUSTOM TILE___________________
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:coin_wise/widgets/widgets.dart';
 import 'package:coin_wise/data/model/category_model.dart';
@@ -17,18 +18,15 @@ class CustomTile extends StatelessWidget {
     BlocListener<TransactionsBloc, TransactionsState>(
       listener: (context, state) {
         // TODO: implement listener
-        context.read<TransactionsBloc>().add(TransactionController(
-            isAdd: false,
-            isIncome: true,
-            categories: state.categories,
-            dropDownValue: state.dropDownValue));
+
+        // context.read<TransactionsBloc>().add(const GetAllTransactions());
       },
       //child:_,
     );
-    inUpdate = true;
+    // inUpdate = true;
     // isAdd = false;
     mainData?.field == CategoryField.income ? categoryMod = 0 : categoryMod = 1;
-    dropDownValue == null;
+    // dropDownValue == null;
     Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
       return AddScreen(selectedTransactionData: mainData);
     }));
@@ -58,6 +56,8 @@ class CustomTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // context.read<TransactionsBloc>().add(const GetAllTransactions());
+
     Color red = Theme.of(context).indicatorColor;
     Color green = Theme.of(context).selectedRowColor;
     Color bg = Theme.of(context).primaryColor;
@@ -73,7 +73,16 @@ class CustomTile extends StatelessWidget {
           children: [
             SlidableAction(
               flex: 1,
-              onPressed: popupEdit,
+              onPressed: (value) async {
+                context
+                    .read<TransactionsBloc>()
+                    .add(const TransactionController(
+                      isAdd: false,
+                      isIncome: true,
+                      // categories: state.categories,
+                    ));
+                popupEdit(value);
+              },
               backgroundColor: bgSub,
               foregroundColor: fg,
               icon: Icons.edit,
@@ -87,7 +96,12 @@ class CustomTile extends StatelessWidget {
             /** To Do */
             SlidableAction(
               flex: 1,
-              onPressed: (context) {
+              onPressed: (context)async {
+                print('deletion');
+                  // context
+                  //           .read<TransactionsBloc>()
+                  //           .add(TransactionsEvent.deleteTransaction(keey: mainData!.id!));
+                            context.read<TransactionsBloc>().add(TransactionsEvent.getAllTransactions());
                 transactionDeletePopup(context, mainData!.id);
               },
               backgroundColor: bgSub,

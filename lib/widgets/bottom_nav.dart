@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    print('botton nav is again and again calling');
     Color bg = Theme.of(context).floatingActionButtonTheme.backgroundColor!;
     Color bgSub = Theme.of(context).primaryColorLight;
 
@@ -145,25 +146,32 @@ class _HomePageState extends State<HomePage>
               bubbleColor: bg,
               icon: Icons.arrow_circle_up_sharp,
               titleStyle: const TextStyle(fontSize: 16, color: primaryLight),
-              onPress: () {
-                BlocListener<TransactionsBloc, TransactionsState>(
-                  listener: (context, state) {
-                    // TODO: implement listener
-                    context.read<TransactionsBloc>().add(TransactionController(
-                        isAdd: true,
-                        isIncome: false,
-                        categories: state.categories,
-                        dropDownValue: state.dropDownValue));
-                  },
-                  //child:_,
-                );
+              onPress: ()async {
+                print('Exppppppppppppppp');
+                context
+                    .read<TransactionsBloc>()
+                    .add(const TransactionsEvent.transactionController(
+                      isAdd: true,
+                      isIncome: false,
+                    ));
+                // BlocListener<TransactionsBloc, TransactionsState>(
+                //   listener: (context, state) {
+                // TODO: implement listener
+                context
+                    .read<TransactionsBloc>()
+                    .add(const GetAllTransactions());
+                context.read<CategoryBloc>().add(GetAllCategory());
+
+                // },
+                //child:_,
+                // );
                 categoryMod = 1;
                 field = 1;
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (ctx) => AddScreen(field: field)));
-                dropDownValue = null;
+                // dropDownValue = null;
                 _animationController.reverse();
               },
             ),
@@ -173,22 +181,29 @@ class _HomePageState extends State<HomePage>
               bubbleColor: bg,
               icon: Icons.arrow_circle_down_rounded,
               titleStyle: const TextStyle(fontSize: 16, color: primaryLight),
-              onPress: () {
-                BlocListener<TransactionsBloc, TransactionsState>(
-                  listener: (context, state) {
-                    context.read<TransactionsBloc>().add(TransactionController(
-                        isAdd: true,
-                        isIncome: true,
-                        categories: state.categories,
-                        dropDownValue: state.dropDownValue));
-                  },
+              onPress: () async{
+                print('Incccccccccccccccc');
+                // BlocListener<TransactionsBloc, TransactionsState>(
+                //   listener: (context, state) {
+                    context
+                        .read<TransactionsBloc>()
+                        .add(const TransactionsEvent.transactionController(
+                          isAdd: true,
+                          isIncome: true,
+                          // categories: state.categories,
+                        ));
+                    context
+                        .read<TransactionsBloc>()
+                        .add(const GetAllTransactions());
+                    context.read<CategoryBloc>().add(GetAllCategory());
+                  // },
                   //child:_,
-                );
+                // );
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (ctx) => AddScreen(field: field)));
-                dropDownValue = null;
+                // dropDownValue = null;
                 _animationController.reverse();
               },
             ),
