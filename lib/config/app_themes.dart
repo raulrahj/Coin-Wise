@@ -27,7 +27,7 @@ class MyThemes {
       backgroundColor: primaryGrey,
       indicatorColor: primaryLight,
     ),
-    primaryColorLight: defaultPrimaryColorDark,
+    primaryColorLight: defaultScaffoldDark,
     primaryColorDark: defaultColorDark,
     indicatorColor: primaryRedDark,
     dialogTheme: const DialogTheme(

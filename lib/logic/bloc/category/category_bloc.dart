@@ -85,7 +85,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       // });
 // !__________________________________________________________________
 
-      Future.forEach<TransactionModel>(_transactionDatabase, (element) {
+      Future.forEach<TransactionModel>(_transactionDatabase, (element) async {
         if (element.field == CategoryField.income) {
           print('isIncome true..');
           setIncome.add(element.category);
@@ -94,60 +94,76 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
 
           setExpense.add(element.category);
         }
+        incomeCategoryAmountList.clear();
+        incomeCategoryAmountList.addAll(setIncome.toList());
+        expenseCategoryAmountList.clear();
+        expenseCategoryAmountList.addAll(setExpense.toList());
+        print('print set $setIncome');
+        print('length of the amount list ${incomeCategoryAmountList.length}');
       }).then((value) async {
         incomeCategoryAmountList.clear();
         incomeCategoryAmountList.addAll(setIncome.toList());
         expenseCategoryAmountList.clear();
         expenseCategoryAmountList.addAll(setExpense.toList());
         print('print set $setIncome');
-      }).then((value) async {
-        for (int i = 0; i < incomeCategoryAmountList.length; i++) {
-      
-          double amount = 0;
-
-          Future.forEach(_transactionDatabase,
-              (TransactionModel _transaction) async {
-            if (_transaction.category.name ==
-                incomeCategoryAmountList[i].name) {
-              amount += _transaction.amount;
-            }
-
-            if (incomeCategoryAmountList[i].name ==
-                _transaction.category.name) {
-              incomeCategoryAmountList[i].categoryAmount = 0;
-              incomeCategoryAmountList[i].categoryAmount =
-                  incomeCategoryAmountList[i].categoryAmount! + amount;
-            }
-          });
-        }
-
-        for (int i = 0; i < expenseCategoryAmountList.length; i++) {
-          double amount = 0;
-
-          Future.forEach(_transactionDatabase,
-              (TransactionModel _transaction) async {
-            if (_transaction.category.name ==
-                expenseCategoryAmountList[i].name) {
-              amount += _transaction.amount;
-            }
-
-            if (expenseCategoryAmountList[i].name ==
-                _transaction.category.name) {
-              expenseCategoryAmountList[i].categoryAmount = 0;
-              expenseCategoryAmountList[i].categoryAmount =
-                  expenseCategoryAmountList[i].categoryAmount! + amount;
-            }
-          });
-        }
-      }).then((value) async{
-           emit(state.copyWith(
-          categoryList: state.categoryList,
-          incomeCategoryList: state.incomeCategoryList,
-          expenseCategoryList: state.expenseCategoryList,
-          incomeCategoryAmount: incomeCategoryAmountList,
-          expenseCategoryAmout: expenseCategoryAmountList));
-      print('emitted');
+        print('length of the amount list ${incomeCategoryAmountList.length}');
+        emit(state.copyWith(
+            categoryList: state.categoryList,
+            incomeCategoryList: state.incomeCategoryList,
+            expenseCategoryList: state.expenseCategoryList,
+            incomeCategoryAmount: incomeCategoryAmountList,
+            expenseCategoryAmout: expenseCategoryAmountList));
+        print('emitted');
       });
+      // .then((value) async {
+      // for (int i = 0; i < incomeCategoryAmountList.length; i++) {
+
+      //   double amount = 0;
+
+      //   Future.forEach(_transactionDatabase,
+      //       (TransactionModel _transaction) async {
+      //     if (_transaction.category.name ==
+      //         incomeCategoryAmountList[i].name) {
+      //       amount += _transaction.amount;
+      //     }
+
+      //     if (incomeCategoryAmountList[i].name ==
+      //         _transaction.category.name) {
+      //       incomeCategoryAmountList[i].categoryAmount = 0;
+      //       incomeCategoryAmountList[i].categoryAmount =
+      //           incomeCategoryAmountList[i].categoryAmount! + amount;
+      //     }
+      //   });
+      // }
+
+      // for (int i = 0; i < expenseCategoryAmountList.length; i++) {
+      //   double amount = 0;
+
+      //   Future.forEach(_transactionDatabase,
+      //       (TransactionModel _transaction) async {
+      //         print('exp amount added');
+      //     if (_transaction.category.name ==
+      //         expenseCategoryAmountList[i].name) {
+      //       amount += _transaction.amount;
+      //     }
+
+      //     if (expenseCategoryAmountList[i].name ==
+      //         _transaction.category.name) {
+      //       expenseCategoryAmountList[i].categoryAmount = 0;
+      //       expenseCategoryAmountList[i].categoryAmount =
+      //           expenseCategoryAmountList[i].categoryAmount! + amount;
+      //     }
+      //   });
+      // }
+      // }).then((value) async{
+      //      emit (state.copyWith(
+      //     categoryList: state.categoryList,
+      //     incomeCategoryList: state.incomeCategoryList,
+      //     expenseCategoryList: state.expenseCategoryList,
+      //     incomeCategoryAmount: incomeCategoryAmountList,
+      //     expenseCategoryAmout: expenseCategoryAmountList));
+      // print('emitted');
+      // });
 
       // then((val) async {
       // List<CategoryModel> incomeCategories = [];
@@ -191,7 +207,6 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       // }
       print(
           'availabel inc amountList${incomeCategoryAmountList.toList().toString()}');
-          print('length of the amount list ${incomeCategoryAmountList.length}');
       // CategoryModel? exp;
       // // final expenseCategories = event.expenseCategories;
       // expenseCategoryAmountList.clear();
@@ -236,9 +251,9 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       // });
 
       // emit(state.copyWith(
-      //     categoryList: state.categoryList,
-      //     incomeCategoryList: state.incomeCategoryList,
-      //     expenseCategoryList: state.expenseCategoryList,
+      //     // categoryList: state.categoryList,
+      //     // incomeCategoryList: state.incomeCategoryList,
+      //     // expenseCategoryList: state.expenseCategoryList,
       //     incomeCategoryAmount: incomeCategoryAmountList,
       //     expenseCategoryAmout: expenseCategoryAmountList));
       // print('emitted');

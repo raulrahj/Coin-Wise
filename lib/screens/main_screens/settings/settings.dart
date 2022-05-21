@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'package:coin_wise/data/model/transaction_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:coin_wise/core/constants/sizes.dart';
@@ -35,71 +37,77 @@ class Settings extends StatelessWidget {
                 child: BlocBuilder<ConfigCubit, ConfigState>(
                   builder: (context, state) {
                     return defaultContainer(
-                                  color: Theme.of(context).primaryColor,
-                                        item:  SizedBox(
-                                          height: displayHeight(context) * .14,
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(vertical: 18.0,horizontal: 5),
-                                            child: ListTile(
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.circular(15)),
-                                                title: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  mainAxisSize: MainAxisSize.min,
-                                                  children: [
-                                                    // addHorizontalSpace(20.0),
-                                                    Row(
-                                                      mainAxisAlignment: MainAxisAlignment.start,
-                                                      mainAxisSize: MainAxisSize.min,
-                                                      children: [
-                                                        Wrap(
-                                                          children:  [
-                                                          const  Icon(
-                                                              Icons.person_outlined,
-                                                              size: 16,
-                                                            ),
-                                                            Text(
-                                                              "Profile",
-                                                              style: Theme.of(context).textTheme.titleSmall,
-                                                            ),
-                                                          ],
-                                                        )
-                                                      ],
-                                                    ),
-                                                    addHorizontalSpace(10.0),
-                                                    Text(
-                                                      state.profile.profileName ?? 'Username',
-                                                      style: Theme.of(context).textTheme.titleLarge,
-                                                    ),
-                                                  ],
-                                                ),
-                                                trailing: state.profile.profilePhoto == null
-                                                    ? CircleAvatar(
-                                                        backgroundColor: primaryGrey,
-                                                        radius: 30,
-                                                        child: Icon(
-                                                          Icons.person,
-                                                          color:
-                                                              Theme.of(context).primaryColorLight,
-                                                          size: 50,
-                                                        ),
-                                                      )
-                                                    : CircleAvatar(
-                                                        radius: 30,
-                                                        backgroundImage:
-                                                            FileImage(File(state.profile.profilePhoto!)),
-                                                      )),
-                                          ),
+                        color: Theme.of(context).primaryColor,
+                        item: SizedBox(
+                          height: displayHeight(context) * .14,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 18.0, horizontal: 5),
+                            child: ListTile(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                                title: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    // addHorizontalSpace(20.0),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Wrap(
+                                          children: [
+                                            const Icon(
+                                              Icons.person_outlined,
+                                              size: 16,
+                                            ),
+                                            Text(
+                                              "Profile",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleSmall,
+                                            ),
+                                          ],
                                         )
-                                      // }),
-                                );
+                                      ],
+                                    ),
+                                    addHorizontalSpace(10.0),
+                                    Text(
+                                      state.profile.profileName ?? 'Username',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge,
+                                    ),
+                                  ],
+                                ),
+                                trailing: state.profile.profilePhoto == null
+                                    ? CircleAvatar(
+                                        backgroundColor: primaryGrey,
+                                        radius: 30,
+                                        child: Icon(
+                                          Icons.person,
+                                          color: Theme.of(context)
+                                              .primaryColorLight,
+                                          size: 50,
+                                        ),
+                                      )
+                                    : CircleAvatar(
+                                        radius: 30,
+                                        backgroundImage: FileImage(
+                                            File(state.profile.profilePhoto!)),
+                                      )),
+                          ),
+                        )
+                        // }),
+                        );
                   },
                 ),
               ),
               settingsTile(
                   bg: Theme.of(context).primaryColor,
                   settingsFunction: () async => showDialog(
-                      context: context, builder: (ctx) =>const ThemePopup()),
+                      context: context, builder: (ctx) => const ThemePopup()),
                   head: "Theme",
                   icn: const Icon(Icons.brightness_medium_rounded)),
               settingsTile(
@@ -120,8 +128,9 @@ class Settings extends StatelessWidget {
                           children: [
                             addHorizontalSpace(5.0),
                             const Text(
-                              
-                                ' Do you really want to clear all the\n transactions',textAlign: TextAlign.center,),
+                              ' Do you really want to clear all the\n transactions',
+                              textAlign: TextAlign.center,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -130,7 +139,11 @@ class Settings extends StatelessWidget {
                                         Navigator.of(context).pop()),
                                     child: const Text("Cancel")),
                                 TextButton(
-                                    onPressed: () {
+                                    onPressed: () async {
+                                      final categoryDB =
+                                          await Hive.openBox<TransactionModel>(
+                                              'transaction_Db');
+                                      await categoryDB.clear();
                                       // TODO TransactionDbFunctions.instance
                                       // TODO     .clearTransaction();
                                     },
@@ -159,9 +172,10 @@ class Settings extends StatelessWidget {
                 head: 'Rate App',
                 bg: Theme.of(context).primaryColor,
                 icn: const Icon(Icons.star_purple500_outlined),
-                settingsFunction: (){
-                  LaunchReview.launch(androidAppId: "in.brototype.coin_wise",
-                    );
+                settingsFunction: () {
+                  LaunchReview.launch(
+                    androidAppId: "in.brototype.coin_wise",
+                  );
                 },
               ),
               settingsTile(
@@ -172,8 +186,8 @@ class Settings extends StatelessWidget {
                     _launchURLBrowser();
                   }),
               settingsTile(
-                  settingsFunction: () =>
-                      showDialog(context: context, builder: (ctx) =>const AboutApp()),
+                  settingsFunction: () => showDialog(
+                      context: context, builder: (ctx) => const AboutApp()),
                   bg: Theme.of(context).primaryColor,
                   head: "About app",
                   icn: const Icon(Icons.info_outline)),

@@ -78,8 +78,8 @@ class _AnalysisState extends State<Analysis> {
                         context.read<CategoryBloc>().add(DropdownOnChange(
                             newValue: value.toString(),
                             changeList: state.dropDownValue == fields[1]
-                                ? state.expenseCategoryList
-                                : state.incomeCategoryList));
+                                ? state.expenseCategoryAmout
+                                : state.incomeCategoryAmount));
                         dropDownVal = state.dropDownValue;
                         // setState(() {
                         //   dropDownVal = value.toString();

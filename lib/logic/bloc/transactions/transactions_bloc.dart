@@ -33,7 +33,7 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
         }
 
         emit(state.copyWith(
-            transactionList: _list.toList(),
+            transactionList: _list,
             isAdd: state.isAdd,
             isIncome: state.isIncome,
             incomeBal: incomeValue,
